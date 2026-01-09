@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Your Name — Engineering Portfolio</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+<header class="wrap">
+    <h1>Your Name</h1>
+    <p class="sub">
+        Electrotechnical & Computers (MSc) — Software · Robotics · Control · PLC (sim)
+    </p>
+
+    <div class="links">
+        <a href="https://www.linkedin.com/in/YOUR_LINKEDIN" target="_blank" rel="noreferrer">LinkedIn</a>
+        <a href="https://github.com/YOUR_GITHUB" target="_blank" rel="noreferrer">GitHub</a>
+        <a href="#projects">Projects</a>
+    </div>
+</header>
+
+<main class="wrap">
+    <section id="projects" class="section">
+        <h2>Projects</h2>
+
+        <div class="filters" role="toolbar" aria-label="Project filters">
+            <button class="chip is-active" data-filter="all">All</button>
+            <button class="chip" data-filter="software">Software</button>
+            <button class="chip" data-filter="robotics">Robotics</button>
+            <button class="chip" data-filter="control">Systems & Control</button>
+            <button class="chip" data-filter="plc">PLC (Sim)</button>
+        </div>
+
+        <div class="grid" id="grid">
+            <!-- CARD 1 -->
+            <article class="card" data-tags="plc control">
+                <img src="assets/img/plc.jpg" alt="PLC project cover image" class="cover" />
+                <div class="cardBody">
+                    <h3>PLC Conveyor Sorting (Simulation)</h3>
+                    <p class="meta">Tags: PLC · Control · Safety</p>
+                    <p>
+                        Ladder/FBD logic for a conveyor sorting cell with interlocks, alarms, and E-Stop handling.
+                        Tested in simulation, with IO mapping + state machine.
+                    </p>
+
+                    <div class="actions">
+                        <a class="btn" href="https://github.com/YOUR_GITHUB/plc-conveyor-sim" target="_blank" rel="noreferrer">
+                            Source code / project files
+                        </a>
+                        <button class="btn ghost"
+                                data-modal-title="PLC Conveyor Sorting (Simulation)"
+                                data-modal-desc="Add screenshots, IO list, and a short demo video link here."
+                                data-modal-img="assets/img/plc.jpg"
+                                data-modal-video="https://www.youtube.com/embed/dQw4w9WgXcQ">
+                            Details
+                        </button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- CARD 2 -->
+            <article class="card" data-tags="robotics control software">
+                <img src="assets/img/robot.jpg" alt="Robotics project cover image" class="cover" />
+                <div class="cardBody">
+                    <h3>Robot Pick-and-Place (Trajectory + Vision)</h3>
+                    <p class="meta">Tags: Robotics · Control · Python</p>
+                    <p>
+                        Path planning + control loop prototype and a simple vision pipeline for object detection.
+                        Focus on repeatability and clean architecture.
+                    </p>
+
+                    <div class="actions">
+                        <a class="btn" href="https://github.com/YOUR_GITHUB/robot-pick-place" target="_blank" rel="noreferrer">
+                            GitHub repo
+                        </a>
+                        <button class="btn ghost"
+                                data-modal-title="Robot Pick-and-Place"
+                                data-modal-desc="Explain your architecture: sensing → planning → control → actuation."
+                                data-modal-img="assets/img/robot.jpg"
+                                data-modal-video="">
+                            Details
+                        </button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- CARD 3 -->
+            <article class="card" data-tags="software">
+                <img src="assets/img/software.jpg" alt="Software project cover image" class="cover" />
+                <div class="cardBody">
+                    <h3>Flight Deals Finder (Python)</h3>
+                    <p class="meta">Tags: Software · API · UI</p>
+                    <p>
+                        Python app that queries a flights API and presents cheapest trips with paging and filters.
+                        Clean UI, reproducible results, and documented setup.
+                    </p>
+
+                    <div class="actions">
+                        <a class="btn" href="https://github.com/YOUR_GITHUB/flight-deals" target="_blank" rel="noreferrer">
+                            GitHub repo
+                        </a>
+                        <button class="btn ghost"
+                                data-modal-title="Flight Deals Finder"
+                                data-modal-desc="Show screenshots + explain the data flow + caching strategy."
+                                data-modal-img="assets/img/software.jpg"
+                                data-modal-video="">
+                            Details
+                        </button>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+</main>
+
+<!-- MODAL -->
+<dialog id="modal" class="modal">
+    <div class="modalInner">
+        <button class="close" id="closeBtn" aria-label="Close">×</button>
+        <h3 id="mTitle"></h3>
+        <p id="mDesc" class="mDesc"></p>
+        <img id="mImg" class="mImg" alt="" />
+        <div class="videoWrap" id="videoWrap">
+            <iframe id="mVideo" title="Project demo video"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+        </div>
+    </div>
+</dialog>
+
+<script src="script.js"></script>
+</body>
+</html>
