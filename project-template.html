@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Master component template for portfolio projects">
+    <title>Project Template — Component Library</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="bgGlow"></div>
+
+<div class="wrap">
+    <nav class="topbar" role="navigation" aria-label="Main navigation">
+        <div class="brand">
+            <div class="avatar" aria-hidden="true"></div>
+            <div>
+                <div class="name">Your Name</div>
+                <div class="headline">Researcher & Developer</div>
+            </div>
+        </div>
+        <div class="navLinks">
+            <a href="index.html#projects" class="navLink">Projects</a>
+            <a href="index.html#about" class="navLink">About</a>
+            <a href="index.html#contact" class="navLink">Contact</a>
+        </div>
+        <button
+                id="themeBtn"
+                class="iconBtn"
+                aria-label="Toggle theme"
+                title="Toggle light/dark mode"
+        >
+            <span class="icon" aria-hidden="true">◐</span>
+        </button>
+    </nav>
+
+    <a href="index.html#projects" class="backLink">
+        ← Back to Projects
+    </a>
+
+    <!-- ============================================
+         TABLE OF CONTENTS
+         ============================================ -->
+    <div class="tocBox">
+        <h2>📚 Component Library</h2>
+        <p class="muted smallText">
+            This is your master template. Copy sections as needed for new project pages.
+        </p>
+        <nav class="tocNav" aria-label="Component sections">
+            <a href="#hero" class="tocLink">1. Hero Header</a>
+            <a href="#tech" class="tocLink">2. Tech Stack</a>
+            <a href="#problem-solution" class="tocLink">3. Problem → Solution</a>
+            <a href="#features" class="tocLink">4. Feature Cards</a>
+            <a href="#gallery" class="tocLink">5. Image Gallery</a>
+            <a href="#video" class="tocLink">6. Video Embeds</a>
+            <a href="#text-blocks" class="tocLink">7. Text Content Blocks</a>
+            <a href="#data" class="tocLink">8. Data & Results</a>
+            <a href="#timeline" class="tocLink">9. Timeline & Process</a>
+            <a href="#code" class="tocLink">10. Code & Technical</a>
+            <a href="#faqs" class="tocLink">11. FAQs / Collapsible</a>
+            <a href="#links" class="tocLink">12. Links & Downloads</a>
+            <a href="#contact" class="tocLink">13. Contact CTA</a>
+        </nav>
+    </div>
+
+    <!-- ============================================
+         1. HERO HEADER
+         ============================================ -->
+    <section id="hero" class="templateSection">
+        <div class="sectionLabel">
+            <h2>1. Hero Header</h2>
+            <p class="muted smallText">
+                Use this at the top of every project page. Include title, tagline, quick facts, and CTAs.
+            </p>
+            <p class="hint">
+                💡 Edit: Replace [PROJECT NAME], [TAGLINE], dates, and button URLs.
+            </p>
+        </div>
+
+        <div class="componentDemo">
+            <header class="projectHeader">
+                <h1 class="projectTitle">Battery Management System</h1>
+                <p class="lead">
+                    A custom BMS for lithium-ion battery testing with real-time monitoring,
+                    safety cutoffs, and comprehensive data logging.
+                </p>
+
+                <div class="quickFacts">
+                    <div class="factItem">
+                        <span class="factLabel">Timeline</span>
+                        <span class="factValue">Jan–Jun 2025</span>
+                    </div>
+                    <div class="factItem">
+                        <span class="factLabel">Role</span>
+                        <span class="factValue">Hardware Engineer</span>
+                    </div>
+                    <div class="factItem">
+                        <span class="factLabel">Category</span>
+                        <span class="factValue">Hardware + Embedded</span>
+                    </div>
+                    <div class="factItem">
+                        <span class="factLabel">Status</span>
+                        <span class="factValue grad">Completed</span>
+                    </div>
+                </div>
+
+                <div class="projectMeta">
+                    <span class="badge">Hardware</span>
+                    <span class="chip">C/C++</span>
+                    <span class="chip">Arduino</span>
+                    <span class="chip">Electronics</span>
+                </div>
+
+                <div class="projectLinks">
+                    <a href="#" class="btn primary">View on GitHub</a>
+                    <a href="#" class="btn">Live Demo</a>
+                    <a href="#" class="btn">Case Study PDF</a>
+                </div>
+            </header>
+        </div>
+    </section>
+
+    <!-- ============================================
+         2. TECH STACK
+         ============================================ -->
+    <section id="tech" class="templateSection">
+        <div class="sectionLabel">
+            <h2>2. Tech Stack</h2>
+            <p class="muted smallText">
+                Show technologies used. Choose badge list OR detailed grid.
+            </p>
+            <p class="hint">
+                💡 Edit: Add/remove tech items. Use grid for tools with descriptions.
+            </p>
+        </div>
+
+        <div class="componentDemo">
+            <h3 class="demoTitle">Option A: Simple Badge List</h3>
+            <div class="techList">
+                <span class="techItem">Python 3.x</span>
+                <span class="techItem">Flask</span>
+                <span class="techItem">PostgreSQL</span>
+                <span class="techItem">Docker</span>
+                <span class="techItem">React</span>
+                <span class="techItem">Git</span>
+            </div>
+
+            <h3 class="demoTitle" style="margin-top: 2rem;">Option B: Tools Grid with Descriptions</h3>
+            <div class="toolsGrid">
+                <div class="toolCard">
+                    <div class="toolIcon">🐍</div>
+                    <h4>Python</h4>
+                    <p class="smallText muted">Backend processing and data analysis</p>
+                </div>
+                <div class="toolCard">
+                    <div class="toolIcon">⚛️</div>
+                    <h4>React</h4>
+                    <p class="smallText muted">Interactive frontend interface</p>
+                </div>
+                <div class="toolCard">
+                    <div class="toolIcon">🗄️</div>
+                    <h4>PostgreSQL</h4>
+                    <p class="smallText muted">Relational database storage</p>
+                </div>
+                <div class="toolCard">
+                    <div class="toolIcon">🐳</div>
+                    <h4>Docker</h4>
+                    <p class="smallText muted">Containerized deployment</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         3. PROBLEM → SOLUTION
+         ============================================ -->
+    <section id="problem-solution" class="templateSection">
+        <div class="sectionLabel">
+            <h2>3. Problem → Solution</h2>
+            <p class="muted smallText">
+                Two-column layout contrasting the problem and your solution.
+            </p>
+            <p class="hint">
+                💡 Edit: Replace text in both columns. Auto-stacks on mobile.
+            </p>
+        </div>
+
+        <div class="componentDemo">
+            <div class="problemSolutionGrid">
+                <div class="psBlock problemBlock">
+                    <div class="psIcon">⚠️</div>
+                    <h3>Problem</h3>
+                    <p class="muted">
+                        Existing battery testing solutions were either too expensive (€5000+) or lacked
+                        essential safety features like over-discharge protection and real-time monitoring.
+                        Researchers needed a budget-friendly, customizable BMS for lab environments.
+                    </p>
+                    <ul class="muted">
+                        <li>High cost of commercial solutions</li>
+                        <li>Limited customization options</li>
+                        <li>Inadequate safety mechanisms</li>
+                    </ul>
+                </div>
+                <div class="psBlock solutionBlock">
+                    <div class="psIcon">✅</div>
+                    <h3>Solution</h3>
+                    <p class="muted">
+                        Designed and built a custom BMS using Arduino and relay circuits with comprehensive
+                        safety features, real-time data logging, and a web-based monitoring dashboard—all
+                        for under €150 in components.
+                    </p>
+                    <ul class="muted">
+                        <li>Cost-effective hardware design</li>
+                        <li>Modular, extensible architecture</li>
+                        <li>Multiple redundant safety cutoffs</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         4. FEATURE CARDS
+         ============================================ -->
+    <section id="features" class="templateSection">
+        <div class="sectionLabel">
+            <h2>4. Feature Cards</h2>
+            <p class="muted smallText">
+                Highlight key features with icons, titles, and descriptions.
+            </p>
+            <p class="hint">
+                💡 Edit: Change emoji icons, titles, and descriptions. Add/remove cards.
+            </p>
+        </div>
+
+        <div class="componentDemo">
+            <div class="featureGrid">
+                <div class="featureCard">
+                    <div class="featureIcon">⚡</div>
+                    <h3>Real-Time Monitoring</h3>
+                    <p class="muted smallText">
+                        Track voltage, current, and temperature in real-time with sub-second refresh rates
+                        and automatic anomaly detection.
+                    </p>
+                </div>
+                <div class="featureCard">
+                    <div class="featureIcon">🛡️</div>
+                    <h3>Safety Cutoffs</h3>
+                    <p class="muted smallText">
+                        Multiple redundant protection layers prevent over-discharge, over-current, and
+                        thermal runaway conditions.
+                    </p>
+                </div>
+                <div class="featureCard">
+                    <div class="featureIcon">📊</div>
+                    <h3>Data Logging</h3>
+                    <p class="muted smallText">
+                        Comprehensive CSV logging with configurable sampling rates and automatic file
+                        rotation for long-term testing.
+                    </p>
+                </div>
+                <div class="featureCard">
+                    <div class="featureIcon">🔧</div>
+                    <h3>Modular Design</h3>
+                    <p class="muted smallText">
+                        Easily swap components or extend functionality without redesigning the entire
+                        system architecture.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         5. IMAGE GALLERY
+         ============================================ -->
+    <section id="gallery" class="templateSection">
+        <div class="sectionLabel">
+            <h2>5. Image Gallery</h2>
+            <p class="muted smallText">
+                Show multiple images in a responsive grid with lightbox viewing.
+            </p>
+            <p class="hint">
+                💡 Edit: Replace image URLs. Click images to open lightbox (spacebar/ESC to close).
+            </p>
+        </div>
+
+        <div class="componentDemo">
+            <h3 class="demoTitle">Option A: Standard Grid Gallery</h3>
+            <div class="imageGallery">
+                <img
+                        src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 400'%3E%3Crect fill='%23252b42' width='600' height='400'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='system-ui' font-size='24' fill='%239ba3b8'%3ECircuit Board%3C/text%3E%3C/svg%3E"
+                        alt="Circuit board layout"
+                        class="galleryImage"
+                >
+                <img
+                        src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 400'%3E%3Crect fill='%23252b42' width='600' height='400'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='system-ui' font-size='24' fill='%239ba3b8'%3EAssembled Device%3C/text%3E%3C/svg%3E"
+                        alt="Assembled device"
+                        class="galleryImage"
+                >
+                <img
+                        src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 400'%3E%3Crect fill='%23252b42' width='600' height='400'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='system-ui' font-size='24' fill='%239ba3b8'%3EDashboard UI%3C/text%3E%3C/svg%3E"
+                        alt="Dashboard interface"
+                        class="galleryImage"
+                >
+                <img
+                        src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 400'%3E%3Crect fill='%23252b42' width='600' height='400'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='system-ui' font-size='24' fill='%239ba3b8'%3ETesting Setup%3C/text%3E%3C/svg%3E"
+                        alt="Testing setup"
+                        class="galleryImage"
+                >
+            </div>
+
+            <h3 class="demoTitle" style="margin-top: 2rem;">Option B: Before/After Slider</h3>
+            <div class="beforeAfter">
+                <div class="baContainer">
+                    <img
+                            src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 400'%3E%3Crect fill='%23252b42' width='800' height='400'/%3E%3Ctext x='30%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='system-ui' font-size='28' fill='%239ba3b8'%3EBEFORE%3C/text%3E%3C/svg%3E"
+                            alt="Before state"
+                            class="baImageBefore"
+                    >
+                    <div class="baImageAfter" style="background-image: url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 800 400%22%3E%3Crect fill=%22%231a1f2e%22 width=%22800%22 height=%22400%22/%3E%3Ctext x=%2270%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-family=%22system-ui%22 font-size=%2228%22 fill=%22%232dd4ff%22%3EAFTER%3C/text%3E%3C/svg%3E');"></div>
+                    <input
+                            type="range"
+                            min="0"
+                            max="100"
+                            value="50"
+                            class="baSlider"
+                            aria-label="Before/after comparison slider"
+                    >
+                    <div class="baLine"></div>
+                </div>
+                <div class="baLabels">
+                    <span class="baLabel">Before Optimization</span>
+                    <span class="baLabel">After Optimization</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         6. VIDEO EMBEDS
+         ============================================ -->
+    <section id="video" class="templateSection">
+        <div class="sectionLabel">
+            <h2>6. Video Embeds</h2>
+            <p class="muted smallText">
+                Embed YouTube videos or host local videos with responsive containers.
+            </p>
+            <p class="hint">
+                💡 Edit: Replace video ID for YouTube, or video file path for local <video>.
+            </p>
+        </div>
+
+        <div class="componentDemo">
+            <h3 class="demoTitle">Option A: YouTube Embed</h3>
+            <div class="videoEmbed">
+                <iframe
+                        src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                        title="Project demo video"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen
+                ></iframe>
+            </div>
+
+            <h3 class="demoTitle" style="margin-top: 2rem;">Option B: Local Video</h3>
+            <div class="localVideo">
+                <video
+                        controls
+                        poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 450'%3E%3Crect fill='%23252b42' width='800' height='450'/%3E%3Ccircle cx='400' cy='225' r='60' fill='%232dd4ff' opacity='0.3'/%3E%3Cpolygon points='380,205 380,245 420,225' fill='%232dd4ff'/%3E%3C/svg%3E"
+                >
+                    <source src="your-video.mp4" type="video/mp4">
+                    <source src="your-video.webm" type="video/webm">
+                    Your browser does not support video playback.
+                </video>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         7. TEXT CONTENT BLOCKS
+         ============================================ -->
+    <section id="text-blocks" class="templateSection">
+        <div class="sectionLabel">
+            <h2>7. Text Content Blocks</h2>
+            <p class="muted smallText">
+                Callouts, warnings, quotes, and key takeaways for important information.
+            </p>
+            <p class="hint">
+                💡 Edit: Change text and choose appropriate block type (info/warning/quote/takeaway).
+            </p>
+        </div>
+
+        <div class="componentDemo">
+            <div class="calloutBox calloutInfo">
+                <div class="calloutIcon">ℹ️</div>
+                <div>
+                    <h4>Info Callout</h4>
+                    <p class="smallText">
+                        Use this for helpful context, background information, or clarifications that
+                        support the main content.
+                    </p>
+                </div>
+            </div>
+
+            <div class="calloutBox calloutWarning">
+                <div class="calloutIcon">⚠️</div>
+                <div>
+                    <h4>Lessons Learned / Pitfalls</h4>
+                    <p class="smallText">
+                        Initial prototypes used inadequate wire gauge, causing voltage drops under load.
+                        Switching to 16 AWG eliminated this issue entirely.
+                    </p>
+                </div>
+            </div>
+
+            <div class="calloutBox calloutQuote">
+                <div class="calloutIcon">💬</div>
+                <div>
+                    <blockquote>
+                        "This BMS reduced our testing costs by 90% while providing better monitoring
+                        capabilities than commercial alternatives."
+                    </blockquote>
+                    <cite class="smallText muted">— Research Team Lead, INESCTEC</cite>
+                </div>
+            </div>
+
+            <div class="calloutBox calloutTakeaway">
+                <div class="calloutIcon">🎯</div>
+                <div>
+                    <h4>Key Takeaways</h4>
+                    <ul class="smallText">
+                        <li>Modular design enables rapid iteration and testing</li>
+                        <li>Redundant safety systems are essential for battery applications</li>
+                        <li>Open-source hardware significantly reduces development costs</li>
+                        <li>Real-time monitoring improves experimental reliability</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         8. DATA & RESULTS
+         ============================================ -->
+    <section id="data" class="templateSection">
+        <div class="sectionLabel">
+            <h2>8. Data & Results</h2>
+            <p class="muted smallText">
+                Show metrics, performance data, and comparison tables.
+            </p>
+            <p class="hint">
+                💡 Edit: Update numbers, labels, and table data. Use metric cards for key stats.
+            </p>
+        </div>
+
+        <div class="componentDemo">
+            <h3 class="demoTitle">Metric Cards</h3>
+            <div class="metricsGrid">
+                <div class="metricCard">
+                    <div class="metricValue grad">95%</div>
+                    <div class="metricLabel">Cost Reduction</div>
+                    <p class="smallText muted">vs. commercial solutions</p>
+                </div>
+                <div class="metricCard">
+                    <div class="metricValue grad2">500+</div>
+                    <div class="metricLabel">Testing Hours</div>
+                    <p class="smallText muted">continuous operation</p>
+                </div>
+                <div class="metricCard">
+                    <div class="metricValue grad">99.7%</div>
+                    <div class="metricLabel">Uptime</div>
+                    <p class="smallText muted">system reliability</p>
+                </div>
+                <div class="metricCard">
+                    <div class="metricValue grad2">3ms</div>
+                    <div class="metricLabel">Response Time</div>
+                    <p class="smallText muted">safety cutoff latency</p>
+                </div>
+            </div>
+
+            <h3 class="demoTitle" style="margin-top: 2rem;">Comparison Table</h3>
+            <div class="tableWrapper">
+                <table class="comparisonTable">
+                    <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Commercial BMS</th>
+                        <th>Our Solution</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Cost</td>
+                        <td>€5,000+</td>
+                        <td class="highlight">€150</td>
+                    </tr>
+                    <tr>
+                        <td>Customization</td>
+                        <td>Limited</td>
+                        <td class="highlight">Fully modular</td>
+                    </tr>
+                    <tr>
+                        <td>Data Logging</td>
+                        <td>Proprietary format</td>
+                        <td class="highlight">Open CSV</td>
+                    </tr>
+                    <tr>
+                        <td>Safety Features</td>
+                        <td>Basic</td>
+                        <td class="highlight">Multi-layer redundancy</td>
+                    </tr>
+                    <tr>
+                        <td>Setup Time</td>
+                        <td>2-3 days</td>
+                        <td>2-3 hours</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         9. TIMELINE & PROCESS
+         ============================================ -->
+    <section id="timeline" class="templateSection">
+        <div class="sectionLabel">
+            <h2>9. Timeline & Process</h2>
+            <p class="muted smallText">
+                Show project phases, milestones, or development process steps.
+            </p>
+            <p class="hint">
+                💡 Edit: Update dates, titles, and descriptions. Add/remove timeline items.
+            </p>
+        </div>
+
+        <div class="componentDemo">
+            <h3 class="demoTitle">Option A: Vertical Timeline</h3>
+            <div class="timeline">
+                <div class="timelineItem">
+                    <div class="timelineDot"></div>
+                    <div class="timelineContent">
+                        <div class="timelineDate">January 2025</div>
+                        <h4>Research & Planning</h4>
+                        <p class="smallText muted">
+                            Analyzed commercial BMS solutions, identified gaps, and defined requirements
+                            for lab testing scenarios.
+                        </p>
+                    </div>
+                </div>
+                <div class="timelineItem">
+                    <div class="timelineDot"></div>
+                    <div class="timelineContent">
+                        <div class="timelineDate">February 2025</div>
+                        <h4>Prototype Development</h4>
+                        <p class="smallText muted">
+                            Designed circuit schematics, ordered components, and built initial breadboard
+                            prototype with basic monitoring.
+                        </p>
+                    </div>
+                </div>
+                <div class="timelineItem">
+                    <div class="timelineDot"></div>
+                    <div class="timelineContent">
+                        <div class="timelineDate">March 2025</div>
+                        <h4>Safety Testing</h4>
+                        <p class="smallText muted">
+                            Conducted extensive safety testing under fault conditions, refined cutoff
+                            thresholds, and validated relay response times.
+                        </p>
+                    </div>
+                </div>
+                <div class="timelineItem">
+                    <div class="timelineDot"></div>
+                    <div class="timelineContent">
+                        <div class="timelineDate">April-June 2025</div>
+                        <h4>Production & Deployment</h4>
+                        <p class="smallText muted">
+                            Finalized PCB design, assembled production units, developed web dashboard,
+                            and deployed in lab environment.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="demoTitle" style="margin-top: 2rem;">Option B: Process Steps</h3>
+            <div class="processSteps">
+                <div class="processStep">
+                    <div class="stepNumber">1</div>
+                    <h4>Requirements Analysis</h4>
+                    <p class="smallText muted">Define specifications and constraints</p>
+                </div>
+                <div class="processStep">
+                    <div class="stepNumber">2</div>
+                    <h4>Circuit Design</h4>
+                    <p class="smallText muted">Schematic creation and simulation</p>
+                </div>
+                <div class="processStep">
+                    <div class="stepNumber">3</div>
+                    <h4>Prototyping</h4>
+                    <p class="smallText muted">Build and test initial versions</p>
+                </div>
+                <div class="processStep">
+                    <div class="stepNumber">4</div>
+                    <h4>Validation</h4>
+                    <p class="smallText muted">Safety and performance testing</p>
+                </div>
+                <div class="processStep">
+                    <div class="stepNumber">5</div>
+                    <h4>Deployment</h4>
+                    <p class="smallText muted">Production and documentation</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         10. CODE & TECHNICAL DETAILS
+         ============================================ -->
+    <section id="code" class="templateSection">
+        <div class="sectionLabel">
+            <h2>10. Code & Technical Details</h2>
+            <p class="muted smallText">
+                Show code snippets with syntax highlighting and architecture diagrams.
+            </p>
+            <p class="hint">
+                💡 Edit: Replace code content. Click "Copy" button to copy to clipboard.
+            </p>
+        </div>
+
+        <div class="componentDemo">
+            <h3 class="demoTitle">Code Block with Copy Button</h3>
+            <div class="codeBlock">
+                <div class="codeHeader">
+                    <span class="codeTitle">safety_monitor.ino</span>
+                    <button class="copyBtn" aria-label="Copy code">
+                        <span class="copyIcon">📋</span>
+                        <span class="copyText">Copy</span>
+                    </button>
+                </div>
+                <pre><code>void checkVoltage() {
+  float voltage = readVoltage();
+
+  if (voltage < MIN_VOLTAGE) {
+    triggerCutoff(UNDER_VOLTAGE);
+    logEvent("Under-voltage detected");
+  } else if (voltage > MAX_VOLTAGE) {
+    triggerCutoff(OVER_VOLTAGE);
+    logEvent("Over-voltage detected");
+  }
+
+  displayVoltage(voltage);
+}</code></pre>
+            </div>
+
+            <h3 class="demoTitle" style="margin-top: 2rem;">Architecture Diagram Placeholder</h3>
+            <div class="architectureBox">
+                <img
+                        src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 500'%3E%3Crect fill='%23252b42' width='800' height='500'/%3E%3Crect x='50' y='50' width='200' height='100' fill='none' stroke='%237c5cff' stroke-width='2' rx='8'/%3E%3Ctext x='150' y='105' text-anchor='middle' font-family='system-ui' font-size='16' fill='%239ba3b8'%3EArduino%3C/text%3E%3Crect x='50' y='200' width='200' height='100' fill='none' stroke='%232dd4ff' stroke-width='2' rx='8'/%3E%3Ctext x='150' y='255' text-anchor='middle' font-family='system-ui' font-size='16' fill='%239ba3b8'%3ERelay Module%3C/text%3E%3Crect x='300' y='125' width='200' height='100' fill='none' stroke='%23a78bfa' stroke-width='2' rx='8'/%3E%3Ctext x='400' y='180' text-anchor='middle' font-family='system-ui' font-size='16' fill='%239ba3b8'%3EWeb Dashboard%3C/text%3E%3Cline x1='250' y1='100' x2='300' y2='175' stroke='%239ba3b8' stroke-width='2'/%3E%3Cline x1='250' y1='250' x2='300' y2='175' stroke='%239ba3b8' stroke-width='2'/%3E%3C/svg%3E"
+                        alt="System architecture diagram"
+                        class="architectureDiagram"
+                >
+                <p class="smallText muted" style="margin-top: 0.75rem; text-align: center;">
+                    System architecture showing component relationships
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         11. FAQs / COLLAPSIBLE
+         ============================================ -->
+    <section id="faqs" class="templateSection">
+        <div class="sectionLabel">
+            <h2>11. FAQs / Collapsible Details</h2>
+            <p class="muted smallText">
+                Expandable sections for FAQs, technical details, or additional context.
+            </p>
+            <p class="hint">
+                💡 Edit: Add/remove <details> elements. Content is hidden until user clicks.
+            </p>
+        </div>
+
+        <div class="componentDemo">
+            <div class="faqList">
+                <details class="faqItem">
+                    <summary>How does the safety cutoff mechanism work?</summary>
+                    <p class="smallText muted">
+                        The BMS uses a two-stage safety system. First, the Arduino continuously monitors
+                        voltage and current levels. If thresholds are exceeded, it triggers a relay that
+                        physically disconnects the battery from the load within 3ms. A second watchdog
+                        circuit provides backup protection in case of MCU failure.
+                    </p>
+                </details>
+
+                <details class="faqItem">
+                    <summary>Can this be adapted for different battery chemistries?</summary>
+                    <p class="smallText muted">
+                        Yes, the system is chemistry-agnostic. You only need to adjust the voltage and
+                        current thresholds in the configuration file. We've successfully tested it with
+                        Li-ion, LiFePO4, and NiMH batteries by simply changing these parameters.
+                    </p>
+                </details>
+
+                <details class="faqItem">
+                    <summary>What's the maximum current handling capacity?</summary>
+                    <p class="smallText muted">
+                        The current design supports up to 10A continuous load with 15A peak for short
+                        durations (< 30 seconds). For higher currents, you'd need to upgrade the relay
+                        and current sensing circuitry. The modular design makes this straightforward.
+                    </p>
+                </details>
+
+                <details class="faqItem">
+                    <summary>How accurate is the voltage measurement?</summary>
+                    <p class="smallText muted">
+                        Using a voltage divider and the Arduino's 10-bit ADC, we achieve ±0.05V accuracy
+                        across the 0-20V range after calibration. For applications requiring higher precision,
+                        the design can accommodate an external 16-bit ADC module.
+                    </p>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         12. LINKS & DOWNLOADS
+         ============================================ -->
+    <section id="links" class="templateSection">
+        <div class="sectionLabel">
+            <h2>12. Links & Downloads</h2>
+            <p class="muted smallText">
+                Provide resources, external links, and navigation to other projects.
+            </p>
+            <p class="hint">
+                💡 Edit: Update URLs and add/remove resource items.
+            </p>
+        </div>
+
+        <div class="componentDemo">
+            <h3 class="demoTitle">Resource List</h3>
+            <div class="resourceList">
+                <a href="#" class="resourceItem">
+                    <div class="resourceIcon">📄</div>
+                    <div>
+                        <div class="resourceTitle">Technical Documentation</div>
+                        <div class="smallText muted">Complete assembly guide and schematics (PDF)</div>
+                    </div>
+                    <div class="resourceArrow">→</div>
+                </a>
+                <a href="#" class="resourceItem">
+                    <div class="resourceIcon">💾</div>
+                    <div>
+                        <div class="resourceTitle">Source Code</div>
+                        <div class="smallText muted">Arduino firmware and web dashboard (GitHub)</div>
+                    </div>
+                    <div class="resourceArrow">→</div>
+                </a>
+                <a href="#" class="resourceItem">
+                    <div class="resourceIcon">🎥</div>
+                    <div>
+                        <div class="resourceTitle">Video Walkthrough</div>
+                        <div class="smallText muted">Setup and operation demo (15 min)</div>
+                    </div>
+                    <div class="resourceArrow">→</div>
+                </a>
+                <a href="#" class="resourceItem">
+                    <div class="resourceIcon">📦</div>
+                    <div>
+                        <div class="resourceTitle">Bill of Materials</div>
+                        <div class="smallText muted">Complete parts list with supplier links (CSV)</div>
+                    </div>
+                    <div class="resourceArrow">→</div>
+                </a>
+            </div>
+
+            <h3 class="demoTitle" style="margin-top: 2rem;">Project Navigation</h3>
+            <div class="projectNav">
+                <a href="#" class="projectNavLink projectNavPrev">
+                    <span class="navLabel">Previous Project</span>
+                    <span class="navTitle">Flight Search Tool</span>
+                </a>
+                <a href="index.html#projects" class="projectNavLink projectNavHome">
+                    <span class="navTitle">All Projects</span>
+                </a>
+                <a href="#" class="projectNavLink projectNavNext">
+                    <span class="navLabel">Next Project</span>
+                    <span class="navTitle">Simulation Framework</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         13. CONTACT CTA
+         ============================================ -->
+    <section id="contact" class="templateSection">
+        <div class="sectionLabel">
+            <h2>13. Contact CTA</h2>
+            <p class="muted smallText">
+                End your project page with a call to action for contact or collaboration.
+            </p>
+            <p class="hint">
+                💡 Edit: Customize message and button links.
+            </p>
+        </div>
+
+        <div class="componentDemo">
+            <div class="contactCTA">
+                <h3>Interested in this project?</h3>
+                <p class="muted">
+                    I'm open to discussing technical details, collaborations, or similar projects.
+                    Feel free to reach out via email or connect on GitHub.
+                </p>
+                <div class="ctaButtons">
+                    <a href="mailto:your@email.com" class="btn primary">Send Email</a>
+                    <a href="https://github.com/yourusername" class="btn" target="_blank" rel="noopener">View GitHub</a>
+                    <a href="index.html#projects" class="btn">More Projects</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Back to top -->
+    <div style="text-align: center; margin-top: 3rem;">
+        <a href="#hero" class="btn">↑ Back to Top</a>
+    </div>
+
+</div>
+
+<!-- Lightbox Modal -->
+<div id="lightbox" class="lightbox" aria-hidden="true">
+    <button class="lightboxClose" aria-label="Close lightbox">✕</button>
+    <img id="lightboxImg" src="" alt="" class="lightboxImage">
+    <div class="lightboxCaption" id="lightboxCaption"></div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

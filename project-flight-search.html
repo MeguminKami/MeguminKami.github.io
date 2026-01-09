@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Flight Search Tool - A fast flight filtering application with clean UI and reproducible results.">
+    <title>Flight Search Tool — Project</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="bgGlow"></div>
+
+<div class="wrap">
+    <nav class="topbar" role="navigation" aria-label="Main navigation">
+        <div class="brand">
+            <div class="avatar" aria-hidden="true"></div>
+            <div>
+                <div class="name">Your Name</div>
+                <div class="headline">Researcher & Developer</div>
+            </div>
+        </div>
+        <div class="navLinks">
+            <a href="index.html#projects" class="navLink">Projects</a>
+            <a href="index.html#about" class="navLink">About</a>
+            <a href="index.html#contact" class="navLink">Contact</a>
+        </div>
+        <button
+                id="themeBtn"
+                class="iconBtn"
+                aria-label="Toggle theme"
+                title="Toggle light/dark mode"
+        >
+            <span class="icon" aria-hidden="true">◐</span>
+        </button>
+    </nav>
+
+    <a href="index.html#projects" class="backLink">
+        ← Back to Projects
+    </a>
+
+    <article>
+        <header class="projectHeader">
+            <h1 class="projectTitle">Flight Search Tool</h1>
+            <p class="lead">
+                A fast, focused flight search tool designed for single travelers seeking return flights
+                with transparent pricing and reproducible results.
+            </p>
+            <div class="projectMeta">
+                <span class="badge">Software</span>
+                <span class="chip">Python</span>
+                <span class="chip">API Integration</span>
+                <span class="chip">Data Processing</span>
+            </div>
+            <div class="projectLinks">
+                <a href="https://github.com/yourusername/flight-search" class="btn primary" target="_blank" rel="noopener">
+                    View on GitHub
+                </a>
+                <a href="#" class="btn">Live Demo</a>
+            </div>
+        </header>
+
+        <div class="projectContent">
+            <section class="contentSection">
+                <h2>Overview</h2>
+                <p class="muted">
+                    The Flight Search Tool streamlines the process of finding affordable return flights by
+                    implementing smart filters, pagination, and a clean interface. Built with reproducibility
+                    in mind, it ensures consistent results across searches and provides transparent Euro pricing.
+                </p>
+            </section>
+
+            <div class="mediaSection">
+                <h3>Screenshot</h3>
+                <img
+                        src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 600'%3E%3Crect fill='%23252b42' width='1200' height='600'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='system-ui' font-size='32' fill='%239ba3b8'%3EFlight Search Interface%3C/text%3E%3C/svg%3E"
+                        alt="Flight Search Tool interface"
+                        loading="lazy"
+                >
+                <p class="smallText muted" style="margin-top: 0.5rem;">
+                    Clean, intuitive interface for searching and filtering flight results
+                </p>
+            </div>
+
+            <section class="contentSection">
+                <h2>Problem</h2>
+                <p class="muted">
+                    Existing flight search engines often overwhelm users with options, inconsistent pricing,
+                    and complex filters. Travelers need a straightforward tool that focuses on essential
+                    parameters without unnecessary complexity.
+                </p>
+            </section>
+
+            <section class="contentSection">
+                <h2>Solution</h2>
+                <p class="muted">
+                    I developed a Python-based application that:
+                </p>
+                <ul>
+                    <li>Implements focused search parameters (single traveler, return flights)</li>
+                    <li>Provides flexible date windows and trip duration constraints</li>
+                    <li>Displays paginated results sorted by price</li>
+                    <li>Ensures reproducible searches with transparent data handling</li>
+                    <li>Integrates with flight APIs for real-time pricing</li>
+                </ul>
+            </section>
+
+            <section class="contentSection">
+                <h2>Technical Stack</h2>
+                <div class="techList">
+                    <span class="techItem">Python 3.x</span>
+                    <span class="techItem">Flight API Integration</span>
+                    <span class="techItem">Pandas</span>
+                    <span class="techItem">REST APIs</span>
+                    <span class="techItem">JSON Processing</span>
+                </div>
+            </section>
+
+            <section class="contentSection">
+                <h2>Key Features</h2>
+                <h3>Smart Filtering</h3>
+                <p class="muted">
+                    Users can define search windows and set minimum/maximum trip durations to find flights
+                    that match their schedule constraints precisely.
+                </p>
+
+                <h3>Pagination System</h3>
+                <p class="muted">
+                    Results are presented in manageable pages, sorted by price, making it easy to compare
+                    the most affordable options without information overload.
+                </p>
+
+                <h3>Clear Architecture</h3>
+                <p class="muted">
+                    The codebase follows clean architecture principles with documented setup procedures,
+                    making it maintainable and easy to extend with new features or API integrations.
+                </p>
+            </section>
+
+            <section class="contentSection">
+                <h2>Results</h2>
+                <ul>
+                    <li>Reduced search time by focusing on essential parameters</li>
+                    <li>Provided transparent, reproducible pricing in Euros</li>
+                    <li>Created a reusable framework for flight data processing</li>
+                    <li>Documented architecture enables easy maintenance and feature additions</li>
+                </ul>
+            </section>
+
+            <div class="projectLinks" style="margin-top: 3rem;">
+                <a href="https://github.com/yourusername/flight-search" class="btn primary" target="_blank" rel="noopener">
+                    View Source Code
+                </a>
+                <a href="index.html#projects" class="btn">
+                    ← Back to Projects
+                </a>
+            </div>
+        </div>
+    </article>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

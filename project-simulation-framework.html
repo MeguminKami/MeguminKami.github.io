@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Simulation Framework - Distributed systems framework for network clock synchronization research.">
+    <title>Simulation Framework — Project</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="bgGlow"></div>
+
+<div class="wrap">
+    <nav class="topbar" role="navigation" aria-label="Main navigation">
+        <div class="brand">
+            <div class="avatar" aria-hidden="true"></div>
+            <div>
+                <div class="name">Your Name</div>
+                <div class="headline">Researcher & Developer</div>
+            </div>
+        </div>
+        <div class="navLinks">
+            <a href="index.html#projects" class="navLink">Projects</a>
+            <a href="index.html#about" class="navLink">About</a>
+            <a href="index.html#contact" class="navLink">Contact</a>
+        </div>
+        <button
+                id="themeBtn"
+                class="iconBtn"
+                aria-label="Toggle theme"
+                title="Toggle light/dark mode"
+        >
+            <span class="icon" aria-hidden="true">◐</span>
+        </button>
+    </nav>
+
+    <a href="index.html#projects" class="backLink">
+        ← Back to Projects
+    </a>
+
+    <article>
+        <header class="projectHeader">
+            <h1 class="projectTitle">Simulation Framework</h1>
+            <p class="lead">
+                A high-performance simulation framework for testing stochastic methods in network clock
+                synchronization, developed for distributed systems research at INESCTEC.
+            </p>
+            <div class="projectMeta">
+                <span class="badge">Research</span>
+                <span class="chip">C</span>
+                <span class="chip">Distributed Systems</span>
+                <span class="chip">Simulation</span>
+            </div>
+            <div class="projectLinks">
+                <a href="https://github.com/yourusername/simulation-framework" class="btn primary" target="_blank" rel="noopener">
+                    View on GitHub
+                </a>
+                <a href="#" class="btn">Read Paper</a>
+            </div>
+        </header>
+
+        <div class="projectContent">
+            <section class="contentSection">
+                <h2>Overview</h2>
+                <p class="muted">
+                    This simulation framework enables researchers to test and validate stochastic clock
+                    synchronization algorithms in distributed network environments. Built for performance
+                    and extensibility, it supports large-scale experiments with real-time monitoring capabilities.
+                </p>
+            </section>
+
+            <div class="mediaSection">
+                <h3>System Architecture</h3>
+                <img
+                        src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 600'%3E%3Crect fill='%23252b42' width='1200' height='600'/%3E%3Ccircle cx='300' cy='300' r='60' fill='none' stroke='%237c5cff' stroke-width='3'/%3E%3Ccircle cx='600' cy='200' r='60' fill='none' stroke='%232dd4ff' stroke-width='3'/%3E%3Ccircle cx='900' cy='300' r='60' fill='none' stroke='%23a78bfa' stroke-width='3'/%3E%3Cline x1='360' y1='300' x2='540' y2='200' stroke='%239ba3b8' stroke-width='2' stroke-dasharray='5,5'/%3E%3Cline x1='660' y1='200' x2='840' y2='300' stroke='%239ba3b8' stroke-width='2' stroke-dasharray='5,5'/%3E%3Ctext x='50%25' y='90%25' text-anchor='middle' font-family='system-ui' font-size='24' fill='%239ba3b8'%3EDistributed Node Network%3C/text%3E%3C/svg%3E"
+                        alt="Simulation framework architecture diagram"
+                        loading="lazy"
+                >
+                <p class="smallText muted" style="margin-top: 0.5rem;">
+                    Distributed node architecture with stochastic synchronization
+                </p>
+            </div>
+
+            <section class="contentSection">
+                <h2>Problem</h2>
+                <p class="muted">
+                    Network clock synchronization is critical for distributed systems, but testing
+                    synchronization algorithms in real networks is costly and difficult to reproduce.
+                    Researchers need a controlled environment to evaluate stochastic methods under various
+                    network conditions and failure scenarios.
+                </p>
+            </section>
+
+            <section class="contentSection">
+                <h2>Solution</h2>
+                <p class="muted">
+                    I developed a C-based simulation framework that:
+                </p>
+                <ul>
+                    <li>Models distributed network nodes with configurable clock drift</li>
+                    <li>Implements multiple stochastic synchronization algorithms</li>
+                    <li>Simulates network delays, packet loss, and Byzantine failures</li>
+                    <li>Provides real-time performance metrics and visualization</li>
+                    <li>Supports large-scale experiments (1000+ nodes)</li>
+                </ul>
+            </section>
+
+            <section class="contentSection">
+                <h2>Technical Stack</h2>
+                <div class="techList">
+                    <span class="techItem">C</span>
+                    <span class="techItem">Makefiles</span>
+                    <span class="techItem">CMake</span>
+                    <span class="techItem">Git</span>
+                    <span class="techItem">Python (analysis)</span>
+                    <span class="techItem">gnuplot (visualization)</span>
+                </div>
+            </section>
+
+            <section class="contentSection">
+                <h2>Key Features</h2>
+                <h3>Stochastic Methods</h3>
+                <p class="muted">
+                    Implements probabilistic approaches to clock synchronization, allowing nodes to achieve
+                    consensus despite unreliable communication channels and Byzantine actors.
+                </p>
+
+                <h3>Performance Monitoring</h3>
+                <p class="muted">
+                    Real-time metrics track synchronization accuracy, convergence time, message overhead,
+                    and fault tolerance. Data exports enable detailed statistical analysis.
+                </p>
+
+                <h3>Extensible Architecture</h3>
+                <p class="muted">
+                    Modular design allows researchers to plug in new synchronization algorithms, network
+                    models, and failure scenarios without modifying core framework code.
+                </p>
+            </section>
+
+            <section class="contentSection">
+                <h2>Results</h2>
+                <ul>
+                    <li>Enabled testing of novel synchronization algorithms at scale</li>
+                    <li>Reduced research iteration time through reproducible experiments</li>
+                    <li>Published findings in distributed systems research community</li>
+                    <li>Provided foundation for follow-up hardware implementations</li>
+                </ul>
+            </section>
+
+            <div class="projectLinks" style="margin-top: 3rem;">
+                <a href="https://github.com/yourusername/simulation-framework" class="btn primary" target="_blank" rel="noopener">
+                    View Source Code
+                </a>
+                <a href="index.html#projects" class="btn">
+                    ← Back to Projects
+                </a>
+            </div>
+        </div>
+    </article>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="YouTube Downloader - A command-line tool for downloading videos and audio with format flexibility.">
+  <title>YouTube Downloader — Project</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="bgGlow"></div>
+
+<div class="wrap">
+  <nav class="topbar" role="navigation" aria-label="Main navigation">
+    <div class="brand">
+      <div class="avatar" aria-hidden="true"></div>
+      <div>
+        <div class="name">Your Name</div>
+        <div class="headline">Researcher & Developer</div>
+      </div>
+    </div>
+    <div class="navLinks">
+      <a href="index.html#projects" class="navLink">Projects</a>
+      <a href="index.html#about" class="navLink">About</a>
+      <a href="index.html#contact" class="navLink">Contact</a>
+    </div>
+    <button
+            id="themeBtn"
+            class="iconBtn"
+            aria-label="Toggle theme"
+            title="Toggle light/dark mode"
+    >
+      <span class="icon" aria-hidden="true">◐</span>
+    </button>
+  </nav>
+
+  <a href="index.html#projects" class="backLink">
+    ← Back to Projects
+  </a>
+
+  <article>
+    <header class="projectHeader">
+      <h1 class="projectTitle">YouTube Downloader</h1>
+      <p class="lead">
+        A streamlined command-line tool for downloading YouTube videos and audio with support for
+        multiple formats, playlists, and real-time progress tracking.
+      </p>
+      <div class="projectMeta">
+        <span class="badge">Software</span>
+        <span class="chip">Python</span>
+        <span class="chip">CLI</span>
+        <span class="chip">Media Processing</span>
+      </div>
+      <div class="projectLinks">
+        <a href="https://github.com/yourusername/youtube-downloader" class="btn primary" target="_blank" rel="noopener">
+          View on GitHub
+        </a>
+      </div>
+    </header>
+
+    <div class="projectContent">
+      <section class="contentSection">
+        <h2>Overview</h2>
+        <p class="muted">
+          This YouTube Downloader provides a simple yet powerful command-line interface for
+          downloading videos and extracting audio. It handles various formats, manages playlists
+          efficiently, and provides clear feedback throughout the download process.
+        </p>
+      </section>
+
+      <div class="mediaSection">
+        <h3>Terminal Interface</h3>
+        <img
+                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 600'%3E%3Crect fill='%23252b42' width='1200' height='600'/%3E%3Ctext x='50%25' y='40%25' dominant-baseline='middle' text-anchor='middle' font-family='monospace' font-size='28' fill='%2399ba3b8'%3E$ ytdl --format mp4 [URL]%3C/text%3E%3Ctext x='50%25' y='60%25' dominant-baseline='middle' text-anchor='middle' font-family='monospace' font-size='24' fill='%239ba3b8'%3EDownloading... 45%%3C/text%3E%3C/svg%3E"
+                alt="YouTube Downloader CLI"
+                loading="lazy"
+        >
+        <p class="smallText muted" style="margin-top: 0.5rem;">
+          Clean command-line interface with progress indicators
+        </p>
+      </div>
+
+      <section class="contentSection">
+        <h2>Problem</h2>
+        <p class="muted">
+          Downloading YouTube content for offline use, research, or archival purposes often requires
+          navigating complex web tools or unreliable browser extensions. Users need a dependable,
+          scriptable solution that works efficiently from the command line.
+        </p>
+      </section>
+
+      <section class="contentSection">
+        <h2>Solution</h2>
+        <p class="muted">
+          I built a Python CLI tool that wraps youtube-dl/yt-dlp with an intuitive interface:
+        </p>
+        <ul>
+          <li>Supports multiple output formats (MP4, MP3, WebM, etc.)</li>
+          <li>Handles individual videos and entire playlists</li>
+          <li>Displays real-time download progress</li>
+          <li>Includes robust error handling and retry logic</li>
+          <li>Allows quality selection and format preferences</li>
+        </ul>
+      </section>
+
+      <section class="contentSection">
+        <h2>Technical Stack</h2>
+        <div class="techList">
+          <span class="techItem">Python 3.x</span>
+          <span class="techItem">yt-dlp</span>
+          <span class="techItem">argparse</span>
+          <span class="techItem">FFmpeg</span>
+          <span class="techItem">Progress Bars</span>
+        </div>
+      </section>
+
+      <section class="contentSection">
+        <h2>Key Features</h2>
+        <h3>Format Flexibility</h3>
+        <p class="muted">
+          Users can specify output format, video quality, and whether to extract audio only. The
+          tool automatically handles format conversion using FFmpeg when needed.
+        </p>
+
+        <h3>Playlist Support</h3>
+        <p class="muted">
+          Download entire playlists with a single command. The tool manages queue processing,
+          handles failures gracefully, and provides per-video progress updates.
+        </p>
+
+        <h3>Progress Tracking</h3>
+        <p class="muted">
+          Real-time progress bars show download status, file size, and estimated time remaining.
+          Color-coded output helps distinguish between informational messages and errors.
+        </p>
+      </section>
+
+      <section class="contentSection">
+        <h2>Results</h2>
+        <ul>
+          <li>Created a reliable tool for offline content archival</li>
+          <li>Simplified batch downloading with playlist support</li>
+          <li>Provided scriptable interface for automation workflows</li>
+          <li>Implemented robust error handling for network interruptions</li>
+        </ul>
+      </section>
+
+      <div class="projectLinks" style="margin-top: 3rem;">
+        <a href="https://github.com/yourusername/youtube-downloader" class="btn primary" target="_blank" rel="noopener">
+          View Source Code
+        </a>
+        <a href="index.html#projects" class="btn">
+          ← Back to Projects
+        </a>
+      </div>
+    </div>
+  </article>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
