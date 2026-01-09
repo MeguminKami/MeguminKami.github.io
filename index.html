@@ -3,82 +3,125 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Your Name — Engineering Portfolio</title>
+    <meta name="description" content="Engineering Portfolio — Software, Robotics, Systems & Control, PLC (Simulation)" />
+    <title>João Ferreira — Engineering Portfolio</title>
     <link rel="stylesheet" href="styles.css" />
 </head>
 
 <body>
-<header class="wrap">
-    <h1>Your Name</h1>
-    <p class="sub">
-        Electrotechnical & Computers (MSc) — Software · Robotics · Control · PLC (sim)
-    </p>
+<div class="bgGlow" aria-hidden="true"></div>
 
-    <div class="links">
-        <a href="https://www.linkedin.com/in/YOUR_LINKEDIN" target="_blank" rel="noreferrer">LinkedIn</a>
-        <a href="https://github.com/YOUR_GITHUB" target="_blank" rel="noreferrer">GitHub</a>
-        <a href="#projects">Projects</a>
+<header class="wrap header">
+    <div class="topbar">
+        <div class="brand">
+            <div class="avatar" aria-hidden="true"></div>
+            <div>
+                <div class="name">João Ferreira</div>
+                <div class="headline">MSc Electrotechnical & Computers • Automation • Control • PLC (Sim)</div>
+            </div>
+        </div>
+
+        <button id="themeBtn" class="iconBtn" type="button" aria-label="Toggle theme" title="Toggle theme">
+            <span class="icon" aria-hidden="true">◐</span>
+        </button>
+    </div>
+
+    <div class="hero">
+        <div>
+            <h1>
+                Building reliable systems — from <span class="grad">software</span> to
+                <span class="grad2">control & automation</span>.
+            </h1>
+            <p class="lead">
+                Portfolio of projects in software engineering, robotics, systems & control, and industrial PLC programming (simulation).
+                Each project includes images, short explanations, and a link to the source code on GitHub.
+            </p>
+
+            <div class="ctaRow">
+                <a class="btn primary" href="#projects">View Projects</a>
+                <a class="btn" href="#about">About</a>
+                <a class="btn" href="https://www.linkedin.com/in/autojoaoferreira/" target="_blank" rel="noreferrer">LinkedIn</a>
+                <a class="btn" href="https://github.com/YOUR_GITHUB" target="_blank" rel="noreferrer">GitHub</a>
+            </div>
+
+            <div class="chips" aria-label="Key skills">
+                <span class="chip">Python</span>
+                <span class="chip">Embedded / IoT</span>
+                <span class="chip">Systems & Control</span>
+                <span class="chip">PLC (Ladder/FBD/ST)</span>
+                <span class="chip">Automation</span>
+            </div>
+        </div>
+
+        <div class="heroCard">
+            <div class="heroCardTop">
+                <div class="dot dot1"></div><div class="dot dot2"></div><div class="dot dot3"></div>
+                <div class="mono">portfolio/overview</div>
+            </div>
+            <div class="heroCardBody">
+                <div class="stat">
+                    <div class="statN">3</div>
+                    <div class="statL">Featured projects</div>
+                </div>
+                <div class="stat">
+                    <div class="statN">4</div>
+                    <div class="statL">Domains covered</div>
+                </div>
+                <div class="mini">
+                    <div class="miniRow"><span class="k">Focus</span><span class="v">Automation + clean engineering</span></div>
+                    <div class="miniRow"><span class="k">Style</span><span class="v">Readable, reproducible, documented</span></div>
+                    <div class="miniRow"><span class="k">Links</span><span class="v">Every project → GitHub</span></div>
+                </div>
+            </div>
+        </div>
     </div>
 </header>
 
 <main class="wrap">
     <section id="projects" class="section">
-        <h2>Projects</h2>
-
-        <div class="filters" role="toolbar" aria-label="Project filters">
-            <button class="chip is-active" data-filter="all">All</button>
-            <button class="chip" data-filter="software">Software</button>
-            <button class="chip" data-filter="robotics">Robotics</button>
-            <button class="chip" data-filter="control">Systems & Control</button>
-            <button class="chip" data-filter="plc">PLC (Sim)</button>
+        <div class="sectionTitle">
+            <h2>Projects</h2>
+            <p>Filter by domain, open details, and jump to the repo.</p>
         </div>
 
-        <div class="grid" id="grid">
-            <!-- CARD 1 -->
-            <article class="card" data-tags="plc control">
-                <img src="assets/img/plc.jpg" alt="PLC project cover image" class="cover" />
-                <div class="cardBody">
-                    <h3>PLC Conveyor Sorting (Simulation)</h3>
-                    <p class="meta">Tags: PLC · Control · Safety</p>
-                    <p>
-                        Ladder/FBD logic for a conveyor sorting cell with interlocks, alarms, and E-Stop handling.
-                        Tested in simulation, with IO mapping + state machine.
-                    </p>
+        <div class="filters" role="toolbar" aria-label="Project filters">
+            <button class="pill isActive" data-filter="all">All</button>
+            <button class="pill" data-filter="software">Software</button>
+            <button class="pill" data-filter="control">Systems & Control</button>
+            <button class="pill" data-filter="automation">Automation</button>
+        </div>
 
-                    <div class="actions">
-                        <a class="btn" href="https://github.com/YOUR_GITHUB/plc-conveyor-sim" target="_blank" rel="noreferrer">
-                            Source code / project files
-                        </a>
-                        <button class="btn ghost"
-                                data-modal-title="PLC Conveyor Sorting (Simulation)"
-                                data-modal-desc="Add screenshots, IO list, and a short demo video link here."
-                                data-modal-img="assets/img/plc.jpg"
-                                data-modal-video="https://www.youtube.com/embed/dQw4w9WgXcQ">
-                            Details
-                        </button>
+        <div class="grid">
+            <!-- Project 1 -->
+            <article class="card" data-tags="software automation">
+                <div class="cover" style="background-image:url('assets/img/cover-flight.jpg')"></div>
+                <div class="cardBody">
+                    <div class="row">
+                        <h3>Flight Search Tool</h3>
+                        <span class="badge">Software</span>
                     </div>
-                </div>
-            </article>
-
-            <!-- CARD 2 -->
-            <article class="card" data-tags="robotics control software">
-                <img src="assets/img/robot.jpg" alt="Robotics project cover image" class="cover" />
-                <div class="cardBody">
-                    <h3>Robot Pick-and-Place (Trajectory + Vision)</h3>
-                    <p class="meta">Tags: Robotics · Control · Python</p>
-                    <p>
-                        Path planning + control loop prototype and a simple vision pipeline for object detection.
-                        Focus on repeatability and clean architecture.
+                    <p class="muted">
+                        A flight search tool focused on fast filtering, clean UI, and reproducible results.
+                        Built for a single traveler, return flights, and Euro pricing.
                     </p>
 
+                    <ul class="bullets">
+                        <li>Search window + min/max trip duration</li>
+                        <li>Paging of cheapest results</li>
+                        <li>Clear architecture + documented setup</li>
+                    </ul>
+
+                    <div class="tags">
+                        <span class="tag">Python</span><span class="tag">APIs</span><span class="tag">UI</span>
+                    </div>
+
                     <div class="actions">
-                        <a class="btn" href="https://github.com/YOUR_GITHUB/robot-pick-place" target="_blank" rel="noreferrer">
-                            GitHub repo
-                        </a>
-                        <button class="btn ghost"
-                                data-modal-title="Robot Pick-and-Place"
-                                data-modal-desc="Explain your architecture: sensing → planning → control → actuation."
-                                data-modal-img="assets/img/robot.jpg"
+                        <a class="btn small primary" href="https://github.com/YOUR_GITHUB/flight-search-tool" target="_blank" rel="noreferrer">GitHub Repo</a>
+                        <button class="btn small" type="button"
+                                data-modal-title="Flight Search Tool"
+                                data-modal-sub="Software • Python • API • UI"
+                                data-modal-desc="Add screenshots of the search screen + results list. Explain your data flow: input → API query → filtering → paging → final list. Mention any caching/rate limit handling."
+                                data-modal-img="assets/img/cover-flight.jpg"
                                 data-modal-video="">
                             Details
                         </button>
@@ -86,25 +129,73 @@
                 </div>
             </article>
 
-            <!-- CARD 3 -->
-            <article class="card" data-tags="software">
-                <img src="assets/img/software.jpg" alt="Software project cover image" class="cover" />
+            <!-- Project 2 -->
+            <article class="card" data-tags="software automation">
+                <div class="cover" style="background-image:url('assets/img/cover-ytdl.jpg')"></div>
                 <div class="cardBody">
-                    <h3>Flight Deals Finder (Python)</h3>
-                    <p class="meta">Tags: Software · API · UI</p>
-                    <p>
-                        Python app that queries a flights API and presents cheapest trips with paging and filters.
-                        Clean UI, reproducible results, and documented setup.
+                    <div class="row">
+                        <h3>YouTube Downloader</h3>
+                        <span class="badge">Software</span>
+                    </div>
+                    <p class="muted">
+                        A practical downloader tool with focus on usability, clear error handling,
+                        and safe defaults (formats, naming, destination folders).
                     </p>
 
+                    <ul class="bullets">
+                        <li>Video/audio options + quality selection</li>
+                        <li>Progress + resilient retries</li>
+                        <li>Organized output structure</li>
+                    </ul>
+
+                    <div class="tags">
+                        <span class="tag">Python</span><span class="tag">CLI/GUI</span><span class="tag">Tooling</span>
+                    </div>
+
                     <div class="actions">
-                        <a class="btn" href="https://github.com/YOUR_GITHUB/flight-deals" target="_blank" rel="noreferrer">
-                            GitHub repo
-                        </a>
-                        <button class="btn ghost"
-                                data-modal-title="Flight Deals Finder"
-                                data-modal-desc="Show screenshots + explain the data flow + caching strategy."
-                                data-modal-img="assets/img/software.jpg"
+                        <a class="btn small primary" href="https://github.com/YOUR_GITHUB/youtube-downloader" target="_blank" rel="noreferrer">GitHub Repo</a>
+                        <button class="btn small" type="button"
+                                data-modal-title="YouTube Downloader"
+                                data-modal-sub="Software • Python • Tooling"
+                                data-modal-desc="Show your UI/CLI usage, explain how you handle formats and errors, and include a short demo video if you want (YouTube embed works well)."
+                                data-modal-img="assets/img/cover-ytdl.jpg"
+                                data-modal-video="">
+                            Details
+                        </button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Project 3 -->
+            <article class="card" data-tags="control automation software">
+                <div class="cover" style="background-image:url('assets/img/cover-sim.jpg')"></div>
+                <div class="cardBody">
+                    <div class="row">
+                        <h3>Simulation Framework</h3>
+                        <span class="badge">Master’s Thesis</span>
+                    </div>
+                    <p class="muted">
+                        Simulation framework developed for my Master’s Thesis, structured for repeatable experiments,
+                        clean configuration, and clear results reporting.
+                    </p>
+
+                    <ul class="bullets">
+                        <li>Config-driven runs + reproducibility</li>
+                        <li>Metrics collection + plots/exports</li>
+                        <li>Extensible model/components</li>
+                    </ul>
+
+                    <div class="tags">
+                        <span class="tag">Systems</span><span class="tag">Control</span><span class="tag">Framework</span>
+                    </div>
+
+                    <div class="actions">
+                        <a class="btn small primary" href="https://github.com/YOUR_GITHUB/simulation-framework" target="_blank" rel="noreferrer">GitHub Repo</a>
+                        <button class="btn small" type="button"
+                                data-modal-title="Simulation Framework (Master’s Thesis)"
+                                data-modal-sub="Systems & Control • Automation • Research Engineering"
+                                data-modal-desc="Add: (1) problem statement, (2) architecture diagram, (3) what you validated, (4) key results and what they mean. A short demo video or GIF is great here."
+                                data-modal-img="assets/img/cover-sim.jpg"
                                 data-modal-video="">
                             Details
                         </button>
@@ -113,17 +204,62 @@
             </article>
         </div>
     </section>
+
+    <section id="about" class="section">
+        <div class="sectionTitle">
+            <h2>About</h2>
+            <p>Replace this text with your LinkedIn “About” (shorter and punchy works best).</p>
+        </div>
+
+        <div class="aboutGrid">
+            <div class="panel">
+                <h3>What I do</h3>
+                <p class="muted">
+                    I build automation-focused systems end-to-end — from software tools to control-oriented projects.
+                    I care about clarity, documentation, and engineering that works in the real world.
+                </p>
+            </div>
+
+            <div class="panel">
+                <h3>Highlights</h3>
+                <ul class="bullets">
+                    <li>MSc background bridging electronics + computing</li>
+                    <li>Hands-on mindset: build, test, iterate</li>
+                    <li>Strong interest in automation & industrial workflows</li>
+                </ul>
+            </div>
+
+            <div class="panel">
+                <h3>Contact</h3>
+                <p class="muted">Best place to reach me:</p>
+                <div class="ctaRow">
+                    <a class="btn primary" href="https://www.linkedin.com/in/autojoaoferreira/" target="_blank" rel="noreferrer">Message on LinkedIn</a>
+                    <a class="btn" href="mailto:YOUR_EMAIL@example.com">Email</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <span class="muted">© <span id="year"></span> João Ferreira • Built on GitHub Pages</span>
+    </footer>
 </main>
 
-<!-- MODAL -->
+<!-- Modal -->
 <dialog id="modal" class="modal">
     <div class="modalInner">
-        <button class="close" id="closeBtn" aria-label="Close">×</button>
-        <h3 id="mTitle"></h3>
-        <p id="mDesc" class="mDesc"></p>
-        <img id="mImg" class="mImg" alt="" />
-        <div class="videoWrap" id="videoWrap">
-            <iframe id="mVideo" title="Project demo video"
+        <button id="closeBtn" class="close" type="button" aria-label="Close">×</button>
+        <div class="modalHead">
+            <h3 id="mTitle"></h3>
+            <div id="mSub" class="muted smallText"></div>
+        </div>
+        <p id="mDesc" class="muted"></p>
+
+        <img id="mImg" class="modalImg" alt="" />
+
+        <div id="videoWrap" class="videoWrap">
+            <iframe id="mVideo"
+                    title="Project demo video"
                     frameborder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowfullscreen></iframe>
