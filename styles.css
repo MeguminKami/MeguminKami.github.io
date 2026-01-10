@@ -1699,3 +1699,73 @@ body.light .pill.isActive {
     justify-content: center;
     flex-wrap: wrap;
 }
+
+/* ============================================
+   CONTACT MODAL
+   ============================================ */
+
+.contactModal .contactModalInner {
+    max-width: 360px;
+    padding: 1.5rem;
+}
+
+.contactLinks {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 1rem;
+}
+
+.contactLink {
+    display: flex;
+    align-items: center;
+    gap: 0.875rem;
+    padding: 0.875rem 1rem;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--text);
+    transition: all 0.2s ease;
+}
+
+.contactLink:hover {
+    transform: translateX(4px);
+    border-color: var(--accent-blue);
+}
+
+.contactIcon {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+}
+
+/* Icon colors */
+.contactLink.linkedin .contactIcon {
+    color: #0A66C2;
+}
+
+.contactLink.github .contactIcon {
+    color: #6e5494;
+}
+
+body.light .contactLink.github .contactIcon {
+    color: #24292f;
+}
+
+.contactLink.email .contactIcon {
+    color: #EA4335;
+}
+
+.contactLink.phone .contactIcon {
+    color: #22c55e;
+}
+
+.contactLink.youtube .contactIcon {
+    color: #FF0000;
+}
+
+.contactLink.spotify .contactIcon {
+    color: #1DB954;
+}

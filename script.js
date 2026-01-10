@@ -112,6 +112,31 @@ if (modal) {
 }
 
 // ============================================
+// CONTACT MODAL
+// ============================================
+
+const contactModal = document.getElementById('contactModal');
+const contactBtn = document.getElementById('contactBtn');
+const contactCloseBtn = document.getElementById('contactCloseBtn');
+
+if (contactModal && contactBtn) {
+    contactBtn.addEventListener('click', () => {
+        contactModal.showModal();
+    });
+
+    if (contactCloseBtn) {
+        contactCloseBtn.addEventListener('click', () => contactModal.close());
+    }
+
+    // Close on backdrop click
+    contactModal.addEventListener('click', (e) => {
+        if (e.target === contactModal) {
+            contactModal.close();
+        }
+    });
+}
+
+// ============================================
 // FOOTER YEAR
 // ============================================
 
