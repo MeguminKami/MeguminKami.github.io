@@ -291,8 +291,10 @@ a:focus-visible {
 }
 
 .hero h1 {
+    font-size: 1.82rem;
     line-height: 1.15;
     margin-bottom: 1rem;
+    margin-top: 2rem;
 }
 
 @media (max-width: 600px) {
@@ -319,7 +321,22 @@ a:focus-visible {
     display: flex;
     flex-wrap: wrap;
     gap: 0.625rem;
-    margin-top: 1.25rem;
+    margin-top: 2.5rem;
+}
+
+.chips h2 {
+    width: 100%;
+    margin-top: 0.5rem;
+    display: block; 
+    color: var(--text);
+}
+
+.chips p {
+    font-size: 0.875rem;
+    width: 100%;
+    margin-bottom: 0.75rem;
+    display: block; 
+    color: var(--text-muted);
 }
 
 .chip {
@@ -355,7 +372,7 @@ a:focus-visible {
     border-radius: 50%;
 }
 
-.dot1 { background: rgba(255, 255, 255, 0.2); }
+.dot1 { background: rgba(100, 100, 100, 0.5); }
 .dot2 { background: var(--accent-blue); opacity: 0.4; }
 .dot3 { background: var(--accent-purple); opacity: 0.4; }
 
@@ -1701,71 +1718,85 @@ body.light .pill.isActive {
 }
 
 /* ============================================
-   CONTACT MODAL
-   ============================================ */
+    CONTACT MODAL
+    ============================================ */
+
+.contactModal {
+     margin: auto;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+}
 
 .contactModal .contactModalInner {
-    max-width: 360px;
-    padding: 1.5rem;
+     max-width: 480px;
+     width: 100%;
+     padding: 2rem;
+     margin: 0 auto;
+}
+
+.contactModal .modalHead h2 {
+     color: var(--text);
+     text-align: center;
 }
 
 .contactLinks {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    margin-top: 1rem;
+     display: flex;
+     flex-direction: column;
+     gap: 0.75rem;
+     margin-top: 1rem;
 }
 
 .contactLink {
-    display: flex;
-    align-items: center;
-    gap: 0.875rem;
-    padding: 0.875rem 1rem;
-    background: var(--surface-2);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-sm);
-    font-size: 0.9375rem;
-    font-weight: 500;
-    color: var(--text);
-    transition: all 0.2s ease;
+     display: flex;
+     align-items: center;
+     gap: 0.875rem;
+     padding: 0.875rem 1rem;
+     background: var(--surface-2);
+     border: 1px solid var(--border);
+     border-radius: var(--radius-sm);
+     font-size: 0.9375rem;
+     font-weight: 500;
+     color: var(--text);
+     transition: all 0.2s ease;
 }
 
 .contactLink:hover {
-    transform: translateX(4px);
-    border-color: var(--accent-blue);
+     transform: translateX(4px);
+     border-color: var(--accent-blue);
 }
 
 .contactIcon {
-    width: 22px;
-    height: 22px;
-    flex-shrink: 0;
+     width: 22px;
+     height: 22px;
+     flex-shrink: 0;
 }
 
 /* Icon colors */
 .contactLink.linkedin .contactIcon {
-    color: #0A66C2;
+     color: #0A66C2;
 }
 
 .contactLink.github .contactIcon {
-    color: #6e5494;
+     color: #6e5494;
 }
 
 body.light .contactLink.github .contactIcon {
-    color: #24292f;
+     color: #24292f;
 }
 
 .contactLink.email .contactIcon {
-    color: #EA4335;
+     color: #EA4335;
 }
 
 .contactLink.phone .contactIcon {
-    color: #22c55e;
+     color: #22c55e;
 }
 
 .contactLink.youtube .contactIcon {
-    color: #FF0000;
+     color: #FF0000;
 }
 
 .contactLink.spotify .contactIcon {
-    color: #1DB954;
+     color: #1DB954;
 }
