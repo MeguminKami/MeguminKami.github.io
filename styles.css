@@ -348,6 +348,32 @@ a:focus-visible {
     color: var(--text-muted);
 }
 
+.chipPrimary {
+    background: rgba(124, 92, 255, 0.15);
+    border: 1px solid var(--accent-blue);
+    color: var(--text);
+    border-radius: 999px;
+    font-size: 0.8125rem;
+    padding: 0.5rem 0.875rem;
+}
+
+body.light .chipPrimary {
+    background: rgba(124, 92, 255, 0.1);
+}
+
+.chipTertiary {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    border-radius: 999px;
+    font-size: 0.8125rem;
+    padding: 0.5rem 0.875rem;
+}
+
+body.light .chipTertiary {
+    background: transparent;
+}
+
 /* Hero Card */
 .heroCard {
     background: var(--surface);
@@ -654,7 +680,7 @@ body.light .pill.isActive {
 }
 
 .footerTitle {
-    font-size: 1.25rem;
+    font-size: 1.50rem;
     margin-bottom: 0.5rem;
 }
 
