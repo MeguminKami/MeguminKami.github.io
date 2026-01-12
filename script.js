@@ -35,22 +35,40 @@ initTheme();
 // PROJECT FILTERS
 // ============================================
 
-const pills = document.querySelectorAll('.pill');
+const techPills = document.querySelectorAll('.pill:not(.status-pill)');
+const statusPills = document.querySelectorAll('.pill.status-pill');
 const cards = document.querySelectorAll('.card');
 
-pills.forEach(pill => {
-    pill.addEventListener('click', () => {
-        // Update active state
-        pills.forEach(p => p.classList.remove('isActive'));
-        pill.classList.add('isActive');
+let currentTechFilter = 'all';
+let currentStatusFilter = 'all';
 
-        // Filter cards
-        const filter = pill.dataset.filter;
-        cards.forEach(card => {
-            const tags = (card.dataset.tags || '').split(' ');
-            const shouldShow = filter === 'all' || tags.includes(filter);
-            card.style.display = shouldShow ? '' : 'none';
-        });
+function filterCards() {
+    cards.forEach(card => {
+        const tags = (card.dataset.tags || '').split(' ');
+        const status = card.dataset.status || '';
+
+        const matchesTech = currentTechFilter === 'all' || tags.includes(currentTechFilter);
+        const matchesStatus = currentStatusFilter === 'all' || status === currentStatusFilter;
+
+        card.style.display = (matchesTech && matchesStatus) ? '' : 'none';
+    });
+}
+
+techPills.forEach(pill => {
+    pill.addEventListener('click', () => {
+        techPills.forEach(p => p.classList.remove('isActive'));
+        pill.classList.add('isActive');
+        currentTechFilter = pill.dataset.filter;
+        filterCards();
+    });
+});
+
+statusPills.forEach(pill => {
+    pill.addEventListener('click', () => {
+        statusPills.forEach(p => p.classList.remove('isActive'));
+        pill.classList.add('isActive');
+        currentStatusFilter = pill.dataset.status;
+        filterCards();
     });
 });
 
