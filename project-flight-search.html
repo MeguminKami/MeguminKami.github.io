@@ -15,8 +15,8 @@
         <div class="brand">
             <div class="avatar" aria-hidden="true"></div>
             <div>
-                <div class="name">Your Name</div>
-                <div class="headline">Researcher & Developer</div>
+                <div class="name">João Ferreira</div>
+                <div class="headline">Automation Engineer - M.EEC @ FEUP </div>
             </div>
         </div>
         <div class="navLinks">
@@ -46,8 +46,7 @@
                 with transparent pricing and reproducible results.
             </p>
             <div class="projectMeta">
-                <span class="badge">Software</span>
-                <span class="chip">Python</span>
+                <span class="chipPrimary">Python</span>
                 <span class="chip">API Integration</span>
                 <span class="chip">Data Processing</span>
             </div>
@@ -70,15 +69,28 @@
             </section>
 
             <div class="mediaSection">
-                <h3>Screenshot</h3>
-                <img
-                        src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 600'%3E%3Crect fill='%23252b42' width='1200' height='600'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='system-ui' font-size='32' fill='%239ba3b8'%3EFlight Search Interface%3C/text%3E%3C/svg%3E"
-                        alt="Flight Search Tool interface"
-                        loading="lazy"
-                >
-                <p class="smallText muted" style="margin-top: 0.5rem;">
-                    Clean, intuitive interface for searching and filtering flight results
-                </p>
+                <div class="imageGallery">
+                    <img
+                            src="/assets/img/flightdealfinder/cover.png"
+                            alt="Circuit board layout"
+                            class="galleryImage"
+                    >
+                    <img
+                            src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 400'%3E%3Crect fill='%23252b42' width='600' height='400'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='system-ui' font-size='24' fill='%239ba3b8'%3EAssembled Device%3C/text%3E%3C/svg%3E"
+                            alt="Assembled device"
+                            class="galleryImage"
+                    >
+                    <img
+                            src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 400'%3E%3Crect fill='%23252b42' width='600' height='400'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='system-ui' font-size='24' fill='%239ba3b8'%3EDashboard UI%3C/text%3E%3C/svg%3E"
+                            alt="Dashboard interface"
+                            class="galleryImage"
+                    >
+                    <img
+                            src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 400'%3E%3Crect fill='%23252b42' width='600' height='400'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='system-ui' font-size='24' fill='%239ba3b8'%3ETesting Setup%3C/text%3E%3C/svg%3E"
+                            alt="Testing setup"
+                            class="galleryImage"
+                    >
+                </div>
             </div>
 
             <section class="contentSection">
@@ -156,6 +168,13 @@
             </div>
         </div>
     </article>
+</div>
+
+<!-- Lightbox Modal -->
+<div id="lightbox" class="lightbox" aria-hidden="true">
+    <button class="lightboxClose" aria-label="Close lightbox">✕</button>
+    <img id="lightboxImg" src="" alt="" class="lightboxImage">
+    <div class="lightboxCaption" id="lightboxCaption"></div>
 </div>
 
 <script src="script.js"></script>

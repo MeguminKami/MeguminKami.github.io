@@ -1178,6 +1178,17 @@ body.light .pill.isActive {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 1rem;
+    grid-auto-rows: 200px;
+    align-items: stretch;
+}
+
+/* Make images fill their grid cell */
+.imageGallery img,
+.imageGallery .galleryImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
 }
 
 .galleryImage {
