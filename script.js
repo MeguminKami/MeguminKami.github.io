@@ -35,14 +35,11 @@ initTheme();
 // PROJECT FILTERS
 // ============================================
 
-const techPills = document.querySelectorAll('.pill:not(.status-pill)');
-const statusPills = document.querySelectorAll('.pill.status-pill');
-const cards = document.querySelectorAll('.card');
-
 let currentTechFilter = 'all';
 let currentStatusFilter = 'all';
 
 function filterCards() {
+    const cards = document.querySelectorAll('.card');
     cards.forEach(card => {
         const tags = (card.dataset.tags || '').split(' ');
         const status = card.dataset.status || '';
@@ -54,37 +51,46 @@ function filterCards() {
     });
 }
 
-techPills.forEach(pill => {
-    pill.addEventListener('click', () => {
-        techPills.forEach(p => p.classList.remove('isActive'));
-        pill.classList.add('isActive');
-        currentTechFilter = pill.dataset.filter;
-        filterCards();
-    });
-});
+function initFilters() {
+    const techPills = document.querySelectorAll('.pill:not(.status-pill)');
+    const statusPills = document.querySelectorAll('.pill.status-pill');
 
-statusPills.forEach(pill => {
-    pill.addEventListener('click', () => {
-        statusPills.forEach(p => p.classList.remove('isActive'));
-        pill.classList.add('isActive');
-        currentStatusFilter = pill.dataset.status;
-        filterCards();
+    techPills.forEach(pill => {
+        pill.addEventListener('click', () => {
+            techPills.forEach(p => p.classList.remove('isActive'));
+            pill.classList.add('isActive');
+            currentTechFilter = pill.dataset.filter;
+            filterCards();
+        });
     });
-});
+
+    statusPills.forEach(pill => {
+        pill.addEventListener('click', () => {
+            statusPills.forEach(p => p.classList.remove('isActive'));
+            pill.classList.add('isActive');
+            currentStatusFilter = pill.dataset.status;
+            filterCards();
+        });
+    });
+}
+
+// Initialize filters on page load
+initFilters();
 
 // ============================================
 // MODAL (Quick Preview)
 // ============================================
 
 const modal = document.getElementById('modal');
-if (modal) {
-    const closeBtn = document.getElementById('closeBtn');
-    const mTitle = document.getElementById('mTitle');
-    const mSub = document.getElementById('mSub');
-    const mDesc = document.getElementById('mDesc');
-    const mImg = document.getElementById('mImg');
-    const mVideo = document.getElementById('mVideo');
-    const videoWrap = document.getElementById('videoWrap');
+const mTitle = document.getElementById('mTitle');
+const mSub = document.getElementById('mSub');
+const mDesc = document.getElementById('mDesc');
+const mImg = document.getElementById('mImg');
+const mVideo = document.getElementById('mVideo');
+const videoWrap = document.getElementById('videoWrap');
+
+function initModalButtons() {
+    if (!modal) return;
 
     // Open modal
     document.querySelectorAll('button[data-modal-title]').forEach(btn => {
@@ -109,6 +115,13 @@ if (modal) {
             modal.showModal();
         });
     });
+}
+
+if (modal) {
+    const closeBtn = document.getElementById('closeBtn');
+
+    // Initialize modal buttons on page load
+    initModalButtons();
 
     // Close modal
     if (closeBtn) {
@@ -284,3 +297,158 @@ document.querySelectorAll('.copyBtn').forEach(btn => {
         }
     });
 });
+
+(async function initProjects() {
+    const grid = document.getElementById("projectsGrid");
+    if (!grid) return;
+
+    try {
+        // Change the path if needed:
+        const res = await fetch("projects.json", { cache: "no-store" });
+        if (!res.ok) throw new Error(`Failed to load projects.json (${res.status})`);
+
+        const data = await res.json();
+        const projects = Array.isArray(data) ? data : (data.projects || []);
+
+        renderProjectCards(grid, projects);
+
+        // Reinitialize modal buttons after rendering
+        initModalButtons();
+    } catch (err) {
+        console.error(err);
+        // fallback: show a small message
+        grid.innerHTML = `<p class="muted smallText">Could not load projects.</p>`;
+    }
+})();
+
+/* ================================
+   RENDER FUNCTION (FULLY WORKING)
+================================ */
+function renderProjectCards(gridEl, projects) {
+    gridEl.innerHTML = ""; // clear existing
+
+    const frag = document.createDocumentFragment();
+
+    projects.forEach((p) => {
+        const article = document.createElement("article");
+        article.className = "card";
+        article.dataset.tags = (p.tagsData || []).join(" ");
+        article.dataset.status = p.status || "";
+
+        // Cover
+        const cover = document.createElement("div");
+        cover.className = "cover";
+        cover.setAttribute("role", "img");
+        cover.setAttribute("aria-label", (p.cover?.ariaLabel || `${p.title || "Project"} cover`));
+
+        const imageUrl = p.cover?.image || "";
+        if (imageUrl) {
+            cover.style.backgroundImage = `url('${imageUrl}')`;
+        }
+
+        // Body
+        const body = document.createElement("div");
+        body.className = "cardBody";
+
+        // Row (title + badge + status)
+        const row = document.createElement("div");
+        row.className = "row";
+
+        const h3 = document.createElement("h3");
+        h3.textContent = p.title || "Untitled Project";
+
+        const badge = document.createElement("span");
+        badge.className = "badge";
+        badge.textContent = p.badge || "Project";
+
+        const statusBadge = document.createElement("span");
+        statusBadge.className = `status-badge ${normalizeStatusClass(p.status)}`;
+        statusBadge.textContent = humanStatus(p.status);
+
+        row.append(h3, badge, statusBadge);
+
+        // Description
+        const desc = document.createElement("p");
+        desc.className = "muted smallText";
+        desc.textContent = p.description || "";
+
+        // Bullets
+        const ul = document.createElement("ul");
+        ul.className = "bullets smallText";
+        (p.bullets || []).forEach((b) => {
+            const li = document.createElement("li");
+            li.textContent = b;
+            ul.appendChild(li);
+        });
+
+        // Tags (display chips)
+        const tagsWrap = document.createElement("div");
+        tagsWrap.className = "tags";
+        (p.tags || []).forEach((t) => {
+            const tag = document.createElement("span");
+            tag.className = "tag";
+            tag.textContent = t;
+            tagsWrap.appendChild(tag);
+        });
+
+        // Actions
+        const actions = document.createElement("div");
+        actions.className = "actions";
+
+        const viewLink = document.createElement("a");
+        viewLink.className = "btn primary small";
+        viewLink.href = p.viewHref || "#";
+        viewLink.textContent = "View Details";
+
+        const quickBtn = document.createElement("button");
+        quickBtn.className = "btn small";
+        quickBtn.type = "button";
+        quickBtn.textContent = "Quick Preview";
+
+        // Your existing modal expects these data-* attributes:
+        quickBtn.dataset.modalTitle = p.modal?.title || p.title || "Project";
+        quickBtn.dataset.modalSub = p.modal?.sub || "";
+        quickBtn.dataset.modalDesc = p.modal?.desc || p.description || "";
+        quickBtn.dataset.modalImg = p.modal?.img || p.cover?.image || "";
+
+        actions.append(viewLink, quickBtn);
+
+        // Assemble
+        body.append(row, desc, ul, tagsWrap, actions);
+        article.append(cover, body);
+
+        // Make the entire card clickable (navigate to View Details)
+        article.style.cursor = 'pointer';
+        article.addEventListener('click', (e) => {
+            // Don't navigate if clicking on a button or link
+            if (e.target.closest('button') || e.target.closest('a')) {
+                return;
+            }
+            // Navigate to the project details page
+            const href = p.viewHref || "#";
+            if (href !== "#") {
+                window.location.href = href;
+            }
+        });
+
+        frag.appendChild(article);
+    });
+
+    gridEl.appendChild(frag);
+}
+
+function normalizeStatusClass(status) {
+    const s = (status || "").toLowerCase().trim();
+    if (s === "complete" || s === "completed" || s === "done") return "complete";
+    if (s === "in-progress" || s === "in progress" || s === "progress") return "in-progress";
+    if (s === "paused" || s === "on-hold" || s === "hold") return "paused";
+    return "paused"; // default, or change to something else
+}
+
+function humanStatus(status) {
+    const s = (status || "").toLowerCase().trim();
+    if (s === "complete" || s === "completed" || s === "done") return "Complete";
+    if (s === "in-progress" || s === "in progress" || s === "progress") return "In Progress";
+    if (s === "paused" || s === "on-hold" || s === "hold") return "Paused";
+    return status ? status : "Paused";
+}

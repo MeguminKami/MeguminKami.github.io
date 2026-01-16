@@ -1,0 +1,77 @@
+
+{
+  "projects": [
+    {
+      "title": "Flight Search Tool",
+      "badge": "Python Website",
+      "status": "complete",
+      "description": "Fast flight filtering with clean UI and reproducible results for single travelers",
+      "bullets": [
+        "Search window + min/max trip duration",
+        "Paginated cheapest results",
+        "Clear architecture + documented setup"
+      ],
+      "tags": ["Python", "API Integration", "Data Processing"],
+      "tagsData": ["python"],
+      "viewHref": "project-flight-search.html",
+      "cover": {
+        "ariaLabel": "Flight Search Tool cover",
+        "image": "assets/img/flightdealfinder/cover.png"
+      },
+      "modal": {
+        "title": "Flight Search Tool",
+        "sub": "Python Website",
+        "desc": "A flight search tool focused on fast filtering, clean UI, and reproducible results. Built for single traveler, return flights, and Euro pricing.",
+        "img": "assets/img/flightdealfinder/cover.png"
+      }
+    },
+    {
+      "title": "YouTube Downloader",
+      "badge": "Python Application",
+      "status": "in-progress",
+      "description": "Simple command-line tool for downloading YouTube videos and audio",
+      "bullets": [
+        "Multiple format support (MP4, MP3, etc.)",
+        "Playlist handling capabilities",
+        "Progress tracking and error handling"
+      ],
+      "tags": ["Python", "API Integration", "Media Processing"],
+      "tagsData": ["python"],
+      "viewHref": "project-youtube-downloader.html",
+      "cover": {
+        "ariaLabel": "YouTube Downloader cover",
+        "image": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 800 400%22%3E%3Crect fill=%22%23121c38%22 width=%22800%22 height=%22400%22/%3E%3Cpath fill=%22%237c5cff%22 opacity=%220.15%22 d=%22M350 150h100v100H350z%22/%3E%3C/svg%3E"
+      },
+      "modal": {
+        "title": "YouTube Downloader",
+        "sub": "Software",
+        "desc": "Command-line tool for downloading YouTube videos with support for multiple formats, playlists, and progress tracking.",
+        "img": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 800 400%22%3E%3Crect fill=%22%23121c38%22 width=%22800%22 height=%22400%22/%3E%3C/svg%3E"
+      }
+    },
+    {
+      "title": "Simulation Framework",
+      "badge": "Research",
+      "status": "paused",
+      "description": "Distributed systems framework for network clock synchronization research",
+      "bullets": [
+        "Stochastic methods implementation",
+        "Real-time performance monitoring",
+        "Extensible architecture for experiments"
+      ],
+      "tags": ["C", "Distributed Systems", "Simulation"],
+      "tagsData": ["research", "hardware"],
+      "viewHref": "project-simulation-framework.html",
+      "cover": {
+        "ariaLabel": "Simulation Framework cover",
+        "image": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 800 400%22%3E%3Crect fill=%22%23121c38%22 width=%22800%22 height=%22400%22/%3E%3Ccircle fill=%22%23a78bfa%22 opacity=%220.12%22 cx=%22400%22 cy=%22200%22 r=%2280%22/%3E%3C/svg%3E"
+      },
+      "modal": {
+        "title": "Simulation Framework",
+        "sub": "Research / Hardware",
+        "desc": "A simulation framework for testing stochastic methods in network clock synchronization, built for distributed systems research.",
+        "img": "data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 800 400%22%3E%3Crect fill=%22%23121c38%22 width=%22800%22 height=%22400%22/%3E%3C/svg%3E"
+      }
+    }
+  ]
+}
