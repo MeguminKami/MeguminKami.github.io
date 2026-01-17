@@ -442,7 +442,9 @@ function normalizeStatusClass(status) {
     if (s === "complete" || s === "completed" || s === "done") return "complete";
     if (s === "in-progress" || s === "in progress" || s === "progress") return "in-progress";
     if (s === "paused" || s === "on-hold" || s === "hold") return "paused";
-    return "paused"; // default, or change to something else
+    if (s === "incomplete") return "incomplete";
+    if (s === "tbs" || s === "to be started") return "to-be-started";
+    return "paused";
 }
 
 function humanStatus(status) {
@@ -450,5 +452,173 @@ function humanStatus(status) {
     if (s === "complete" || s === "completed" || s === "done") return "Complete";
     if (s === "in-progress" || s === "in progress" || s === "progress") return "In Progress";
     if (s === "paused" || s === "on-hold" || s === "hold") return "Paused";
+    if (s === "incomplete") return "Incomplete";
+    if (s === "tbs" || s === "to be started") return "To Be Started";
     return status ? status : "Paused";
 }
+
+/* ============================================
+   Looping Image Slider + Lightbox integration
+   ============================================ */
+
+class LoopingImageSlider {
+    constructor(root) {
+        this.root = root;
+        this.viewportImg = root.querySelector(".imgSliderImg");
+        this.btnPrev = root.querySelector(".imgSliderPrev");
+        this.btnNext = root.querySelector(".imgSliderNext");
+        this.elIndex = root.querySelector(".imgSliderIndex");
+        this.elTotal = root.querySelector(".imgSliderTotal");
+
+        this.images = this.#parseImages(root.dataset.images);
+        this.index = 0;
+
+        // Init UI
+        this.elTotal.textContent = String(this.images.length || 0);
+
+        // Bind events
+        this.btnPrev.addEventListener("click", () => this.prev());
+        this.btnNext.addEventListener("click", () => this.next());
+        this.viewportImg.addEventListener("click", () => this.openLightbox());
+
+        // Optional: keyboard nav when focused
+        this.root.addEventListener("keydown", (e) => {
+            if (e.key === "ArrowLeft") this.prev();
+            if (e.key === "ArrowRight") this.next();
+        });
+        this.root.tabIndex = 0; // make root focusable for keyboard arrows
+
+        // Render first
+        this.render();
+    }
+
+    #parseImages(raw) {
+        if (!raw) return [];
+        try {
+            const arr = JSON.parse(raw);
+            if (!Array.isArray(arr)) return [];
+            return arr
+                .map((x) => ({
+                    src: String(x?.src || "").trim(),
+                    alt: String(x?.alt || "").trim(),
+                    caption: String(x?.caption || "").trim(),
+                }))
+                .filter((x) => x.src.length > 0);
+        } catch {
+            return [];
+        }
+    }
+
+    render() {
+        if (!this.images.length) {
+            // Fallback state
+            this.viewportImg.src = "";
+            this.viewportImg.alt = "";
+            this.elIndex.textContent = "0";
+            this.elTotal.textContent = "0";
+            this.btnPrev.disabled = true;
+            this.btnNext.disabled = true;
+            return;
+        }
+
+        const item = this.images[this.index];
+        this.viewportImg.src = item.src;
+        this.viewportImg.alt = item.alt || `Image ${this.index + 1}`;
+        this.viewportImg.dataset.caption = item.caption || "";
+        this.viewportImg.dataset.index = String(this.index);
+
+        this.elIndex.textContent = String(this.index + 1);
+        this.elTotal.textContent = String(this.images.length);
+
+        // If "0 to 0" (one image), keep looping logic but disable buttons (no-op)
+        const one = this.images.length <= 1;
+        this.btnPrev.disabled = one;
+        this.btnNext.disabled = one;
+    }
+
+    prev() {
+        if (!this.images.length) return;
+        this.index = (this.index - 1 + this.images.length) % this.images.length;
+        this.render();
+    }
+
+    next() {
+        if (!this.images.length) return;
+        this.index = (this.index + 1) % this.images.length;
+        this.render();
+    }
+
+    openLightbox() {
+        if (!this.images.length) return;
+        const item = this.images[this.index];
+        openLightbox({
+            src: item.src,
+            alt: item.alt || `Image ${this.index + 1}`,
+            caption: item.caption || "",
+        });
+    }
+}
+
+/* ============================================
+   Lightbox helpers (works with your existing DOM)
+   ============================================ */
+
+function openLightbox({ src, alt, caption }) {
+    const lb = document.getElementById("lightbox");
+    const lbImg = document.getElementById("lightboxImg");
+    const lbCap = document.getElementById("lightboxCaption");
+    const lbClose = lb?.querySelector(".lightboxClose");
+
+    if (!lb || !lbImg) return;
+
+    lbImg.src = src;
+    lbImg.alt = alt || "";
+    if (lbCap) lbCap.textContent = caption || "";
+
+    lb.classList.add("active");
+    lb.setAttribute("aria-hidden", "false");
+    document.documentElement.style.overflow = "hidden";
+
+    // Close handlers (attached once)
+    if (!lb.dataset.bound) {
+        lb.dataset.bound = "true";
+
+        lbClose?.addEventListener("click", closeLightbox);
+
+        // Click backdrop to close (but not the image itself)
+        lb.addEventListener("click", (e) => {
+            const clickedBackdrop = e.target === lb;
+            if (clickedBackdrop) closeLightbox();
+        });
+
+        // ESC to close
+        window.addEventListener("keydown", (e) => {
+            if (e.key === "Escape") closeLightbox();
+        });
+    }
+}
+
+function closeLightbox() {
+    const lb = document.getElementById("lightbox");
+    const lbImg = document.getElementById("lightboxImg");
+    const lbCap = document.getElementById("lightboxCaption");
+
+    if (!lb) return;
+
+    lb.classList.remove("active");
+    lb.setAttribute("aria-hidden", "true");
+    document.documentElement.style.overflow = "";
+
+    if (lbImg) lbImg.src = "";
+    if (lbCap) lbCap.textContent = "";
+}
+
+/* ============================================
+   Auto-init all sliders on the page
+   ============================================ */
+
+document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".imgSlider").forEach((el) => {
+        new LoopingImageSlider(el);
+    });
+});

@@ -68,30 +68,31 @@
                 </p>
             </section>
 
-            <div class="mediaSection">
-                <div class="imageGallery">
-                    <img
-                            src="/assets/img/flightdealfinder/cover.png"
-                            alt="Circuit board layout"
-                            class="galleryImage"
-                    >
-                    <img
-                            src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 400'%3E%3Crect fill='%23252b42' width='600' height='400'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='system-ui' font-size='24' fill='%239ba3b8'%3EAssembled Device%3C/text%3E%3C/svg%3E"
-                            alt="Assembled device"
-                            class="galleryImage"
-                    >
-                    <img
-                            src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 400'%3E%3Crect fill='%23252b42' width='600' height='400'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='system-ui' font-size='24' fill='%239ba3b8'%3EDashboard UI%3C/text%3E%3C/svg%3E"
-                            alt="Dashboard interface"
-                            class="galleryImage"
-                    >
-                    <img
-                            src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 400'%3E%3Crect fill='%23252b42' width='600' height='400'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='system-ui' font-size='24' fill='%239ba3b8'%3ETesting Setup%3C/text%3E%3C/svg%3E"
-                            alt="Testing setup"
-                            class="galleryImage"
-                    >
+            <section class="imgSlider" data-images='[
+                { "src": "assets/img/flightdealfinder/cover.png", "alt": "1"},
+                { "src": "assets/img/flightdealfinder/cover.png", "alt": "2" },
+                { "src": "assets/img/flightdealfinder/cover.png", "alt": "3"}
+                ]'>
+
+                <div class="imgSliderViewport">
+                    <img class="imgSliderImg" src="" alt="" loading="lazy" decoding="async">
                 </div>
-            </div>
+
+                <div class="imgSliderControls" aria-label="Image slider controls">
+                    <button type="button" class="btn small imgSliderBtn imgSliderPrev" aria-label="Previous image">
+                        ← Back
+                    </button>
+
+                    <div class="imgSliderCount" aria-live="polite">
+                        <span class="imgSliderIndex">1</span>/<span class="imgSliderTotal">1</span>
+                    </div>
+
+                    <button type="button" class="btn small imgSliderBtn imgSliderNext" aria-label="Next image">
+                        Forward →
+                    </button>
+                </div>
+            </section>
+
 
             <section class="contentSection">
                 <h2>Problem</h2>
