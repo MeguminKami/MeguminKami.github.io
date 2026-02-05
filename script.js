@@ -1,8 +1,69 @@
 // ============================================
+// SHARED LAYOUT (HEADER / FOOTER)
+// ============================================
+
+async function loadPartial(targetId, url) {
+    const host = document.getElementById(targetId);
+    if (!host) return;
+
+    try {
+        const res = await fetch(url, { cache: "no-store" });
+        if (!res.ok) throw new Error(`Failed to load ${url} (${res.status})`);
+        host.innerHTML = await res.text();
+    } catch (err) {
+        console.error(err);
+    }
+}
+
+function updateNavLinksForPage() {
+    const path = window.location.pathname.toLowerCase();
+    const isHome = path.endsWith("/") || path.endsWith("/index.html") || path.endsWith("index.html");
+
+    const projectsLink = document.querySelector('[data-nav="projects"]');
+    const aboutLink = document.querySelector('[data-nav="about"]');
+    const contactLink = document.querySelector('[data-nav="contact"]');
+
+    if (projectsLink) projectsLink.href = isHome ? "#projects" : "index.html#projects";
+    if (aboutLink) aboutLink.href = isHome ? "#about" : "index.html#about";
+    if (contactLink) contactLink.href = "#contact";
+}
+
+function updateFooterYear() {
+    const yearElement = document.getElementById('year');
+    if (yearElement) {
+        yearElement.textContent = new Date().getFullYear();
+    }
+}
+
+function bindThemeToggle() {
+    const themeBtn = document.getElementById('themeBtn');
+    if (!themeBtn || themeBtn.dataset.bound === "true") return;
+
+    themeBtn.dataset.bound = "true";
+    themeBtn.addEventListener('click', () => {
+        const isLight = document.body.classList.contains('light');
+        const newTheme = isLight ? 'dark' : 'light';
+        applyTheme(newTheme);
+        localStorage.setItem(THEME_KEY, newTheme);
+    });
+}
+
+async function initSharedLayout() {
+    await Promise.all([
+        loadPartial("siteHeader", "partials/header.partial"),
+        loadPartial("siteFooter", "partials/footer.partial"),
+    ]);
+
+    updateNavLinksForPage();
+    bindThemeToggle();
+    updateFooterYear();
+    initSmoothScroll();
+}
+
+// ============================================
 // THEME TOGGLE
 // ============================================
 
-const themeBtn = document.getElementById('themeBtn');
 const THEME_KEY = 'portfolio_theme';
 
 function applyTheme(theme) {
@@ -20,16 +81,8 @@ function initTheme() {
     }
 }
 
-if (themeBtn) {
-    themeBtn.addEventListener('click', () => {
-        const isLight = document.body.classList.contains('light');
-        const newTheme = isLight ? 'dark' : 'light';
-        applyTheme(newTheme);
-        localStorage.setItem(THEME_KEY, newTheme);
-    });
-}
-
 initTheme();
+initSharedLayout();
 
 // ============================================
 // PROJECT FILTERS
@@ -168,35 +221,31 @@ if (contactModal && contactBtn) {
 }
 
 // ============================================
-// FOOTER YEAR
-// ============================================
-
-const yearElement = document.getElementById('year');
-if (yearElement) {
-    yearElement.textContent = new Date().getFullYear();
-}
-
-// ============================================
 // SMOOTH SCROLL (with offset for fixed nav)
 // ============================================
 
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        const href = this.getAttribute('href');
-        if (href === '#') return;
+function initSmoothScroll() {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        if (anchor.dataset.smoothBound === "true") return;
+        anchor.dataset.smoothBound = "true";
 
-        e.preventDefault();
-        const target = document.querySelector(href);
-        if (target) {
-            const offset = 80;
-            const targetPosition = target.offsetTop - offset;
-            window.scrollTo({
-                top: targetPosition,
-                behavior: 'smooth'
-            });
-        }
+        anchor.addEventListener('click', function (e) {
+            const href = this.getAttribute('href');
+            if (!href || href === '#') return;
+
+            e.preventDefault();
+            const target = document.querySelector(href);
+            if (target) {
+                const offset = 80;
+                const targetPosition = target.offsetTop - offset;
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
     });
-});
+}
 
 // ============================================
 // IMAGE LIGHTBOX

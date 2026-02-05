@@ -16,7 +16,7 @@
       "viewHref": "project-flight-search.html",
       "cover": {
         "ariaLabel": "Flight Search Tool cover",
-        "image": "assets/img/flightdealfinder/cover.png"
+        "image": "assets/img/flightdealfinder/cover_dark.png"
       },
       "modal": {
         "title": "Flight Search Tool",
@@ -191,6 +191,54 @@
         "title": "DBS Item Shop",
         "sub": "Course project — PHP/MySQL online store",
         "desc": "An item shop web application built with PHP and MySQL for a Master's course. Features include user registration/login, product pages, cart management, checkout with multiple payment methods, and an admin dashboard for managing products and users.",
+        "img": ""
+      }
+    },
+    {
+      "title": "Terminal Games Collection",
+      "badge": "C++ Projects",
+      "status": "complete",
+      "description": "A collection of terminal-based C++ games developed during a Bachelor's Programming course. Includes maze and dungeon-style games that exercise game loops, movement logic, randomization and simple AI.",
+      "bullets": [
+        "Several small CLI games showcasing map/maze logic, entity movement and collision checks",
+        "Modular C++ code with headers and source files for game state, coordinates utilities and input handling",
+        "Educational course projects focused on algorithms, randomization, and basic AI behaviors"
+      ],
+      "tags": ["C++", "Terminal Games", "Educational"],
+      "tagsData": ["c-cpp"],
+      "viewHref": "",
+      "cover": {
+        "ariaLabel": "Terminal gameplay example",
+        "image": ""
+      },
+      "modal": {
+        "title": "Terminal Games Collection",
+        "sub": "BSc Programming course projects",
+        "desc": "A set of terminal/console games written in C++ during my bachelor's Programming course. These projects were designed to practice algorithmic thinking, game loop structure, randomized placement, collision detection and simple AI for enemy movement.",
+        "img": ""
+      }
+    },
+    {
+      "title": "Conveyor Sorting State Machines",
+      "badge": "C / PLC Project",
+      "status": "complete",
+      "description": "A PLC-style controller written in C that implements multiple interacting finite state machines connected by Modbus TCP to the sim env Factorio.",
+      "bullets": [
+        "PLC controller in C with multiple finite state machines for operator panel and two conveyor subsystems",
+        "Cycle-based timers in milliseconds plus rising/falling-edge detection for sensor events",
+        "Modbus TCP for integration with an external simulator"
+      ],
+      "tags": ["C", "PLC", "Modbus", "Industrial Automation"],
+      "tagsData": ["c-cpp", "plc"],
+      "viewHref": "",
+      "cover": {
+        "ariaLabel": "Finite state machine diagram for conveyor sorting",
+        "image": ""
+      },
+      "modal": {
+        "title": "Conveyor Sorting State Machines",
+        "sub": "PLC-style FSM controller with Modbus I/O",
+        "desc": "Implements a deterministic control loop in C with multiple finite state machines for an operator panel and two conveyor subsystems (blue/green). Uses edge detection, millisecond timers, and Modbus TCP mapping to drive actuators and keep item counters—built to run against a simulator (Factorio-style).",
         "img": ""
       }
     }
