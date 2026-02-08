@@ -299,14 +299,12 @@ if (lightbox) {
 // BEFORE/AFTER SLIDER
 // ============================================
 
-const baSlider = document.querySelector('.baSlider');
-if (baSlider) {
-    const baImageAfter = document.querySelector('.baImageAfter');
-    const baLine = document.querySelector('.baLine');
+document.querySelectorAll('.baSlider').forEach((baSlider) => {
+    const baContainer = baSlider.closest('.baContainer');
+    if (!baContainer) return;
 
     function updateSlider(value) {
-        if (baImageAfter) baImageAfter.style.width = `${value}%`;
-        if (baLine) baLine.style.left = `${value}%`;
+        baContainer.style.setProperty('--ba-pos', `${value}%`);
     }
 
     baSlider.addEventListener('input', (e) => {
@@ -315,7 +313,7 @@ if (baSlider) {
 
     // Initialize
     updateSlider(baSlider.value);
-}
+});
 
 // ============================================
 // CODE COPY BUTTON
@@ -347,19 +345,125 @@ document.querySelectorAll('.copyBtn').forEach(btn => {
     });
 });
 
+const latestUpdateDateFormatter = new Intl.DateTimeFormat("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+    timeZone: "UTC",
+});
+
+let projectsDataPromise = null;
+
+function parseIsoDateToUtcTimestamp(value) {
+    if (typeof value !== "string") return Number.NEGATIVE_INFINITY;
+
+    const match = value.trim().match(/^(\d{4})-(\d{2})-(\d{2})$/);
+    if (!match) return Number.NEGATIVE_INFINITY;
+
+    const year = Number(match[1]);
+    const month = Number(match[2]);
+    const day = Number(match[3]);
+    const timestamp = Date.UTC(year, month - 1, day);
+    const date = new Date(timestamp);
+
+    if (
+        date.getUTCFullYear() !== year
+        || date.getUTCMonth() !== (month - 1)
+        || date.getUTCDate() !== day
+    ) {
+        return Number.NEGATIVE_INFINITY;
+    }
+
+    return timestamp;
+}
+
+function getProjectLatestUpdate(project) {
+    const rawLatestUpdate = project?.latestUpdate ?? project?.lastestUpdate ?? project?.lastUpdate;
+    if (!rawLatestUpdate) return null;
+
+    if (typeof rawLatestUpdate === "string") {
+        const raw = rawLatestUpdate.trim();
+        if (!raw) return null;
+
+        const timestamp = parseIsoDateToUtcTimestamp(raw);
+        const display = Number.isFinite(timestamp)
+            ? latestUpdateDateFormatter.format(new Date(timestamp))
+            : raw;
+
+        return { raw, timestamp, display };
+    }
+
+    if (typeof rawLatestUpdate === "object") {
+        const rawDate = typeof rawLatestUpdate.date === "string" ? rawLatestUpdate.date.trim() : "";
+        const rawLabel = typeof rawLatestUpdate.label === "string" ? rawLatestUpdate.label.trim() : "";
+        const timestamp = parseIsoDateToUtcTimestamp(rawDate);
+        const display = rawLabel || (Number.isFinite(timestamp) ? latestUpdateDateFormatter.format(new Date(timestamp)) : rawDate);
+
+        if (!display) return null;
+        return { raw: rawDate || rawLabel, timestamp, display };
+    }
+
+    return null;
+}
+
+function sortProjectsByLatestUpdate(projects) {
+    return [...projects].sort((a, b) => {
+        const aUpdate = getProjectLatestUpdate(a);
+        const bUpdate = getProjectLatestUpdate(b);
+        const aTimestamp = aUpdate?.timestamp ?? Number.NEGATIVE_INFINITY;
+        const bTimestamp = bUpdate?.timestamp ?? Number.NEGATIVE_INFINITY;
+
+        if (aTimestamp !== bTimestamp) return bTimestamp - aTimestamp;
+        return (a.title || "").localeCompare((b.title || ""));
+    });
+}
+
+function normalizePathForMatch(path) {
+    return String(path || "")
+        .split("#")[0]
+        .split("?")[0]
+        .replace(/\\/g, "/")
+        .split("/")
+        .pop()
+        .toLowerCase()
+        .trim();
+}
+
+function findProjectForCurrentPage(projects) {
+    const currentPage = normalizePathForMatch(window.location.pathname);
+    if (!currentPage || currentPage === "index.html") return null;
+
+    return projects.find((project) => {
+        const projectPath = normalizePathForMatch(project?.viewHref || "");
+        return projectPath && projectPath === currentPage;
+    }) || null;
+}
+
+async function loadProjectsData() {
+    if (!projectsDataPromise) {
+        projectsDataPromise = fetch("projects.json", { cache: "no-store" })
+            .then((res) => {
+                if (!res.ok) throw new Error(`Failed to load projects.json (${res.status})`);
+                return res.json();
+            })
+            .then((data) => (Array.isArray(data) ? data : (data.projects || [])))
+            .catch((err) => {
+                projectsDataPromise = null;
+                throw err;
+            });
+    }
+
+    return projectsDataPromise;
+}
+
 (async function initProjects() {
     const grid = document.getElementById("projectsGrid");
     if (!grid) return;
 
     try {
-        // Change the path if needed:
-        const res = await fetch("projects.json", { cache: "no-store" });
-        if (!res.ok) throw new Error(`Failed to load projects.json (${res.status})`);
-
-        const data = await res.json();
-        const projects = Array.isArray(data) ? data : (data.projects || []);
-
-        renderProjectCards(grid, projects);
+        const projects = await loadProjectsData();
+        const sortedProjects = sortProjectsByLatestUpdate(projects);
+        renderProjectCards(grid, sortedProjects);
 
         // Reinitialize modal buttons after rendering
         initModalButtons();
@@ -367,6 +471,26 @@ document.querySelectorAll('.copyBtn').forEach(btn => {
         console.error(err);
         // fallback: show a small message
         grid.innerHTML = `<p class="muted smallText">Could not load projects.</p>`;
+    }
+})();
+
+(async function initProjectQuickFactsTimeline() {
+    const timelineValues = document.querySelectorAll("[data-project-latest-update]");
+    if (!timelineValues.length) return;
+
+    try {
+        const projects = await loadProjectsData();
+        const currentProject = findProjectForCurrentPage(projects);
+        if (!currentProject) return;
+
+        const latestUpdate = getProjectLatestUpdate(currentProject);
+        if (!latestUpdate?.display) return;
+
+        timelineValues.forEach((timelineValue) => {
+            timelineValue.textContent = latestUpdate.display;
+        });
+    } catch (err) {
+        console.error(err);
     }
 })();
 
@@ -421,6 +545,13 @@ function renderProjectCards(gridEl, projects) {
         desc.className = "muted smallText";
         desc.textContent = p.description || "";
 
+        const latestUpdate = getProjectLatestUpdate(p);
+        const latestUpdateLine = document.createElement("p");
+        latestUpdateLine.className = "cardLatestUpdate smallText";
+        latestUpdateLine.textContent = latestUpdate?.display
+            ? `Latest update: ${latestUpdate.display}`
+            : "Latest update: not set";
+
         // Bullets
         const ul = document.createElement("ul");
         ul.className = "bullets smallText";
@@ -463,7 +594,7 @@ function renderProjectCards(gridEl, projects) {
         actions.append(viewLink, quickBtn);
 
         // Assemble
-        body.append(row, desc, ul, tagsWrap, actions);
+        body.append(row, latestUpdateLine, desc, ul, tagsWrap, actions);
         article.append(cover, body);
 
         // Make the entire card clickable (navigate to View Details)

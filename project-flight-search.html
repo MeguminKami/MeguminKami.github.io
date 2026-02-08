@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Flight Deal Finder - A privacy-first local desktop app for discovering cheap round trips inside a date window.">
     <title>Flight Deal Finder — Project</title>
+    <link rel="icon" type="image/png" href="assets/img/flightdealfinder/icon.png">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -19,18 +20,27 @@
 
     <article class="projectArticle flightProject">
         <header class="projectHeader">
-            <h1 class="projectTitle">Flight Deal Finder</h1>
+            <h1 class="projectTitle">
+                <img
+                    src="assets/img/flightdealfinder/icon.png"
+                    alt=""
+                    class="projectTitleIcon"
+                    aria-hidden="true"
+                    loading="eager"
+                >
+                Flight Deal Finder
+            </h1>
             <p class="lead">
-                I built Flight Deal Finder to plan trips the way I actually decide: pick a date window, set a trip
-                length, then see the cheapest round trips first. It is a privacy-first local desktop app that searches
-                cached prices from Amadeus and Travelpayouts and drops you into Google Flights or Booking with dates
-                already filled.
+                Flight Deal Finder is built around how I actually plan trips: choose a travel window, set the trip
+                length, and instantly rank the cheapest round trips first. It runs as a privacy-first local desktop app,
+                searches cached fares from Amadeus and Travelpayouts, and opens Google Flights or Booking with your
+                dates already filled in.
             </p>
 
-            <div class="quickFacts">
+                <div class="quickFacts">
                 <div class="factItem">
-                    <span class="factLabel">Timeline</span>
-                    <span class="factValue">2025</span>
+                    <span class="factLabel">Latest Update</span>
+                    <span class="factValue" data-project-latest-update>2025</span>
                 </div>
                 <div class="factItem">
                     <span class="factLabel">Type</span>
@@ -38,11 +48,11 @@
                 </div>
                 <div class="factItem">
                     <span class="factLabel">Category</span>
-                    <span class="factValue">Python Desktop App (NiceGUI)</span>
+                    <span class="factValue">Python Webapp</span>
                 </div>
                 <div class="factItem">
                     <span class="factLabel">Status</span>
-                    <span class="factValue grad">Prototype complete</span>
+                    <span class="factValue grad">Prototype Complete</span>
                 </div>
             </div>
 
@@ -63,22 +73,6 @@
                     <section class="contentSection sectionCard storySection">
 
                         <div class="storyFlow">
-                            <div class="storyCard storyIdea">
-                                <div class="storyCardHeader">
-                                    <span class="storyIcon" aria-hidden="true">💡</span>
-                                    <span class="storyTag">Idea</span>
-                                </div>
-                                <p class="muted">
-                                    Flip the usual destination-first approach. Start with a date window and trip length, then
-                                    rank every valid round trip by total price.
-                                </p>
-                                <br>
-                                <p class="muted">
-                                    Allows the user to explore the cheapest options inside their available time, rather than
-                                    hunting for specific destinations.
-                                </p>
-                            </div>
-
                             <div class="storyCard storyProblem">
                                 <div class="storyCardHeader">
                                     <span class="storyIcon" aria-hidden="true">⚠️</span>
@@ -94,6 +88,22 @@
                                     <li>No clear "short trip" view</li>
                                 </ul>
                             </div>
+
+                            <div class="storyCard storyIdea">
+                                <div class="storyCardHeader">
+                                    <span class="storyIcon" aria-hidden="true">💡</span>
+                                    <span class="storyTag">Idea</span>
+                                </div>
+                                <p class="muted">
+                                    Flip the usual destination-first approach. Start with a date window and trip length, then
+                                    rank every valid round trip by total price.
+                                </p>
+                                <p class="muted">
+                                    Allows the user to explore the cheapest options inside their available time, rather than
+                                    hunting for specific destinations.
+                                </p>
+                            </div>
+
 
                             <div class="storyCard storySolution">
                                 <div class="storyCardHeader">
@@ -116,13 +126,12 @@
                                         <section class="contentSection sectionCard">
                         <h2>Technical Stack</h2>
                         <div class="techList">
-                            <span class="techItem">Python 3</span>
+                            <span class="techItem">Python</span>
                             <span class="techItem">NiceGUI</span>
                             <span class="techItem">Asynchronous I/O</span>
                             <span class="techItem">Amadeus API</span>
                             <span class="techItem">Travelpayouts API</span>
-                            <span class="techItem">SQLite Cache</span>
-                            <span class="techItem">PyInstaller</span>
+                            <span class="techItem">SQLite</span>
                             <span class="techItem">JavaScript</span>
                             <span class="techItem">HTML</span>
                             <span class="techItem">CSS</span>
@@ -157,7 +166,7 @@
                                 <div class="featureIcon">🔁</div>
                                 <h3>Provider Fallback</h3>
                                 <p class="muted smallText">
-                                    Amadeus is primary, with Travelpayouts used only on API/auth failures (not empty results).
+                                    Amadeus is primary, with Travelpayouts used only on API/auth failures (to avoid empty results).
                                 </p>
                             </div>
                             <div class="featureCard">
@@ -192,6 +201,30 @@
                     </section>
 
                     <section class="contentSection sectionCard">
+                        <h2>Dark and Light Modes</h2>
+                        <div class="beforeAfter">
+                            <div class="baContainer">
+                                <img
+                                        src="assets/img/flightdealfinder/cover_light.png"
+                                        alt="Before state"
+                                        class="baImageBefore"
+                                >
+                                <div class="baImageAfter" style="background-image: url('assets/img/flightdealfinder/cover_dark.png');"></div>
+                                <input
+                                        type="range"
+                                        min="0"
+                                        max="100"
+                                        value="50"
+                                        class="baSlider"
+                                        aria-label="Dark and Light mode comparison slider"
+                                >
+                                <div class="baLine"></div>
+                            </div>
+                        </div>
+                    </section>
+
+                    
+                    <section class="contentSection sectionCard">
                         <h2>Video Walkthrough</h2>
                         <div class="localVideo">
                             <video
@@ -211,46 +244,17 @@
                     </section>
 
                     <section class="contentSection sectionCard">
-                        <h2>App Screenshots</h2>
-                        <div class="imgSlider" data-images='[
-                            { "src": "assets/img/flightdealfinder/cover_dark.png", "alt": "Dark mode home"},
-                            { "src": "assets/img/flightdealfinder/cover_light.png", "alt": "Light mode home" },
-                            { "src": "assets/img/flightdealfinder/search_results.png", "alt": "Search results"},
-                            { "src": "assets/img/flightdealfinder/footer.png", "alt": "Footer / links"}
-                            ]'>
-
-                            <div class="imgSliderViewport">
-                                <img class="imgSliderImg" src="" alt="" loading="lazy" decoding="async">
-                            </div>
-
-                            <div class="imgSliderControls" aria-label="Image slider controls">
-                                <button type="button" class="btn small imgSliderBtn imgSliderPrev" aria-label="Previous image">
-                                    ← Back
-                                </button>
-
-                                <div class="imgSliderCount" aria-live="polite">
-                                    <span class="imgSliderIndex">1</span>/<span class="imgSliderTotal">1</span>
-                                </div>
-
-                                <button type="button" class="btn small imgSliderBtn imgSliderNext" aria-label="Next image">
-                                    Forward →
-                                </button>
-                            </div>
-                        </div>
-                    </section>
-
-                    <section class="contentSection sectionCard">
-                        <h2>How the search works</h2>
+                        <h2>Internal Search Pipeline</h2>
                         <p class="muted">
                             A fast, constraint-first pipeline that keeps results deterministic, searchable, and easy to compare.
                         </p>
                         <ol class="searchSteps">
-                            <li>Validate inputs and date constraints, then reset the <code>cancel_flag</code>.</li>
+                            <li>Validate inputs and date constraints.</li>
                             <li>Expand destinations and generate valid depart/return pairs inside the window.</li>
-                            <li>Send the search to <code>AmadeusClient</code> with progress callbacks updating the UI.</li>
+                            <li>Make API calls to AmadeusClient, with progress callbacks updating the UI.</li>
                             <li>On API/auth failures, fall back to <code>TravelpayoutsClient</code>.</li>
                             <li>Cache responses in <code>flight_cache.db</code> (6-hour TTL) and build <code>FlightDeal</code> objects.</li>
-                            <li>Paginate results (10 per page) and render cards with Google Flights / Booking.com links.</li>
+                            <li>Paginate results and render cards with Google Flights / Booking.com links.</li>
                         </ol>
 
                         <div class="calloutBox calloutInfo">
@@ -278,150 +282,82 @@
 
                         <div class="architectureBox">
                             <img
-                                src="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%20900%20520%27%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3Cmarker%20id%3D%27arrow%27%20viewBox%3D%270%200%2010%2010%27%20refX%3D%279%27%20refY%3D%275%27%20markerWidth%3D%278%27%20markerHeight%3D%278%27%20orient%3D%27auto-start-reverse%27%3E%0A%20%20%20%20%20%20%3Cpath%20d%3D%27M%200%200%20L%2010%205%20L%200%2010%20z%27%20fill%3D%27%239ba3b8%27/%3E%0A%20%20%20%20%3C/marker%3E%0A%20%20%3C/defs%3E%0A%0A%20%20%3Crect%20width%3D%27900%27%20height%3D%27520%27%20fill%3D%27%23252b42%27/%3E%0A%0A%20%20%3Crect%20x%3D%2760%27%20y%3D%2750%27%20width%3D%27220%27%20height%3D%2780%27%20rx%3D%2712%27%20fill%3D%27none%27%20stroke%3D%27%232dd4ff%27%20stroke-width%3D%272%27/%3E%0A%20%20%3Ctext%20x%3D%27170%27%20y%3D%2795%27%20text-anchor%3D%27middle%27%20font-family%3D%27system-ui%27%20font-size%3D%2716%27%20fill%3D%27%239ba3b8%27%3EPresentation%3C/text%3E%0A%0A%20%20%3Crect%20x%3D%27620%27%20y%3D%2750%27%20width%3D%27220%27%20height%3D%2780%27%20rx%3D%2712%27%20fill%3D%27none%27%20stroke%3D%27%237c5cff%27%20stroke-width%3D%272%27/%3E%0A%20%20%3Ctext%20x%3D%27730%27%20y%3D%2795%27%20text-anchor%3D%27middle%27%20font-family%3D%27system-ui%27%20font-size%3D%2716%27%20fill%3D%27%239ba3b8%27%3EAPIs%3C/text%3E%0A%0A%20%20%3Crect%20x%3D%27330%27%20y%3D%27210%27%20width%3D%27240%27%20height%3D%27100%27%20rx%3D%2712%27%20fill%3D%27none%27%20stroke%3D%27%23a78bfa%27%20stroke-width%3D%272%27/%3E%0A%20%20%3Ctext%20x%3D%27450%27%20y%3D%27255%27%20text-anchor%3D%27middle%27%20font-family%3D%27system-ui%27%20font-size%3D%2716%27%20fill%3D%27%239ba3b8%27%3EFlightSearchApp%3C/text%3E%0A%0A%20%20%3Crect%20x%3D%2760%27%20y%3D%27390%27%20width%3D%27220%27%20height%3D%2780%27%20rx%3D%2712%27%20fill%3D%27none%27%20stroke%3D%27%232dd4bf%27%20stroke-width%3D%272%27/%3E%0A%20%20%3Ctext%20x%3D%27170%27%20y%3D%27435%27%20text-anchor%3D%27middle%27%20font-family%3D%27system-ui%27%20font-size%3D%2715%27%20fill%3D%27%239ba3b8%27%3EData%20%2B%20Cache%3C/text%3E%0A%0A%20%20%3Crect%20x%3D%27620%27%20y%3D%27390%27%20width%3D%27220%27%20height%3D%2780%27%20rx%3D%2712%27%20fill%3D%27none%27%20stroke%3D%27%23f59e0b%27%20stroke-width%3D%272%27/%3E%0A%20%20%3Ctext%20x%3D%27730%27%20y%3D%27435%27%20text-anchor%3D%27middle%27%20font-family%3D%27system-ui%27%20font-size%3D%2715%27%20fill%3D%27%239ba3b8%27%3ELinks%3C/text%3E%0A%0A%20%20%3Crect%20x%3D%27650%27%20y%3D%27155%27%20width%3D%27160%27%20height%3D%2760%27%20rx%3D%2710%27%20fill%3D%27none%27%20stroke%3D%27%23fbbf24%27%20stroke-width%3D%272%27/%3E%0A%20%20%3Ctext%20x%3D%27730%27%20y%3D%27190%27%20text-anchor%3D%27middle%27%20font-family%3D%27system-ui%27%20font-size%3D%2713%27%20fill%3D%27%239ba3b8%27%3EConfig%3C/text%3E%0A%0A%20%20%3Cline%20x1%3D%27170%27%20y1%3D%27130%27%20x2%3D%27450%27%20y2%3D%27210%27%20stroke%3D%27%239ba3b8%27%20stroke-width%3D%272%27%20marker-start%3D%27url%28%23arrow%29%27%20marker-end%3D%27url%28%23arrow%29%27/%3E%0A%20%20%3Cline%20x1%3D%27450%27%20y1%3D%27210%27%20x2%3D%27730%27%20y2%3D%27130%27%20stroke%3D%27%239ba3b8%27%20stroke-width%3D%272%27%20marker-end%3D%27url%28%23arrow%29%27/%3E%0A%20%20%3Cline%20x1%3D%27450%27%20y1%3D%27310%27%20x2%3D%27170%27%20y2%3D%27390%27%20stroke%3D%27%239ba3b8%27%20stroke-width%3D%272%27%20marker-start%3D%27url%28%23arrow%29%27%20marker-end%3D%27url%28%23arrow%29%27/%3E%0A%20%20%3Cline%20x1%3D%27450%27%20y1%3D%27310%27%20x2%3D%27730%27%20y2%3D%27390%27%20stroke%3D%27%239ba3b8%27%20stroke-width%3D%272%27%20marker-end%3D%27url%28%23arrow%29%27/%3E%0A%20%20%3Cline%20x1%3D%27730%27%20y1%3D%27155%27%20x2%3D%27730%27%20y2%3D%27130%27%20stroke%3D%27%239ba3b8%27%20stroke-width%3D%272%27%20marker-end%3D%27url%28%23arrow%29%27/%3E%0A%3C/svg%3E%0A"
-                                alt="Flight Deal Finder architecture diagram"
+                                src="assets/img/flightdealfinder/diagram.png"
+                                alt="Flight Deal Finder architecture overview diagram"
                                 class="architectureDiagram"
+                                loading="lazy"
                             >
-                            <p class="smallText muted" style="margin-top: 0.75rem; text-align: center;">
-                                Presentation, controller, data access, providers, and links form a clean local loop.
-                            </p>
                         </div>
 
                         <div class="architectureGrid">
                             <div class="architectureCard">
                                 <div class="architectureIcon">&#x1F4BB;</div>
-                                <h3>Presentation Layer</h3>
+                                <h3>User Interface</h3>
                                 <p class="smallText muted">
-                                    NiceGUI serves a local web UI on port 8080 with a theme persisted in
-                                    <code>localStorage</code>.
+                                    NiceGUI serves a local web UI, based on HTML/CSS/JS, with components for search inputs, results display, pagination, and settings.
                                 </p>
                             </div>
-                            <div class="architectureCard">
-                                <div class="architectureIcon">&#x1F9E0;</div>
-                                <h3>Business Logic</h3>
-                                <p class="smallText muted">
-                                    <code>FlightSearchApp</code> owns validation, pagination, progress updates, and lifecycle
-                                    state.
-                                </p>
-                            </div>
-                            <div class="architectureCard">
-                                <div class="architectureIcon">&#x1F5C3;</div>
-                                <h3>Data Access</h3>
-                                <p class="smallText muted">
-                                    Airports load via <code>airports.py</code> from <code>airports.json</code>, plus a SQLite
-                                    cache (<code>flight_cache.db</code>) with a 6-hour TTL.
-                                </p>
-                            </div>
-                            <div class="architectureCard">
-                                <div class="architectureIcon">&#x1F4E6;</div>
-                                <h3>API Providers</h3>
-                                <p class="smallText muted">
-                                    <code>AmadeusClient</code> is primary, with <code>TravelpayoutsClient</code> used on API
-                                    errors via <code>search_deals()</code>.
-                                </p>
-                            </div>
+
                             <div class="architectureCard">
                                 <div class="architectureIcon">&#x1F511;</div>
-                                <h3>Configuration</h3>
+                                <h3>Config</h3>
                                 <p class="smallText muted">
-                                    <code>config.env</code> + <code>config.py</code> manage credentials, OAuth2, and provider
-                                    selection.
+                                    API keys, cache settings, and app preferences are loaded through a config module that abstracts file access and environment variables.
                                 </p>
                             </div>
+
+                            <div class="architectureCard">
+                                <div class="architectureIcon">&#x1F9E0;</div>
+                                <h3>UI Controller</h3>
+                                <p class="smallText muted">
+                                    Central controller manages search state, coordinates between the UI and data layers, and handles user interactions like search initiation, cancellation, and pagination.
+                                </p>
+                            </div>
+
+                            <div class="architectureCard">
+                                <div class="architectureIcon">&#x2699;</div>
+                                <h3>Search Engine</h3>
+                                <p class="smallText muted">
+                                    Core logic for generating date pairs, validating constraints, and orchestrating API calls with progress updates.
+                                </p>
+                            </div>
+
+                            <div class="architectureCard">
+                                <div class="architectureIcon">&#x1F4BE;</div>
+                                <h3>Cache</h3>
+                                <p class="smallText muted">
+                                    SQLite database with a 6-hour TTL to store API responses and reduce redundant calls, improving speed and reliability.
+                                </p>
+                            </div>
+
+                            <div class="architectureCard">
+                                <div class="architectureIcon">&#x1F6EB;</div>
+                                <h3>Airports</h3>
+                                <p class="smallText muted">
+                                    Local module to load and search airport data from <code>airports.json</code>, supporting IATA, country, and continent lookups.
+                                </p>
+                            </div>
+
+                            <div class="architectureCard">
+                                <div class="architectureIcon">&#x1F4E6;</div>
+                                <h3>APIs</h3>
+                                <p class="smallText muted">
+                                    <code>AmadeusClient</code> is primary, with <code>TravelpayoutsClient</code> as fallback on
+                                    API/auth failures.
+                                </p>
+                            </div>
+
                             <div class="architectureCard">
                                 <div class="architectureIcon">&#x1F517;</div>
-                                <h3>Link Generation</h3>
+                                <h3>Links</h3>
                                 <p class="smallText muted">
-                                    Google Flights and Booking.com URLs are encoded with dates + cities and open in new tabs.
+                                    Google Flights and Booking.com URLs are encoded with dates + cities for one-click handoff.
                                 </p>
                             </div>
                         </div>
                     </section>
 
 
-
-                    
-                    
-                    <section class="contentSection sectionCard">
-                        <h2>Implementation Details</h2>
-                        <p class="muted">
-                            Concrete modules, UI structure, and runtime behaviors that complete the architecture and keep searches reliable.
-                        </p>
-                        <div class="detailGrid">
-                            <div class="detailCard">
-                                <div class="detailHeader">
-                                    <span class="detailIcon">&#x1F4BE;</span>
-                                    <h3>SQLite Cache</h3>
-                                </div>
-                                <ul class="smallText muted">
-                                    <li><code>flight_cache.db</code> stores API responses.</li>
-                                    <li>6-hour TTL keeps results fast and bounded.</li>
-                                    <li>Cache stats track valid vs. expired entries.</li>
-                                </ul>
-                            </div>
-                            <div class="detailCard">
-                                <div class="detailHeader">
-                                    <span class="detailIcon">&#x1F6EB;</span>
-                                    <h3>Airport Database</h3>
-                                </div>
-                                <ul class="smallText muted">
-                                    <li><code>airports.py</code> loads and indexes <code>airports.json</code>.</li>
-                                    <li>Search by IATA, country, or continent.</li>
-                                    <li>Populates fast UI dropdowns.</li>
-                                </ul>
-                            </div>
-                            <div class="detailCard">
-                                <div class="detailHeader">
-                                    <span class="detailIcon">&#x23F9;</span>
-                                    <h3>State & Lifecycle</h3>
-                                </div>
-                                <ul class="smallText muted">
-                                    <li><code>is_searching</code> blocks concurrent searches.</li>
-                                    <li><code>cancel_flag</code> interrupts long runs cleanly.</li>
-                                    <li>Results paginate at 10 per page.</li>
-                                    <li>Auto-shutdown after last client disconnects (5-second grace period).</li>
-                                </ul>
-                            </div>
-                            <div class="detailCard">
-                                <div class="detailHeader">
-                                    <span class="detailIcon">&#x1F9F1;</span>
-                                    <h3>UI Hierarchy</h3>
-                                </div>
-                                <ul class="smallText muted">
-                                    <li>Header with branding, cache info, and theme toggle.</li>
-                                    <li>Search form with dropdowns, date pickers, and trip duration inputs.</li>
-                                    <li>Results area with deal cards and pagination controls.</li>
-                                    <li>FAQ accordion plus footer attribution and data sources.</li>
-                                </ul>
-                            </div>
-                            <div class="detailCard">
-                                <div class="detailHeader">
-                                    <span class="detailIcon">&#x1F9F0;</span>
-                                    <h3>Resource Loading</h3>
-                                </div>
-                                <ul class="smallText muted">
-                                    <li><code>get_resource_path()</code> handles dev + PyInstaller.</li>
-                                    <li>Supports <code>_MEIPASS</code> bundled assets.</li>
-                                    <li>Keeps file access consistent in builds.</li>
-                                </ul>
-                            </div>
-                            <div class="detailCard">
-                                <div class="detailHeader">
-                                    <span class="detailIcon">&#x1F517;</span>
-                                    <h3>Deep Links</h3>
-                                </div>
-                                <ul class="smallText muted">
-                                    <li>Google Flights URLs encode dates + cities.</li>
-                                    <li>Booking.com links include check-in/out.</li>
-                                    <li>Links open in new tabs for quick handoff.</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </section>
-
-
-
-                    
                     <section class="contentSection sectionCard">
                         <h2>How to Use</h2>
                         <div class="processSteps">
@@ -457,7 +393,7 @@
                                 <div class="stepNumber">5</div>
                                 <h4>Review & customize</h4>
                                 <p class="smallText muted">
-                                    Sort by cheapest, open booking links, toggle light/dark mode, or clear cache for a fresh run.
+                                    Browse results, use pagination, and use the generated Google Flights or Booking.com links to quickly move to booking with your dates pre-filled.
                                 </p>
                             </div>
                         </div>
@@ -559,10 +495,10 @@
                         <h2>Project Links</h2>
                         <p class="muted smallText">Download builds, browse the source, or head back to all projects.</p>
                         <div class="projectLinks">
-                            <a href="https://github.com/yourusername/flight-search" class="btn primary" target="_blank" rel="noopener">
+                            <a href="https://github.com/MeguminKami/Flight-Deal-Finder" class="btn primary" target="_blank" rel="noopener">
                                 View Source Code
                             </a>
-                            <a href="https://github.com/yourusername/flight-search" class="btn quaternary" target="_blank" rel="noopener">
+                            <a href="https://github.com/MeguminKami/Flight-Deal-Finder/releases" class="btn quaternary" target="_blank" rel="noopener">
                                 View Releases
                             </a>
                             <a href="index.html#projects" class="btn secondary">

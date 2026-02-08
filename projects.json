@@ -5,6 +5,7 @@
       "title": "Flight Search Tool",
       "badge": "Python Website",
       "status": "complete",
+      "latestUpdate": "2026-02-07",
       "tagsData": ["python"],
       "description": "Fast flight filtering with clean UI and reproducible results for single travelers",
       "bullets": [
@@ -16,7 +17,7 @@
       "viewHref": "project-flight-search.html",
       "cover": {
         "ariaLabel": "Flight Search Tool cover",
-        "image": "assets/img/flightdealfinder/cover_dark.png"
+        "image": "assets/img/flightdealfinder/cover.png"
       },
       "modal": {
         "title": "Flight Search Tool",
@@ -29,6 +30,7 @@
       "title": "YouTube Downloader",
       "badge": "Python Application",
       "status": "in-progress",
+      "latestUpdate": "2026-01-30",
       "description": "Application for downloading YouTube videos with multiple format and playlist support",
       "bullets": [
         "Multiple format support (MP4, MP3, etc.)",
@@ -53,6 +55,7 @@
       "title": "Simulation Framework",
       "badge": "Python Project",
       "status": "incomplete",
+      "latestUpdate": "2026-01-15",
       "description": "Work developed as part of my Master's thesis, focusing on building a discrete event simulation framework that integrates real data for testing various scenarios.",
       "bullets": [
         "Discrete event simulation engine",
@@ -78,6 +81,7 @@
       "title": "Production Planner",
       "badge": "Python Project",
       "status": "incomplete",
+      "latestUpdate": "2025-12-20",
       "description": "Developed as a secondary project during my Master's thesis, this application focuses on optimizing production schedules.",
       "bullets": [
         "Application to optimize production schedules or assembly lines",
@@ -102,6 +106,7 @@
       "title": "ESP32 LED Controller",
       "badge": "Arduino Project",
       "status": "complete",
+      "latestUpdate": "2025-11-25",
       "description": "WiFi-enabled ESP32 LED strip controller firmware with a responsive web UI.",
       "bullets": [
         "ESP32 firmware written in C++ (Arduino) using FastLED and fauxmoESP",
@@ -126,6 +131,7 @@
       "title": "Soup-of-Letters Book Generator",
       "badge": "Python Project",
       "status": "paused",
+      "latestUpdate": "2025-10-28",
       "description": "A Python tool that generates paired word-search grids and exports ready-to-build LaTeX files using curated word lists and placement heuristics.",
       "bullets": [
         "Generates paired puzzles by sampling.",
@@ -150,6 +156,7 @@
       "title": "Batalha Naval RPG",
       "badge": "C++ OOP Game",
       "status": "complete",
+      "latestUpdate": "2025-09-17",
       "description": "Custom Battleship-style tactical RPG built with C++ and Qt for a Master's course. Features character classes, skill-based attacks, AI opponent logic, and online multiplayer support.",
       "bullets": [
         "Turn-based naval combat with RPG elements: characters, passives, skills, action points and varied AOEs",
@@ -174,6 +181,7 @@
       "title": "DBS Item Shop",
       "badge": "Full Stack Website",
       "status": "complete",
+      "latestUpdate": "2025-08-12",
       "description": "A online item shop developed for a Master's course. Implements user accounts, shopping cart and checkout flows, an admin area for product/user management, and multiple payment method integrations.",
       "bullets": [
         "Full-stack PHP site with session-based auth, user profile management, shopping cart and order history",
@@ -198,6 +206,7 @@
       "title": "Terminal Games Collection",
       "badge": "C++ Projects",
       "status": "complete",
+      "latestUpdate": "2025-07-09",
       "description": "A collection of terminal-based C++ games developed during a Bachelor's Programming course. Includes maze and dungeon-style games that exercise game loops, movement logic, randomization and simple AI.",
       "bullets": [
         "Several small CLI games showcasing map/maze logic, entity movement and collision checks",
@@ -222,6 +231,7 @@
       "title": "Conveyor Sorting State Machines",
       "badge": "C / PLC Project",
       "status": "complete",
+      "latestUpdate": "2025-06-18",
       "description": "A PLC-style controller written in C that implements multiple interacting finite state machines connected by Modbus TCP to the sim env Factorio.",
       "bullets": [
         "PLC controller in C with multiple finite state machines for operator panel and two conveyor subsystems",
