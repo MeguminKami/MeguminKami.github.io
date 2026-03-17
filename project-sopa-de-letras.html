@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Gerador de Sopas de Letras - printable word-search book generator with multiple page layouts and LaTeX export.">
+    <title>Gerador de Sopas de Letras - Project</title>
+    <link rel="icon" type="image/png" href="assets/img/sopadeletras/icon.png">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="bgGlow"></div>
+
+<div class="wrap">
+    <div id="siteHeader" class="siteHeader"></div>
+
+    <a href="index.html#projects" class="backLink">
+        &larr; Back to Projects
+    </a>
+
+    <article class="projectArticle wordSearchProject">
+        <header class="projectHeader">
+            <h1 class="projectTitle">
+                <img
+                    src="assets/img/sopadeletras/icon.png"
+                    alt=""
+                    class="projectTitleIcon"
+                    aria-hidden="true"
+                    loading="eager"
+                >
+                Gerador de Sopas de Letras
+            </h1>
+            <p class="lead">
+                The project is built around automatic generation of puzzle page files in <code>LaTeX</code>. Its purpose is to create organized collections of word-search pages with multiple page formats, including both battle-style pages and standard single-puzzle pages. 
+            </p>
+
+            <div class="quickFacts">    
+                <div class="factItem">
+                    <span class="factLabel">Latest Update</span>
+                    <span class="factValue" data-project-latest-update>2025</span>
+                </div>
+                <div class="factItem">
+                    <span class="factLabel">Type</span>
+                    <span class="factValue">Solo Project</span>
+                </div>
+                <div class="factItem">
+                    <span class="factLabel">Category</span>
+                    <span class="factValue">Python Terminal Application</span>
+                </div>
+                <div class="factItem">
+                    <span class="factLabel">Status</span>
+                    <span class="factValue grad">Complete</span>
+                </div>
+            </div>
+
+
+            
+        </header>
+
+        <div class="projectContent">
+            <div class="projectMain">
+                <section class="contentSection sectionCard">
+                    <h2>Overview</h2>
+                    <p class="muted">
+                        A local menu-driven workflow lets the user choose an output folder, load word pools from the <code>.json</code> directory, pick the page type, set how many pages to create, choose a difficulty level, and then generate a full batch of numbered <code>.tex</code> files for compilation.
+                    </p>
+
+                    <div class="metricsGrid">
+                        <div class="metricCard">
+                            <div class="metricValue grad">6</div>
+                            <div class="metricLabel">Layout Modes</div>
+                            <p class="smallText muted">Battle spreads and single-puzzle pages.</p>
+                        </div>
+                        <div class="metricCard">
+                            <div class="metricValue grad2">4</div>
+                            <div class="metricLabel">Difficulty Levels</div>
+                            <p class="smallText muted">Easy, medium, hard, and impossible.</p>
+                        </div>
+                        <div class="metricCard">
+                            <div class="metricValue grad">4 to 8</div>
+                            <div class="metricLabel">Letter Pools</div>
+                            <p class="smallText muted">JSON dictionaries grouped by word length.</p>
+                        </div>
+                        <div class="metricCard">
+                            <div class="metricValue grad2">A5</div>
+                            <div class="metricLabel">Book Template</div>
+                            <p class="smallText muted">LaTeX structure ready for printing and binding.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="contentSection sectionCard">
+                    <h2>Technical Stack</h2>
+                    <div class="techList">
+                        <span class="techItem">Python</span>
+                        <span class="techItem">LaTeX</span>
+                        <span class="techItem">CLI Workflow</span>
+                        <span class="techItem">JSON</span>
+                    </div>
+                </section>
+
+                <section class="contentSection sectionCard storySection">
+                    <div class="storyIntro">
+                        <h2>Project Story</h2>
+                        <p class="muted">
+                            The core idea is not just puzzle generation, but reliable production of multiple printable
+                            formats from the same controlled pipeline.
+                        </p>
+                    </div>
+
+                    <div class="storyFlow">
+                        <div class="storyCard storyProblem">
+                            <div class="storyCardHeader">
+                                <span class="storyIcon" aria-hidden="true">&#x26A0;</span>
+                                <span class="storyTag">Problem</span>
+                            </div>
+                            <p class="muted">
+                                Building puzzle books by hand is repetitive and fragile. Managing varied layouts,
+                                keeping word sets consistent, and preparing printable files takes time before the
+                                actual book design even starts.
+                            </p>
+                            <ul class="muted">
+                                <li>Repeated layout work for each page</li>
+                                <li>Manual control of word placement and reuse</li>
+                                <li>Extra effort to keep the book compilation organized</li>
+                            </ul>
+                        </div>
+
+                        <div class="storyCard storyIdea">
+                            <div class="storyCardHeader">
+                                <span class="storyIcon" aria-hidden="true">&#x1F4A1;</span>
+                                <span class="storyTag">Design Goal</span>
+                            </div>
+                            <p class="muted">
+                                Create one generator that can produce both battle pages and standard puzzle pages while
+                                preserving a consistent output workflow for books, collections, and themed sets.
+                            </p>
+                            <p class="muted">
+                                The emphasis is on multiple layout modes, controlled word selection, and reliable print
+                                exports instead of one-off on-screen puzzles.
+                            </p>
+                        </div>
+
+                        <div class="storyCard storySolution">
+                            <div class="storyCardHeader">
+                                <span class="storyIcon" aria-hidden="true">&#x2705;</span>
+                                <span class="storyTag">Solution</span>
+                            </div>
+                            <p class="muted">
+                                The implemented tool loads length-based JSON dictionaries, generates words for each page,
+                                places them into constrained grids, fills the remaining cells with difficulty-aware
+                                letters, and exports numbered LaTeX files ready for compilation.
+                            </p>
+                            <ul class="muted">
+                                <li>Batch page generation in one session</li>
+                                <li>Reusable LaTeX book structure with <code>main.tex</code></li>
+                                <li>Battle and standard layouts from the same generator core</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="cli-widget" class="contentSection sectionCard">
+                    <h2>CLI Widget Preview</h2>
+                    <p class="muted">
+                        Static visual walkthrough of the terminal flow used by the generator. Browse each step from
+                        word source selection to the final generation summary.
+                    </p>
+
+                    <div class="sopaCliWidget" data-sopa-cli>
+                        <aside class="sopaCliSidebar">
+                            <h3>CLI Screens</h3>
+                            <p class="muted smallText">
+                                Browse the key menu moments and output screens in order.
+                            </p>
+
+                            <div class="sopaCliScreenList" role="tablist" aria-label="CLI screens">
+                                <button type="button" class="sopaCliScreenBtn active" data-sopa-cli-screen="source">1. Word source</button>
+                                <button type="button" class="sopaCliScreenBtn" data-sopa-cli-screen="folder">2. Destination folder</button>
+                                <button type="button" class="sopaCliScreenBtn" data-sopa-cli-screen="menu">3. Main menu</button>
+                                <button type="button" class="sopaCliScreenBtn" data-sopa-cli-screen="page-type">4. Page type</button>
+                                <button type="button" class="sopaCliScreenBtn" data-sopa-cli-screen="pages">5. Pages count</button>
+                                <button type="button" class="sopaCliScreenBtn" data-sopa-cli-screen="difficulty">6. Difficulty</button>
+                                <button type="button" class="sopaCliScreenBtn" data-sopa-cli-screen="generation">7. Generation result</button>
+                            </div>
+                        </aside>
+
+                        <section class="sopaCliTerminalCard" aria-live="polite">
+                            <div class="sopaCliTerminalTopbar">
+                                <div class="sopaCliDots" aria-hidden="true">
+                                    <span></span><span></span><span></span>
+                                </div>
+                                <div class="sopaCliTitle">terminal / gerador-cli-preview</div>
+                            </div>
+
+                            <div class="sopaCliTerminalBody">
+                                <pre class="sopaCliTerminalOutput" data-sopa-cli-output></pre>
+                            </div>
+                        </section>
+                    </div>
+                </section>
+
+                <section class="contentSection sectionCard">
+                    <h2>Supported Page Types</h2>
+                    <div class="featureGrid">
+                        <div class="featureCard">
+                            <div class="featureIcon">&#x1F4D8;</div>
+                            <h3>Type A - Battle Page with Details</h3>
+                            <p class="muted smallText">
+                                Two 14 x 11 puzzles on the same page, 14 words each, plus battle metadata fields such
+                                as date, winner, and time.
+                            </p>
+                        </div>
+                        <div class="featureCard">
+                            <div class="featureIcon">&#x2694;</div>
+                            <h3>Type B - Battle Page without Details</h3>
+                            <p class="muted smallText">
+                                Keeps the paired 14 x 11 competitive layout while removing the extra battle-detail fields.
+                            </p>
+                        </div>
+                        <div class="featureCard">
+                            <div class="featureIcon">&#x1F5C2;</div>
+                            <h3>Type C - Side Word List</h3>
+                            <p class="muted smallText">
+                                A 28 x 17 single-puzzle page with 20 words and a word list placed beside the grid.
+                            </p>
+                        </div>
+                        <div class="featureCard">
+                            <div class="featureIcon">&#x1F4CB;</div>
+                            <h3>Type D - Top Word List</h3>
+                            <p class="muted smallText">
+                                A 21 x 20 layout with 30 words and a multi-column list above the puzzle for denser pages.
+                            </p>
+                        </div>
+                        <div class="featureCard">
+                            <div class="featureIcon">&#x25A3;</div>
+                            <h3>Type E - Larger Square Battle Grids</h3>
+                            <p class="muted smallText">
+                                Two 14 x 14 puzzles on the same page with 16 words each, focused on a larger square format.
+                            </p>
+                        </div>
+                        <div class="featureCard">
+                            <div class="featureIcon">&#x2195;</div>
+                            <h3>Type F - Narrow Vertical Layout</h3>
+                            <p class="muted smallText">
+                                A 30 x 12 single-puzzle format with 22 words and a compact side list for tall page designs.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="generation-pipeline" class="contentSection sectionCard">
+                    <h2>Generation Pipeline</h2>
+                    <p class="muted">
+                        The generator is session-based and optimized for repeated output. Each run is centered around a
+                        destination folder and a chosen layout, so the workflow naturally scales from one page to a full booklet.
+                    </p>
+
+                    <ol class="searchSteps">
+                        <li>Choose the destination folder for the generated output.</li>
+                        <li>Load normalized word lists from the <code>palavras</code> JSON directory.</li>
+                        <li>Select the page type that defines the grid and word-list layout.</li>
+                        <li>Pick how many pages the session should generate.</li>
+                        <li>Choose the difficulty level for filler-letter density.</li>
+                        <li>Build a length plan and sample valid words for each page.</li>
+                        <li>Place the words into the grid with constrained directions and retries.</li>
+                        <li>Export numbered <code>.tex</code> pages such as <code>1.tex</code>, <code>2.tex</code>, and <code>3.tex</code>.</li>
+                        <li>Update a folder-specific <code>main.tex</code> so the full document can be compiled immediately.</li>
+                    </ol>
+                </section>
+
+                <section class="contentSection sectionCard">
+                    <h2>Core Systems</h2>
+                    <div class="detailGrid">
+                        <div class="detailCard">
+                            <div class="detailHeader">
+                                <div class="detailIcon">&#x1F4C1;</div>
+                                <h3>Length-Based Word Pools</h3>
+                            </div>
+                            <p class="smallText muted">
+                                The <code>palavras</code> folder is organized by word length, with <code>4.json</code> through
+                                <code>8.json</code> providing deterministic pools that are normalized before use.
+                            </p>
+                        </div>
+
+                        <div class="detailCard">
+                            <div class="detailHeader">
+                                <div class="detailIcon">&#x1F522;</div>
+                                <h3>Grid Construction Rules</h3>
+                            </div>
+                            <p class="smallText muted">
+                                Words are placed horizontally or vertically, can appear reversed, may intersect on matching
+                                letters, and trigger retries when a valid puzzle cannot be assembled on the first pass.
+                            </p>
+                        </div>
+
+                        <div class="detailCard">
+                            <div class="detailHeader">
+                                <div class="detailIcon">&#x1F3AF;</div>
+                                <h3>Difficulty as Density Control</h3>
+                            </div>
+                            <p class="smallText muted">
+                                Difficulty changes the probability of filler letters, biasing the background toward letters
+                                already present in the chosen words so the grid becomes more visually deceptive.
+                            </p>
+                        </div>
+
+                        <div class="detailCard">
+                            <div class="detailHeader">
+                                <div class="detailIcon">&#x1F504;</div>
+                                <h3>Word Reuse Tracking</h3>
+                            </div>
+                            <p class="smallText muted">
+                                During a generation session the tool tracks which words have already been used, reducing
+                                repetition and keeping booklet content more varied page after page.
+                            </p>
+                        </div>
+
+                        <div class="detailCard">
+                            <div class="detailHeader">
+                                <div class="detailIcon">&#x1F5A8;</div>
+                                <h3>LaTeX Output Composer</h3>
+                            </div>
+                            <p class="smallText muted">
+                                The project is output-oriented: numbered page files and a tailored <code>main.tex</code>
+                                work together so the final result is ready for compilation rather than just on-screen viewing.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="contentSection sectionCard">
+                    <h2>Print-Oriented Output</h2>
+                    <p class="muted">
+                        The LaTeX side of the project is what turns the generator into a real booklet workflow. It provides
+                        the reusable structure that keeps cover pages, puzzle macros, and page iteration consistent.
+                    </p>
+
+                    <div class="architectureGrid">
+                        <div class="architectureCard">
+                            <div class="architectureIcon">&#x1F4D5;</div>
+                            <h3>A5 Template</h3>
+                            <p class="smallText muted">
+                                The document structure targets A5 output and includes support for cover and back-cover pages.
+                            </p>
+                        </div>
+                        <div class="architectureCard">
+                            <div class="architectureIcon">&#x1F4C4;</div>
+                            <h3>Numbered Page Files</h3>
+                            <p class="smallText muted">
+                                Each generated page is written as its own numbered <code>.tex</code> file for predictable organization.
+                            </p>
+                        </div>
+                        <div class="architectureCard">
+                            <div class="architectureIcon">&#x2699;</div>
+                            <h3>Main Document Updater</h3>
+                            <p class="smallText muted">
+                                A folder-specific <code>main.tex</code> is updated to point at the generated pages and total count.
+                            </p>
+                        </div>
+                        <div class="architectureCard">
+                            <div class="architectureIcon">&#x1F500;</div>
+                            <h3>Shuffle Utility</h3>
+                            <p class="smallText muted">
+                                A separate helper script can safely randomize numbered page files using a two-step rename process.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="calloutBox calloutTakeaway">
+                        <div class="calloutIcon">&#x1F3AF;</div>
+                        <div>
+                            <h4>Strongest Project Idea</h4>
+                            <p class="smallText">
+                                Gerador de Sopas de Letras is best understood as a flexible generator for printable word-search
+                                books and puzzle pages with multiple layout modes, not as a single static puzzle creator.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="contentSection sectionCard">
+                    <h2>Scope and Interaction Model</h2>
+  
+
+                    <div class="tipsGrid">
+                        <div class="tipsCard">
+                            <div class="tipsIcon">&#x2328;</div>
+                            <div>
+                                <h4>Menu-driven CLI flow</h4>
+                                <p class="smallText muted">
+                                    Users choose sources, page types, output folders, page counts, and difficulty from repeated menus.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="tipsCard">
+                            <div class="tipsIcon">&#x1F4DA;</div>
+                            <div>
+                                <h4>Book-first mindset</h4>
+                                <p class="smallText muted">
+                                    The generator is oriented around collections and custom sets rather than one isolated puzzle at a time.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="tipsCard">
+                            <div class="tipsIcon">&#x1F3B2;</div>
+                            <div>
+                                <h4>Variety across sessions</h4>
+                                <p class="smallText muted">
+                                    Reuse control and randomized placement help keep generated books less repetitive across pages.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                                <section id="booklet-library" class="contentSection sectionCard">
+                    <h2>Booklet Library</h2>
+                    <p class="muted">
+                        Below is a small booklet library showcasing some of the printable puzzle books and page sets
+                        created with the generator. It gives a quick, browseable preview of the different editions and
+                        helps show what the final printed experience looks like.
+                    </p>
+
+                    <div class="bookletWidget" data-booklet-dir="assets/img/sopadeletras/">
+                        <div class="bookletControls">
+                            <span class="bookletPreviewBadge" data-booklet-status>Loading books...</span>
+                            <div class="bookletNavCluster">
+                                <div class="bookletSelectWrap bookletSelectNavWrap">
+                                    <select id="sopaBookletSelect" class="bookletSelect" data-booklet-select></select>
+                                </div>
+                                <div class="bookletNav" role="group" aria-label="Browse booklet editions">
+                                    <button type="button" class="bookletNavBtn" data-booklet-prev aria-label="Show previous booklet">
+                                        &#8592;
+                                    </button>
+                                    <button type="button" class="bookletNavBtn" data-booklet-next aria-label="Show next booklet">
+                                        &#8594;
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bookletStage">
+                            <div class="bookletViewerWrap">
+                                <div class="bookletViewer">
+                                    <iframe
+                                        data-booklet-preview
+                                        title="Selected booklet preview"
+                                        loading="lazy"
+                                    ></iframe>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+
+                <section class="contentSection sectionCard ctaSection">
+                    <h2>Explore the Outputs</h2>
+                    <p class="muted smallText">
+                        Jump back to the booklet library, open the written brief for this page, or return to the full portfolio.
+                    </p>
+                    <div class="projectLinks">
+                        <a href="https://github.com/MeguminKami/Soup-of-Letters-Book-Generator" class="btn primary" target="_blank" rel="noopener">View Source Code</a>
+                        <a href="#booklet-library" class="btn quaternary">Jump to Booklet Library</a>
+                        <a href="index.html#projects" class="btn secondary">&larr; Back to Projects</a>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </article>
+
+    <div id="siteFooter" class="siteFooter"></div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

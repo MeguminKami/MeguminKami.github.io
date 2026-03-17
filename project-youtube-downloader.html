@@ -1,140 +1,494 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="YouTube Downloader - A command-line tool for downloading videos and audio with format flexibility.">
-  <title>YouTube Downloader — Project</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="YouTube Downloader Pro — A polished desktop app for downloading YouTube videos and playlists with smart format selection, queue management, and real-time progress feedback.">
+    <title>YouTube Downloader Pro — Project</title>
+    <link rel="icon" type="image/png" href="assets/img/ytdownloader/logo.png">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 <div class="bgGlow"></div>
 
 <div class="wrap">
-  <div id="siteHeader" class="siteHeader"></div>
+    <div id="siteHeader" class="siteHeader"></div>
 
-  <a href="index.html#projects" class="backLink">
-    ← Back to Projects
-  </a>
+    <a href="index.html#projects" class="backLink">
+        &larr; Back to Projects
+    </a>
 
-  <article>
-    <header class="projectHeader">
-      <h1 class="projectTitle">YouTube Downloader</h1>
-      <p class="lead">
-        A streamlined command-line tool for downloading YouTube videos and audio with support for
-        multiple formats, playlists, and real-time progress tracking.
-      </p>
-      <div class="projectMeta">
-        <span class="badge">Software</span>
-        <span class="chip">Python</span>
-        <span class="chip">CLI</span>
-        <span class="chip">Media Processing</span>
-      </div>
-      <div class="projectLinks">
-        <a href="https://github.com/yourusername/youtube-downloader" class="btn primary" target="_blank" rel="noopener">
-          View on GitHub
-        </a>
-      </div>
-    </header>
+    <article class="projectArticle ytdlProject">
+        <header class="projectHeader">
+            <h1 class="projectTitle">
+                <img
+                    src="assets/img/ytdownloader/logo.png"
+                    alt=""
+                    class="projectTitleIcon"
+                    aria-hidden="true"
+                    loading="eager"
+                >
+                YouTube Downloader Pro
+            </h1>
+            <p class="lead">
+                YouTube Downloader Pro is a desktop application built in Python for downloading YouTube content
+                with a polished, modern UI. Paste a URL, choose your quality and format, add to queue, and watch
+                real-time progress.
+            </p>
 
-    <div class="projectContent">
-      <section class="contentSection">
-        <h2>Overview</h2>
-        <p class="muted">
-          This YouTube Downloader provides a simple yet powerful command-line interface for
-          downloading videos and extracting audio. It handles various formats, manages playlists
-          efficiently, and provides clear feedback throughout the download process.
-        </p>
-      </section>
+            <div class="quickFacts">
+                <div class="factItem">
+                    <span class="factLabel">Latest Update</span>
+                    <span class="factValue" data-project-latest-update>2026</span>
+                </div>
+                <div class="factItem">
+                    <span class="factLabel">Type</span>
+                    <span class="factValue">Solo Project</span>
+                </div>
+                <div class="factItem">
+                    <span class="factLabel">Category</span>
+                    <span class="factValue">Python Desktop App</span>
+                </div>
+                <div class="factItem">
+                    <span class="factLabel">Status</span>
+                    <span class="factValue grad">Complete</span>
+                </div>
+            </div>
+        </header>
 
-      <div class="mediaSection">
-        <h3>Terminal Interface</h3>
-        <img
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 600'%3E%3Crect fill='%23252b42' width='1200' height='600'/%3E%3Ctext x='50%25' y='40%25' dominant-baseline='middle' text-anchor='middle' font-family='monospace' font-size='28' fill='%2399ba3b8'%3E$ ytdl --format mp4 [URL]%3C/text%3E%3Ctext x='50%25' y='60%25' dominant-baseline='middle' text-anchor='middle' font-family='monospace' font-size='24' fill='%239ba3b8'%3EDownloading... 45%%3C/text%3E%3C/svg%3E"
-                alt="YouTube Downloader CLI"
-                loading="lazy"
-        >
-        <p class="smallText muted" style="margin-top: 0.5rem;">
-          Clean command-line interface with progress indicators
-        </p>
-      </div>
+        <div class="projectContent">
+            <div class="projectMain">
 
-      <section class="contentSection">
-        <h2>Problem</h2>
-        <p class="muted">
-          Downloading YouTube content for offline use, research, or archival purposes often requires
-          navigating complex web tools or unreliable browser extensions. Users need a dependable,
-          scriptable solution that works efficiently from the command line.
-        </p>
-      </section>
+                <section class="contentSection sectionCard">
+                    <h2>Overview</h2>
+                    <p class="muted">
+                        YouTube Downloader Pro makes YouTube downloading effortless with smart format selection,
+                        playlist control to merge or download separately.
+                        The app guides users through a structured workflow, from optional dependency setup to
+                        queue management and live download telemetry, while keeping the experience intuitive for
+                        both casual and power users.
+                    </p>
 
-      <section class="contentSection">
-        <h2>Solution</h2>
-        <p class="muted">
-          I built a Python CLI tool that wraps youtube-dl/yt-dlp with an intuitive interface:
-        </p>
-        <ul>
-          <li>Supports multiple output formats (MP4, MP3, WebM, etc.)</li>
-          <li>Handles individual videos and entire playlists</li>
-          <li>Displays real-time download progress</li>
-          <li>Includes robust error handling and retry logic</li>
-          <li>Allows quality selection and format preferences</li>
-        </ul>
-      </section>
+                    <div class="metricsGrid">
+                        <div class="metricCard">
+                            <div class="metricValue grad2">4</div>
+                            <div class="metricLabel">Output Formats</div>
+                            <p class="smallText muted">WEBM, MP4, MP3 and MHTML</p>
+                        </div>
 
-      <section class="contentSection">
-        <h2>Technical Stack</h2>
-        <div class="techList">
-          <span class="techItem">Python 3.x</span>
-          <span class="techItem">yt-dlp</span>
-          <span class="techItem">argparse</span>
-          <span class="techItem">FFmpeg</span>
-          <span class="techItem">Progress Bars</span>
+                        <div class="metricCard">
+                            <div class="metricValue grad">12</div>
+                            <div class="metricLabel">Resolutions</div>
+                            <p class="smallText muted">Like SD, HD, Full HD, QHD and 4K (conforming to YouTube's available options)</p>
+                        </div>
+                  
+                        <div class="metricCard">
+                            <div class="metricValue grad">2</div>
+                            <div class="metricLabel">Playlist Options</div>
+                            <p class="smallText muted">Download separately or merge into a single file.</p>
+                        </div>
+                        <div class="metricCard">
+                            <div class="metricValue grad2">2</div>
+                            <div class="metricLabel">Themes: Light / Dark</div>
+                            <p class="smallText muted">Choose your preferred theme for the app interface.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="contentSection sectionCard">
+                    <h2>Video Download Example</h2>
+                    <p class="muted">
+                        A walkthrough of the app's core screens: from download configuration
+                        to real-time progress feedback. 
+                    </p>
+
+                    <div class="imgSlider" tabindex="0"
+                         data-autoplay="2000"
+                         data-images='[
+                             {"src":"assets/img/ytdownloader/pages/1.png","alt":"App screen 1","caption":"Screen 1 of 4"},
+                             {"src":"assets/img/ytdownloader/pages/2.png","alt":"App screen 2","caption":"Screen 2 of 4"},
+                             {"src":"assets/img/ytdownloader/pages/3.png","alt":"App screen 3","caption":"Screen 3 of 4"},
+                             {"src":"assets/img/ytdownloader/pages/4.png","alt":"App screen 4","caption":"Screen 4 of 4"}
+                         ]'>
+                        <div class="imgSliderViewport">
+                            <img class="imgSliderImg" src="" alt="" loading="lazy">
+                            <button class="imgSliderOverlayBtn imgSliderOverlayPrev" aria-label="Previous image">&#8249;</button>
+                            <button class="imgSliderOverlayBtn imgSliderOverlayNext" aria-label="Next image">&#8250;</button>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="contentSection sectionCard">
+                    <h2>Technical Stack</h2>
+                    <div class="techList">
+                        <span class="techItem">Python</span>
+                        <span class="techItem">CustomTkinter</span>
+                        <span class="techItem">YT-DLP API</span>
+                        <span class="techItem">FFmpeg</span>
+                    </div>
+                </section>
+
+                <section class="contentSection sectionCard storySection">
+                    <div class="storyIntro">
+                        <h2>Project Story</h2>
+                        <p class="muted">
+                            The driving idea was to make a technically capable download tool that feels
+                            approachable. 
+                        </p>
+                    </div>
+
+                    <div class="storyFlow">
+                        <div class="storyCard storyProblem">
+                            <div class="storyCardHeader">
+                                <span class="storyIcon" aria-hidden="true">&#x26A0;</span>
+                                <span class="storyTag">Problem</span>
+                            </div>
+                            <p class="muted">
+                                Downloading YouTube content often means dealing with
+                                unreliable browser extensions, confusing web tools, or command-line
+                                interfaces that expose too much complexity at once.
+                            </p>
+                            <ul class="muted">
+                                <li>No clear quality or format selection</li>
+                                <li>No playlist handling to merge videos</li>
+                                <li>No real-time feedback during long downloads</li>
+                            </ul>
+                        </div>
+
+                        <div class="storyCard storyIdea">
+                            <div class="storyCardHeader">
+                                <span class="storyIcon" aria-hidden="true">&#x1F4A1;</span>
+                                <span class="storyTag">Design Goal</span>
+                            </div>
+                            <p class="muted">
+                                Build a desktop app with a guided, dialog-driven workflow. Each step
+                                should be focused: add a URL, configure the download, watch it run.
+                            </p>
+                            <ul class="muted">
+                                <li>Paste a YouTube URL</li>
+                                <li>Configure download options</li>
+                                <li>Monitor download progress</li>
+                            </ul>
+                        </div>
+
+                        <div class="storyCard storySolution">
+                            <div class="storyCardHeader">
+                                <span class="storyIcon" aria-hidden="true">&#x2705;</span>
+                                <span class="storyTag">Solution</span>
+                            </div>
+                            <p class="muted">
+                                Using an URL-driven system the app fetches metadata and available formats from YouTube, then guides the user through a structured flow of dialogs to configure and execute the download with real-time feedback.
+                            </p>
+                            <ul class="muted">
+                                <li>Dependency installer with live logs</li>
+                                <li>Dynamic format fetching for single videos</li>
+                                <li>Playlist options to merge or download separately</li>
+                                <li>Real-time progress dialog with speed, ETA, and size metrics</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="contentSection sectionCard">
+                    <h2>Key Features</h2>
+                    <div class="featureGrid">
+                        <div class="featureCard">
+                            <div class="featureIcon">&#x1F4F9;</div>
+                            <h3>Video Downloads</h3>
+                            <p class="muted smallText">
+                                Download single YouTube videos in MP4 with quality selection based on
+                                dynamically fetched available formats.
+                            </p>
+                        </div>
+                        <div class="featureCard">
+                            <div class="featureIcon">&#x1F3B5;</div>
+                            <h3>Audio Extraction</h3>
+                            <p class="muted smallText">
+                                Audio-only mode extracts MP3 with selectable bitrate: 320 kbps, 192 kbps,
+                                or 128 kbps.
+                            </p>
+                        </div>
+                        <div class="featureCard">
+                            <div class="featureIcon">&#x1F4CB;</div>
+                            <h3>Playlist Support</h3>
+                            <p class="muted smallText">
+                                Download entire playlists as separate files or merge all videos into one
+                                output with a custom filename.
+                            </p>
+                        </div>
+                        <div class="featureCard">
+                            <div class="featureIcon">&#x1F50D;</div>
+                            <h3>Dynamic Format Discovery</h3>
+                            <p class="muted smallText">
+                                For single videos, the app fetches actual available formats from YouTube
+                                metadata and marks incompatible options as disabled.
+                            </p>
+                        </div>
+                        <div class="featureCard">
+                            <div class="featureIcon">&#x1F4CA;</div>
+                            <h3>Real-Time Progress</h3>
+                            <p class="muted smallText">
+                                Live speed, ETA, downloaded size, and total size displayed during every
+                                active download for full transparency.
+                            </p>
+                        </div>
+                        <div class="featureCard">
+                            <div class="featureIcon">&#x1F527;</div>
+                            <h3>Guided Dependency Installer</h3>
+                            <p class="muted smallText">
+                                First-run installer detects missing <code>yt-dlp</code> and walks through
+                                setup with live logs, retry on failure, and auto-close on success.
+                            </p>
+                        </div>
+                        <div class="featureCard">
+                            <div class="featureIcon">&#x1F4E5;</div>
+                            <h3>Queue Workflow</h3>
+                            <p class="muted smallText">
+                                Items are validated and added to a download queue before processing starts,
+                                supporting both video and audio tasks in the same session.
+                            </p>
+                        </div>
+                        <div class="featureCard">
+                            <div class="featureIcon">&#x1F319;</div>
+                            <h3>Dark / Light Theme</h3>
+                            <p class="muted smallText">
+                                A reactive theme system switches between deep navy dark mode and soft gray
+                                light mode, updating all UI components globally.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="contentSection sectionCard">
+                    <h2>End-to-End Workflow</h2>
+                    <p class="muted">
+                        The app follows a linear, focused flow from launch to completed download. Each step
+                        is handled by a dedicated dialog, keeping user decisions scoped and clear.
+                    </p>
+                    <div class="processSteps">
+                        <div class="processStep">
+                            <div class="stepNumber">1</div>
+                            <h4>Launch the app</h4>
+                            <p class="smallText muted">
+                                App starts and checks for required dependencies. If <code>yt-dlp</code> is
+                                missing, the Installer Dialog opens automatically.
+                            </p>
+                        </div>
+                        <div class="processStep">
+                            <div class="stepNumber">2</div>
+                            <h4>Paste a YouTube URL</h4>
+                            <p class="smallText muted">
+                                Enter a single video or playlist URL. The app reads metadata in the
+                                background and prepares the options flow.
+                            </p>
+                        </div>
+                        <div class="processStep">
+                            <div class="stepNumber">3</div>
+                            <h4>Configure the download</h4>
+                            <p class="smallText muted">
+                                The Options Dialog opens with format, quality, and playlist choices.
+                                For single videos, available formats are fetched dynamically from YouTube.
+                            </p>
+                        </div>
+                        <div class="processStep">
+                            <div class="stepNumber">4</div>
+                            <h4>Add to queue</h4>
+                            <p class="smallText muted">
+                                Validated queue items are created with all metadata — URL, type, quality,
+                                playlist flags, merge behavior, and title — ready for download.
+                            </p>
+                        </div>
+                        <div class="processStep">
+                            <div class="stepNumber">5</div>
+                            <h4>Watch the progress</h4>
+                            <p class="smallText muted">
+                                The Progress Dialog shows live download telemetry: current item, overall
+                                percentage, speed, ETA, and downloaded vs total size.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="contentSection sectionCard">
+                    <h2>Three Core Dialogs</h2>
+                    <p class="muted">
+                        Each dialog handles one focused task, keeping the UX clean and the state
+                        transitions clear regardless of whether the user is a first-time setup or an
+                        experienced power user.
+                    </p>
+                    <div class="detailGrid">
+                        <div class="detailCard">
+                            <div class="detailHeader">
+                                <div class="detailIcon">&#x2699;</div>
+                                <h3>Installer Dialog</h3>
+                            </div>
+                            <p class="smallText muted">
+                                Appears on first run if <code>yt-dlp</code> is not found. Runs the
+                                installation in a background thread and streams live logs to the user.
+                                Shows retry and exit options on failure, and auto-closes on success.
+                            </p>
+                        </div>
+                        <div class="detailCard">
+                            <div class="detailHeader">
+                                <div class="detailIcon">&#x1F4CB;</div>
+                                <h3>Options Dialog</h3>
+                            </div>
+                            <p class="smallText muted">
+                                Centered modal with scrollable card sections. Lets the user choose
+                                download type (video/audio), quality or bitrate, and playlist behavior
+                                (separate files or merged). Dynamic format loading for single videos.
+                            </p>
+                        </div>
+                        <div class="detailCard">
+                            <div class="detailHeader">
+                                <div class="detailIcon">&#x1F4CA;</div>
+                                <h3>Progress Dialog</h3>
+                            </div>
+                            <p class="smallText muted">
+                                Non-closable modal that tracks the active download. Displays queue status,
+                                current item card, overall progress bar, and a stats row with speed, ETA,
+                                downloaded size, and total size.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="contentSection sectionCard">
+                    <h2>Download Item Model</h2>
+                    <p class="muted">
+                        Every queue entry is built from a structured <code>DownloadItem</code> model that
+                        captures both simple fallback and advanced format-specific metadata in one place.
+                    </p>
+
+                    <div class="calloutBox calloutInfo">
+                        <div class="calloutIcon">&#x2139;</div>
+                        <div>
+                            <h4>Simple vs Advanced Paths</h4>
+                            <p class="smallText">
+                                When dynamic format fetching succeeds, the item stores precise
+                                <code>format_id</code> values for video and audio streams. When it does not,
+                                the item falls back to height-based quality presets (1080p, 720p, 480p,
+                                360p) for a reliable download in all cases.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="tipsGrid">
+                        <div class="tipsCard">
+                            <div class="tipsIcon">&#x1F4F9;</div>
+                            <div>
+                                <h4>Video mode</h4>
+                                <p class="smallText muted">
+                                    Stores selected format ID, height, quality label, and a merge flag when
+                                    the chosen stream requires muxing with a separate audio track.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="tipsCard">
+                            <div class="tipsIcon">&#x1F3B5;</div>
+                            <div>
+                                <h4>Audio mode</h4>
+                                <p class="smallText muted">
+                                    Stores the selected bitrate (320 / 192 / 128 kbps) and audio format ID,
+                                    bypassing the video quality flow entirely.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="tipsCard">
+                            <div class="tipsIcon">&#x1F4CB;</div>
+                            <div>
+                                <h4>Playlist mode</h4>
+                                <p class="smallText muted">
+                                    Separate mode creates one queue item per video. Merge mode creates a
+                                    single playlist item with an optional custom output filename.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="contentSection sectionCard">
+                    <h2>UI &amp; Theme System</h2>
+                    <p class="muted">
+                        The app uses a modern desktop aesthetic with rounded cards, layered surfaces, strong
+                        spacing, and an accent-driven blue-violet color system. A <code>ThemeManager</code>
+                        stores the current mode and dispatches reactive callbacks to update every UI
+                        component simultaneously.
+                    </p>
+
+                    <div class="architectureGrid">
+                        <div class="architectureCard">
+                            <div class="architectureIcon">&#x1F30C;</div>
+                            <h3>Dark Theme</h3>
+                            <p class="smallText muted">
+                                Deep navy background, muted blue-slate surfaces, bright cyan-blue and vibrant
+                                violet accents, with white primary text.
+                            </p>
+                        </div>
+                        <div class="architectureCard">
+                            <div class="architectureIcon">&#x2600;</div>
+                            <h3>Light Theme</h3>
+                            <p class="smallText muted">
+                                Soft gray background, white surfaces, preserved blue and purple brand accents
+                                adapted for contrast on light backgrounds.
+                            </p>
+                        </div>
+                        <div class="architectureCard">
+                            <div class="architectureIcon">&#x1F4AC;</div>
+                            <h3>Tooltips</h3>
+                            <p class="smallText muted">
+                                Reusable hover tooltips appear near the cursor, use themed colors, and
+                                dismiss on pointer leave — explaining controls without cluttering the UI.
+                            </p>
+                        </div>
+                        <div class="architectureCard">
+                            <div class="architectureIcon">&#x1F5D7;</div>
+                            <h3>Modal Positioning</h3>
+                            <p class="smallText muted">
+                                The installer dialog centers relative to the parent window and repositions
+                                when the parent moves. Other dialogs center on screen for consistency.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="calloutBox calloutTakeaway">
+                        <div class="calloutIcon">&#x1F3AF;</div>
+                        <div>
+                            <h4>Technical UX Principles</h4>
+                            <p class="smallText">
+                                Long operations (dependency install, format fetch) run on background threads
+                                with callbacks marshaled back to the main thread — keeping the UI responsive
+                                and the user informed throughout.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="contentSection sectionCard ctaSection">
+                    <h2>Project Links</h2>
+                    <p class="muted smallText">Browse the source code or head back to all projects.</p>
+                    <div class="projectLinks">
+                        <a href="https://github.com/MeguminKami/Youtube-Downloader-Pro" class="btn primary" target="_blank" rel="noopener">
+                            View Source Code
+                        </a>
+                        <a href="index.html#projects" class="btn secondary">
+                            &larr; Back to Projects
+                        </a>
+                    </div>
+                </section>
+
+            </div>
         </div>
-      </section>
+    </article>
 
-      <section class="contentSection">
-        <h2>Key Features</h2>
-        <h3>Format Flexibility</h3>
-        <p class="muted">
-          Users can specify output format, video quality, and whether to extract audio only. The
-          tool automatically handles format conversion using FFmpeg when needed.
-        </p>
-
-        <h3>Playlist Support</h3>
-        <p class="muted">
-          Download entire playlists with a single command. The tool manages queue processing,
-          handles failures gracefully, and provides per-video progress updates.
-        </p>
-
-        <h3>Progress Tracking</h3>
-        <p class="muted">
-          Real-time progress bars show download status, file size, and estimated time remaining.
-          Color-coded output helps distinguish between informational messages and errors.
-        </p>
-      </section>
-
-      <section class="contentSection">
-        <h2>Results</h2>
-        <ul>
-          <li>Created a reliable tool for offline content archival</li>
-          <li>Simplified batch downloading with playlist support</li>
-          <li>Provided scriptable interface for automation workflows</li>
-          <li>Implemented robust error handling for network interruptions</li>
-        </ul>
-      </section>
-
-      <div class="projectLinks" style="margin-top: 3rem;">
-        <a href="https://github.com/yourusername/youtube-downloader" class="btn primary" target="_blank" rel="noopener">
-          View Source Code
-        </a>
-        <a href="index.html#projects" class="btn">
-          ← Back to Projects
-        </a>
-      </div>
-    </div>
-  </article>
     <div id="siteFooter" class="siteFooter"></div>
+</div>
+
+<!-- Lightbox Modal -->
+<div id="lightbox" class="lightbox" aria-hidden="true">
+    <button class="lightboxClose" aria-label="Close lightbox">&#x2715;</button>
+    <img id="lightboxImg" src="" alt="" class="lightboxImage">
+    <div class="lightboxCaption" id="lightboxCaption"></div>
 </div>
 
 <script src="script.js"></script>

@@ -647,26 +647,47 @@ class LoopingImageSlider {
         this.viewportImg = root.querySelector(".imgSliderImg");
         this.btnPrev = root.querySelector(".imgSliderPrev");
         this.btnNext = root.querySelector(".imgSliderNext");
+        this.overlayPrev = root.querySelector(".imgSliderOverlayPrev");
+        this.overlayNext = root.querySelector(".imgSliderOverlayNext");
         this.elIndex = root.querySelector(".imgSliderIndex");
         this.elTotal = root.querySelector(".imgSliderTotal");
 
         this.images = this.#parseImages(root.dataset.images);
         this.index = 0;
 
-        // Init UI
-        this.elTotal.textContent = String(this.images.length || 0);
+        this._autoplayTimer = null;
+        this._autoplayDelay = parseInt(root.dataset.autoplay || "0", 10);
 
-        // Bind events
-        this.btnPrev.addEventListener("click", () => this.prev());
-        this.btnNext.addEventListener("click", () => this.next());
+        // Init UI
+        if (this.elTotal) this.elTotal.textContent = String(this.images.length || 0);
+
+        // Bind bottom controls
+        if (this.btnPrev) this.btnPrev.addEventListener("click", () => { this.prev(); this._resetAutoplay(); });
+        if (this.btnNext) this.btnNext.addEventListener("click", () => { this.next(); this._resetAutoplay(); });
+
+        // Bind overlay arrows (stop click from bubbling to lightbox)
+        if (this.overlayPrev) {
+            this.overlayPrev.addEventListener("click", (e) => { e.stopPropagation(); this.prev(); this._resetAutoplay(); });
+        }
+        if (this.overlayNext) {
+            this.overlayNext.addEventListener("click", (e) => { e.stopPropagation(); this.next(); this._resetAutoplay(); });
+        }
+
         this.viewportImg.addEventListener("click", () => this.openLightbox());
 
         // Optional: keyboard nav when focused
         this.root.addEventListener("keydown", (e) => {
-            if (e.key === "ArrowLeft") this.prev();
-            if (e.key === "ArrowRight") this.next();
+            if (e.key === "ArrowLeft") { this.prev(); this._resetAutoplay(); }
+            if (e.key === "ArrowRight") { this.next(); this._resetAutoplay(); }
         });
         this.root.tabIndex = 0; // make root focusable for keyboard arrows
+
+        // Autoplay
+        if (this._autoplayDelay > 0) {
+            this._startAutoplay();
+            this.root.addEventListener("mouseenter", () => this._stopAutoplay());
+            this.root.addEventListener("mouseleave", () => this._startAutoplay());
+        }
 
         // Render first
         this.render();
@@ -694,10 +715,10 @@ class LoopingImageSlider {
             // Fallback state
             this.viewportImg.src = "";
             this.viewportImg.alt = "";
-            this.elIndex.textContent = "0";
-            this.elTotal.textContent = "0";
-            this.btnPrev.disabled = true;
-            this.btnNext.disabled = true;
+            if (this.elIndex) this.elIndex.textContent = "0";
+            if (this.elTotal) this.elTotal.textContent = "0";
+            if (this.btnPrev) this.btnPrev.disabled = true;
+            if (this.btnNext) this.btnNext.disabled = true;
             return;
         }
 
@@ -707,13 +728,13 @@ class LoopingImageSlider {
         this.viewportImg.dataset.caption = item.caption || "";
         this.viewportImg.dataset.index = String(this.index);
 
-        this.elIndex.textContent = String(this.index + 1);
-        this.elTotal.textContent = String(this.images.length);
+        if (this.elIndex) this.elIndex.textContent = String(this.index + 1);
+        if (this.elTotal) this.elTotal.textContent = String(this.images.length);
 
         // If "0 to 0" (one image), keep looping logic but disable buttons (no-op)
         const one = this.images.length <= 1;
-        this.btnPrev.disabled = one;
-        this.btnNext.disabled = one;
+        if (this.btnPrev) this.btnPrev.disabled = one;
+        if (this.btnNext) this.btnNext.disabled = one;
     }
 
     prev() {
@@ -737,6 +758,551 @@ class LoopingImageSlider {
             caption: item.caption || "",
         });
     }
+
+    _startAutoplay() {
+        this._stopAutoplay();
+        if (this._autoplayDelay > 0 && this.images.length > 1) {
+            this._autoplayTimer = setInterval(() => this.next(), this._autoplayDelay);
+        }
+    }
+
+    _stopAutoplay() {
+        if (this._autoplayTimer) {
+            clearInterval(this._autoplayTimer);
+            this._autoplayTimer = null;
+        }
+    }
+
+    _resetAutoplay() {
+        if (this._autoplayDelay > 0) {
+            this._stopAutoplay();
+            this._startAutoplay();
+        }
+    }
+}
+
+class BookletLibrary {
+    constructor(root) {
+        this.root = root;
+        this.select = root.querySelector("[data-booklet-select]");
+        this.fileLabel = root.querySelector("[data-booklet-file]");
+        this.badge = root.querySelector("[data-booklet-badge]");
+        this.title = root.querySelector("[data-booklet-title]");
+        this.subtitle = root.querySelector("[data-booklet-subtitle]");
+        this.summary = root.querySelector("[data-booklet-summary]");
+        this.status = root.querySelector("[data-booklet-status]");
+        this.preview = root.querySelector("[data-booklet-preview]");
+        this.openLink = root.querySelector("[data-booklet-open]");
+        this.prevButton = root.querySelector("[data-booklet-prev]");
+        this.nextButton = root.querySelector("[data-booklet-next]");
+        this.directory = (root.dataset.bookletDir || "").trim();
+        this.books = [];
+        this.index = 0;
+
+        if (this.select) this.select.disabled = true;
+        if (this.prevButton) this.prevButton.disabled = true;
+        if (this.nextButton) this.nextButton.disabled = true;
+
+        if (this.openLink) {
+            this.openLink.removeAttribute("href");
+            this.openLink.setAttribute("aria-disabled", "true");
+        }
+
+        this.root.tabIndex = 0;
+        this.#bindEvents();
+        this.init();
+    }
+
+    async init() {
+        try {
+            this.books = await this.#discoverBooks(this.directory);
+            if (!this.books.length) {
+                this.#renderEmptyState("No booklet PDFs were found in this folder yet.");
+                return;
+            }
+
+            this.#renderOptions();
+            this.render();
+        } catch (err) {
+            console.error("Could not load booklet previews:", err);
+            this.#renderEmptyState("The booklet preview could not load the available PDFs automatically.");
+        }
+    }
+
+    async #discoverBooks(directory) {
+        if (!directory) return [];
+
+        const response = await fetch(directory, { cache: "no-store" });
+        if (!response.ok) {
+            throw new Error(`Failed to load booklet directory (${response.status})`);
+        }
+
+        const html = await response.text();
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, "text/html");
+        const directoryUrl = new URL(response.url, window.location.href);
+        const pdfLinks = new Map();
+
+        doc.querySelectorAll("a[href]").forEach((linkEl) => {
+            const href = (linkEl.getAttribute("href") || "").trim();
+            if (!href || !/\.pdf(?:$|[?#])/i.test(href)) return;
+
+            const absoluteUrl = new URL(href, directoryUrl).href;
+            const fileName = this.#fileNameFromPath(absoluteUrl);
+            if (!fileName) return;
+
+            pdfLinks.set(fileName.toLowerCase(), absoluteUrl);
+        });
+
+        return [...pdfLinks.values()]
+            .map((file, index) => this.#buildBookFromFile(file, index))
+            .sort((a, b) => {
+                if (a.sortGroup !== b.sortGroup) return a.sortGroup - b.sortGroup;
+                if (a.sortOrder !== b.sortOrder) return a.sortOrder - b.sortOrder;
+                return a.title.localeCompare(b.title);
+            });
+    }
+
+    #renderOptions() {
+        if (!this.select) return;
+
+        this.select.innerHTML = "";
+        this.select.disabled = false;
+
+        this.books.forEach((book) => {
+            const option = document.createElement("option");
+            option.value = book.id;
+            option.textContent = book.selectorLabel || book.title;
+            this.select.appendChild(option);
+        });
+    }
+
+    #bindEvents() {
+        this.select?.addEventListener("change", (event) => {
+            const selectedIndex = this.books.findIndex((book) => book.id === event.target.value);
+            if (selectedIndex >= 0) {
+                this.index = selectedIndex;
+                this.render();
+            }
+        });
+
+        this.prevButton?.addEventListener("click", () => this.prev());
+        this.nextButton?.addEventListener("click", () => this.next());
+
+        this.root.addEventListener("keydown", (event) => {
+            const tagName = String(event.target?.tagName || "").toLowerCase();
+            if (tagName === "select" || tagName === "input" || tagName === "textarea") return;
+
+            if (event.key === "ArrowLeft") {
+                event.preventDefault();
+                this.prev();
+            }
+
+            if (event.key === "ArrowRight") {
+                event.preventDefault();
+                this.next();
+            }
+        });
+    }
+
+    prev() {
+        if (!this.books.length) return;
+        this.index = (this.index - 1 + this.books.length) % this.books.length;
+        this.render();
+    }
+
+    next() {
+        if (!this.books.length) return;
+        this.index = (this.index + 1) % this.books.length;
+        this.render();
+    }
+
+    #buildFileHref(path) {
+        return String(path || "").trim();
+    }
+
+    #buildPreviewHref(path, pageNumber) {
+        const href = this.#buildFileHref(path);
+        if (!href) return "";
+
+        const safePage = Number.isFinite(pageNumber) && pageNumber > 0 ? pageNumber : 1;
+        return `${href}#page=${safePage}&toolbar=0&navpanes=0&scrollbar=0&zoom=page-fit`;
+    }
+
+    #fileNameFromPath(path) {
+        const normalized = String(path || "")
+            .split("#")[0]
+            .split("?")[0]
+            .split("/")
+            .pop() || "";
+        try {
+            return decodeURIComponent(normalized);
+        } catch {
+            return normalized;
+        }
+    }
+
+    #stripPdfExtensions(name) {
+        return String(name || "").replace(/(?:\.pdf)+$/i, "");
+    }
+
+    #toTitleCase(value) {
+        return String(value || "")
+            .split(/\s+/)
+            .filter(Boolean)
+            .map((part) => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase())
+            .join(" ");
+    }
+
+    #ordinal(value) {
+        const number = Number(value);
+        if (!Number.isFinite(number) || number <= 0) return "";
+
+        const mod100 = number % 100;
+        if (mod100 >= 11 && mod100 <= 13) return `${number}th`;
+
+        const mod10 = number % 10;
+        if (mod10 === 1) return `${number}st`;
+        if (mod10 === 2) return `${number}nd`;
+        if (mod10 === 3) return `${number}rd`;
+        return `${number}th`;
+    }
+
+    #buildBookFromFile(file, index) {
+        const fileName = this.#fileNameFromPath(file);
+        const rawBaseName = this.#stripPdfExtensions(fileName);
+        const tokens = rawBaseName.split(/[_\-\s]+/).filter(Boolean);
+        const lowerTokens = tokens.map((token) => token.toLowerCase());
+
+        const numberToken = lowerTokens.find((token) => /^\d+$/.test(token));
+        const editionNumber = numberToken ? Number(numberToken) : null;
+        const hasSpecial = lowerTokens.includes("special") || lowerTokens.includes("especial");
+        const isBattle = lowerTokens.includes("batalha");
+        const isIndividual = lowerTokens.includes("individual");
+        const ignoredTokens = new Set([
+            "batalha",
+            "individual",
+            "special",
+            "especial",
+            "edition",
+            "edicao",
+            "edição",
+            "person",
+            "pessoa",
+            "sof",
+            "sofs",
+        ]);
+
+        const personTokens = tokens.filter((token, tokenIndex) => {
+            const lower = lowerTokens[tokenIndex];
+            return !ignoredTokens.has(lower) && !/^\d+$/.test(lower);
+        });
+
+        const personName = personTokens.length ? this.#toTitleCase(personTokens.join(" ")) : "";
+        const editionLabel = hasSpecial
+            ? "Special Edition"
+            : (editionNumber ? `${this.#ordinal(editionNumber)} Edition` : "Edition");
+
+        if (isBattle) {
+            const title = personName
+                ? `Batalha - ${editionLabel} (${personName})`
+                : `Batalha - ${editionLabel}`;
+
+            return {
+                id: `battle-${index + 1}`,
+                selectorLabel: title,
+                title,
+                file,
+                badge: "Battle booklet",
+                subtitle: "Paired printable puzzle booklet",
+                summary: "A battle-style booklet with paired printable puzzles per sheet. The preview shows the opening page of this edition.",
+                tone: hasSpecial ? "emerald" : (editionNumber === 2 ? "violet" : "blue"),
+                sortGroup: 0,
+                sortOrder: hasSpecial ? 999 : (editionNumber || (index + 1)),
+            };
+        }
+
+        if (isIndividual) {
+            const titlePrefix = personName ? `Individual ${personName}` : "Individual Person";
+            const title = `${titlePrefix} - ${editionLabel}`;
+
+            return {
+                id: `individual-${index + 1}`,
+                selectorLabel: title,
+                title,
+                file,
+                badge: "Single-puzzle pages",
+                subtitle: "Standalone printable puzzle set",
+                summary: "A standalone printable puzzle set for single-page play. The preview shows the opening page of this edition.",
+                tone: editionNumber === 2 ? "rose" : "amber",
+                sortGroup: 1,
+                sortOrder: hasSpecial ? 999 : (editionNumber || (index + 1)),
+            };
+        }
+
+        const fallbackTitle = this.#toTitleCase(rawBaseName.replace(/[_-]+/g, " "));
+        return {
+            id: `book-${index + 1}`,
+            selectorLabel: fallbackTitle,
+            title: fallbackTitle,
+            file,
+            badge: "Booklet preview",
+            subtitle: "Printable puzzle export",
+            summary: "An automatically discovered booklet export shown from the first page of the file.",
+            tone: "blue",
+            sortGroup: 2,
+            sortOrder: index + 1,
+        };
+    }
+
+    #renderEmptyState(message) {
+        if (this.select) {
+            this.select.innerHTML = '<option>No books available</option>';
+            this.select.disabled = true;
+        }
+
+        if (this.badge) this.badge.textContent = "Booklet preview";
+        if (this.title) this.title.textContent = "No booklet previews found";
+        if (this.subtitle) this.subtitle.textContent = "";
+        if (this.summary) this.summary.textContent = message;
+        if (this.status) this.status.textContent = "Unavailable";
+        if (this.fileLabel) this.fileLabel.textContent = "";
+        if (this.preview) this.preview.removeAttribute("src");
+        if (this.prevButton) this.prevButton.disabled = true;
+        if (this.nextButton) this.nextButton.disabled = true;
+
+        if (this.openLink) {
+            this.openLink.removeAttribute("href");
+            this.openLink.setAttribute("aria-disabled", "true");
+        }
+    }
+
+    render() {
+        const book = this.books[this.index];
+        if (!book) return;
+
+        this.root.dataset.bookletTone = book.tone || "blue";
+
+        if (this.select) this.select.value = book.id;
+        if (this.fileLabel) this.fileLabel.textContent = this.#fileNameFromPath(book.file);
+        if (this.badge) this.badge.textContent = book.badge;
+        if (this.title) this.title.textContent = book.title;
+        if (this.subtitle) this.subtitle.textContent = book.subtitle;
+        if (this.summary) this.summary.textContent = book.summary;
+        if (this.status) this.status.textContent = `${this.index + 1} of ${this.books.length}`;
+
+        const canBrowse = this.books.length > 1;
+        if (this.prevButton) this.prevButton.disabled = !canBrowse;
+        if (this.nextButton) this.nextButton.disabled = !canBrowse;
+
+        const previewHref = this.#buildPreviewHref(book.file, 1);
+
+        if (this.preview) {
+            this.preview.src = previewHref;
+            this.preview.title = `${book.title} preview`;
+        }
+
+        if (this.openLink) {
+            this.openLink.href = this.#buildFileHref(book.file);
+            this.openLink.setAttribute("aria-disabled", "false");
+        }
+    }
+}
+
+function initBookletWidgets() {
+    document.querySelectorAll(".bookletWidget[data-booklet-dir]").forEach((el) => {
+        if (el.dataset.bookletBound === "true") return;
+        el.dataset.bookletBound = "true";
+        new BookletLibrary(el);
+    });
+}
+
+class SopaCliWidget {
+    constructor(root) {
+        this.root = root;
+        this.output = root.querySelector("[data-sopa-cli-output]");
+        this.buttons = [...root.querySelectorAll("[data-sopa-cli-screen]")];
+        this.width = 66;
+        this.divider = "=".repeat(this.width);
+        this.hr = "-".repeat(this.width);
+        this.screens = this.#buildScreens();
+
+        this.#bindEvents();
+        this.render("source");
+    }
+
+    #bindEvents() {
+        this.buttons.forEach((button) => {
+            button.addEventListener("click", () => {
+                this.render(button.dataset.sopaCliScreen);
+            });
+        });
+    }
+
+    #centerText(text, totalWidth) {
+        const normalized = String(text || "");
+        if (normalized.length >= totalWidth) return normalized;
+
+        const left = Math.floor((totalWidth - normalized.length) / 2);
+        const right = totalWidth - normalized.length - left;
+        return `${" ".repeat(left)}${normalized}${" ".repeat(right)}`;
+    }
+
+    #box(lines) {
+        const safeLines = (Array.isArray(lines) ? lines : []).map((line) => String(line || ""));
+        const maxLen = safeLines.reduce((longest, line) => Math.max(longest, line.length), 0);
+        const top = `+${"-".repeat(maxLen + 2)}+`;
+        const body = safeLines
+            .map((line) => `| ${line}${" ".repeat(maxLen - line.length)} |`)
+            .join("\n");
+        const bottom = `+${"-".repeat(maxLen + 2)}+`;
+        return `${top}\n${body}\n${bottom}`;
+    }
+
+    #header() {
+        return `<span class="sopaCliCyan">${this.divider}</span>
+<span class="sopaCliCyan">${this.#centerText("Gerador de Livros de Sopa de Letras", this.width)}</span>
+<span class="sopaCliCyan">${this.divider}</span>`;
+    }
+
+    #info(text) {
+        return `<span class="sopaCliCyan">[i] ${text}</span>`;
+    }
+
+    #success(text) {
+        return `<span class="sopaCliGreen">[ok] ${text}</span>`;
+    }
+
+    #error(text) {
+        return `<span class="sopaCliRed">[x] ${text}</span>`;
+    }
+
+    #section(text) {
+        return `<span class="sopaCliYellow">> ${text}</span>\n<span class="sopaCliYellow">${this.hr}</span>`;
+    }
+
+    #buildScreens() {
+        return {
+            source: `${this.#header()}
+
+${this.#info("Type 'Q' or 'SAIR' at any point to exit")}
+
+${this.#section("Word source:")}
+1. JSON files (palavras/4..8.json)
+2. AI generated words
+
+<span class="sopaCliCyan">> Choose:</span> 1`,
+
+            folder: `${this.#header()}
+
+${this.#section("Destination folder:")}
+<span class="sopaCliCyan">> Folder:</span> projeto_sopas
+
+${this.#success("Destination folder set: /Users/demo/projeto_sopas")}`,
+
+            menu: `${this.#header()}
+
+<span class="sopaCliCyan">${this.#box([
+    "Folder:       /Users/demo/projeto_sopas",
+    "Source:       JSON files",
+    "Total pages:  12",
+])}</span>
+
+${this.#section("Main menu")}
+1. Generate pages
+2. Change word source
+3. Exit
+
+<span class="sopaCliCyan">> Choose:</span> 1`,
+
+            "page-type": `${this.#header()}
+
+<span class="sopaCliCyan">${this.#box([
+    "Folder:       /Users/demo/projeto_sopas",
+    "Source:       JSON files",
+    "Total pages:  12",
+])}</span>
+
+${this.#section("Page type:")}
+A. Battle 2x puzzles 14x11 + date/winner/time (14 words each)
+B. Battle 2x puzzles 14x11 without details   (14 words each)
+C. Single puzzle 28x17 with side list        (20 words)
+D. Single puzzle 21x20 with top list         (30 words)
+E. Battle 2x puzzles 14x14 without details   (16 words each)
+F. Single puzzle 30x12 with side list        (22 words)
+
+<span class="sopaCliCyan">> Choose:</span> C
+<span class="sopaCliMuted">&lt; Back to return</span>`,
+
+            pages: `${this.#header()}
+
+${this.#section("How many pages should be generated?")}
+<span class="sopaCliCyan">> Amount:</span> 8
+
+${this.#info("Accepted value: 8 page(s)")}`,
+
+            difficulty: `${this.#header()}
+
+${this.#section("Difficulty:")}
+1. Easy
+2. Medium
+3. Hard
+4. Impossible
+
+<span class="sopaCliCyan">> Choose:</span> 2
+
+${this.#success("Difficulty selected: Medium")}`,
+
+            generation: `${this.#header()}
+
+<span class="sopaCliCyan">${this.#box([
+    "Folder:       /Users/demo/projeto_sopas",
+    "Source:       JSON files",
+    "Total pages:  12",
+])}</span>
+
+${this.#info("Generating 8 page(s) starting at page 13...")}
+
+<span class="sopaCliCyan">[1/8]</span> Generating page 13... <span class="sopaCliGreen">[ok]</span>
+<span class="sopaCliCyan">[2/8]</span> Generating page 14... <span class="sopaCliGreen">[ok]</span>
+<span class="sopaCliCyan">[3/8]</span> Generating page 15... <span class="sopaCliGreen">[ok]</span>
+<span class="sopaCliCyan">[4/8]</span> Generating page 16... <span class="sopaCliGreen">[ok]</span>
+<span class="sopaCliCyan">[5/8]</span> Generating page 17... <span class="sopaCliGreen">[ok]</span>
+<span class="sopaCliCyan">[6/8]</span> Generating page 18... <span class="sopaCliGreen">[ok]</span>
+<span class="sopaCliCyan">[7/8]</span> Generating page 19... <span class="sopaCliGreen">[ok]</span>
+<span class="sopaCliCyan">[8/8]</span> Generating page 20... <span class="sopaCliGreen">[ok]</span>
+
+${this.#success("Pages generated successfully")}
+${this.#info("Created range: 13 to 20")}
+${this.#info("main.tex updated")}
+${this.#error("Visual example only. No real generation here")}
+
+${this.#section("Main menu")}
+1. Generate pages
+2. Change word source
+3. Exit
+
+<span class="sopaCliCyan">> Choose:</span>`,
+        };
+    }
+
+    render(screenName) {
+        if (!this.output) return;
+        const key = String(screenName || "source");
+        this.output.innerHTML = this.screens[key] || this.screens.source;
+
+        this.buttons.forEach((button) => {
+            button.classList.toggle("active", button.dataset.sopaCliScreen === key);
+        });
+    }
+}
+
+function initSopaCliWidgets() {
+    document.querySelectorAll("[data-sopa-cli]").forEach((el) => {
+        if (el.dataset.sopaCliBound === "true") return;
+        el.dataset.sopaCliBound = "true";
+        new SopaCliWidget(el);
+    });
 }
 
 /* ============================================
@@ -801,4 +1367,6 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll(".imgSlider").forEach((el) => {
         new LoopingImageSlider(el);
     });
+    initBookletWidgets();
+    initSopaCliWidgets();
 });

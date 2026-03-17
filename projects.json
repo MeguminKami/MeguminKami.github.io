@@ -27,28 +27,28 @@
       }
     },
     {
-      "title": "YouTube Downloader",
+      "title": "YouTube Downloader Pro",
       "badge": "Python Application",
-      "status": "in-progress",
-      "latestUpdate": "2026-01-30",
-      "description": "Application for downloading YouTube videos with multiple format and playlist support",
+      "status": "complete",
+      "latestUpdate": "2026-03-16",
+      "description": "Desktop app for downloading YouTube videos and playlists with smart format selection, queue management, and real-time progress feedback.",
       "bullets": [
-        "Multiple format support (MP4, MP3, etc.)",
-        "Playlist handling capabilities",
-        "Progress tracking and error handling"
+        "Video and audio-only downloads with dynamic format discovery",
+        "Playlist support with separate or merged output options",
+        "Real-time progress: speed, ETA, and size stats"
       ],
-      "tags": ["Python", "API Integration", "Media Processing"],
+      "tags": ["Python", "CustomTkinter", "yt-dlp"],
       "tagsData": ["python"],
       "viewHref": "project-youtube-downloader.html",
       "cover": {
-        "ariaLabel": "YouTube Downloader cover",
-        "image": ""
+        "ariaLabel": "YouTube Downloader Pro application cover",
+        "image": "assets/img/ytdownloader/cover.png"
       },
       "modal": {
-        "title": "YouTube Downloader",
-        "sub": "Software",
-        "desc": "Application for downloading YouTube videos with multiple format and playlist support",
-        "img": ""
+        "title": "YouTube Downloader Pro",
+        "sub": "Python Desktop Application",
+        "desc": "A polished desktop app for downloading YouTube videos and playlists. Features smart format selection, queue management, real-time progress tracking, and a guided first-run installer for yt-dlp.",
+        "img": "assets/img/ytdownloader/cover.png"
       }
     },
     {
@@ -128,28 +128,28 @@
       }
     },
     {
-      "title": "Soup-of-Letters Book Generator",
-      "badge": "Python Project",
-      "status": "paused",
-      "latestUpdate": "2025-10-28",
-      "description": "A Python tool that generates paired word-search grids and exports ready-to-build LaTeX files using curated word lists and placement heuristics.",
+      "title": "Gerador de Sopas de Letras",
+      "badge": "Python + LaTeX Tool",
+      "status": "complete",
+      "latestUpdate": "2026-03-13",
+      "description": "Printable word-search generator for battle pages, puzzle books, and single-page exports with a structured LaTeX workflow.",
       "bullets": [
-        "Generates paired puzzles by sampling.",
-        "Places words into 14x11 grids with randomized orientations and fills remaining cells using weighted letter distributions",
-        "Exports LaTeX (.tex) files"
+        "Generates multiple printable layouts, from paired battle pages to large single-puzzle spreads",
+        "Uses length-based JSON word pools, placement retries, and difficulty-aware filler letters",
+        "Exports numbered LaTeX pages plus an updated main.tex for full-book compilation"
       ],
-      "tags": ["Python", "Word Search", "LaTeX"],
+      "tags": ["Python", "LaTeX", "Puzzle Generation", "Print Design"],
       "tagsData": ["python"],
-      "viewHref": "project-soup-of-letters.html",
+      "viewHref": "project-sopa-de-letras.html",
       "cover": {
-        "ariaLabel": "Generated word-search grid sample",
-        "image": ""
+        "ariaLabel": "Gerador de Sopas de Letras booklet cover illustration",
+        "image": "assets/img/sopadeletras/cover.png"
       },
       "modal": {
-        "title": "Soup-of-Letters Book Generator",
-        "sub": "Batch soup-of-Letters generator with LaTeX export",
-        "desc": "Generates battle-style paired word-search puzzles from multilingual word lists (palavras.json), arranges words into grids, fills remaining cells with weighted letters, and writes LaTeX files for printing. Includes tooling to update word inventories and counters.",
-        "img": ""
+        "title": "Gerador de Sopas de Letras",
+        "sub": "Printable word-search book generator",
+        "desc": "A local Python generator for printable word-search books and puzzle pages. It supports battle layouts and single-puzzle formats, builds grids from curated JSON word pools, adjusts filler complexity by difficulty, and exports numbered LaTeX pages plus a ready-to-compile main.tex.",
+        "img": "assets/img/sopadeletras/cover.png"
       }
     },
     {

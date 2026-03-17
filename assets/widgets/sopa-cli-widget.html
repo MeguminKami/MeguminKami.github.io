@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gerador de Sopas de Letras - CLI Widget</title>
+    <style>
+        :root {
+            --bg: #0b1020;
+            --panel: #11182d;
+            --panel-2: #0f1528;
+            --border: #24304f;
+            --text: #e8eefc;
+            --muted: #94a3b8;
+            --cyan: #22d3ee;
+            --yellow: #facc15;
+            --green: #4ade80;
+            --red: #f87171;
+            --magenta: #e879f9;
+            --shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+            --radius: 18px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background:
+                    radial-gradient(circle at top left, rgba(34, 211, 238, 0.08), transparent 30%),
+                    radial-gradient(circle at bottom right, rgba(232, 121, 249, 0.08), transparent 30%),
+                    var(--bg);
+            color: var(--text);
+            font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            padding: 24px;
+        }
+
+        .widget-shell {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 20px;
+            align-items: start;
+        }
+
+        .sidebar,
+        .terminal-card {
+            background: linear-gradient(180deg, var(--panel), var(--panel-2));
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .sidebar {
+            padding: 18px;
+            position: sticky;
+            top: 24px;
+        }
+
+        .sidebar h2 {
+            margin: 0 0 14px;
+            font-size: 1rem;
+            color: var(--cyan);
+        }
+
+        .sidebar p {
+            margin: 0 0 16px;
+            color: var(--muted);
+            font-size: 0.92rem;
+            line-height: 1.45;
+        }
+
+        .screen-list {
+            display: grid;
+            gap: 10px;
+        }
+
+        .screen-btn {
+            width: 100%;
+            text-align: left;
+            border: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.02);
+            color: var(--text);
+            border-radius: 12px;
+            padding: 12px 14px;
+            cursor: pointer;
+            transition: 0.2s ease;
+            font-size: 0.95rem;
+        }
+
+        .screen-btn:hover,
+        .screen-btn.active {
+            border-color: var(--cyan);
+            background: rgba(34, 211, 238, 0.08);
+            transform: translateY(-1px);
+        }
+
+        .terminal-card {
+            overflow: hidden;
+        }
+
+        .terminal-topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 18px;
+            border-bottom: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .terminal-dots {
+            display: flex;
+            gap: 8px;
+        }
+
+        .terminal-dots span {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+            opacity: 0.9;
+        }
+
+        .terminal-dots span:nth-child(1) { background: #fb7185; }
+        .terminal-dots span:nth-child(2) { background: #facc15; }
+        .terminal-dots span:nth-child(3) { background: #4ade80; }
+
+        .terminal-title {
+            font-size: 0.9rem;
+            color: var(--muted);
+            letter-spacing: 0.02em;
+        }
+
+        .terminal-body {
+            padding: 20px;
+        }
+
+        .terminal {
+            margin: 0;
+            white-space: pre-wrap;
+            word-break: break-word;
+            font-family: "Cascadia Code", "Fira Code", Consolas, Menlo, Monaco, monospace;
+            font-size: 15px;
+            line-height: 1.52;
+            color: var(--text);
+            background: #0a0f1d;
+            border: 1px solid #1b2744;
+            border-radius: 16px;
+            padding: 22px;
+            min-height: 640px;
+            overflow: auto;
+        }
+
+        .cyan { color: var(--cyan); }
+        .yellow { color: var(--yellow); }
+        .green { color: var(--green); }
+        .red { color: var(--red); }
+        .magenta { color: var(--magenta); }
+        .muted { color: var(--muted); }
+
+        .footer-note {
+            margin-top: 14px;
+            color: var(--muted);
+            font-size: 0.9rem;
+            line-height: 1.45;
+        }
+
+        @media (max-width: 900px) {
+            .widget-shell {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                position: static;
+            }
+
+            .terminal {
+                min-height: 520px;
+                font-size: 14px;
+                padding: 18px;
+            }
+        }
+
+        @media (max-width: 560px) {
+            body {
+                padding: 14px;
+            }
+
+            .sidebar,
+            .terminal-body {
+                padding: 14px;
+            }
+
+            .terminal-topbar {
+                padding: 12px 14px;
+            }
+
+            .terminal {
+                font-size: 13px;
+                line-height: 1.45;
+                border-radius: 12px;
+            }
+
+            .screen-btn {
+                font-size: 0.9rem;
+                padding: 11px 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="widget-shell">
+    <aside class="sidebar">
+        <h2>CLI Screens</h2>
+        <p>
+            Static visual representation of the terminal interface from
+            <strong>Gerador de Sopas de Letras</strong>.
+        </p>
+
+        <div class="screen-list">
+            <button class="screen-btn active" data-screen="source">1. Word source</button>
+            <button class="screen-btn" data-screen="folder">2. Destination folder</button>
+            <button class="screen-btn" data-screen="menu">3. Main menu</button>
+            <button class="screen-btn" data-screen="page-type">4. Page type</button>
+            <button class="screen-btn" data-screen="pages">5. Pages count</button>
+            <button class="screen-btn" data-screen="difficulty">6. Difficulty</button>
+            <button class="screen-btn" data-screen="generation">7. Generation result</button>
+        </div>
+
+        <div class="footer-note">
+            This is only a front-end mockup. It keeps the terminal feel and the original characters, without real CLI functionality.
+        </div>
+    </aside>
+
+    <section class="terminal-card">
+        <div class="terminal-topbar">
+            <div class="terminal-dots">
+                <span></span><span></span><span></span>
+            </div>
+            <div class="terminal-title">terminal / gerador-cli-preview</div>
+        </div>
+
+        <div class="terminal-body">
+            <pre class="terminal" id="terminal-output"></pre>
+        </div>
+    </section>
+</div>
+
+<script>
+    const width = 70;
+    const line = "═".repeat(width);
+    const hr = "─".repeat(width);
+
+    function centerText(text, totalWidth) {
+        const textLength = [...text].length;
+        if (textLength >= totalWidth) return text;
+        const left = Math.floor((totalWidth - textLength) / 2);
+        const right = totalWidth - textLength - left;
+        return " ".repeat(left) + text + " ".repeat(right);
+    }
+
+    function box(lines) {
+        const maxLen = Math.max(...lines.map(line => [...line].length));
+        const top = "┌" + "─".repeat(maxLen + 2) + "┐";
+        const body = lines.map(line => {
+            const len = [...line].length;
+            const pad = " ".repeat(maxLen - len);
+            return "│ " + line + pad + " │";
+        }).join("\n");
+        const bottom = "└" + "─".repeat(maxLen + 2) + "┘";
+        return [top, body, bottom].join("\n");
+    }
+
+    function header() {
+        return `<span class="cyan">${line}</span>
+<span class="cyan">${centerText("🧩 Gerador de Livros de Sopa de Letras 🧩", width)}</span>
+<span class="cyan">${line}</span>`;
+    }
+
+    function info(text) {
+        return `<span class="cyan">ℹ ${text}</span>`;
+    }
+
+    function success(text) {
+        return `<span class="green">✓ ${text}</span>`;
+    }
+
+    function error(text) {
+        return `<span class="red">✗ ${text}</span>`;
+    }
+
+    function section(text) {
+        return `<span class="yellow">▶ ${text}</span>\n<span class="yellow">${hr}</span>`;
+    }
+
+    const screens = {
+        source: `${header()}
+
+${info("Escreva 'Q' ou 'SAIR' em qualquer momento para sair")}
+
+${section("Fonte de palavras:")}
+1. Ficheiros JSON (palavras/4..8.json)
+2. Palavras geradas por IA
+
+<span class="cyan">➤ Escolha:</span> 1`,
+
+        folder: `${header()}
+
+${section("Nome da pasta de destino:")}
+<span class="cyan">➤ Pasta:</span> projeto_sopas
+
+${success("Pasta de destino: /Users/demo/projeto_sopas")}`,
+
+        menu: `${header()}
+
+<span class="cyan">${box([
+            "Pasta:         /Users/demo/projeto_sopas",
+            "Fonte:         Ficheiros JSON",
+            "Total páginas: 12"
+        ])}</span>
+
+${section("Menu Principal")}
+1. Gerar páginas
+2. Alterar fonte de palavras
+3. Sair
+
+<span class="cyan">➤ Escolha:</span> 1`,
+
+        "page-type": `${header()}
+
+<span class="cyan">${box([
+            "Pasta:         /Users/demo/projeto_sopas",
+            "Fonte:         Ficheiros JSON",
+            "Total páginas: 12"
+        ])}</span>
+
+${section("Tipo de página:")}
+A. Batalha com 2 puzzles 14×11 + data/vencedor/tempo   (14 palavras cada)
+B. Batalha com 2 puzzles 14×11 sem detalhes             (14 palavras cada)
+C. Puzzle único 28×17 com lista lateral                 (20 palavras)
+D. Puzzle único 21×20 com lista em cima                 (30 palavras, 6 colunas)
+E. Batalha com 2 puzzles 14×14 sem detalhes             (16 palavras cada)
+F. Puzzle único 30×12 com lista lateral                 (22 palavras)
+
+<span class="cyan">➤ Escolha:</span> C
+<span class="muted">← B / BACK para voltar</span>`,
+
+        pages: `${header()}
+
+${section("Quantas páginas gerar?")}
+<span class="cyan">➤ Quantidade:</span> 8
+
+${info("Valor aceite: 8 página(s)")}`,
+
+        difficulty: `${header()}
+
+${section("Dificuldade:")}
+1. Fácil
+2. Médio
+3. Difícil
+4. Impossível
+
+<span class="cyan">➤ Escolha:</span> 2
+
+${success("Dificuldade selecionada: Médio")}`,
+
+        generation: `${header()}
+
+<span class="cyan">${box([
+            "Pasta:         /Users/demo/projeto_sopas",
+            "Fonte:         Ficheiros JSON",
+            "Total páginas: 12"
+        ])}</span>
+
+${info("A gerar 8 página(s) a partir da página 13...")}
+
+<span class="cyan">[1/8]</span> A gerar página 13... <span class="green">✓</span>
+<span class="cyan">[2/8]</span> A gerar página 14... <span class="green">✓</span>
+<span class="cyan">[3/8]</span> A gerar página 15... <span class="green">✓</span>
+<span class="cyan">[4/8]</span> A gerar página 16... <span class="green">✓</span>
+<span class="cyan">[5/8]</span> A gerar página 17... <span class="green">✓</span>
+<span class="cyan">[6/8]</span> A gerar página 18... <span class="green">✓</span>
+<span class="cyan">[7/8]</span> A gerar página 19... <span class="green">✓</span>
+<span class="cyan">[8/8]</span> A gerar página 20... <span class="green">✓</span>
+
+${success("Páginas geradas com sucesso!")}
+${info("Intervalo criado: 13 até 20")}
+${info("Ficheiro main.tex atualizado")}
+${error("Exemplo visual apenas — sem geração real")}
+
+${section("Menu Principal")}
+1. Gerar páginas
+2. Alterar fonte de palavras
+3. Sair
+
+<span class="cyan">➤ Escolha:</span>`
+    };
+
+    const output = document.getElementById("terminal-output");
+    const buttons = document.querySelectorAll(".screen-btn");
+
+    function renderScreen(name) {
+        output.innerHTML = screens[name] || screens.source;
+        buttons.forEach(btn => {
+            btn.classList.toggle("active", btn.dataset.screen === name);
+        });
+    }
+
+    buttons.forEach(btn => {
+        btn.addEventListener("click", () => {
+            renderScreen(btn.dataset.screen);
+        });
+    });
+
+    renderScreen("source");
+</script>
+</body>
+</html>
