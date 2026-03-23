@@ -3,8 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="YouTube Downloader Pro — A polished desktop app for downloading YouTube videos and playlists with smart format selection, queue management, and real-time progress feedback.">
-    <title>YouTube Downloader Pro — Project</title>
+    <meta
+        name="description"
+        content="YTGrab - Modern desktop app for downloading YouTube videos or audio with queue-based downloads, playlist selection, live progress, and saved history."
+    >
+    <title>YTGrab - Project</title>
     <link rel="icon" type="image/png" href="assets/img/ytdownloader/logo.png">
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -28,18 +31,18 @@
                     aria-hidden="true"
                     loading="eager"
                 >
-                YouTube Downloader Pro
+                YTGrab
             </h1>
             <p class="lead">
-                YouTube Downloader Pro is a desktop application built in Python for downloading YouTube content
-                with a polished, modern UI. Paste a URL, choose your quality and format, add to queue, and watch
-                real-time progress.
+                YTGrab is a desktop YouTube downloader built for a cleaner, more reliable workflow. Users can paste a
+                watch link, Shorts URL, or playlist, preview the media, choose MP4 or MP3, pick the quality they want,
+                queue multiple downloads, and track everything from one polished desktop app.
             </p>
 
             <div class="quickFacts">
                 <div class="factItem">
                     <span class="factLabel">Latest Update</span>
-                    <span class="factValue" data-project-latest-update>2026</span>
+                    <span class="factValue" data-project-latest-update>2026-03-22</span>
                 </div>
                 <div class="factItem">
                     <span class="factLabel">Type</span>
@@ -62,58 +65,35 @@
                 <section class="contentSection sectionCard">
                     <h2>Overview</h2>
                     <p class="muted">
-                        YouTube Downloader Pro makes YouTube downloading effortless with smart format selection,
-                        playlist control to merge or download separately.
-                        The app guides users through a structured workflow, from optional dependency setup to
-                        queue management and live download telemetry, while keeping the experience intuitive for
-                        both casual and power users.
+                        This version of YTGrab is no longer a simple paste-and-save downloader. It gives users real
+                        format selection from <code>yt-dlp</code>, queue-based batch downloads, thumbnail-rich previews,
+                        playlist entry picking, live progress tracking, saved history, theme switching, and optional
+                        <code>cookies.txt</code> support for tougher YouTube verification cases.
                     </p>
 
                     <div class="metricsGrid">
                         <div class="metricCard">
-                            <div class="metricValue grad2">4</div>
-                            <div class="metricLabel">Output Formats</div>
-                            <p class="smallText muted">WEBM, MP4, MP3 and MHTML</p>
+                            <div class="metricValue grad2">2</div>
+                            <div class="metricLabel">Download Modes</div>
+                            <p class="smallText muted">MP4 video or MP3 audio from the same workflow.</p>
                         </div>
 
                         <div class="metricCard">
-                            <div class="metricValue grad">12</div>
-                            <div class="metricLabel">Resolutions</div>
-                            <p class="smallText muted">Like SD, HD, Full HD, QHD and 4K (conforming to YouTube's available options)</p>
+                            <div class="metricValue grad">6+</div>
+                            <div class="metricLabel">Available Resolutions</div>
+                            <p class="smallText muted">From 360p up to 2160p when YouTube exposes them.</p>
                         </div>
-                  
+
                         <div class="metricCard">
-                            <div class="metricValue grad">2</div>
-                            <div class="metricLabel">Playlist Options</div>
-                            <p class="smallText muted">Download separately or merge into a single file.</p>
+                            <div class="metricValue grad">4</div>
+                            <div class="metricLabel">Audio Bitrates</div>
+                            <p class="smallText muted">128, 192, 256, and 320 kbps MP3 export presets.</p>
                         </div>
+
                         <div class="metricCard">
                             <div class="metricValue grad2">2</div>
-                            <div class="metricLabel">Themes: Light / Dark</div>
-                            <p class="smallText muted">Choose your preferred theme for the app interface.</p>
-                        </div>
-                    </div>
-                </section>
-
-                <section class="contentSection sectionCard">
-                    <h2>Video Download Example</h2>
-                    <p class="muted">
-                        A walkthrough of the app's core screens: from download configuration
-                        to real-time progress feedback. 
-                    </p>
-
-                    <div class="imgSlider" tabindex="0"
-                         data-autoplay="2000"
-                         data-images='[
-                             {"src":"assets/img/ytdownloader/pages/1.png","alt":"App screen 1","caption":"Screen 1 of 4"},
-                             {"src":"assets/img/ytdownloader/pages/2.png","alt":"App screen 2","caption":"Screen 2 of 4"},
-                             {"src":"assets/img/ytdownloader/pages/3.png","alt":"App screen 3","caption":"Screen 3 of 4"},
-                             {"src":"assets/img/ytdownloader/pages/4.png","alt":"App screen 4","caption":"Screen 4 of 4"}
-                         ]'>
-                        <div class="imgSliderViewport">
-                            <img class="imgSliderImg" src="" alt="" loading="lazy">
-                            <button class="imgSliderOverlayBtn imgSliderOverlayPrev" aria-label="Previous image">&#8249;</button>
-                            <button class="imgSliderOverlayBtn imgSliderOverlayNext" aria-label="Next image">&#8250;</button>
+                            <div class="metricLabel">Theme Modes</div>
+                            <p class="smallText muted">Dark and light themes.</p>
                         </div>
                     </div>
                 </section>
@@ -123,345 +103,368 @@
                     <div class="techList">
                         <span class="techItem">Python</span>
                         <span class="techItem">CustomTkinter</span>
-                        <span class="techItem">YT-DLP API</span>
+                        <span class="techItem">yt-dlp</span>
+                        <span class="techItem">Pillow</span>
                         <span class="techItem">FFmpeg</span>
+                        <span class="techItem">Local Persistence</span>
                     </div>
                 </section>
 
-                <section class="contentSection sectionCard storySection">
-                    <div class="storyIntro">
-                        <h2>Project Story</h2>
-                        <p class="muted">
-                            The driving idea was to make a technically capable download tool that feels
-                            approachable. 
-                        </p>
-                    </div>
+                <section class="contentSection sectionCard">
+                    <h2>Project Story</h2>
+                    <p class="muted">
+                        YTGrab evolved from a simple download script into a deliberate desktop workflow moving from
+                        "quick paste-and-save" to "preview, configure, queue, and batch process" with full visibility.
+                    </p>
 
-                    <div class="storyFlow">
-                        <div class="storyCard storyProblem">
-                            <div class="storyCardHeader">
-                                <span class="storyIcon" aria-hidden="true">&#x26A0;</span>
-                                <span class="storyTag">Problem</span>
+                    <div class="projectStory">
+                        <div class="storyPhase storyPhase--challenge">
+                            <div class="storyPhaseContent">
+                                <div class="storyPhaseLabel">The Challenge</div>
+                                <h3>Typical Downloaders Leave Users Guessing</h3>
+                                <p class="muted">
+                                    Most YouTube downloaders hide format options, treat playlists as all-or-nothing, and provide
+                                    minimal feedback when downloads fail. Users paste a link, click download, and hope for the
+                                    best with no preview, no batch control, and no recovery context.
+                                </p>
+                                <ul class="storyPhaseList">
+                                    <li>No preview or review step before starting</li>
+                                    <li>Limited playlist control and weak batch support</li>
+                                    <li>Poor error context and no download history</li>
+                                </ul>
                             </div>
-                            <p class="muted">
-                                Downloading YouTube content often means dealing with
-                                unreliable browser extensions, confusing web tools, or command-line
-                                interfaces that expose too much complexity at once.
-                            </p>
-                            <ul class="muted">
-                                <li>No clear quality or format selection</li>
-                                <li>No playlist handling to merge videos</li>
-                                <li>No real-time feedback during long downloads</li>
-                            </ul>
                         </div>
 
-                        <div class="storyCard storyIdea">
-                            <div class="storyCardHeader">
-                                <span class="storyIcon" aria-hidden="true">&#x1F4A1;</span>
-                                <span class="storyTag">Design Goal</span>
+                        <div class="storyPhase storyPhase--vision">
+                            <div class="storyPhaseContent">
+                                <div class="storyPhaseLabel">The Vision</div>
+                                <h3>A Workflow That Feels Predictable</h3>
+                                <p class="muted">
+                                    Build a desktop app that feels reliable and controlled load media metadata first, let users
+                                    choose formats and quality levels, allow queue-based batching, and keep both progress and
+                                    history visible throughout the entire workflow.
+                                </p>
+                                <ul class="storyPhaseList">
+                                    <li>Preview media details before committing</li>
+                                    <li>Make queuing the standard workflow</li>
+                                    <li>Surface progress, history, and theme controls</li>
+                                </ul>
                             </div>
-                            <p class="muted">
-                                Build a desktop app with a guided, dialog-driven workflow. Each step
-                                should be focused: add a URL, configure the download, watch it run.
-                            </p>
-                            <ul class="muted">
-                                <li>Paste a YouTube URL</li>
-                                <li>Configure download options</li>
-                                <li>Monitor download progress</li>
-                            </ul>
                         </div>
 
-                        <div class="storyCard storySolution">
-                            <div class="storyCardHeader">
-                                <span class="storyIcon" aria-hidden="true">&#x2705;</span>
-                                <span class="storyTag">Solution</span>
+                        <div class="storyPhase storyPhase--result">
+                            <div class="storyPhaseContent">
+                                <div class="storyPhaseLabel">The Result</div>
+                                <h3>Queue-First Downloads With Full Visibility</h3>
+                                <p class="muted">
+                                    YTGrab reads real <code>yt-dlp</code> metadata, exposes video and audio format options, lets
+                                    users add multiple items to a queue with full context, then processes everything together with
+                                    live progress tracking and persistent history for easy recovery.
+                                </p>
+                                <ul class="storyPhaseList">
+                                    <li>Fetch all available formats and resolutions</li>
+                                    <li>Queue items store title, thumbnail, mode, quality</li>
+                                    <li>Live progress shows speed, size, and batch status</li>
+                                </ul>
                             </div>
-                            <p class="muted">
-                                Using an URL-driven system the app fetches metadata and available formats from YouTube, then guides the user through a structured flow of dialogs to configure and execute the download with real-time feedback.
-                            </p>
-                            <ul class="muted">
-                                <li>Dependency installer with live logs</li>
-                                <li>Dynamic format fetching for single videos</li>
-                                <li>Playlist options to merge or download separately</li>
-                                <li>Real-time progress dialog with speed, ETA, and size metrics</li>
-                            </ul>
                         </div>
                     </div>
                 </section>
 
                 <section class="contentSection sectionCard">
                     <h2>Key Features</h2>
-                    <div class="featureGrid">
-                        <div class="featureCard">
-                            <div class="featureIcon">&#x1F4F9;</div>
-                            <h3>Video Downloads</h3>
-                            <p class="muted smallText">
-                                Download single YouTube videos in MP4 with quality selection based on
-                                dynamically fetched available formats.
-                            </p>
+                    <p class="muted">
+                        YTGrab combines powerful download capabilities with thoughtful UX design giving you full control
+                        over format selection, batch management, and progress monitoring in a polished desktop experience.
+                    </p>
+
+                    <div class="interfaceComponents">
+                        <div class="interfaceCard">
+                            <div class="interfaceIconLarge">🎬</div>
+                            <div class="interfaceBody">
+                                <h3>Format Selection</h3>
+                                <p class="muted smallText">
+                                    Download as MP4 video (360p to 2160p) or export MP3 audio (128-320 kbps). Quality options
+                                    come directly from <code>yt-dlp</code> metadata, so you get real format availability, not
+                                    hard-coded promises. Higher resolutions may require FFmpeg merging.
+                                </p>
+                                <div class="interfaceTag">Video & Audio</div>
+                            </div>
                         </div>
-                        <div class="featureCard">
-                            <div class="featureIcon">&#x1F3B5;</div>
-                            <h3>Audio Extraction</h3>
-                            <p class="muted smallText">
-                                Audio-only mode extracts MP3 with selectable bitrate: 320 kbps, 192 kbps,
-                                or 128 kbps.
-                            </p>
+
+                        <div class="interfaceCard">
+                            <div class="interfaceIconLarge">📦</div>
+                            <div class="interfaceBody">
+                                <h3>Batch Queue System</h3>
+                                <p class="muted smallText">
+                                    Add multiple items to the queue before starting downloads. Each entry stores its URL,
+                                    thumbnail, title, format, and quality settings. Reorder, remove, or manage items freely,
+                                    then process everything in one organized batch.
+                                </p>
+                                <div class="interfaceTag">Batch Processing</div>
+                            </div>
                         </div>
-                        <div class="featureCard">
-                            <div class="featureIcon">&#x1F4CB;</div>
-                            <h3>Playlist Support</h3>
-                            <p class="muted smallText">
-                                Download entire playlists as separate files or merge all videos into one
-                                output with a custom filename.
-                            </p>
+
+                        <div class="interfaceCard">
+                            <div class="interfaceIconLarge">📚</div>
+                            <div class="interfaceBody">
+                                <h3>Playlist Control</h3>
+                                <p class="muted smallText">
+                                    Choose specific videos from playlists instead of downloading everything. Select individual
+                                    entries, add them separately to the queue, or merge selected items into one output when that
+                                    workflow fits better.
+                                </p>
+                                <div class="interfaceTag">Advanced Selection</div>
+                            </div>
                         </div>
-                        <div class="featureCard">
-                            <div class="featureIcon">&#x1F50D;</div>
-                            <h3>Dynamic Format Discovery</h3>
-                            <p class="muted smallText">
-                                For single videos, the app fetches actual available formats from YouTube
-                                metadata and marks incompatible options as disabled.
-                            </p>
+
+                        <div class="interfaceCard">
+                            <div class="interfaceIconLarge">📊</div>
+                            <div class="interfaceBody">
+                                <h3>Progress Tracking</h3>
+                                <p class="muted smallText">
+                                    Monitor downloads in real-time with live updates on current item, queue position, batch
+                                    progress, download speed, and size estimates. Clear visibility into what's running and how
+                                    much time remains.
+                                </p>
+                                <div class="interfaceTag">Real-time Status</div>
+                            </div>
                         </div>
-                        <div class="featureCard">
-                            <div class="featureIcon">&#x1F4CA;</div>
-                            <h3>Real-Time Progress</h3>
-                            <p class="muted smallText">
-                                Live speed, ETA, downloaded size, and total size displayed during every
-                                active download for full transparency.
-                            </p>
+
+                        <div class="interfaceCard">
+                            <div class="interfaceIconLarge">🗂️</div>
+                            <div class="interfaceBody">
+                                <h3>Download History</h3>
+                                <p class="muted smallText">
+                                        Every completed and failed download persists in history with full context success states,
+                                        error messages, cookie readiness indicators, and source URLs. Easy troubleshooting and
+                                    re-attempts when things go wrong.
+                                </p>
+                                <div class="interfaceTag">Session Memory</div>
+                            </div>
                         </div>
-                        <div class="featureCard">
-                            <div class="featureIcon">&#x1F527;</div>
-                            <h3>Guided Dependency Installer</h3>
-                            <p class="muted smallText">
-                                First-run installer detects missing <code>yt-dlp</code> and walks through
-                                setup with live logs, retry on failure, and auto-close on success.
-                            </p>
-                        </div>
-                        <div class="featureCard">
-                            <div class="featureIcon">&#x1F4E5;</div>
-                            <h3>Queue Workflow</h3>
-                            <p class="muted smallText">
-                                Items are validated and added to a download queue before processing starts,
-                                supporting both video and audio tasks in the same session.
-                            </p>
-                        </div>
-                        <div class="featureCard">
-                            <div class="featureIcon">&#x1F319;</div>
-                            <h3>Dark / Light Theme</h3>
-                            <p class="muted smallText">
-                                A reactive theme system switches between deep navy dark mode and soft gray
-                                light mode, updating all UI components globally.
-                            </p>
+
+                        <div class="interfaceCard">
+                            <div class="interfaceIconLarge">🌓</div>
+                            <div class="interfaceBody">
+                                <h3>Theme Modes</h3>
+                                <p class="muted smallText">
+                                    Switch between dark and light themes with localStorage persistence. Your preference stays
+                                    consistent across sessions, and the entire interface adapts smoothly with no jarring
+                                    transitions or inconsistent styling.
+                                </p>
+                                <div class="interfaceTag">Visual Customization</div>
+                            </div>
                         </div>
                     </div>
                 </section>
 
                 <section class="contentSection sectionCard">
-                    <h2>End-to-End Workflow</h2>
+                    <h2>User Workflow</h2>
                     <p class="muted">
-                        The app follows a linear, focused flow from launch to completed download. Each step
-                        is handled by a dedicated dialog, keeping user decisions scoped and clear.
-                    </p>
-                    <div class="processSteps">
-                        <div class="processStep">
-                            <div class="stepNumber">1</div>
-                            <h4>Launch the app</h4>
-                            <p class="smallText muted">
-                                App starts and checks for required dependencies. If <code>yt-dlp</code> is
-                                missing, the Installer Dialog opens automatically.
-                            </p>
-                        </div>
-                        <div class="processStep">
-                            <div class="stepNumber">2</div>
-                            <h4>Paste a YouTube URL</h4>
-                            <p class="smallText muted">
-                                Enter a single video or playlist URL. The app reads metadata in the
-                                background and prepares the options flow.
-                            </p>
-                        </div>
-                        <div class="processStep">
-                            <div class="stepNumber">3</div>
-                            <h4>Configure the download</h4>
-                            <p class="smallText muted">
-                                The Options Dialog opens with format, quality, and playlist choices.
-                                For single videos, available formats are fetched dynamically from YouTube.
-                            </p>
-                        </div>
-                        <div class="processStep">
-                            <div class="stepNumber">4</div>
-                            <h4>Add to queue</h4>
-                            <p class="smallText muted">
-                                Validated queue items are created with all metadata — URL, type, quality,
-                                playlist flags, merge behavior, and title — ready for download.
-                            </p>
-                        </div>
-                        <div class="processStep">
-                            <div class="stepNumber">5</div>
-                            <h4>Watch the progress</h4>
-                            <p class="smallText muted">
-                                The Progress Dialog shows live download telemetry: current item, overall
-                                percentage, speed, ETA, and downloaded vs total size.
-                            </p>
-                        </div>
-                    </div>
-                </section>
-
-                <section class="contentSection sectionCard">
-                    <h2>Three Core Dialogs</h2>
-                    <p class="muted">
-                        Each dialog handles one focused task, keeping the UX clean and the state
-                        transitions clear regardless of whether the user is a first-time setup or an
-                        experienced power user.
-                    </p>
-                    <div class="detailGrid">
-                        <div class="detailCard">
-                            <div class="detailHeader">
-                                <div class="detailIcon">&#x2699;</div>
-                                <h3>Installer Dialog</h3>
-                            </div>
-                            <p class="smallText muted">
-                                Appears on first run if <code>yt-dlp</code> is not found. Runs the
-                                installation in a background thread and streams live logs to the user.
-                                Shows retry and exit options on failure, and auto-closes on success.
-                            </p>
-                        </div>
-                        <div class="detailCard">
-                            <div class="detailHeader">
-                                <div class="detailIcon">&#x1F4CB;</div>
-                                <h3>Options Dialog</h3>
-                            </div>
-                            <p class="smallText muted">
-                                Centered modal with scrollable card sections. Lets the user choose
-                                download type (video/audio), quality or bitrate, and playlist behavior
-                                (separate files or merged). Dynamic format loading for single videos.
-                            </p>
-                        </div>
-                        <div class="detailCard">
-                            <div class="detailHeader">
-                                <div class="detailIcon">&#x1F4CA;</div>
-                                <h3>Progress Dialog</h3>
-                            </div>
-                            <p class="smallText muted">
-                                Non-closable modal that tracks the active download. Displays queue status,
-                                current item card, overall progress bar, and a stats row with speed, ETA,
-                                downloaded size, and total size.
-                            </p>
-                        </div>
-                    </div>
-                </section>
-
-                <section class="contentSection sectionCard">
-                    <h2>Download Item Model</h2>
-                    <p class="muted">
-                        Every queue entry is built from a structured <code>DownloadItem</code> model that
-                        captures both simple fallback and advanced format-specific metadata in one place.
+                        YTGrab is built around a repeatable batch workflow that puts control in your hands preview first,
+                        configure options, queue multiple items, then download everything together.
                     </p>
 
-                    <div class="calloutBox calloutInfo">
-                        <div class="calloutIcon">&#x2139;</div>
-                        <div>
-                            <h4>Simple vs Advanced Paths</h4>
-                            <p class="smallText">
-                                When dynamic format fetching succeeds, the item stores precise
-                                <code>format_id</code> values for video and audio streams. When it does not,
-                                the item falls back to height-based quality presets (1080p, 720p, 480p,
-                                360p) for a reliable download in all cases.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="tipsGrid">
-                        <div class="tipsCard">
-                            <div class="tipsIcon">&#x1F4F9;</div>
-                            <div>
-                                <h4>Video mode</h4>
-                                <p class="smallText muted">
-                                    Stores selected format ID, height, quality label, and a merge flag when
-                                    the chosen stream requires muxing with a separate audio track.
+                    <div class="workflowTimeline">
+                        <div class="workflowStep">
+                            <div class="workflowIcon">📋</div>
+                            <div class="workflowContent">
+                                <h4>Paste URL</h4>
+                                <p class="muted smallText">
+                                    Drop in any YouTube watch link, Shorts URL, or full playlist URL to get started.
                                 </p>
                             </div>
+                            <div class="workflowNumber">01</div>
                         </div>
-                        <div class="tipsCard">
-                            <div class="tipsIcon">&#x1F3B5;</div>
-                            <div>
-                                <h4>Audio mode</h4>
-                                <p class="smallText muted">
-                                    Stores the selected bitrate (320 / 192 / 128 kbps) and audio format ID,
-                                    bypassing the video quality flow entirely.
+
+                        <div class="workflowStep">
+                            <div class="workflowIcon">🔍</div>
+                            <div class="workflowContent">
+                                <h4>Preview Media</h4>
+                                <p class="muted smallText">
+                                    View title, channel, thumbnail, and duration before making any format decisions.
                                 </p>
                             </div>
+                            <div class="workflowNumber">02</div>
                         </div>
-                        <div class="tipsCard">
-                            <div class="tipsIcon">&#x1F4CB;</div>
-                            <div>
-                                <h4>Playlist mode</h4>
-                                <p class="smallText muted">
-                                    Separate mode creates one queue item per video. Merge mode creates a
-                                    single playlist item with an optional custom output filename.
+
+                        <div class="workflowStep">
+                            <div class="workflowIcon">⚙️</div>
+                            <div class="workflowContent">
+                                <h4>Select Format</h4>
+                                <p class="muted smallText">
+                                    Choose between Video (MP4) or Audio (MP3) mode, then pick your preferred quality or bitrate.
                                 </p>
                             </div>
+                            <div class="workflowNumber">03</div>
+                        </div>
+
+                        <div class="workflowStep">
+                            <div class="workflowIcon">📚</div>
+                            <div class="workflowContent">
+                                <h4>Handle Playlists</h4>
+                                <p class="muted smallText">
+                                    For playlists, select specific videos you want and decide whether to merge them or keep separate.
+                                </p>
+                            </div>
+                            <div class="workflowNumber">04</div>
+                        </div>
+
+                        <div class="workflowStep">
+                            <div class="workflowIcon">➕</div>
+                            <div class="workflowContent">
+                                <h4>Add to Queue</h4>
+                                <p class="muted smallText">
+                                    Queue up the configured item add as many as you need before starting any downloads.
+                                </p>
+                            </div>
+                            <div class="workflowNumber">05</div>
+                        </div>
+
+                        <div class="workflowStep">
+                            <div class="workflowIcon">🚀</div>
+                            <div class="workflowContent">
+                                <h4>Start Batch</h4>
+                                <p class="muted smallText">
+                                    Choose your output folder, then launch all queued downloads together in one organized batch.
+                                </p>
+                            </div>
+                            <div class="workflowNumber">06</div>
+                        </div>
+
+                        <div class="workflowStep">
+                            <div class="workflowIcon">📊</div>
+                            <div class="workflowContent">
+                                <h4>Track Progress</h4>
+                                <p class="muted smallText">
+                                    Monitor live progress with speed, size, and status for each item as downloads run.
+                                </p>
+                            </div>
+                            <div class="workflowNumber">07</div>
+                        </div>
+
+                        <div class="workflowStep">
+                            <div class="workflowIcon">✅</div>
+                            <div class="workflowContent">
+                                <h4>Review History</h4>
+                                <p class="muted smallText">
+                                    Check completed downloads or revisit failed jobs with full context and error details.
+                                </p>
+                            </div>
+                            <div class="workflowNumber">08</div>
                         </div>
                     </div>
                 </section>
 
                 <section class="contentSection sectionCard">
-                    <h2>UI &amp; Theme System</h2>
+                    <h2>Interface Walkthrough</h2>
                     <p class="muted">
-                        The app uses a modern desktop aesthetic with rounded cards, layered surfaces, strong
-                        spacing, and an accent-driven blue-violet color system. A <code>ThemeManager</code>
-                        stores the current mode and dispatches reactive callbacks to update every UI
-                        component simultaneously.
+                        A visual tour of YTGrab's desktop interface from media preview and option selection to queue
+                        management, download progress, and history tracking.
                     </p>
 
-                    <div class="architectureGrid">
-                        <div class="architectureCard">
-                            <div class="architectureIcon">&#x1F30C;</div>
-                            <h3>Dark Theme</h3>
-                            <p class="smallText muted">
-                                Deep navy background, muted blue-slate surfaces, bright cyan-blue and vibrant
-                                violet accents, with white primary text.
+                    <div class="imgSlider" tabindex="0"
+                         data-autoplay="2000"
+                         data-images='[
+                             {"src":"assets/img/ytdownloader/pages/1.png","alt":"YTGrab workflow screen 1","caption":"Input and media preview"},
+                             {"src":"assets/img/ytdownloader/pages/2.png","alt":"YTGrab workflow screen 2","caption":"Download options and selection"},
+                             {"src":"assets/img/ytdownloader/pages/3.png","alt":"YTGrab workflow screen 3","caption":"Queue management and status"},
+                             {"src":"assets/img/ytdownloader/pages/4.png","alt":"YTGrab workflow screen 4","caption":"Progress and completed results"},
+                             {"src":"assets/img/ytdownloader/pages/5.png","alt":"YTGrab workflow screen 5","caption":"Progress and completed results"},
+                             {"src":"assets/img/ytdownloader/pages/6.png","alt":"YTGrab workflow screen 6","caption":"Progress and completed results"},
+                             {"src":"assets/img/ytdownloader/pages/7.png","alt":"YTGrab workflow screen 7","caption":"Progress and completed results"},
+                             {"src":"assets/img/ytdownloader/pages/8.png","alt":"YTGrab workflow screen 8","caption":"Progress and completed results"}
+                         ]'>
+                        <div class="imgSliderViewport">
+                            <div class="imgSliderTopCounter">
+                                <span class="imgSliderIndex">1</span> / <span class="imgSliderTotal">8</span>
+                            </div>
+                            <img class="imgSliderImg" src="" alt="" loading="lazy">
+                            <button class="imgSliderOverlayBtn imgSliderOverlayPrev" aria-label="Previous image">&#8249;</button>
+                            <button class="imgSliderOverlayBtn imgSliderOverlayNext" aria-label="Next image">&#8250;</button>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="contentSection sectionCard">
+                    <h2>Dark and Light Modes</h2>
+                    <p class="muted">
+                        YTGrab supports both dark and light themes with localStorage persistence. Use the interactive
+                        slider below to compare both themes side by side.
+                    </p>
+                    <div class="beforeAfter">
+                        <div class="baContainer">
+                            <img
+                                src="assets/img/ytdownloader/light.png"
+                                alt="YTGrab Light Mode"
+                                class="baImageBefore"
+                            >
+                            <div class="baImageAfter" style="background-image: url('assets/img/ytdownloader/dark.png');"></div>
+                            <input
+                                type="range"
+                                min="0"
+                                max="100"
+                                value="50"
+                                class="baSlider"
+                                aria-label="Dark and Light mode comparison slider"
+                            >
+                            <div class="baLine"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="contentSection sectionCard">
+                    <h2>Application Limitations</h2>
+                    <p class="muted">
+                        YTGrab's core functionality depends entirely on a valid <code>cookies.txt</code> file exported from
+                        your browser. This creates significant friction because YouTube frequently invalidates these cookies
+                        through various mechanisms the app cannot control.
+                    </p>
+
+                    <div class="limitationsList">
+                        <div class="limitationItem">
+                            <h4>&#x1F36A; Cookie Dependency</h4>
+                            <p class="muted smallText">
+                                Every download requires fresh browser cookies. When YouTube detects account re-authentication,
+                                security checks, region changes, or anti-bot signals, your cookies expire and downloads fail
+                                immediately even though the app code is working correctly.
                             </p>
                         </div>
-                        <div class="architectureCard">
-                            <div class="architectureIcon">&#x2600;</div>
-                            <h3>Light Theme</h3>
-                            <p class="smallText muted">
-                                Soft gray background, white surfaces, preserved blue and purple brand accents
-                                adapted for contrast on light backgrounds.
+
+                        <div class="limitationItem">
+                            <h4>&#x1F527; Constant Maintenance</h4>
+                            <p class="muted smallText">
+                                Users must repeatedly export cookies from their browser, manually replace the file, and restart
+                                the app whenever YouTube invalidates credentials. This makes the tool high-maintenance rather
+                                than "set and forget," especially burdensome for non-technical users.
                             </p>
                         </div>
-                        <div class="architectureCard">
-                            <div class="architectureIcon">&#x1F4AC;</div>
-                            <h3>Tooltips</h3>
-                            <p class="smallText muted">
-                                Reusable hover tooltips appear near the cursor, use themed colors, and
-                                dismiss on pointer leave — explaining controls without cluttering the UI.
+
+                        <div class="limitationItem">
+                            <h4>&#x26A0; Unpredictable Failures</h4>
+                            <p class="muted smallText">
+                                Startup checks can fail without warning, queued downloads get interrupted mid-batch, and the
+                                same workflow that succeeded yesterday may suddenly break today. Troubleshooting becomes harder
+                                because failures often stem from external platform changes rather than actual bugs.
                             </p>
                         </div>
-                        <div class="architectureCard">
-                            <div class="architectureIcon">&#x1F5D7;</div>
-                            <h3>Modal Positioning</h3>
-                            <p class="smallText muted">
-                                The installer dialog centers relative to the parent window and repositions
-                                when the parent moves. Other dialogs center on screen for consistency.
+
+                        <div class="limitationItem">
+                            <h4>&#x1F512; Security and Trust Concerns</h4>
+                            <p class="muted smallText">
+                                Handling sensitive authentication data manually increases both complexity and risk. Users must
+                                store browser session cookies locally, trust the app with account access, and accept that
+                                mistakes in cookie management can expose credentials or lock them out of downloads entirely.
                             </p>
                         </div>
                     </div>
 
-                    <div class="calloutBox calloutTakeaway">
-                        <div class="calloutIcon">&#x1F3AF;</div>
-                        <div>
-                            <h4>Technical UX Principles</h4>
-                            <p class="smallText">
-                                Long operations (dependency install, format fetch) run on background threads
-                                with callbacks marshaled back to the main thread — keeping the UI responsive
-                                and the user informed throughout.
-                            </p>
-                        </div>
-                    </div>
+                    <p class="muted" style="margin-top: 1.5rem;">
+                        Even with careful UI design and clear error messaging, the app's reliability is fundamentally limited
+                        by this external dependency. Long-term stability remains weaker than solutions that avoid requiring
+                        continuous cookie renewal.
+                    </p>
                 </section>
 
                 <section class="contentSection sectionCard ctaSection">

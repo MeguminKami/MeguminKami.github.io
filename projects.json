@@ -27,27 +27,27 @@
       }
     },
     {
-      "title": "YouTube Downloader Pro",
-      "badge": "Python Application",
+      "title": "YTGrab",
+      "badge": "Python Desktop App",
       "status": "complete",
-      "latestUpdate": "2026-03-16",
-      "description": "Desktop app for downloading YouTube videos and playlists with smart format selection, queue management, and real-time progress feedback.",
+      "latestUpdate": "2026-03-22",
+      "description": "Modern desktop YouTube downloader with MP4 and MP3 quality selection, playlist handling, queue-based downloads, live progress, and saved history.",
       "bullets": [
-        "Video and audio-only downloads with dynamic format discovery",
-        "Playlist support with separate or merged output options",
-        "Real-time progress: speed, ETA, and size stats"
+        "Real video and audio quality choices powered by yt-dlp format discovery",
+        "Queue-based workflow with previews, batch downloads, and progress tracking",
+        "Playlist entry selection, merge mode, history, and cookies.txt support"
       ],
       "tags": ["Python", "CustomTkinter", "yt-dlp"],
       "tagsData": ["python"],
       "viewHref": "project-youtube-downloader.html",
       "cover": {
-        "ariaLabel": "YouTube Downloader Pro application cover",
+        "ariaLabel": "YTGrab desktop application cover",
         "image": "assets/img/ytdownloader/cover.png"
       },
       "modal": {
-        "title": "YouTube Downloader Pro",
+        "title": "YTGrab",
         "sub": "Python Desktop Application",
-        "desc": "A polished desktop app for downloading YouTube videos and playlists. Features smart format selection, queue management, real-time progress tracking, and a guided first-run installer for yt-dlp.",
+        "desc": "A modern desktop YouTube downloader built around format selection, queue-based batch downloads, playlist control, thumbnail previews, live progress, saved history, and optional cookies.txt support for stricter verification cases.",
         "img": "assets/img/ytdownloader/cover.png"
       }
     },
