@@ -456,6 +456,21 @@ async function loadProjectsData() {
     return projectsDataPromise;
 }
 
+function updateStats(projects) {
+    const projectsStatEl = document.querySelector('[data-stat="projects"]');
+    const articlesStatEl = document.querySelector('[data-stat="articles"]');
+
+    if (projectsStatEl) {
+        projectsStatEl.textContent = projects.length;
+    }
+
+    // For articles, you can update this logic if you have an articles data source
+    // For now, keeping it at 1 as default
+    if (articlesStatEl) {
+        // articlesStatEl.textContent = articles.length;
+    }
+}
+
 (async function initProjects() {
     const grid = document.getElementById("projectsGrid");
     if (!grid) return;
@@ -464,6 +479,9 @@ async function loadProjectsData() {
         const projects = await loadProjectsData();
         const sortedProjects = sortProjectsByLatestUpdate(projects);
         renderProjectCards(grid, sortedProjects);
+
+        // Update stats with actual project count
+        updateStats(projects);
 
         // Reinitialize modal buttons after rendering
         initModalButtons();

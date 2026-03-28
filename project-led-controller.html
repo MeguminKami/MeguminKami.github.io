@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="description"
+        content="ESP32 LED Controller - Wi-Fi LED strip controller with on-device FastLED rendering, device-hosted web UI, special modes, and responsive browser controls."
+    >
+    <title>ESP32 LED Controller - Project</title>
+    <link rel="icon" type="image/png" href="assets/img/espledcontroller/logo.png">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="bgGlow"></div>
+
+<div class="wrap">
+    <div id="siteHeader" class="siteHeader"></div>
+
+    <a href="index.html#projects" class="backLink">
+        &larr; Back to Projects
+    </a>
+
+    <article class="projectArticle ledProject">
+        <header class="projectHeader">
+            <h1 class="projectTitle">
+                <img
+                    src="assets/img/espledcontroller/logo.png"
+                    alt=""
+                    class="projectTitleIcon"
+                    aria-hidden="true"
+                    loading="eager"
+                >
+                ESP32 LED Controller
+            </h1>
+            <p class="lead">
+                ESP32 LED Controller is a Wi-Fi lighting system built as a standalone product, not just a browser demo.
+                The interface is served directly from the ESP32, the firmware renders animations on-device with
+                <code>FastLED</code>, and the strip keeps running smoothly even if the browser disconnects.
+            </p>
+
+            <div class="quickFacts">
+                <div class="factItem">
+                    <span class="factLabel">Latest Update</span>
+                    <span class="factValue" data-project-latest-update>28 March 2026</span>
+                </div>
+                <div class="factItem">
+                    <span class="factLabel">Type</span>
+                    <span class="factValue">Solo Project</span>
+                </div>
+                <div class="factItem">
+                    <span class="factLabel">Category</span>
+                    <span class="factValue">Embedded + Web UI</span>
+                </div>
+                <div class="factItem">
+                    <span class="factLabel">Status</span>
+                    <span class="factValue grad">Complete</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="projectContent">
+            <div class="projectMain">
+                <section id="overview" class="contentSection sectionCard">
+                    <h2>Overview</h2>
+                    <p class="muted">
+                        This project combines embedded firmware and a browser-based dashboard into one self-hosted LED
+                        control system. The frontend files are stored in <code>LittleFS</code> and served by the ESP32,
+                        the control layer talks to device endpoints such as <code>/status</code>, <code>/state</code>,
+                        <code>/apply</code>, and <code>/off</code>, and the firmware owns the actual animation runtime.
+                        The result is a controller that feels polished on the surface while remaining technically solid
+                        underneath.
+                    </p>
+
+                    <div class="metricsGrid">
+                        <div class="metricCard">
+                            <div class="metricValue grad">100 Hz</div>
+                            <div class="metricLabel">Runtime Loop</div>
+                            <p class="smallText muted">The main loop updates roughly every 10 ms for fluid rendering.</p>
+                        </div>
+                        <div class="metricCard">
+                            <div class="metricValue grad2">88</div>
+                            <div class="metricLabel">Default LEDs</div>
+                            <p class="smallText muted">Default hardware profile targets an 88-pixel WS2813 strip.</p>
+                        </div>
+                        <div class="metricCard">
+                            <div class="metricValue grad">4</div>
+                            <div class="metricLabel">Core Routes</div>
+                            <p class="smallText muted">Status, state, apply, and off cover the main control flow.</p>
+                        </div>
+                        <div class="metricCard">
+                            <div class="metricValue grad2">10 min</div>
+                            <div class="metricLabel">Theme Rotation</div>
+                            <p class="smallText muted">Special categories rotate enabled submodes automatically.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="contentSection sectionCard">
+                    <h2>Technical Stack</h2>
+                    <div class="techList">
+                        <span class="techItem">ESP32</span>
+                        <span class="techItem">Arduino</span>
+                        <span class="techItem">FastLED</span>
+                        <span class="techItem">ESPAsyncWebServer</span>
+                        <span class="techItem">WiFi + mDNS</span>
+                        <span class="techItem">LittleFS</span>
+                        <span class="techItem">HTML</span>
+                        <span class="techItem">CSS</span>
+                        <span class="techItem">JavaScript</span>
+                    </div>
+                </section>
+
+                <section class="contentSection sectionCard storySection">
+                    <div class="storyIntro">
+                        <h2>Project Story</h2>
+                        <p class="muted">
+                            The goal was to make an LED controller that feels like a finished connected product while
+                            still respecting the realities of embedded hardware and local-network control.
+                        </p>
+                    </div>
+
+                    <div class="storyFlow">
+                        <div class="storyCard storyProblem">
+                            <div class="storyCardHeader">
+                                <span class="storyIcon" aria-hidden="true">&#x26A0;</span>
+                                <span class="storyTag">Challenge</span>
+                            </div>
+                            <p class="muted">
+                                Off-the-shelf LED controllers often limit what you can build. They restrict individual LED
+                                control, lock you into preset modes, and make it difficult to add custom animations or
+                                fine-tune behavior.
+                            </p>
+                            <p class="muted">
+                                The goal was to build a fully customizable DIY LED controller from scratch. So I can create any lighting effect I want and evolve the feature set over time without
+                                artificial constraints.
+                            </p>
+                        </div>
+
+                        <div class="storyCard storyIdea">
+                            <div class="storyCardHeader">
+                                <span class="storyIcon" aria-hidden="true">&#x1F4A1;</span>
+                                <span class="storyTag">Design Goal</span>
+                            </div>
+                            <p class="muted">
+                                Build a web-based interface that controls the LED strip over Wi-Fi through an ESP32, with a
+                                polished, responsive GUI that exposes granular control down to individual LED pixels.
+                            </p>
+                            <p class="muted">
+                                The controller should feel like a finished product while staying flexible enough to support
+                                new modes, custom animations, and hardware changes without requiring a complete rebuild.
+                            </p>
+                        </div>
+
+                        <div class="storyCard storySolution">
+                            <div class="storyCardHeader">
+                                <span class="storyIcon" aria-hidden="true">&#x2705;</span>
+                                <span class="storyTag">Result</span>
+                            </div>
+                            <p class="muted">
+                                A fully functional LED controller with a self-hosted web UI, real-time Wi-Fi control,
+                                on-device animation rendering, themed mode sequencing, and preset management.
+                            </p>
+                            <p class="muted">
+                                The system runs independently on the ESP32, serving its own interface and handling all
+                                lighting logic without external dependencies making it simple to extend, tune, and adapt
+                                to new use cases.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="how-it-works" class="contentSection sectionCard">
+                    <h2>How It Works</h2>
+                    <p class="muted">
+                        The interaction model is intentionally simple: the browser handles visibility and control, while
+                        the ESP32 handles state, timing, and pixel output.
+                    </p>
+                    <p class="muted">
+                        This is a DIY project for self use and not for mass production.
+                    </p>
+
+                    <div class="workflowTimeline">
+                        <div class="workflowStep">
+                            <div class="workflowIcon">&#x1F4F6;</div>
+                            <div class="workflowContent">
+                                <h4>Join the device on the local network</h4>
+                                <p class="muted smallText">
+                                    The controller becomes reachable through <code>http://led.local</code> or its local
+                                    IP address using Wi-Fi plus <code>mDNS</code>.
+                                </p>
+                            </div>
+                            <div class="workflowNumber">01</div>
+                        </div>
+
+                        <div class="workflowStep">
+                            <div class="workflowIcon">&#x1F4C2;</div>
+                            <div class="workflowContent">
+                                <h4>Load the frontend from the ESP32</h4>
+                                <p class="muted smallText">
+                                    HTML, CSS, and JavaScript are served directly from <code>LittleFS</code>, so the
+                                    device ships its own control panel.
+                                </p>
+                            </div>
+                            <div class="workflowNumber">02</div>
+                        </div>
+
+                        <div class="workflowStep">
+                            <div class="workflowIcon">&#x1F50D;</div>
+                            <div class="workflowContent">
+                                <h4>Read live status and current state</h4>
+                                <p class="muted smallText">
+                                    The interface checks routes such as <code>/status</code> and <code>/state</code> to
+                                    populate controls, connection indicators, and the current lighting setup.
+                                </p>
+                            </div>
+                            <div class="workflowNumber">03</div>
+                        </div>
+
+                        <div class="workflowStep">
+                            <div class="workflowIcon">&#x2699;</div>
+                            <div class="workflowContent">
+                                <h4>Apply mode and parameter changes</h4>
+                                <p class="muted smallText">
+                                    Updates from sliders, color controls, mode pickers, and category tools are sent back
+                                    through the control API without moving rendering responsibility to the browser.
+                                </p>
+                            </div>
+                            <div class="workflowNumber">04</div>
+                        </div>
+
+                        <div class="workflowStep">
+                            <div class="workflowIcon">&#x2728;</div>
+                            <div class="workflowContent">
+                                <h4>Render frames on-device</h4>
+                                <p class="muted smallText">
+                                    The firmware computes the LED frame, writes pixels with <code>FastLED</code>, and
+                                    keeps animation playback smooth at roughly 100 Hz.
+                                </p>
+                            </div>
+                            <div class="workflowNumber">05</div>
+                        </div>
+
+                        <div class="workflowStep">
+                            <div class="workflowIcon">&#x23F1;</div>
+                            <div class="workflowContent">
+                                <h4>Rotate themed sequences automatically</h4>
+                                <p class="muted smallText">
+                                    Special categories can cycle through enabled submodes every 10 minutes in the order
+                                    defined from the UI.
+                                </p>
+                            </div>
+                            <div class="workflowNumber">06</div>
+                        </div>
+                    </div>
+
+                    <div class="calloutBox calloutInfo">
+                        <div class="calloutIcon">&#x2139;</div>
+                        <div>
+                            <h4>Browser as control layer</h4>
+                            <p class="smallText">
+                                The browser never becomes the animation engine. Its job is to read state, send user
+                                intent, and preview settings. The ESP32 keeps the real runtime alive, which is why the
+                                strip continues animating cleanly even after the control page closes.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+
+
+                <section class="contentSection sectionCard">
+                    <h2>Key Features</h2>
+                    <p class="muted">
+                        The project balances maker flexibility with a product-style control experience so the system feels
+                        good to operate, not just technically impressive.
+                    </p>
+
+                    <div class="interfaceComponents">
+                        <div class="interfaceCard">
+                            <div class="interfaceIconLarge">&#x1F680;</div>
+                            <div class="interfaceBody">
+                                <h3>Standalone Animation Engine</h3>
+                                <p class="muted smallText">
+                                    Effects are generated directly by the firmware, so timing, smoothing, and playback
+                                    stay consistent regardless of browser state or device refresh rate.
+                                </p>
+                                <div class="interfaceTag">On-device Rendering</div>
+                            </div>
+                        </div>
+
+                        <div class="interfaceCard">
+                            <div class="interfaceIconLarge">&#x1F4F6;</div>
+                            <div class="interfaceBody">
+                                <h3>Real-Time Wi-Fi Control</h3>
+                                <p class="muted smallText">
+                                    Power, mode, and parameter changes happen over the local network, giving the strip a
+                                    responsive remote-control workflow without cloud dependence.
+                                </p>
+                                <div class="interfaceTag">Local Network Access</div>
+                            </div>
+                        </div>
+
+                        <div class="interfaceCard">
+                            <div class="interfaceIconLarge">&#x1F39B;</div>
+                            <div class="interfaceBody">
+                                <h3>Deep Per-Mode Tuning</h3>
+                                <p class="muted smallText">
+                                    Standard modes expose controls for color, brightness, speed, saturation,
+                                    smoothness, wave length, spacing, direction, and intensity where relevant.
+                                </p>
+                                <div class="interfaceTag">Fine-Grained Control</div>
+                            </div>
+                        </div>
+
+                        <div class="interfaceCard">
+                            <div class="interfaceIconLarge">&#x1F4BE;</div>
+                            <div class="interfaceBody">
+                                <h3>Preset Save / Load / Delete</h3>
+                                <p class="muted smallText">
+                                    Browser-side <code>localStorage</code> keeps favorite looks close to the user,
+                                    making it fast to return to a known lighting setup with minimal friction.
+                                </p>
+                                <div class="interfaceTag">Browser Memory</div>
+                            </div>
+                        </div>
+
+                        <div class="interfaceCard">
+                            <div class="interfaceIconLarge">&#x1F4DA;</div>
+                            <div class="interfaceBody">
+                                <h3>Special Mode Sequencing</h3>
+                                <p class="muted smallText">
+                                    Dedicated themed pages let you enable or disable submodes, reorder them, reset
+                                    category defaults, and start ordered sequences from the interface.
+                                </p>
+                                <div class="interfaceTag">Category Orchestration</div>
+                            </div>
+                        </div>
+
+                        <div class="interfaceCard">
+                            <div class="interfaceIconLarge">&#x1F4F1;</div>
+                            <div class="interfaceBody">
+                                <h3>Responsive Product UI</h3>
+                                <p class="muted smallText">
+                                    The dashboard is built to work across desktop and mobile, with live connection
+                                    status, strip preview, and touch-friendly controls where they matter most.
+                                </p>
+                                <div class="interfaceTag">Desktop + Mobile</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="standard-modes" class="contentSection sectionCard">
+                    <h2>Standard Modes Showcase</h2>
+                    <p class="muted">
+                        The standard lighting page covers the everyday interaction model: pick a mode, tune its
+                        parameters, preview the result in the browser, then let the ESP32 keep the strip moving.
+                    </p>
+
+                    <div class="modeCatalog modeCatalog--threeColumn">
+                        <article class="modeCard modeCard--solid">
+                            <div class="modePreview" aria-hidden="true">
+                                <span></span>
+                            </div>
+                            <h3>Solid</h3>
+                            <p class="muted smallText">
+                                A clean static look for ambient lighting, accent colors, or single-tone room scenes.
+                            </p>
+                            <div class="modeControlTags">
+                                <span>Color</span>
+                                <span>Brightness</span>
+                                <span>Saturation</span>
+                            </div>
+                        </article>
+
+                        <article class="modeCard modeCard--rainbow">
+                            <div class="modePreview" aria-hidden="true">
+                                <span></span>
+                            </div>
+                            <h3>Rainbow</h3>
+                            <p class="muted smallText">
+                                Continuous hue motion for brighter, more playful output with control over pace and feel.
+                            </p>
+                            <div class="modeControlTags">
+                                <span>Speed</span>
+                                <span>Saturation</span>
+                            </div>
+                        </article>
+
+                        <article class="modeCard modeCard--wave">
+                            <div class="modePreview" aria-hidden="true">
+                                <span></span>
+                            </div>
+                            <h3>Wave</h3>
+                            <p class="muted smallText">
+                                Moving bands of light sweep across the strip with more control over spacing and rhythm.
+                            </p>
+                            <div class="modeControlTags">
+                                <span>Wave Length</span>
+                                <span>Spacing</span>
+                                <span>Smoothness</span>
+                            </div>
+                        </article>
+
+                        <article class="modeCard modeCard--fade">
+                            <div class="modePreview" aria-hidden="true">
+                                <span></span>
+                            </div>
+                            <h3>Fade</h3>
+                            <p class="muted smallText">
+                                Soft transitions between colors for mood lighting and lower-noise visual motion.
+                            </p>
+                            <div class="modeControlTags">
+                                <span>Colors</span>
+                                <span>Speed</span>
+                                <span>Smoothness</span>
+                            </div>
+                        </article>
+
+                        <article class="modeCard modeCard--strobe">
+                            <div class="modePreview" aria-hidden="true">
+                                <span></span>
+                            </div>
+                            <h3>Strobe</h3>
+                            <p class="muted smallText">
+                                Punchier pulses and flashes for energetic scenes where timing and intensity matter.
+                            </p>
+                            <div class="modeControlTags">
+                                <span>Spacing</span>
+                                <span>Speed</span>
+                                <span>Brightness</span>
+                            </div>
+                        </article>
+
+                        <article class="modeCard modeCard--chase">
+                            <div class="modePreview" aria-hidden="true">
+                                <span></span>
+                            </div>
+                            <h3>Chase</h3>
+                            <p class="muted smallText">
+                                Repeating moving segments create directional motion that reads well on longer strips.
+                            </p>
+                            <div class="modeControlTags">
+                                <span>Colors</span>
+                                <span>Speed</span>
+                                <span>Spacing</span>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+
+                <section id="special-modes" class="contentSection sectionCard">
+                    <h2>Special Modes Showcase</h2>
+                    <p class="muted">
+                        Special modes turn the controller into more than a list of single effects. Each category acts as
+                        its own small playlist system, giving the browser a richer orchestration role while the firmware
+                        keeps playback autonomous.
+                    </p>
+
+                    <div class="specialModesGrid specialModesGrid--threeColumn">
+                        <article class="specialModeCard">
+                            <div class="specialModeHead">
+                                <h3>Christmas</h3>
+                            </div>
+                            <p class="muted smallText">
+                                Designed for festive color palettes and celebratory motion, with sequencing tools that
+                                let the user build a more dynamic holiday loop from the browser.
+                            </p>
+                            <ul class="muted smallText">
+                                <li>Enable or disable individual submodes</li>
+                                <li>Reorder playback to shape the festive pacing</li>
+                                <li>Reset the category back to its default ordering</li>
+                            </ul>
+                        </article>
+
+                        <article class="specialModeCard">
+                            <div class="specialModeHead">
+                                <h3>Fireplace</h3>
+                            </div>
+                            <p class="muted smallText">
+                                Built for warmer ambience, softer flicker, and lower-intensity scenes that need a more
+                                believable glow than a simple orange fade can provide.
+                            </p>
+                            <ul class="muted smallText">
+                                <li>Curated for warm-room mood and ember-style motion</li>
+                                <li>Ordered submode playback keeps the look evolving</li>
+                                <li>Ideal for slower transitions and comfort lighting</li>
+                            </ul>
+                        </article>
+
+                        <article class="specialModeCard">
+                            <div class="specialModeHead">
+                                <h3>Sex Trip</h3>
+                            </div>
+                            <p class="muted smallText">
+                                A mood-driven category centered on darker atmosphere, richer color transitions, and more
+                                intentional pacing for intimate or low-light scenes.
+                            </p>
+                            <ul class="muted smallText">
+                                <li>Built around slower, more immersive visual flow</li>
+                                <li>Supports manual sequencing and submode ordering</li>
+                                <li>Starts ordered playback directly from the UI</li>
+                            </ul>
+                        </article>
+                    </div>
+
+                    <div class="calloutBox calloutTakeaway">
+                        <div class="calloutIcon">&#x2728;</div>
+                        <div>
+                            <h4>Theme logic stays inside the firmware</h4>
+                            <p class="smallText">
+                                The UI decides which themed submodes are enabled and in what order they should run. The
+                                ESP32 then handles the timed rotation itself, switching enabled submodes every 10 minutes
+                                without requiring the browser to stay open.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="technical-architecture" class="contentSection sectionCard">
+                    <h2>Technical Architecture</h2>
+                    <p class="muted">
+                        The architecture is intentionally split so the browser can feel modern and convenient while the
+                        ESP32 remains the trustworthy runtime owner. That separation is what makes the controller feel
+                        both premium and technically credible.
+                    </p>
+
+                    <div class="ledArchitectureFlow" aria-label="ESP32 LED Controller architecture flow">
+                        <div class="ledArchitectureNode">
+                            <span class="ledArchitectureLabel">Browser UI</span>
+                            <strong>Control Layer</strong>
+                        </div>
+                        <div class="ledArchitectureArrow" aria-hidden="true">&rarr;</div>
+                        <div class="ledArchitectureNode">
+                            <span class="ledArchitectureLabel">ESP32 HTTP Layer</span>
+                            <strong>LittleFS + Async Server</strong>
+                        </div>
+                        <div class="ledArchitectureArrow" aria-hidden="true">&rarr;</div>
+                        <div class="ledArchitectureNode">
+                            <span class="ledArchitectureLabel">Firmware Runtime</span>
+                            <strong>State + Animation Engine</strong>
+                        </div>
+                        <div class="ledArchitectureArrow" aria-hidden="true">&rarr;</div>
+                        <div class="ledArchitectureNode">
+                            <span class="ledArchitectureLabel">LED Output</span>
+                            <strong>FastLED.show()</strong>
+                        </div>
+                    </div>
+
+                    <div class="architectureGrid architectureGrid--threeColumn">
+                        <div class="architectureCard">
+                            <div class="architectureIcon">&#x1F310;</div>
+                            <h3>Browser Interface</h3>
+                            <p class="smallText muted">
+                                Responsive HTML, CSS, and JavaScript UI for live controls, strip preview, power state,
+                                presets, and themed category tools.
+                            </p>
+                        </div>
+
+                        <div class="architectureCard">
+                            <div class="architectureIcon">&#x1F4C1;</div>
+                            <h3>LittleFS Hosting</h3>
+                            <p class="smallText muted">
+                                Frontend files live on the device itself, removing the need for a separate web server or
+                                companion app.
+                            </p>
+                        </div>
+
+                        <div class="architectureCard">
+                            <div class="architectureIcon">&#x1F4E1;</div>
+                            <h3>Network Discovery</h3>
+                            <p class="smallText muted">
+                                Wi-Fi connectivity plus <code>mDNS</code> makes the controller discoverable through
+                                <code>led.local</code> for friendlier local access.
+                            </p>
+                        </div>
+
+                        <div class="architectureCard">
+                            <div class="architectureIcon">&#x2699;</div>
+                            <h3>Control Endpoints</h3>
+                            <p class="smallText muted">
+                                Small HTTP routes expose state reads, state updates, and immediate power control without
+                                leaking rendering complexity into the frontend.
+                            </p>
+                        </div>
+
+                        <div class="architectureCard">
+                            <div class="architectureIcon">&#x1F9E0;</div>
+                            <h3>Animation Runtime</h3>
+                            <p class="smallText muted">
+                                The loop tracks mode settings, computes each frame on-device, and preserves playback
+                                continuity even when the UI is no longer connected.
+                            </p>
+                        </div>
+
+                        <div class="architectureCard">
+                            <div class="architectureIcon">&#x1F4A1;</div>
+                            <h3>Hardware Output</h3>
+                            <p class="smallText muted">
+                                Default output targets a WS2813 strip on GPIO 4 with 88 LEDs and GRB color order, while
+                                keeping the firmware ready for profile changes.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="contentSection sectionCard">
+                    <h2>Installation / Setup Overview</h2>
+                    <p class="muted">
+                        The setup flow stays maker-friendly: flash the firmware, upload the web assets, connect the strip,
+                        and the controller becomes a self-contained lighting endpoint on the local network.
+                    </p>
+                    <br>
+                    <div class="processSteps">
+                        <div class="processStep">
+                            <div class="stepNumber">1</div>
+                            <h4>Flash the ESP32 firmware</h4>
+                            <p class="smallText muted">
+                                Upload the Arduino / C++ firmware that contains networking, routing, state handling, and
+                                animation logic.
+                            </p>
+                        </div>
+
+                        <div class="processStep">
+                            <div class="stepNumber">2</div>
+                            <h4>Upload frontend assets to LittleFS</h4>
+                            <p class="smallText muted">
+                                Store the browser UI files on-device so the controller can serve its own interface.
+                            </p>
+                        </div>
+
+                        <div class="processStep">
+                            <div class="stepNumber">3</div>
+                            <h4>Wire the default LED profile</h4>
+                            <p class="smallText muted">
+                                Connect the WS2813 strip and use the default profile or adjust firmware values if the
+                                strip length, pin, or color order differs.
+                            </p>
+                        </div>
+
+                        <div class="processStep">
+                            <div class="stepNumber">4</div>
+                            <h4>Join the local network</h4>
+                            <p class="smallText muted">
+                                Once Wi-Fi is active, reach the controller by <code>led.local</code> or its assigned IP.
+                            </p>
+                        </div>
+
+                        <div class="processStep">
+                            <div class="stepNumber">5</div>
+                            <h4>Open the UI and tune the strip</h4>
+                            <p class="smallText muted">
+                                Pick modes, save presets, manage special categories, and leave playback running on the device.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="calloutBox calloutInfo">
+                        <div class="calloutIcon">&#x1F527;</div>
+                        <div>
+                            <h4>Default hardware profile</h4>
+                            <p class="smallText">
+                                The current baseline setup uses a <code>WS2813</code> LED strip on <code>GPIO 4</code>
+                                with <code>88 LEDs</code> and <code>GRB</code> color order.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="contentSection sectionCard">
+                    <h2>API / Control Workflow</h2>
+                    <p class="muted">
+                        The API surface stays intentionally narrow so the browser has exactly what it needs to be useful
+                        without duplicating firmware responsibilities.
+                    </p>
+
+                    <ol class="searchSteps">
+                        <li>The browser boots from device-hosted files and checks if the controller is reachable.</li>
+                        <li><code>/status</code> helps surface connection and live state context.</li>
+                        <li><code>/state</code> is used to hydrate the UI with the active mode and parameter values.</li>
+                        <li>User changes are submitted through <code>/apply</code> so the firmware can update runtime state.</li>
+                        <li><code>/off</code> provides an immediate power-off path without removing the device from the network.</li>
+                        <li>The firmware continues frame generation locally and pushes updates with <code>FastLED.show()</code>.</li>
+                    </ol>
+
+                    <div class="detailGrid">
+                        <div class="detailCard">
+                            <div class="detailHeader">
+                                <div class="detailIcon">&#x1F50E;</div>
+                                <h3>Status</h3>
+                            </div>
+                            <p class="smallText muted">
+                                Used to check whether the controller is online and to expose high-level runtime feedback.
+                            </p>
+                        </div>
+
+                        <div class="detailCard">
+                            <div class="detailHeader">
+                                <div class="detailIcon">&#x1F4DD;</div>
+                                <h3>State</h3>
+                            </div>
+                            <p class="smallText muted">
+                                Returns the active mode and the settings needed to render the browser controls accurately.
+                            </p>
+                        </div>
+
+                        <div class="detailCard">
+                            <div class="detailHeader">
+                                <div class="detailIcon">&#x2699;</div>
+                                <h3>Apply</h3>
+                            </div>
+                            <p class="smallText muted">
+                                Accepts updated lighting parameters so the runtime can change behavior without leaving the
+                                device-hosted control flow.
+                            </p>
+                        </div>
+
+                        <div class="detailCard">
+                            <div class="detailHeader">
+                                <div class="detailIcon">&#x23FB;</div>
+                                <h3>Off</h3>
+                            </div>
+                            <p class="smallText muted">
+                                Provides a direct shutdown command for the strip while the controller itself remains ready.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="codeBlock">
+                        <div class="codeHeader">
+                            <span class="codeTitle">controller-routes.txt</span>
+                            <button type="button" class="copyBtn">
+                                <span class="copyIcon">&#x2398;</span>
+                                <span class="copyText">Copy</span>
+                            </button>
+                        </div>
+                        <pre><code>/status  - connection and runtime snapshot
+/state   - current lighting state
+/apply   - apply updated parameters
+/off     - immediate strip power off</code></pre>
+                    </div>
+                </section>
+
+                <section id="interface-mockups" class="contentSection sectionCard">
+                    <h2>Web Interface</h2>
+                    <p class="muted">
+                        The UI is designed to make an embedded controller feel product-grade: dark ambient surfaces,
+                        live status, bright contrast, and visual cues that suggest the strip is actively responding in
+                        real time.
+                    </p>
+                    
+                    <div class="ledWebsiteEmbed ledWebsiteEmbed--main">
+                        <div class="embedHeader">
+                            <a href="partials/led-controller-website/index.html" class="embedBadge" target="_blank" rel="noopener">Open Web Interface</a>
+                        </div>
+                        <iframe
+                            src="partials/led-controller-website/index.html"
+                            class="websiteFrame"
+                            title="LED Controller Main Interface"
+                            loading="lazy"
+                        ></iframe>
+                    </div>
+    
+                </section>
+
+
+                <section class="contentSection sectionCard ctaSection">
+                    <h2>Project Links</h2>
+                    <p class="muted smallText">Download builds, browse the source, or head back to all projects.</p>
+                    <div class="projectLinks">
+                        <a href="https://github.com/MeguminKami/ESP32-LED-Controller" class="btn primary" target="_blank" rel="noopener">
+                            View Source Code
+                        </a>
+                        <a href="index.html#projects" class="btn secondary">
+                            &larr; Back to Projects
+                        </a>
+                    </div>
+                </section>
+
+            </div>
+        </div>
+    </article>
+
+    <div id="siteFooter" class="siteFooter"></div>
+</div>
+
+<div id="lightbox" class="lightbox" aria-hidden="true">
+    <button class="lightboxClose" aria-label="Close lightbox">&#x2715;</button>
+    <img id="lightboxImg" src="" alt="" class="lightboxImage">
+    <div class="lightboxCaption" id="lightboxCaption"></div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

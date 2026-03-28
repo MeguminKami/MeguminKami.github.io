@@ -106,25 +106,28 @@
       "title": "ESP32 LED Controller",
       "badge": "Arduino Project",
       "status": "complete",
-      "latestUpdate": "2025-11-25",
+      "latestUpdate": {
+        "date": "2026-03-28",
+        "label": "28 March 2026"
+      },
       "description": "WiFi-enabled ESP32 LED strip controller firmware with a responsive web UI.",
       "bullets": [
-        "ESP32 firmware written in C++ (Arduino) using FastLED and fauxmoESP",
-        "Hosts a responsive web UI from LittleFS (HTML/CSS/JS) for live configuration",
-        "Multiple built-in modes"
+        "ESP32 firmware renders LED animations on-device with FastLED",
+        "Hosts a responsive web UI from LittleFS for live Wi-Fi control at led.local",
+        "Standard and themed modes with live preview, presets, and per-mode tuning"
       ],
       "tags": ["C++", "Arduino", "JavaScript", "Web UI"],
       "tagsData": ["c-cpp","js","arduino"],
       "viewHref": "project-led-controller.html",
       "cover": {
         "ariaLabel": "ESP32 LED Controller UI screenshot",
-        "image": ""
+        "image": "assets/img/espledcontroller/banner.png"
       },
       "modal": {
         "title": "ESP32 LED Controller",
         "sub": "Personal Led Strip Controller",
         "desc": "WiFi-enabled ESP32 LED strip controller firmware with a responsive web UI.",
-        "img": ""
+        "img": "assets/img/espledcontroller/banner.png"
       }
     },
     {
