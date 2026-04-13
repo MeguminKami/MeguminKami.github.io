@@ -3,8 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Simulation Framework - Distributed systems framework for network clock synchronization research.">
-    <title>Simulation Framework — Project</title>
+    <meta
+        name="description"
+        content="Master dissertation project on building a simulation framework for Bosch assembly lines, human-machine collaboration, and cobot scenario evaluation."
+    >
+    <title>Simulation Framework - Dissertation Project</title>
+    <link rel="icon" type="image/png" href="assets/img/tese/thumbnail.png">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -14,129 +18,815 @@
     <div id="siteHeader" class="siteHeader"></div>
 
     <a href="index.html#projects" class="backLink">
-        ← Back to Projects
+        &larr; Back to Projects
     </a>
 
-    <article>
+    <article class="projectArticle simulationProject thesisProject">
         <header class="projectHeader">
-            <h1 class="projectTitle">Simulation Framework</h1>
+            <h1 class="projectTitle">Simulation Framework for Human-Machine Collaboration</h1>
             <p class="lead">
-                A high-performance simulation framework for testing stochastic methods in network clock
-                synchronization, developed for distributed systems research at INESCTEC.
+                This page follows the structure of my dissertation and focuses on the actual work: the
+                industrial motivation, the state of the art, the development of the framework, the Bosch
+                case study, and the results that came from testing real and improved line configurations.
             </p>
-            <div class="projectMeta">
-                <span class="badge">Research</span>
-                <span class="chip">C</span>
-                <span class="chip">Distributed Systems</span>
-                <span class="chip">Simulation</span>
+            <p class="smallText muted">
+                Dissertation title: <em>Development of a Simulation Model for the Analysis and Evaluation
+                of Human-Machine Collaboration in an Assembly Cell</em>.
+            </p>
+
+            <div class="quickFacts">
+                <div class="factItem">
+                    <span class="factLabel">Date</span>
+                    <span class="factValue">5 November 2025</span>
+                </div>
+                <div class="factItem">
+                    <span class="factLabel">Type</span>
+                    <span class="factValue">Master Dissertation</span>
+                </div>
+                <div class="factItem">
+                    <span class="factLabel">Context</span>
+                    <span class="factValue">Bosch Ovar</span>
+                </div>
+                <div class="factItem">
+                    <span class="factLabel">Toolchain</span>
+                    <span class="factValue">Python + SimPy + PyQt5</span>
+                </div>
+                <div class="factItem">
+                    <span class="factLabel">Validation</span>
+                    <span class="factValue">L05C deviation about 5.4%</span>
+                </div>
+                <div class="factItem">
+                    <span class="factLabel">Best Gain</span>
+                    <span class="factValue grad">L05B/V2 +19%</span>
+                </div>
             </div>
+
             <div class="projectLinks">
-                <a href="https://github.com/yourusername/simulation-framework" class="btn primary" target="_blank" rel="noopener">
-                    View on GitHub
+                <a href="assets/img/tese/Tese.pdf" class="btn primary" target="_blank" rel="noopener">
+                    Open Dissertation PDF
                 </a>
-                <a href="#" class="btn">Read Paper</a>
+                <a href="#chapter-5" class="btn">
+                    Jump to Results
+                </a>
             </div>
         </header>
 
         <div class="projectContent">
-            <section class="contentSection">
-                <h2>Overview</h2>
-                <p class="muted">
-                    This simulation framework enables researchers to test and validate stochastic clock
-                    synchronization algorithms in distributed network environments. Built for performance
-                    and extensibility, it supports large-scale experiments with real-time monitoring capabilities.
-                </p>
-            </section>
-
-            <div class="mediaSection">
-                <h3>System Architecture</h3>
-                <img
-                        src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 600'%3E%3Crect fill='%23252b42' width='1200' height='600'/%3E%3Ccircle cx='300' cy='300' r='60' fill='none' stroke='%237c5cff' stroke-width='3'/%3E%3Ccircle cx='600' cy='200' r='60' fill='none' stroke='%232dd4ff' stroke-width='3'/%3E%3Ccircle cx='900' cy='300' r='60' fill='none' stroke='%23a78bfa' stroke-width='3'/%3E%3Cline x1='360' y1='300' x2='540' y2='200' stroke='%239ba3b8' stroke-width='2' stroke-dasharray='5,5'/%3E%3Cline x1='660' y1='200' x2='840' y2='300' stroke='%239ba3b8' stroke-width='2' stroke-dasharray='5,5'/%3E%3Ctext x='50%25' y='90%25' text-anchor='middle' font-family='system-ui' font-size='24' fill='%239ba3b8'%3EDistributed Node Network%3C/text%3E%3C/svg%3E"
-                        alt="Simulation framework architecture diagram"
-                        loading="lazy"
-                >
-                <p class="smallText muted" style="margin-top: 0.5rem;">
-                    Distributed node architecture with stochastic synchronization
-                </p>
-            </div>
-
-            <section class="contentSection">
-                <h2>Problem</h2>
-                <p class="muted">
-                    Network clock synchronization is critical for distributed systems, but testing
-                    synchronization algorithms in real networks is costly and difficult to reproduce.
-                    Researchers need a controlled environment to evaluate stochastic methods under various
-                    network conditions and failure scenarios.
-                </p>
-            </section>
-
-            <section class="contentSection">
-                <h2>Solution</h2>
-                <p class="muted">
-                    I developed a C-based simulation framework that:
-                </p>
-                <ul>
-                    <li>Models distributed network nodes with configurable clock drift</li>
-                    <li>Implements multiple stochastic synchronization algorithms</li>
-                    <li>Simulates network delays, packet loss, and Byzantine failures</li>
-                    <li>Provides real-time performance metrics and visualization</li>
-                    <li>Supports large-scale experiments (1000+ nodes)</li>
-                </ul>
-            </section>
-
-            <section class="contentSection">
-                <h2>Technical Stack</h2>
-                <div class="techList">
-                    <span class="techItem">C</span>
-                    <span class="techItem">Makefiles</span>
-                    <span class="techItem">CMake</span>
-                    <span class="techItem">Git</span>
-                    <span class="techItem">Python (analysis)</span>
-                    <span class="techItem">gnuplot (visualization)</span>
+            <div class="projectMain">
+                <div class="tocBox">
+                    <h2>Dissertation Structure</h2>
+                    <p class="muted smallText">
+                        Instead of a gallery, this page mirrors the written dissertation in a cleaner web format.
+                    </p>
+                    <nav class="tocNav" aria-label="Dissertation chapters">
+                        <a href="#abstract" class="tocLink">Abstract</a>
+                        <a href="#chapter-1" class="tocLink">Chapter 1 - Introduction</a>
+                        <a href="#chapter-2" class="tocLink">Chapter 2 - State-of-the-Art</a>
+                        <a href="#chapter-3" class="tocLink">Chapter 3 - Framework Development</a>
+                        <a href="#chapter-4" class="tocLink">Chapter 4 - Bosch Case Study</a>
+                        <a href="#chapter-5" class="tocLink">Chapter 5 - Results</a>
+                        <a href="#chapter-6" class="tocLink">Chapter 6 - Conclusions</a>
+                        <a href="#resources" class="tocLink">Dissertation Materials</a>
+                    </nav>
                 </div>
-            </section>
 
-            <section class="contentSection">
-                <h2>Key Features</h2>
-                <h3>Stochastic Methods</h3>
-                <p class="muted">
-                    Implements probabilistic approaches to clock synchronization, allowing nodes to achieve
-                    consensus despite unreliable communication channels and Byzantine actors.
-                </p>
+                <section id="abstract" class="contentSection sectionCard">
+                    <h2>Abstract</h2>
+                    <p class="muted">
+                        The dissertation presents a simulation framework created to evaluate human-machine
+                        collaboration strategies in industrial assembly lines. It was designed to reproduce
+                        discrete-event production environments using real operational data from Bosch Security
+                        Systems, S.A.
+                    </p>
+                    <p class="muted">
+                        Two assembly lines were modeled as case studies, multiple scenarios were tested, key
+                        indicators such as throughput, utilization, value-added time, and cycle time were
+                        extracted, and a cost-benefit analysis was used to judge whether a cobot-based
+                        improvement made industrial sense.
+                    </p>
 
-                <h3>Performance Monitoring</h3>
-                <p class="muted">
-                    Real-time metrics track synchronization accuracy, convergence time, message overhead,
-                    and fault tolerance. Data exports enable detailed statistical analysis.
-                </p>
+                    <div class="metricsGrid">
+                        <div class="metricCard">
+                            <div class="metricValue grad">2</div>
+                            <div class="metricLabel">Modeled Lines</div>
+                            <p class="smallText muted">L05C and L05B were recreated inside the framework.</p>
+                        </div>
+                        <div class="metricCard">
+                            <div class="metricValue grad2">3</div>
+                            <div class="metricLabel">Key Scenarios</div>
+                            <p class="smallText muted">L05C, L05B, and the improved L05B/V2 proposal.</p>
+                        </div>
+                        <div class="metricCard">
+                            <div class="metricValue grad">25 h</div>
+                            <div class="metricLabel">Simulation Window</div>
+                            <p class="smallText muted">Runs were aligned with the Bosch monitoring campaign horizon.</p>
+                        </div>
+                        <div class="metricCard">
+                            <div class="metricValue grad2">73.26</div>
+                            <div class="metricLabel">Payback Days</div>
+                            <p class="smallText muted">Estimated payback time for the L05B/V2 implementation.</p>
+                        </div>
+                    </div>
+                </section>
 
-                <h3>Extensible Architecture</h3>
-                <p class="muted">
-                    Modular design allows researchers to plug in new synchronization algorithms, network
-                    models, and failure scenarios without modifying core framework code.
-                </p>
-            </section>
+                <section id="chapter-1" class="contentSection sectionCard">
+                    <h2>Chapter 1 - Introduction</h2>
+                    <p class="muted">
+                        The first chapter frames the dissertation around a real industrial problem: how to allocate
+                        tasks between people, machines, and collaborative robots in a way that improves output
+                        without sacrificing flexibility, usability, or decision quality.
+                    </p>
 
-            <section class="contentSection">
-                <h2>Results</h2>
-                <ul>
-                    <li>Enabled testing of novel synchronization algorithms at scale</li>
-                    <li>Reduced research iteration time through reproducible experiments</li>
-                    <li>Published findings in distributed systems research community</li>
-                    <li>Provided foundation for follow-up hardware implementations</li>
-                </ul>
-            </section>
+                    <div class="storyFlow">
+                        <div class="storyCard storyProblem">
+                            <div class="storyCardHeader">
+                                <span class="storyIcon" aria-hidden="true">C</span>
+                                <span class="storyTag">Context and Motivation</span>
+                            </div>
+                            <p class="muted">
+                                Bosch Ovar operates a large manufacturing environment where many assembly lines run in
+                                parallel. In that setting, balancing human flexibility with machine consistency is a
+                                real optimization challenge.
+                            </p>
+                            <ul class="muted">
+                                <li>Humans adapt well to variability and exceptions</li>
+                                <li>Machines and cobots excel at repetitive and demanding work</li>
+                                <li>A better mix can improve productivity and working conditions</li>
+                            </ul>
+                        </div>
 
-            <div class="projectLinks" style="margin-top: 3rem;">
-                <a href="https://github.com/yourusername/simulation-framework" class="btn primary" target="_blank" rel="noopener">
-                    View Source Code
-                </a>
-                <a href="index.html#projects" class="btn">
-                    ← Back to Projects
-                </a>
+                        <div class="storyCard storyIdea">
+                            <div class="storyCardHeader">
+                                <span class="storyIcon" aria-hidden="true">P</span>
+                                <span class="storyTag">Problem Statement</span>
+                            </div>
+                            <p class="muted">
+                                Existing simulation tools were too generic, too closed, or too cumbersome for rapid
+                                what-if analysis in a Bosch-like environment. Engineers needed a modular and practical
+                                decision-support tool they could use without rebuilding a whole model from scratch.
+                            </p>
+                            <ul class="muted">
+                                <li>Too much complexity for quick industrial testing</li>
+                                <li>Limited transparency in proprietary logic</li>
+                                <li>Weak support for hybrid human-machine-cobot lines</li>
+                            </ul>
+                        </div>
+
+                        <div class="storyCard storySolution">
+                            <div class="storyCardHeader">
+                                <span class="storyIcon" aria-hidden="true">O</span>
+                                <span class="storyTag">Main Objective</span>
+                            </div>
+                            <p class="muted">
+                                Develop a simulation-based decision-support framework that can model real assembly
+                                lines, validate them against factory data, compare alternative layouts, and support
+                                investment decisions around automation and cobots.
+                            </p>
+                            <ul class="muted">
+                                <li>Model real Bosch process flow and timing</li>
+                                <li>Run scenario-based evaluation</li>
+                                <li>Link operational gains to financial impact</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h3>Research Approach and Methodology</h3>
+                    <ol class="searchSteps">
+                        <li>Review literature on Industry 4.0, human-robot collaboration, digital twins, and simulation technologies.</li>
+                        <li>Develop a custom simulation framework tailored to hybrid assembly-line decision support.</li>
+                        <li>Collect Bosch data through observations, process documentation, and engineer feedback.</li>
+                        <li>Build and test baseline and improved scenarios using the same framework.</li>
+                        <li>Validate the models by comparing simulated output with real production indicators.</li>
+                        <li>Interpret the results in terms of bottlenecks, workload balance, and cost-benefit tradeoffs.</li>
+                    </ol>
+
+                    <h3>Core Objectives</h3>
+                    <div class="detailGrid detailGrid--threeColumn">
+                        <div class="detailCard">
+                            <div class="detailHeader">
+                                <div class="detailIcon">01</div>
+                                <h3>Process Mapping</h3>
+                            </div>
+                            <p class="muted smallText">Study the Bosch assembly line flow, task sequences, and operator distribution.</p>
+                        </div>
+                        <div class="detailCard">
+                            <div class="detailHeader">
+                                <div class="detailIcon">02</div>
+                                <h3>Framework Development</h3>
+                            </div>
+                            <p class="muted smallText">Create a modular and user-friendly simulation platform for industrial assembly scenarios.</p>
+                        </div>
+                        <div class="detailCard">
+                            <div class="detailHeader">
+                                <div class="detailIcon">03</div>
+                                <h3>Model Development</h3>
+                            </div>
+                            <p class="muted smallText">Translate a real Bosch line into a digital model that preserves logic, flow, and timing.</p>
+                        </div>
+                        <div class="detailCard">
+                            <div class="detailHeader">
+                                <div class="detailIcon">04</div>
+                                <h3>Model Validation</h3>
+                            </div>
+                            <p class="muted smallText">Compare simulation outputs with real throughput and cycle-time data from Bosch.</p>
+                        </div>
+                        <div class="detailCard">
+                            <div class="detailHeader">
+                                <div class="detailIcon">05</div>
+                                <h3>Scenario Evaluation</h3>
+                            </div>
+                            <p class="muted smallText">Test operator variations, cobot integration, and layout changes in a safe virtual environment.</p>
+                        </div>
+                        <div class="detailCard">
+                            <div class="detailHeader">
+                                <div class="detailIcon">06</div>
+                                <h3>Cost-Benefit Analysis</h3>
+                            </div>
+                            <p class="muted smallText">Judge proposed solutions not only by performance, but also by implementation cost and return.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="chapter-2" class="contentSection sectionCard">
+                    <h2>Chapter 2 - State-of-the-Art</h2>
+                    <p class="muted">
+                        The literature review places the project inside a broader technical context. It explains why
+                        hybrid manufacturing systems benefit from simulation, why collaborative robotics is relevant,
+                        and why open and configurable tooling matters for industrial experimentation.
+                    </p>
+
+                    <div class="architectureGrid">
+                        <div class="architectureCard">
+                            <div class="architectureIcon">I4</div>
+                            <h3>Industry 4.0</h3>
+                            <p class="muted smallText">Digitalization and data-driven planning are central to modern manufacturing improvement.</p>
+                        </div>
+                        <div class="architectureCard">
+                            <div class="architectureIcon">HR</div>
+                            <h3>Human-Robot Collaboration</h3>
+                            <p class="muted smallText">Cobots allow repetitive work to be automated while human operators keep flexibility and judgment.</p>
+                        </div>
+                        <div class="architectureCard">
+                            <div class="architectureIcon">DT</div>
+                            <h3>Digital Twin Thinking</h3>
+                            <p class="muted smallText">Virtual experimentation supports better planning even when full real-time synchronization is absent.</p>
+                        </div>
+                        <div class="architectureCard">
+                            <div class="architectureIcon">PM</div>
+                            <h3>Process Modeling</h3>
+                            <p class="muted smallText">Assembly systems can be represented as flows of resources, buffers, timings, and task dependencies.</p>
+                        </div>
+                        <div class="architectureCard">
+                            <div class="architectureIcon">SM</div>
+                            <h3>Simulation Tools</h3>
+                            <p class="muted smallText">The dissertation compares open and closed tools, with SimPy emerging as the most flexible base.</p>
+                        </div>
+                        <div class="architectureCard">
+                            <div class="architectureIcon">DS</div>
+                            <h3>Decision Support</h3>
+                            <p class="muted smallText">The real target is not simulation for its own sake, but better industrial decisions backed by data.</p>
+                        </div>
+                    </div>
+
+                    <div class="calloutBox calloutWarning" style="margin-top: 1.5rem;">
+                        <div class="calloutIcon">RG</div>
+                        <div>
+                            <h4>Research gap</h4>
+                            <p class="muted smallText">
+                                The dissertation identifies a gap between powerful commercial simulation suites and the
+                                needs of fast industrial what-if analysis. What was missing was a tool that combined
+                                operator allocation, manual and automatic tasks, buffers, and cobot scenarios in one
+                                open, transparent, and practical workflow.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="chapter-3" class="contentSection sectionCard">
+                    <h2>Chapter 3 - Development of the Simulation Framework</h2>
+                    <p class="muted">
+                        This chapter explains how the framework itself was designed and built. The aim was not only
+                        to create a simulation engine, but to create a framework that an engineer could actually use
+                        to construct, validate, run, and compare scenarios in a visual way.
+                    </p>
+
+                    <h3>Goals and Design Principles</h3>
+                    <div class="featureGrid">
+                        <div class="featureCard">
+                            <div class="featureIcon">MOD</div>
+                            <h3>Modularity</h3>
+                            <p class="muted smallText">Separate logic, interface, logging, and statistics so the framework can evolve cleanly.</p>
+                        </div>
+                        <div class="featureCard">
+                            <div class="featureIcon">VIS</div>
+                            <h3>Visual Construction</h3>
+                            <p class="muted smallText">Let users build assembly lines graphically instead of forcing code-first model creation.</p>
+                        </div>
+                        <div class="featureCard">
+                            <div class="featureIcon">VAL</div>
+                            <h3>Validation</h3>
+                            <p class="muted smallText">Check structural logic before runtime so incorrect models are caught early.</p>
+                        </div>
+                        <div class="featureCard">
+                            <div class="featureIcon">OSS</div>
+                            <h3>Open Foundation</h3>
+                            <p class="muted smallText">Retain full control over model behavior without license restrictions or hidden logic.</p>
+                        </div>
+                        <div class="featureCard">
+                            <div class="featureIcon">CFG</div>
+                            <h3>Configurability</h3>
+                            <p class="muted smallText">Make it easy to change operators, timings, buffers, routing, and cobot behavior.</p>
+                        </div>
+                    </div>
+
+                    <h3>Selected Toolchain</h3>
+                    <div class="toolsGrid">
+                        <div class="toolCard">
+                            <div class="toolIcon">PY</div>
+                            <h4>Python</h4>
+                            <p class="smallText muted">Chosen as the common language for the interface, logic, and analysis layers.</p>
+                        </div>
+                        <div class="toolCard">
+                            <div class="toolIcon">DES</div>
+                            <h4>SimPy</h4>
+                            <p class="smallText muted">Used as the discrete-event core for processes, resources, queues, and scheduling.</p>
+                        </div>
+                        <div class="toolCard">
+                            <div class="toolIcon">QT</div>
+                            <h4>PyQt5</h4>
+                            <p class="smallText muted">Used to create the graphical interface for model construction and parameter editing.</p>
+                        </div>
+                        <div class="toolCard">
+                            <div class="toolIcon">XLS</div>
+                            <h4>Excel-Oriented Data Flow</h4>
+                            <p class="smallText muted">Supports process-time import, log export, and easy post-run analysis in familiar tools.</p>
+                        </div>
+                    </div>
+
+                    <h3>How the Framework Works</h3>
+                    <div class="workflowTimeline">
+                        <div class="workflowStep">
+                            <div class="workflowIcon">01</div>
+                            <div class="workflowContent">
+                                <h4>Build the line visually</h4>
+                                <p class="muted smallText">Sources, processes, conveyors, buffers, operators, and targets are arranged on a 2D canvas.</p>
+                            </div>
+                            <div class="workflowNumber">01</div>
+                        </div>
+                        <div class="workflowStep">
+                            <div class="workflowIcon">02</div>
+                            <div class="workflowContent">
+                                <h4>Translate the drawing into logic</h4>
+                                <p class="muted smallText">The interface representation is converted into executable nodes, links, and parameters.</p>
+                            </div>
+                            <div class="workflowNumber">02</div>
+                        </div>
+                        <div class="workflowStep">
+                            <div class="workflowIcon">03</div>
+                            <div class="workflowContent">
+                                <h4>Validate the system</h4>
+                                <p class="muted smallText">The model is checked for sources, targets, valid paths, valid operators, and connectivity.</p>
+                            </div>
+                            <div class="workflowNumber">03</div>
+                        </div>
+                        <div class="workflowStep">
+                            <div class="workflowIcon">04</div>
+                            <div class="workflowContent">
+                                <h4>Run the discrete-event simulation</h4>
+                                <p class="muted smallText">Each piece becomes a process that competes for resources and moves through the system over time.</p>
+                            </div>
+                            <div class="workflowNumber">04</div>
+                        </div>
+                        <div class="workflowStep">
+                            <div class="workflowIcon">05</div>
+                            <div class="workflowContent">
+                                <h4>Log events and outputs</h4>
+                                <p class="muted smallText">Piece flow and operator activity are recorded to support KPI calculation and later inspection.</p>
+                            </div>
+                            <div class="workflowNumber">05</div>
+                        </div>
+                        <div class="workflowStep">
+                            <div class="workflowIcon">06</div>
+                            <div class="workflowContent">
+                                <h4>Compare scenarios</h4>
+                                <p class="muted smallText">Operational and financial indicators are used to evaluate tradeoffs between competing solutions.</p>
+                            </div>
+                            <div class="workflowNumber">06</div>
+                        </div>
+                    </div>
+
+                    <h3>Implementation Highlights</h3>
+                    <div class="detailGrid">
+                        <div class="detailCard">
+                            <div class="detailHeader">
+                                <div class="detailIcon">UI</div>
+                                <h3>Graphical User Interface</h3>
+                            </div>
+                            <p class="muted smallText">
+                                The Qt-based interface includes the main window, file controls, a canvas, an element
+                                palette, add/edit dialogs, validation feedback, and runtime parameters for each scenario.
+                            </p>
+                        </div>
+                        <div class="detailCard">
+                            <div class="detailHeader">
+                                <div class="detailIcon">KP</div>
+                                <h3>Output Metrics and Logging</h3>
+                            </div>
+                            <p class="muted smallText">
+                                The framework records piece logs and operator logs, then derives metrics such as
+                                throughput, station cycle time, hold time, rejection rates, and economic return.
+                            </p>
+                        </div>
+                        <div class="detailCard">
+                            <div class="detailHeader">
+                                <div class="detailIcon">LM</div>
+                                <h3>Known Limitations</h3>
+                            </div>
+                            <p class="muted smallText">
+                                Operator behavior is simplified, cobot behavior is modeled rather than fully validated,
+                                ergonomic aspects are not simulated, and the framework is not yet a live digital twin.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="chapter-4" class="contentSection sectionCard">
+                    <h2>Chapter 4 - Case Study: Bosch Assembly Lines</h2>
+                    <p class="muted">
+                        The framework was validated and demonstrated through a Bosch case study centered on the
+                        Avenar fire detector assembly process. This chapter moves the work from framework design
+                        into a concrete industrial application.
+                    </p>
+
+                    <div class="detailGrid detailGrid--threeColumn">
+                        <div class="detailCard">
+                            <div class="detailHeader">
+                                <div class="detailIcon">BC</div>
+                                <h3>Company Context</h3>
+                            </div>
+                            <p class="muted smallText">
+                                Bosch Security Systems, S.A. in Ovar provided the production environment, process
+                                knowledge, and operational data that grounded the case study.
+                            </p>
+                        </div>
+                        <div class="detailCard">
+                            <div class="detailHeader">
+                                <div class="detailIcon">PD</div>
+                                <h3>Product Overview</h3>
+                            </div>
+                            <p class="muted smallText">
+                                The analyzed lines assemble the Avenar fire detector, a product that combines
+                                mechanical, electronic, and testing operations.
+                            </p>
+                        </div>
+                        <div class="detailCard">
+                            <div class="detailHeader">
+                                <div class="detailIcon">DA</div>
+                                <h3>Modeling Inputs</h3>
+                            </div>
+                            <p class="muted smallText">
+                                The lines were modeled from Bosch Excel datasets, shop-floor observation, and feedback
+                                from engineers and operators.
+                            </p>
+                        </div>
+                        <div class="detailCard">
+                            <div class="detailHeader">
+                                <div class="detailIcon">OP</div>
+                                <h3>Operator Modeling</h3>
+                            </div>
+                            <p class="muted smallText">
+                                Operators were treated as resources with dynamic availability and cost, linked to
+                                manual or assisted tasks inside each station group.
+                            </p>
+                        </div>
+                        <div class="detailCard">
+                            <div class="detailHeader">
+                                <div class="detailIcon">L05C</div>
+                                <h3>L05C</h3>
+                            </div>
+                            <p class="muted smallText">
+                                The more automated reference line, with four operators and a more balanced structure.
+                            </p>
+                        </div>
+                        <div class="detailCard">
+                            <div class="detailHeader">
+                                <div class="detailIcon">L05B</div>
+                                <h3>L05B</h3>
+                            </div>
+                            <p class="muted smallText">
+                                The more manual baseline line, with three operators and heavier dependence on buffers.
+                            </p>
+                        </div>
+                    </div>
+
+                    <h3>Modeled Line Comparison</h3>
+                    <div class="tableWrapper">
+                        <table class="comparisonTable">
+                            <thead>
+                            <tr>
+                                <th>Line</th>
+                                <th>Operators</th>
+                                <th>Structure</th>
+                                <th>Automation Profile</th>
+                                <th>Role in the Dissertation</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>L05C</td>
+                                <td>4</td>
+                                <td>Includes parallel middle branches</td>
+                                <td>More automated</td>
+                                <td>Reference line used for validation and comparison.</td>
+                            </tr>
+                            <tr>
+                                <td>L05B</td>
+                                <td>3</td>
+                                <td>Linear flow with stronger manual dependence</td>
+                                <td>More manual</td>
+                                <td>Baseline line used to identify bottlenecks and test improvement ideas.</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <h3>Modeling Workflow</h3>
+                    <div class="processSteps">
+                        <div class="processStep">
+                            <div class="stepNumber">1</div>
+                            <h4>Observe</h4>
+                            <p class="smallText muted">Study the real shop-floor flow and station responsibilities.</p>
+                        </div>
+                        <div class="processStep">
+                            <div class="stepNumber">2</div>
+                            <h4>Map</h4>
+                            <p class="smallText muted">Create conceptual diagrams for the line structure and process order.</p>
+                        </div>
+                        <div class="processStep">
+                            <div class="stepNumber">3</div>
+                            <h4>Parameterize</h4>
+                            <p class="smallText muted">Assign task times from Bosch datasets and fit the simulation inputs.</p>
+                        </div>
+                        <div class="processStep">
+                            <div class="stepNumber">4</div>
+                            <h4>Implement</h4>
+                            <p class="smallText muted">Recreate the line inside the framework using modular simulation entities.</p>
+                        </div>
+                        <div class="processStep">
+                            <div class="stepNumber">5</div>
+                            <h4>Configure</h4>
+                            <p class="smallText muted">Run every scenario over a common 25-hour simulated period for fair comparison.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="chapter-5" class="contentSection sectionCard">
+                    <h2>Chapter 5 - Results and Evaluation</h2>
+                    <p class="muted">
+                        This chapter compares baseline and improved scenarios using operational and financial
+                        indicators. It first validates the model against real Bosch data, then uses the validated
+                        framework to explore a cobot-based improvement for L05B.
+                    </p>
+
+                    <div class="tableWrapper">
+                        <table class="comparisonTable">
+                            <thead>
+                            <tr>
+                                <th>Scenario</th>
+                                <th>Completed Pieces</th>
+                                <th>Throughput</th>
+                                <th>CTmed</th>
+                                <th>Key Reading</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>L05C</td>
+                                <td>3962</td>
+                                <td>158.48 pcs/h</td>
+                                <td>22.72 s</td>
+                                <td>Close to real Bosch data and strong enough to validate the model.</td>
+                            </tr>
+                            <tr>
+                                <td>L05B</td>
+                                <td>2589</td>
+                                <td>103.56 pcs/h</td>
+                                <td>34.76 s</td>
+                                <td>Large waiting times in the middle and workstation buffers exposed a structural imbalance.</td>
+                            </tr>
+                            <tr>
+                                <td class="highlight">L05B/V2</td>
+                                <td class="highlight">3085</td>
+                                <td class="highlight">123.40 pcs/h</td>
+                                <td class="highlight">29.17 s</td>
+                                <td>Targeted cobot integration improved throughput and reduced cycle time.</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="metricsGrid" style="margin-top: 1.5rem;">
+                        <div class="metricCard">
+                            <div class="metricValue grad">5.4%</div>
+                            <div class="metricLabel">L05C Deviation</div>
+                            <p class="smallText muted">The automated reference line stayed close to the real measured output.</p>
+                        </div>
+                        <div class="metricCard">
+                            <div class="metricValue grad2">9%</div>
+                            <div class="metricLabel">L05B Deviation</div>
+                            <p class="smallText muted">The manual line showed a slightly larger deviation, which is reasonable given human variability.</p>
+                        </div>
+                        <div class="metricCard">
+                            <div class="metricValue grad">+19%</div>
+                            <div class="metricLabel">Throughput Improvement</div>
+                            <p class="smallText muted">L05B/V2 raised throughput from 103.56 to 123.40 pieces per hour.</p>
+                        </div>
+                        <div class="metricCard">
+                            <div class="metricValue grad2">-5.59 s</div>
+                            <div class="metricLabel">Cycle-Time Reduction</div>
+                            <p class="smallText muted">The proposed solution reduced CTmed from 34.76 s to 29.17 s.</p>
+                        </div>
+                    </div>
+
+                    <div class="projectStory">
+                        <div class="storyPhase storyPhase--challenge">
+                            <div class="storyPhaseContent">
+                                <div class="storyPhaseLabel">L05C Validation</div>
+                                <h3>Reference Model Confirmed</h3>
+                                <p class="muted">
+                                    The L05C model reproduced the behavior of the real automated line closely enough to
+                                    establish credibility for the framework.
+                                </p>
+                                <ul class="storyPhaseList">
+                                    <li>158.48 pcs/h simulated throughput</li>
+                                    <li>22.72 s cycle time</li>
+                                    <li>Useful as a trusted comparison baseline</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="storyPhase storyPhase--vision">
+                            <div class="storyPhaseContent">
+                                <div class="storyPhaseLabel">L05B Baseline</div>
+                                <h3>Bottlenecks Became Visible</h3>
+                                <p class="muted">
+                                    The manual line revealed the real issue clearly: excessive waiting time in the
+                                    middle buffer and weak synchronization between stages.
+                                </p>
+                                <ul class="storyPhaseList">
+                                    <li>Middle buffer average time of 1970.46 s</li>
+                                    <li>Workstation buffer average time of 678.34 s</li>
+                                    <li>Manual line flow was structurally unbalanced</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="storyPhase storyPhase--result">
+                            <div class="storyPhaseContent">
+                                <div class="storyPhaseLabel">L05B/V2 Solution</div>
+                                <h3>Cobot Integration Paid Off</h3>
+                                <p class="muted">
+                                    The improved solution automated the sensitivity test, welding, and standby test
+                                    sequence and also reassigned soldering responsibility to balance operator workload.
+                                </p>
+                                <ul class="storyPhaseList">
+                                    <li>3085 completed pieces in 25 hours</li>
+                                    <li>Extra 484 pieces in equal working time</li>
+                                    <li>Estimated payback time of 73.26 working days</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="calloutBox calloutTakeaway" style="margin-top: 1.5rem;">
+                        <div class="calloutIcon">ROI</div>
+                        <div>
+                            <h4>Main takeaway</h4>
+                            <p class="muted smallText">
+                                The strongest result of the dissertation is not only the improved scenario itself, but
+                                the fact that the improvement can be justified with data before touching the real line.
+                                The framework turns layout and automation discussions into measurable decisions.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="chapter-6" class="contentSection sectionCard">
+                    <h2>Chapter 6 - Conclusions and Future Work</h2>
+                    <p class="muted">
+                        The final chapter reflects on what the framework achieved, where it still falls short, and
+                        how it could evolve from a proof-of-concept decision-support system into a stronger planning
+                        and digital-twin foundation.
+                    </p>
+
+                    <h3>Critical Assessment of the Framework</h3>
+                    <div class="detailGrid">
+                        <div class="detailCard">
+                            <div class="detailHeader">
+                                <div class="detailIcon">AG</div>
+                                <h3>Configurational Agility</h3>
+                            </div>
+                            <p class="muted smallText">
+                                Alternative layouts and task reallocations can be instantiated quickly, which is a major
+                                practical strength for scenario testing.
+                            </p>
+                        </div>
+                        <div class="detailCard">
+                            <div class="detailHeader">
+                                <div class="detailIcon">EF</div>
+                                <h3>Computational Efficiency</h3>
+                            </div>
+                            <p class="muted smallText">
+                                The discrete-event approach compresses long periods of physical production into fast
+                                computational experiments.
+                            </p>
+                        </div>
+                        <div class="detailCard">
+                            <div class="detailHeader">
+                                <div class="detailIcon">TR</div>
+                                <h3>Analytical Transparency</h3>
+                            </div>
+                            <p class="muted smallText">
+                                Detailed logs make the simulation inspectable, but built-in visualization and reporting
+                                are still limited.
+                            </p>
+                        </div>
+                        <div class="detailCard">
+                            <div class="detailHeader">
+                                <div class="detailIcon">LM</div>
+                                <h3>Current Limits</h3>
+                            </div>
+                            <p class="muted smallText">
+                                Ergonomics, operator fatigue, richer buffer logic, and live factory synchronization are
+                                not yet part of the framework.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="calloutBox calloutInfo" style="margin-top: 1.5rem;">
+                        <div class="calloutIcon">OBJ</div>
+                        <div>
+                            <h4>Alignment with the dissertation objectives</h4>
+                            <p class="muted smallText">
+                                According to the dissertation, all core objectives were addressed except the final step
+                                of producing more detailed optimization recommendations for the current Bosch processes.
+                                Time constraints limited that final layer, but the framework and results now provide the
+                                basis needed for it.
+                            </p>
+                        </div>
+                    </div>
+
+                    <h3>Future Work</h3>
+                    <div class="tipsGrid">
+                        <div class="tipsCard">
+                            <div class="tipsIcon">1</div>
+                            <div>
+                                <h4>Broadened resource modeling</h4>
+                                <p class="muted smallText">Add more machine types, richer buffer behavior, more cobot profiles, and ergonomic factors.</p>
+                            </div>
+                        </div>
+                        <div class="tipsCard">
+                            <div class="tipsIcon">2</div>
+                            <div>
+                                <h4>Automated analytics</h4>
+                                <p class="muted smallText">Generate dashboards, utilization heatmaps, and better built-in reporting directly from each run.</p>
+                            </div>
+                        </div>
+                        <div class="tipsCard">
+                            <div class="tipsIcon">3</div>
+                            <div>
+                                <h4>Empirical expansion</h4>
+                                <p class="muted smallText">Validate more use cases, more lines, and more production contexts to strengthen reliability.</p>
+                            </div>
+                        </div>
+                        <div class="tipsCard">
+                            <div class="tipsIcon">4</div>
+                            <div>
+                                <h4>Pathway to a digital twin</h4>
+                                <p class="muted smallText">Connect the framework to live production data and ongoing calibration for real-time decision support.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="resources" class="contentSection sectionCard ctaSection">
+                    <h2>Dissertation Materials</h2>
+                    <p class="muted">
+                        The full written dissertation remains the main source for the complete architecture,
+                        methodology, and case-study detail. This page is the cleaner web summary of that work.
+                    </p>
+                    <div class="projectLinks">
+                        <a href="assets/img/tese/Tese.pdf" class="btn primary" target="_blank" rel="noopener">
+                            Read the Full Dissertation
+                        </a>
+                        <a href="index.html#projects" class="btn secondary">
+                            &larr; Back to Projects
+                        </a>
+                    </div>
+                </section>
             </div>
         </div>
     </article>
+
     <div id="siteFooter" class="siteFooter"></div>
 </div>
 

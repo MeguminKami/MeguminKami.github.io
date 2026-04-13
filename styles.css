@@ -5028,3 +5028,103 @@ body.light .ledWebsiteEmbed:hover {
 body.light .websiteFrame {
     background: #ffffff;
 }
+
+.simulationProject .projectContent {
+    max-width: 1100px;
+}
+
+.simulationProject .projectMain {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.simulationProject .contentSection {
+    margin-bottom: 0;
+}
+
+.simulationProject .sectionCard {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    box-shadow: var(--shadow-sm);
+}
+
+.simulationMediaGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    margin-top: 1.25rem;
+}
+
+.simulationMediaGrid--three {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+@media (max-width: 1024px) {
+    .simulationMediaGrid--three {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 640px) {
+    .simulationMediaGrid--three {
+        grid-template-columns: 1fr;
+    }
+}
+
+.simulationMediaCard {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.simulationMediaCard .galleryImage {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.simulationMediaCard .galleryImage:hover {
+    transform: scale(1.01);
+    box-shadow: var(--shadow-sm);
+}
+
+.thesisProject .projectHeader .smallText {
+    max-width: 72ch;
+}
+
+.thesisProject .quickFacts {
+    margin-bottom: 1.25rem;
+}
+
+.thesisProject .metricsGrid,
+.thesisProject .detailGrid,
+.thesisProject .architectureGrid,
+.thesisProject .featureGrid,
+.thesisProject .toolsGrid,
+.thesisProject .projectStory,
+.thesisProject .tipsGrid,
+.thesisProject .processSteps,
+.thesisProject .workflowTimeline {
+    margin-top: 1.5rem;
+}
+
+.thesisProject .searchSteps {
+    margin-top: 1.25rem;
+}
+
+.thesisProject .comparisonTable th,
+.thesisProject .comparisonTable td {
+    vertical-align: top;
+}
+
+.thesisProject .calloutBox {
+    margin-top: 1.5rem;
+}
