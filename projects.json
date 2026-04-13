@@ -53,27 +53,27 @@
     },
     {
       "title": "Simulation Framework",
-      "badge": "Python Project",
-      "status": "incomplete",
+      "badge": "Master Thesis App",
+      "status": "complete",
       "latestUpdate": "2026-01-15",
-      "description": "Work developed as part of my Master's thesis, focusing on building a discrete event simulation framework that integrates real data for testing various scenarios.",
+      "description": "Python desktop app from my Master's thesis at Bosch Ovar for modeling assembly lines, importing real timings, validating layouts, and running discrete-event simulations.",
       "bullets": [
-        "Discrete event simulation engine",
-        "Real data integration",
-        "what-if scenario testing with statistical analysis"
+        "Visual line builder with operators, conveyors, buffers, and stations",
+        "Spreadsheet-driven timing import plus simulation parameter setup",
+        "Validation, logs, KPI dashboard, and financial analysis in one tool"
       ],
-      "tags": ["Python", "System Modeling", "Simulation"],
+      "tags": ["Python", "Qt", "Simulation", "Industrial Engineering"],
       "tagsData": ["python"],
       "viewHref": "project-simulation-framework.html",
       "cover": {
-        "ariaLabel": "Simulation Framework cover",
-        "image": ""
+        "ariaLabel": "Simulation framework application window",
+        "image": "assets/img/tese/fullwindow.png"
       },
       "modal": {
         "title": "Simulation Framework",
-        "sub": "Master Thesis Python Project",
-        "desc": "Work developed as part of my Master's thesis, focusing on building a discrete event simulation framework that integrates real data for testing various scenarios.",
-        "img": ""
+        "sub": "Master Thesis Simulation App",
+        "desc": "Python desktop app from my Master's thesis at Bosch Ovar for building production-line models, importing real timings, validating system layouts, and running discrete-event simulations with logs and dashboards.",
+        "img": "assets/img/tese/fullwindow.png"
       }
     },
 
