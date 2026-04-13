@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="description"
+        content="Djabusabi static account demo with login, signup and editable profile forms."
+    >
+    <title>Djabusabi - Conta</title>
+    <link rel="icon" href="../dbs_php/assets/logos/logo_vigo.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Manrope:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body data-page="account">
+<div class="backgroundOrbs" aria-hidden="true">
+    <span class="orb orbA"></span>
+    <span class="orb orbB"></span>
+    <span class="orb orbC"></span>
+</div>
+
+<div class="siteShell">
+    <header id="siteHeader"></header>
+
+    <main class="pageWrap">
+        <section class="pageIntro">
+            <div>
+                <span class="eyebrow">Conta demo</span>
+                <h1>Autenticação e dados pessoais, agora só com JavaScript.</h1>
+                <p class="pageLead">
+                    O comportamento de login, registo, perfil, morada e password foi convertido para um fluxo local no
+                    browser para continuar demonstrável em hosting estático.
+                </p>
+            </div>
+            <div class="introBadgeGroup">
+                <span class="pillTag">Login demo</span>
+                <span class="pillTag">Registo local</span>
+                <span class="pillTag">Persistência no browser</span>
+            </div>
+        </section>
+
+        <section id="accountRoot" class="accountRoot"></section>
+    </main>
+
+    <footer id="siteFooter"></footer>
+</div>
+
+<div id="toast" class="toast" aria-live="polite" aria-atomic="true"></div>
+</body>
+</html>

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="description"
+        content="DBS Item Shop - original PHP/MySQL course project with a new static HTML, CSS and JavaScript rebuild for GitHub Pages."
+    >
+    <title>DBS Item Shop - Project</title>
+    <link rel="icon" type="image/png" href="partials/dbs_php/assets/logos/logo_vigo.png">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="bgGlow"></div>
+
+<div class="wrap">
+    <div id="siteHeader" class="siteHeader"></div>
+
+    <a href="index.html#projects" class="backLink">
+        &larr; Back to Projects
+    </a>
+
+    <article class="projectArticle">
+        <header class="projectHeader">
+            <h1 class="projectTitle">
+                <img
+                    src="partials/dbs_php/assets/logos/logo.png"
+                    alt=""
+                    class="projectTitleIcon"
+                    aria-hidden="true"
+                    loading="eager"
+                >
+                DBS Item Shop
+            </h1>
+            <p class="lead">
+                DBS Item Shop started as a university PHP/MySQL storefront with authentication, product filtering,
+                account management, and an admin area. This portfolio version now includes a static rebuild in
+                HTML, CSS, and JavaScript so the project can be opened directly on GitHub Pages without any backend.
+            </p>
+
+            <div class="quickFacts">
+                <div class="factItem">
+                    <span class="factLabel">Latest Update</span>
+                    <span class="factValue" data-project-latest-update>2026-04-14</span>
+                </div>
+                <div class="factItem">
+                    <span class="factLabel">Original Stack</span>
+                    <span class="factValue">PHP + PostgreSQL</span>
+                </div>
+                <div class="factItem">
+                    <span class="factLabel">Static Rebuild</span>
+                    <span class="factValue">HTML + CSS + JS</span>
+                </div>
+                <div class="factItem">
+                    <span class="factLabel">Status</span>
+                    <span class="factValue grad">Complete</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="projectContent">
+            <div class="projectMain">
+                <section class="contentSection sectionCard">
+                    <h2>Overview</h2>
+                    <p class="muted">
+                        The original course project implemented a branded online shop with user accounts, product
+                        browsing, server-side forms, and role-based administration. That backend version cannot run on
+                        GitHub Pages, so this portfolio now ships with a browser-only demo that preserves the core
+                        storefront experience while moving data and session state into <code>localStorage</code>.
+                    </p>
+
+                    <div class="metricsGrid">
+                        <div class="metricCard">
+                            <div class="metricValue grad2">4</div>
+                            <div class="metricLabel">Static Pages</div>
+                            <p class="smallText muted">Home, store, account, and admin now run without server code.</p>
+                        </div>
+                        <div class="metricCard">
+                            <div class="metricValue grad">6</div>
+                            <div class="metricLabel">Seed Products</div>
+                            <p class="smallText muted">Local mock catalog data powers the storefront and admin view.</p>
+                        </div>
+                        <div class="metricCard">
+                            <div class="metricValue grad2">2</div>
+                            <div class="metricLabel">Demo Accounts</div>
+                            <p class="smallText muted">Client and admin credentials are preloaded for quick testing.</p>
+                        </div>
+                        <div class="metricCard">
+                            <div class="metricValue grad">0</div>
+                            <div class="metricLabel">Backend Dependencies</div>
+                            <p class="smallText muted">No PHP runtime, database, or server session support required.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="contentSection sectionCard">
+                    <h2>Technical Stack</h2>
+                    <div class="techList">
+                        <span class="techItem">PHP</span>
+                        <span class="techItem">PostgreSQL</span>
+                        <span class="techItem">HTML</span>
+                        <span class="techItem">CSS</span>
+                        <span class="techItem">JavaScript</span>
+                        <span class="techItem">localStorage</span>
+                        <span class="techItem">GitHub Pages</span>
+                    </div>
+                </section>
+
+                <section class="contentSection sectionCard storySection">
+                    <div class="storyFlow">
+                        <div class="storyCard storyProblem">
+                            <div class="storyCardHeader">
+                                <span class="storyIcon" aria-hidden="true">&#x26A0;</span>
+                                <span class="storyTag">Problem</span>
+                            </div>
+                            <p class="muted">
+                                The original website depends on PHP includes, session handling, and database queries, so
+                                it cannot be deployed as-is on a static host like GitHub Pages.
+                            </p>
+                        </div>
+
+                        <div class="storyCard storyIdea">
+                            <div class="storyCardHeader">
+                                <span class="storyIcon" aria-hidden="true">&#x1F4A1;</span>
+                                <span class="storyTag">Approach</span>
+                            </div>
+                            <p class="muted">
+                                Rebuild the interactive parts with reusable frontend state: seeded products, seeded
+                                users, cart persistence, login flows, and an admin dashboard that edits local demo data.
+                            </p>
+                        </div>
+
+                        <div class="storyCard storySolution">
+                            <div class="storyCardHeader">
+                                <span class="storyIcon" aria-hidden="true">&#x2705;</span>
+                                <span class="storyTag">Result</span>
+                            </div>
+                            <p class="muted">
+                                A self-contained static website that still demonstrates the original project structure,
+                                branding, and user journeys while remaining deployable from this portfolio repo.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="contentSection sectionCard">
+                    <h2>What The Static Version Preserves</h2>
+                    <div class="detailGrid">
+                        <div class="detailCard">
+                            <div class="detailHeader">
+                                <div class="detailIcon">&#x1F6D2;</div>
+                                <h3>Catalog Flow</h3>
+                            </div>
+                            <p class="smallText muted">
+                                Category filters, availability filters, sorting, and a cart drawer remain part of the experience.
+                            </p>
+                        </div>
+                        <div class="detailCard">
+                            <div class="detailHeader">
+                                <div class="detailIcon">&#x1F464;</div>
+                                <h3>Account Area</h3>
+                            </div>
+                            <p class="smallText muted">
+                                Login, signup, profile edits, address updates, and password changes now run entirely in-browser.
+                            </p>
+                        </div>
+                        <div class="detailCard">
+                            <div class="detailHeader">
+                                <div class="detailIcon">&#x2699;</div>
+                                <h3>Admin Tools</h3>
+                            </div>
+                            <p class="smallText muted">
+                                Products and users can be added, edited, and removed with local persistence for demo purposes.
+                            </p>
+                        </div>
+                        <div class="detailCard">
+                            <div class="detailHeader">
+                                <div class="detailIcon">&#x1F5C3;</div>
+                                <h3>Original Assets</h3>
+                            </div>
+                            <p class="smallText muted">
+                                The static rebuild reuses the original Djabusabi logos, icons, and image assets from the PHP project.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="contentSection sectionCard">
+                    <h2>Static Web Demo</h2>
+                    <p class="muted">
+                        The iframe below loads the new GitHub Pages friendly version built in
+                        <code>partials/dbs-website</code>.
+                    </p>
+
+                    <div class="ledWebsiteEmbed ledWebsiteEmbed--main">
+                        <div class="embedHeader">
+                            <a href="partials/dbs-website/index.html" class="embedBadge" target="_blank" rel="noopener">
+                                Open Static Demo
+                            </a>
+                        </div>
+                        <iframe
+                            src="partials/dbs-website/index.html"
+                            class="websiteFrame"
+                            title="DBS Item Shop static website demo"
+                            loading="lazy"
+                        ></iframe>
+                    </div>
+                </section>
+
+                <section class="contentSection sectionCard ctaSection">
+                    <h2>Project Links</h2>
+                    <p class="muted smallText">Open the static rebuild, download the report, or head back to the project list.</p>
+                    <div class="projectLinks">
+                        <a href="partials/dbs-website/index.html" class="btn primary" target="_blank" rel="noopener">
+                            Open Static Demo
+                        </a>
+                        <a href="partials/dbs_php/sie-ex3-report.pdf" class="btn" target="_blank" rel="noopener">
+                            Download Report
+                        </a>
+                        <a href="index.html#projects" class="btn secondary">
+                            &larr; Back to Projects
+                        </a>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </article>
+
+    <div id="siteFooter" class="siteFooter"></div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

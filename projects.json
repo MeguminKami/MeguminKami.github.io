@@ -182,21 +182,21 @@
     },
     {
       "title": "DBS Item Shop",
-      "badge": "Full Stack Website",
+      "badge": "PHP + Static Demo",
       "status": "complete",
-      "latestUpdate": "2025-08-12",
-      "description": "A online item shop developed for a Master's course. Implements user accounts, shopping cart and checkout flows, an admin area for product/user management, and multiple payment method integrations.",
+      "latestUpdate": "2026-04-14",
+      "description": "Course storefront originally built in PHP and now rebuilt as a static GitHub Pages demo with local account, cart, and admin flows.",
       "bullets": [
-        "Full-stack PHP site with session-based auth, user profile management, shopping cart and order history",
-        "Admin panel for product and user management plus store endpoints for checkout and payment selection (MB Way, PayPal, Multibanco, etc.)",
-        "Server-side validation, templated includes (header/footer/head), and responsive UI for browsing and purchasing items"
+        "Original PHP/PostgreSQL project with auth, profile management, product browsing, and admin CRUD",
+        "New static HTML/CSS/JS rebuild keeps the storefront, account, cart, and admin experience working on GitHub Pages",
+        "Browser-side demo state uses localStorage for seeded users, products, login state, and cart persistence"
       ],
-      "tags": ["PHP", "JavaScript", "MySQL"],
+      "tags": ["PHP", "JavaScript", "HTML/CSS", "Static Demo"],
       "tagsData": ["php","js"],
       "viewHref": "project-dbs-item-shop.html",
       "cover": {
-        "ariaLabel": "Store product page",
-        "image": ""
+        "ariaLabel": "DBS Item Shop landing page preview",
+        "image": "partials/dbs_php/assets/images/mainpage-image1.jpg"
       },
       "modal": {
         "title": "DBS Item Shop",

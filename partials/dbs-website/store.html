@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="description"
+        content="Static Djabusabi store demo with filters, sorting and local cart state."
+    >
+    <title>Djabusabi - Loja</title>
+    <link rel="icon" href="../dbs_php/assets/logos/logo_vigo.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Manrope:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body data-page="store">
+<div class="backgroundOrbs" aria-hidden="true">
+    <span class="orb orbA"></span>
+    <span class="orb orbB"></span>
+    <span class="orb orbC"></span>
+</div>
+
+<div class="siteShell">
+    <header id="siteHeader"></header>
+
+    <main class="pageWrap">
+        <section class="pageIntro">
+            <div>
+                <span class="eyebrow">Loja demo</span>
+                <h1>Catálogo estático com filtros, ordenação e carrinho.</h1>
+                <p class="pageLead">
+                    Esta página substitui as queries PHP por renderização no browser, mantendo a lógica de filtros,
+                    disponibilidade e ordenação do projeto original.
+                </p>
+            </div>
+            <div class="introBadgeGroup">
+                <span class="pillTag">Sem backend</span>
+                <span class="pillTag">Carrinho persistente</span>
+                <span class="pillTag">GitHub Pages ready</span>
+            </div>
+        </section>
+
+        <section class="storeToolbar">
+            <div class="toolbarLeft">
+                <button type="button" id="toggleFiltersBtn" class="btn btnGhost btnSmall">Mostrar filtros</button>
+                <button type="button" id="clearFiltersBtn" class="btn btnGhost btnSmall">Limpar filtros</button>
+                <span class="toolbarResult" id="storeResultCount">0 resultados</span>
+            </div>
+            <label class="toolbarOrder">
+                <span>Ordenar por</span>
+                <select id="orderSelect"></select>
+            </label>
+        </section>
+
+        <section class="storeLayout">
+            <aside id="storeFilters" class="panel filtersPanel"></aside>
+            <div class="storeMainColumn">
+                <div id="storeProducts" class="productGrid"></div>
+            </div>
+            <aside id="storeCart" class="panel cartPanel"></aside>
+        </section>
+    </main>
+
+    <footer id="siteFooter"></footer>
+</div>
+
+<div id="toast" class="toast" aria-live="polite" aria-atomic="true"></div>
+</body>
+</html>

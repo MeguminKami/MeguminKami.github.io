@@ -1,0 +1,38 @@
+.error-message{
+    background-color: transparent;
+    font-size: 13px;
+    color: palevioletred;
+    font-weight: bold;
+    opacity: 100%;
+    padding-bottom: 10px;
+}
+
+.success-message{
+    background-color: transparent;
+    font-size: 13px;
+    color: lightgreen;
+    font-weight: bold;
+    opacity: 100%;
+    padding-bottom: 10px;
+}
+
+.available {
+    color: lightgreen;
+    font-size: 14px;
+}
+
+.lastunits {
+    color: darkorange;
+    opacity: 50%;
+    font-size: 14px;
+}
+
+.unavailable {
+    color: lightcoral;
+    font-size: 14px;
+}
+
+.soonavailable {
+    color: lightskyblue;
+    font-size: 14px;
+}

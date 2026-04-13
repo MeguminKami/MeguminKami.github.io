@@ -5128,3 +5128,202 @@ body.light .websiteFrame {
 .thesisProject .calloutBox {
     margin-top: 1.5rem;
 }
+
+.thesisProject .thesisSubheading {
+    margin: 1.85rem 0 0.95rem;
+    font-size: 1.125rem;
+    line-height: 1.2;
+}
+
+.thesisProject .thesisMediaCanvas {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    min-height: 220px;
+}
+
+.thesisProject .thesisMediaCanvas--wide {
+    min-height: 340px;
+    padding: 1.2rem;
+}
+
+.thesisProject .thesisMediaCanvas--white {
+    background: #ffffff;
+}
+
+.thesisProject .thesisMediaCanvas img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 560px;
+    object-fit: contain;
+}
+
+.thesisProject .simulationMediaCard .galleryImage {
+    aspect-ratio: auto;
+    height: auto;
+    object-fit: contain;
+    border: none;
+    box-shadow: none;
+}
+
+.thesisProject .simulationMediaCard .galleryImage:hover {
+    transform: scale(1.01);
+    box-shadow: none;
+}
+
+.thesisProject .thesisFigureCaption {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 0.875rem;
+    line-height: 1.6;
+}
+
+.thesisProject .introSpotlight {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.95fr);
+    gap: 1.1rem;
+    padding: 1.35rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background:
+        radial-gradient(circle at top right, rgba(45, 212, 255, 0.14), transparent 34%),
+        linear-gradient(180deg, rgba(124, 92, 255, 0.08), transparent 65%),
+        var(--surface-2);
+    box-shadow: var(--shadow-sm);
+}
+
+.thesisProject .introEyebrow {
+    margin: 0 0 0.5rem;
+    color: var(--accent-blue);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.thesisProject .introSpotlightTitle {
+    margin: 0 0 0.75rem;
+    font-size: clamp(1.45rem, 2vw, 2rem);
+    line-height: 1.08;
+}
+
+.thesisProject .introSpotlightLead {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 1rem;
+    line-height: 1.75;
+}
+
+.thesisProject .introFocusList {
+    display: grid;
+    gap: 0.85rem;
+}
+
+.thesisProject .introFocusItem {
+    padding: 1rem;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.thesisProject .introFocusItem h4 {
+    margin: 0 0 0.35rem;
+    font-size: 0.98rem;
+}
+
+.thesisProject .introFocusItem p {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 0.92rem;
+    line-height: 1.65;
+}
+
+.thesisProject .interfaceShowcaseGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.thesisProject .interfaceShowcaseCard {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    padding: 1rem;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+}
+
+.thesisProject .interfaceShowcaseHeader {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.thesisProject .interfaceShowcaseCard--hero {
+    grid-column: 1 / -1;
+    padding: 1.2rem;
+}
+
+.thesisProject .interfaceShowcaseCard--hero .thesisMediaCanvas {
+    min-height: 420px;
+}
+
+.thesisProject .interfaceShowcaseTitle {
+    margin: 0;
+    font-size: 1.08rem;
+    font-weight: 800;
+    line-height: 1.25;
+}
+
+.thesisProject .interfaceShowcaseText {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 0.9375rem;
+    line-height: 1.65;
+}
+
+.thesisProject .caseStudyModelCard {
+    display: grid;
+    gap: 1rem;
+    padding: 1.2rem;
+    margin-top: 1rem;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+}
+
+.thesisProject .caseStudyModelCard h3 {
+    margin: 0 0 0.5rem;
+    font-size: 1.16rem;
+}
+
+.thesisProject .caseStudyModelCard p:last-child {
+    margin-bottom: 0;
+}
+
+@media (max-width: 640px) {
+    .thesisProject .introSpotlight {
+        grid-template-columns: 1fr;
+        padding: 1.05rem;
+    }
+
+    .thesisProject .thesisMediaCanvas {
+        min-height: 180px;
+        padding: 0.85rem;
+    }
+
+    .thesisProject .thesisMediaCanvas--wide,
+    .thesisProject .interfaceShowcaseCard--hero .thesisMediaCanvas {
+        min-height: 220px;
+    }
+}

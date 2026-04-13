@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta
         name="description"
-        content="Master dissertation project on building a simulation framework for Bosch assembly lines, human-machine collaboration, and cobot scenario evaluation."
+        content="Master's thesis project focused on a Python-based discrete-event simulation framework for evaluating human-machine collaboration in Bosch assembly lines."
     >
-    <title>Simulation Framework - Dissertation Project</title>
+    <title>Simulation Framework - Project</title>
     <link rel="icon" type="image/png" href="assets/img/tese/thumbnail.png">
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -23,800 +23,690 @@
 
     <article class="projectArticle simulationProject thesisProject">
         <header class="projectHeader">
-            <h1 class="projectTitle">Simulation Framework for Human-Machine Collaboration</h1>
+            <h1 class="projectTitle">Simulation Framework</h1>
             <p class="lead">
-                This page follows the structure of my dissertation and focuses on the actual work: the
-                industrial motivation, the state of the art, the development of the framework, the Bosch
-                case study, and the results that came from testing real and improved line configurations.
+                This project was developed as part of my Master's thesis and focuses on a discrete-event
+                simulation framework for evaluating human-machine collaboration in industrial assembly cells.
+                The goal was to model real Bosch production lines, test alternative configurations safely, and
+                support engineering decisions before making changes on the factory floor.
             </p>
-            <p class="smallText muted">
-                Dissertation title: <em>Development of a Simulation Model for the Analysis and Evaluation
-                of Human-Machine Collaboration in an Assembly Cell</em>.
+            <p class="muted smallText">
+                Dissertation focus: simulation-driven decision support for task allocation, cobot integration,
+                and line-balancing analysis in mixed human-machine workspaces.
             </p>
 
             <div class="quickFacts">
                 <div class="factItem">
-                    <span class="factLabel">Date</span>
-                    <span class="factValue">5 November 2025</span>
+                    <span class="factLabel">Latest Update</span>
+                    <span class="factValue" data-project-latest-update>2026-01-15</span>
                 </div>
                 <div class="factItem">
                     <span class="factLabel">Type</span>
-                    <span class="factValue">Master Dissertation</span>
+                    <span class="factValue">Master's Thesis</span>
                 </div>
                 <div class="factItem">
-                    <span class="factLabel">Context</span>
-                    <span class="factValue">Bosch Ovar</span>
+                    <span class="factLabel">Category</span>
+                    <span class="factValue">Python Simulation Tool</span>
                 </div>
                 <div class="factItem">
-                    <span class="factLabel">Toolchain</span>
-                    <span class="factValue">Python + SimPy + PyQt5</span>
+                    <span class="factLabel">Status</span>
+                    <span class="factValue grad">Complete</span>
                 </div>
-                <div class="factItem">
-                    <span class="factLabel">Validation</span>
-                    <span class="factValue">L05C deviation about 5.4%</span>
-                </div>
-                <div class="factItem">
-                    <span class="factLabel">Best Gain</span>
-                    <span class="factValue grad">L05B/V2 +19%</span>
-                </div>
-            </div>
-
-            <div class="projectLinks">
-                <a href="assets/img/tese/Tese.pdf" class="btn primary" target="_blank" rel="noopener">
-                    Open Dissertation PDF
-                </a>
-                <a href="#chapter-5" class="btn">
-                    Jump to Results
-                </a>
             </div>
         </header>
 
         <div class="projectContent">
             <div class="projectMain">
-                <div class="tocBox">
-                    <h2>Dissertation Structure</h2>
-                    <p class="muted smallText">
-                        Instead of a gallery, this page mirrors the written dissertation in a cleaner web format.
-                    </p>
-                    <nav class="tocNav" aria-label="Dissertation chapters">
-                        <a href="#abstract" class="tocLink">Abstract</a>
-                        <a href="#chapter-1" class="tocLink">Chapter 1 - Introduction</a>
-                        <a href="#chapter-2" class="tocLink">Chapter 2 - State-of-the-Art</a>
-                        <a href="#chapter-3" class="tocLink">Chapter 3 - Framework Development</a>
-                        <a href="#chapter-4" class="tocLink">Chapter 4 - Bosch Case Study</a>
-                        <a href="#chapter-5" class="tocLink">Chapter 5 - Results</a>
-                        <a href="#chapter-6" class="tocLink">Chapter 6 - Conclusions</a>
-                        <a href="#resources" class="tocLink">Dissertation Materials</a>
-                    </nav>
-                </div>
-
-                <section id="abstract" class="contentSection sectionCard">
-                    <h2>Abstract</h2>
-                    <p class="muted">
-                        The dissertation presents a simulation framework created to evaluate human-machine
-                        collaboration strategies in industrial assembly lines. It was designed to reproduce
-                        discrete-event production environments using real operational data from Bosch Security
-                        Systems, S.A.
-                    </p>
-                    <p class="muted">
-                        Two assembly lines were modeled as case studies, multiple scenarios were tested, key
-                        indicators such as throughput, utilization, value-added time, and cycle time were
-                        extracted, and a cost-benefit analysis was used to judge whether a cobot-based
-                        improvement made industrial sense.
-                    </p>
-
-                    <div class="metricsGrid">
-                        <div class="metricCard">
-                            <div class="metricValue grad">2</div>
-                            <div class="metricLabel">Modeled Lines</div>
-                            <p class="smallText muted">L05C and L05B were recreated inside the framework.</p>
-                        </div>
-                        <div class="metricCard">
-                            <div class="metricValue grad2">3</div>
-                            <div class="metricLabel">Key Scenarios</div>
-                            <p class="smallText muted">L05C, L05B, and the improved L05B/V2 proposal.</p>
-                        </div>
-                        <div class="metricCard">
-                            <div class="metricValue grad">25 h</div>
-                            <div class="metricLabel">Simulation Window</div>
-                            <p class="smallText muted">Runs were aligned with the Bosch monitoring campaign horizon.</p>
-                        </div>
-                        <div class="metricCard">
-                            <div class="metricValue grad2">73.26</div>
-                            <div class="metricLabel">Payback Days</div>
-                            <p class="smallText muted">Estimated payback time for the L05B/V2 implementation.</p>
-                        </div>
+                <section class="contentSection sectionCard">
+                    <h2>Technical Stack</h2>
+                    <div class="techList">
+                        <span class="techItem">Python</span>
+                        <span class="techItem">SimPy</span>
+                        <span class="techItem">Qt</span>
+                        <span class="techItem">Discrete-Event Simulation</span>
+                        <span class="techItem">Statistical Time Models</span>
+                        <span class="techItem">Excel Data Import</span>
+                        <span class="techItem">KPI Logging</span>
+                        <span class="techItem">Industrial Case Study Data</span>
                     </div>
                 </section>
 
-                <section id="chapter-1" class="contentSection sectionCard">
-                    <h2>Chapter 1 - Introduction</h2>
+                <section class="contentSection sectionCard">
+                    <h2>Overview</h2>
                     <p class="muted">
-                        The first chapter frames the dissertation around a real industrial problem: how to allocate
-                        tasks between people, machines, and collaborative robots in a way that improves output
-                        without sacrificing flexibility, usability, or decision quality.
+                        At its core, this project is a configurable simulation framework for industrial assembly
+                        cells. It gives the user a visual way to build the line, assign operators and machines,
+                        import measured timings, validate the logic of the model, run what-if scenarios, and export
+                        the resulting KPIs without rewriting the simulation each time.
+                    </p>
+                    <p class="muted">
+                        The main focus is the framework itself: a reusable tool for exploring production-system
+                        behavior, not just a one-off model tied to a single experiment. The Bosch case study then
+                        acts as the proof that the framework can represent a real line and support useful decisions.
                     </p>
 
-                    <div class="storyFlow">
-                        <div class="storyCard storyProblem">
-                            <div class="storyCardHeader">
-                                <span class="storyIcon" aria-hidden="true">C</span>
-                                <span class="storyTag">Context and Motivation</span>
-                            </div>
-                            <p class="muted">
-                                Bosch Ovar operates a large manufacturing environment where many assembly lines run in
-                                parallel. In that setting, balancing human flexibility with machine consistency is a
-                                real optimization challenge.
-                            </p>
-                            <ul class="muted">
-                                <li>Humans adapt well to variability and exceptions</li>
-                                <li>Machines and cobots excel at repetitive and demanding work</li>
-                                <li>A better mix can improve productivity and working conditions</li>
-                            </ul>
-                        </div>
-
-                        <div class="storyCard storyIdea">
-                            <div class="storyCardHeader">
-                                <span class="storyIcon" aria-hidden="true">P</span>
-                                <span class="storyTag">Problem Statement</span>
-                            </div>
-                            <p class="muted">
-                                Existing simulation tools were too generic, too closed, or too cumbersome for rapid
-                                what-if analysis in a Bosch-like environment. Engineers needed a modular and practical
-                                decision-support tool they could use without rebuilding a whole model from scratch.
-                            </p>
-                            <ul class="muted">
-                                <li>Too much complexity for quick industrial testing</li>
-                                <li>Limited transparency in proprietary logic</li>
-                                <li>Weak support for hybrid human-machine-cobot lines</li>
-                            </ul>
-                        </div>
-
-                        <div class="storyCard storySolution">
-                            <div class="storyCardHeader">
-                                <span class="storyIcon" aria-hidden="true">O</span>
-                                <span class="storyTag">Main Objective</span>
-                            </div>
-                            <p class="muted">
-                                Develop a simulation-based decision-support framework that can model real assembly
-                                lines, validate them against factory data, compare alternative layouts, and support
-                                investment decisions around automation and cobots.
-                            </p>
-                            <ul class="muted">
-                                <li>Model real Bosch process flow and timing</li>
-                                <li>Run scenario-based evaluation</li>
-                                <li>Link operational gains to financial impact</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <h3>Research Approach and Methodology</h3>
-                    <ol class="searchSteps">
-                        <li>Review literature on Industry 4.0, human-robot collaboration, digital twins, and simulation technologies.</li>
-                        <li>Develop a custom simulation framework tailored to hybrid assembly-line decision support.</li>
-                        <li>Collect Bosch data through observations, process documentation, and engineer feedback.</li>
-                        <li>Build and test baseline and improved scenarios using the same framework.</li>
-                        <li>Validate the models by comparing simulated output with real production indicators.</li>
-                        <li>Interpret the results in terms of bottlenecks, workload balance, and cost-benefit tradeoffs.</li>
-                    </ol>
-
-                    <h3>Core Objectives</h3>
                     <div class="detailGrid detailGrid--threeColumn">
                         <div class="detailCard">
                             <div class="detailHeader">
-                                <div class="detailIcon">01</div>
-                                <h3>Process Mapping</h3>
+                                <div class="detailIcon">&#x1F5A5;</div>
+                                <h3>Visual line building</h3>
                             </div>
-                            <p class="muted smallText">Study the Bosch assembly line flow, task sequences, and operator distribution.</p>
+                            <p class="smallText muted">
+                                Assemble production flows on a canvas instead of coding every scenario from scratch.
+                            </p>
                         </div>
                         <div class="detailCard">
                             <div class="detailHeader">
-                                <div class="detailIcon">02</div>
-                                <h3>Framework Development</h3>
+                                <div class="detailIcon">&#x23F1;</div>
+                                <h3>Measured time modeling</h3>
                             </div>
-                            <p class="muted smallText">Create a modular and user-friendly simulation platform for industrial assembly scenarios.</p>
+                            <p class="smallText muted">
+                                Fit process durations to imported real values so the model stays grounded in data.
+                            </p>
                         </div>
                         <div class="detailCard">
                             <div class="detailHeader">
-                                <div class="detailIcon">03</div>
-                                <h3>Model Development</h3>
+                                <div class="detailIcon">&#x1F9E0;</div>
+                                <h3>Scenario experimentation</h3>
                             </div>
-                            <p class="muted smallText">Translate a real Bosch line into a digital model that preserves logic, flow, and timing.</p>
+                            <p class="smallText muted">
+                                Test operator changes, automation ideas, and layout alternatives in a safe digital environment.
+                            </p>
                         </div>
                         <div class="detailCard">
                             <div class="detailHeader">
-                                <div class="detailIcon">04</div>
-                                <h3>Model Validation</h3>
+                                <div class="detailIcon">&#x2705;</div>
+                                <h3>Model validation</h3>
                             </div>
-                            <p class="muted smallText">Compare simulation outputs with real throughput and cycle-time data from Bosch.</p>
+                            <p class="smallText muted">
+                                Check the model structure before execution so invalid flows are caught early.
+                            </p>
                         </div>
                         <div class="detailCard">
                             <div class="detailHeader">
-                                <div class="detailIcon">05</div>
-                                <h3>Scenario Evaluation</h3>
+                                <div class="detailIcon">&#x1F4CA;</div>
+                                <h3>KPI extraction</h3>
                             </div>
-                            <p class="muted smallText">Test operator variations, cobot integration, and layout changes in a safe virtual environment.</p>
+                            <p class="smallText muted">
+                                Generate throughput, cycle time, utilization, value-added time, and cost-related outputs.
+                            </p>
                         </div>
                         <div class="detailCard">
                             <div class="detailHeader">
-                                <div class="detailIcon">06</div>
-                                <h3>Cost-Benefit Analysis</h3>
+                                <div class="detailIcon">&#x1F4E6;</div>
+                                <h3>Reusable structure</h3>
                             </div>
-                            <p class="muted smallText">Judge proposed solutions not only by performance, but also by implementation cost and return.</p>
+                            <p class="smallText muted">
+                                Keep the tool modular enough to support other lines and future digital-twin evolution.
+                            </p>
                         </div>
                     </div>
                 </section>
 
-                <section id="chapter-2" class="contentSection sectionCard">
-                    <h2>Chapter 2 - State-of-the-Art</h2>
+                <section class="contentSection sectionCard">
+                    <h2>Introduction</h2>
+                    <div class="introSpotlight">
+                        <div>
+                            <p class="introEyebrow">From factory uncertainty to testable decisions</p>
+                            <h3 class="introSpotlightTitle">
+                                A thesis about turning human-machine collaboration into something engineers can explore,
+                                question, and improve before touching the real line.
+                            </h3>
+                            <p class="introSpotlightLead">
+                                Industrial assembly lines increasingly depend on how work is divided between human
+                                operators, automated equipment, and collaborative robots. The real challenge is not
+                                only building that mix, but understanding whether a change will actually improve
+                                flow, flexibility, and efficiency. This thesis was built around that exact question.
+                            </p>
+                        </div>
+
+                        <div class="introFocusList">
+                            <div class="introFocusItem">
+                                <h4>Developed inside Bosch Ovar</h4>
+                                <p>
+                                    The work was grounded in Bosch Security Systems, where multiple assembly lines with
+                                    different automation levels create a strong real industrial testbed.
+                                </p>
+                            </div>
+
+                            <div class="introFocusItem">
+                                <h4>Focused on decision support</h4>
+                                <p>
+                                    The goal was not just to simulate a line, but to build a framework that helps answer
+                                    practical setup questions with data-backed scenario testing.
+                                </p>
+                            </div>
+
+                            <div class="introFocusItem">
+                                <h4>Built for what-if exploration</h4>
+                                <p>
+                                    Engineers should be able to ask what happens if an operator moves, a cobot is added,
+                                    or a route changes, and see the likely effect before making the real change.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="contentSection sectionCard">
+                    <h2>State of the Art</h2>
                     <p class="muted">
-                        The literature review places the project inside a broader technical context. It explains why
-                        hybrid manufacturing systems benefit from simulation, why collaborative robotics is relevant,
-                        and why open and configurable tooling matters for industrial experimentation.
+                        The literature review positioned the framework at the intersection of Industry 4.0,
+                        human-robot collaboration, digital twins, and simulation-driven decision support. The goal
+                        was not to cover every topic exhaustively on this page, but to extract the concepts that
+                        directly shaped the tool.
                     </p>
 
                     <div class="architectureGrid">
                         <div class="architectureCard">
-                            <div class="architectureIcon">I4</div>
+                            <div class="architectureIcon">&#x2699;</div>
                             <h3>Industry 4.0</h3>
-                            <p class="muted smallText">Digitalization and data-driven planning are central to modern manufacturing improvement.</p>
+                            <p class="smallText muted">
+                                Interoperability, virtualization, modularity, decentralization, and real-time
+                                capability frame the need for smart production tools that react quickly to change.
+                            </p>
                         </div>
+
                         <div class="architectureCard">
-                            <div class="architectureIcon">HR</div>
+                            <div class="architectureIcon">&#x1F91D;</div>
                             <h3>Human-Robot Collaboration</h3>
-                            <p class="muted smallText">Cobots allow repetitive work to be automated while human operators keep flexibility and judgment.</p>
+                            <p class="smallText muted">
+                                Humans bring adaptability and decision-making, while cobots are strong in repetitive,
+                                precise, and ergonomically difficult operations performed in safe shared workflows.
+                            </p>
                         </div>
-                        <div class="architectureCard">
-                            <div class="architectureIcon">DT</div>
-                            <h3>Digital Twin Thinking</h3>
-                            <p class="muted smallText">Virtual experimentation supports better planning even when full real-time synchronization is absent.</p>
-                        </div>
-                        <div class="architectureCard">
-                            <div class="architectureIcon">PM</div>
-                            <h3>Process Modeling</h3>
-                            <p class="muted smallText">Assembly systems can be represented as flows of resources, buffers, timings, and task dependencies.</p>
-                        </div>
-                        <div class="architectureCard">
-                            <div class="architectureIcon">SM</div>
-                            <h3>Simulation Tools</h3>
-                            <p class="muted smallText">The dissertation compares open and closed tools, with SimPy emerging as the most flexible base.</p>
-                        </div>
-                        <div class="architectureCard">
-                            <div class="architectureIcon">DS</div>
-                            <h3>Decision Support</h3>
-                            <p class="muted smallText">The real target is not simulation for its own sake, but better industrial decisions backed by data.</p>
-                        </div>
-                    </div>
 
-                    <div class="calloutBox calloutWarning" style="margin-top: 1.5rem;">
-                        <div class="calloutIcon">RG</div>
-                        <div>
-                            <h4>Research gap</h4>
-                            <p class="muted smallText">
-                                The dissertation identifies a gap between powerful commercial simulation suites and the
-                                needs of fast industrial what-if analysis. What was missing was a tool that combined
-                                operator allocation, manual and automatic tasks, buffers, and cobot scenarios in one
-                                open, transparent, and practical workflow.
+                        <div class="architectureCard">
+                            <div class="architectureIcon">&#x1F4BB;</div>
+                            <h3>Digital Twin Direction</h3>
+                            <p class="smallText muted">
+                                A simulation model is a practical stepping stone toward a digital twin, enabling
+                                virtual experimentation, validation, and future live-data integration.
+                            </p>
+                        </div>
+
+                        <div class="architectureCard">
+                            <div class="architectureIcon">&#x1F9E0;</div>
+                            <h3>Why SimPy</h3>
+                            <p class="smallText muted">
+                                The framework leans on open-source tooling to keep logic transparent, configurable,
+                                and easier to adapt than heavier closed platforms with steeper setup overhead.
                             </p>
                         </div>
                     </div>
                 </section>
 
-                <section id="chapter-3" class="contentSection sectionCard">
-                    <h2>Chapter 3 - Development of the Simulation Framework</h2>
+                <section class="contentSection sectionCard">
+                    <h2>Development</h2>
                     <p class="muted">
-                        This chapter explains how the framework itself was designed and built. The aim was not only
-                        to create a simulation engine, but to create a framework that an engineer could actually use
-                        to construct, validate, run, and compare scenarios in a visual way.
+                        The framework was developed around four main concerns: a modular simulation architecture,
+                        a visual modeling workflow, configurable statistical inputs, and exportable logs for KPI
+                        analysis. The objective was to keep the tool practical for industrial scenario building,
+                        not just technically correct.
                     </p>
 
-                    <h3>Goals and Design Principles</h3>
-                    <div class="featureGrid">
-                        <div class="featureCard">
-                            <div class="featureIcon">MOD</div>
-                            <h3>Modularity</h3>
-                            <p class="muted smallText">Separate logic, interface, logging, and statistics so the framework can evolve cleanly.</p>
-                        </div>
-                        <div class="featureCard">
-                            <div class="featureIcon">VIS</div>
-                            <h3>Visual Construction</h3>
-                            <p class="muted smallText">Let users build assembly lines graphically instead of forcing code-first model creation.</p>
-                        </div>
-                        <div class="featureCard">
-                            <div class="featureIcon">VAL</div>
-                            <h3>Validation</h3>
-                            <p class="muted smallText">Check structural logic before runtime so incorrect models are caught early.</p>
-                        </div>
-                        <div class="featureCard">
-                            <div class="featureIcon">OSS</div>
-                            <h3>Open Foundation</h3>
-                            <p class="muted smallText">Retain full control over model behavior without license restrictions or hidden logic.</p>
-                        </div>
-                        <div class="featureCard">
-                            <div class="featureIcon">CFG</div>
-                            <h3>Configurability</h3>
-                            <p class="muted smallText">Make it easy to change operators, timings, buffers, routing, and cobot behavior.</p>
-                        </div>
+                    <h3 class="thesisSubheading">Architecture and responsibilities</h3>
+                    <div class="architectureBox">
+                        <figure class="simulationMediaCard">
+                            <div class="thesisMediaCanvas thesisMediaCanvas--white">
+                                <img
+                                    src="assets/img/tese/Diagrams/Tese_Folders.png"
+                                    alt="Simulation framework Python file hierarchy"
+                                    class="galleryImage"
+                                    loading="lazy"
+                                >
+                            </div>
+                            <figcaption class="thesisFigureCaption">
+                                File hierarchy used to separate simulation logic, GUI handling, statistics, and data flow.
+                            </figcaption>
+                        </figure>
                     </div>
-
-                    <h3>Selected Toolchain</h3>
-                    <div class="toolsGrid">
-                        <div class="toolCard">
-                            <div class="toolIcon">PY</div>
-                            <h4>Python</h4>
-                            <p class="smallText muted">Chosen as the common language for the interface, logic, and analysis layers.</p>
-                        </div>
-                        <div class="toolCard">
-                            <div class="toolIcon">DES</div>
-                            <h4>SimPy</h4>
-                            <p class="smallText muted">Used as the discrete-event core for processes, resources, queues, and scheduling.</p>
-                        </div>
-                        <div class="toolCard">
-                            <div class="toolIcon">QT</div>
-                            <h4>PyQt5</h4>
-                            <p class="smallText muted">Used to create the graphical interface for model construction and parameter editing.</p>
-                        </div>
-                        <div class="toolCard">
-                            <div class="toolIcon">XLS</div>
-                            <h4>Excel-Oriented Data Flow</h4>
-                            <p class="smallText muted">Supports process-time import, log export, and easy post-run analysis in familiar tools.</p>
-                        </div>
-                    </div>
-
-                    <h3>How the Framework Works</h3>
-                    <div class="workflowTimeline">
-                        <div class="workflowStep">
-                            <div class="workflowIcon">01</div>
-                            <div class="workflowContent">
-                                <h4>Build the line visually</h4>
-                                <p class="muted smallText">Sources, processes, conveyors, buffers, operators, and targets are arranged on a 2D canvas.</p>
-                            </div>
-                            <div class="workflowNumber">01</div>
-                        </div>
-                        <div class="workflowStep">
-                            <div class="workflowIcon">02</div>
-                            <div class="workflowContent">
-                                <h4>Translate the drawing into logic</h4>
-                                <p class="muted smallText">The interface representation is converted into executable nodes, links, and parameters.</p>
-                            </div>
-                            <div class="workflowNumber">02</div>
-                        </div>
-                        <div class="workflowStep">
-                            <div class="workflowIcon">03</div>
-                            <div class="workflowContent">
-                                <h4>Validate the system</h4>
-                                <p class="muted smallText">The model is checked for sources, targets, valid paths, valid operators, and connectivity.</p>
-                            </div>
-                            <div class="workflowNumber">03</div>
-                        </div>
-                        <div class="workflowStep">
-                            <div class="workflowIcon">04</div>
-                            <div class="workflowContent">
-                                <h4>Run the discrete-event simulation</h4>
-                                <p class="muted smallText">Each piece becomes a process that competes for resources and moves through the system over time.</p>
-                            </div>
-                            <div class="workflowNumber">04</div>
-                        </div>
-                        <div class="workflowStep">
-                            <div class="workflowIcon">05</div>
-                            <div class="workflowContent">
-                                <h4>Log events and outputs</h4>
-                                <p class="muted smallText">Piece flow and operator activity are recorded to support KPI calculation and later inspection.</p>
-                            </div>
-                            <div class="workflowNumber">05</div>
-                        </div>
-                        <div class="workflowStep">
-                            <div class="workflowIcon">06</div>
-                            <div class="workflowContent">
-                                <h4>Compare scenarios</h4>
-                                <p class="muted smallText">Operational and financial indicators are used to evaluate tradeoffs between competing solutions.</p>
-                            </div>
-                            <div class="workflowNumber">06</div>
-                        </div>
-                    </div>
-
-                    <h3>Implementation Highlights</h3>
-                    <div class="detailGrid">
-                        <div class="detailCard">
-                            <div class="detailHeader">
-                                <div class="detailIcon">UI</div>
-                                <h3>Graphical User Interface</h3>
-                            </div>
-                            <p class="muted smallText">
-                                The Qt-based interface includes the main window, file controls, a canvas, an element
-                                palette, add/edit dialogs, validation feedback, and runtime parameters for each scenario.
-                            </p>
-                        </div>
-                        <div class="detailCard">
-                            <div class="detailHeader">
-                                <div class="detailIcon">KP</div>
-                                <h3>Output Metrics and Logging</h3>
-                            </div>
-                            <p class="muted smallText">
-                                The framework records piece logs and operator logs, then derives metrics such as
-                                throughput, station cycle time, hold time, rejection rates, and economic return.
-                            </p>
-                        </div>
-                        <div class="detailCard">
-                            <div class="detailHeader">
-                                <div class="detailIcon">LM</div>
-                                <h3>Known Limitations</h3>
-                            </div>
-                            <p class="muted smallText">
-                                Operator behavior is simplified, cobot behavior is modeled rather than fully validated,
-                                ergonomic aspects are not simulated, and the framework is not yet a live digital twin.
-                            </p>
-                        </div>
-                    </div>
-                </section>
-
-                <section id="chapter-4" class="contentSection sectionCard">
-                    <h2>Chapter 4 - Case Study: Bosch Assembly Lines</h2>
-                    <p class="muted">
-                        The framework was validated and demonstrated through a Bosch case study centered on the
-                        Avenar fire detector assembly process. This chapter moves the work from framework design
-                        into a concrete industrial application.
-                    </p>
 
                     <div class="detailGrid detailGrid--threeColumn">
                         <div class="detailCard">
                             <div class="detailHeader">
-                                <div class="detailIcon">BC</div>
-                                <h3>Company Context</h3>
+                                <div class="detailIcon">&#x1F4E6;</div>
+                                <h3>Simulation Core</h3>
                             </div>
-                            <p class="muted smallText">
-                                Bosch Security Systems, S.A. in Ovar provided the production environment, process
-                                knowledge, and operational data that grounded the case study.
+                            <p class="smallText muted">
+                                SimPy drives the discrete-event behavior. Pieces move through sources, buffers,
+                                processes, and targets while competing for operators and equipment as shared resources.
                             </p>
                         </div>
+
                         <div class="detailCard">
                             <div class="detailHeader">
-                                <div class="detailIcon">PD</div>
-                                <h3>Product Overview</h3>
+                                <div class="detailIcon">&#x1F5A5;</div>
+                                <h3>Qt Interface</h3>
                             </div>
-                            <p class="muted smallText">
-                                The analyzed lines assemble the Avenar fire detector, a product that combines
-                                mechanical, electronic, and testing operations.
+                            <p class="smallText muted">
+                                The GUI lets the user add elements, place them on a canvas, connect flows, assign
+                                operators, and manage multiple scenarios without writing code.
                             </p>
                         </div>
+
                         <div class="detailCard">
                             <div class="detailHeader">
-                                <div class="detailIcon">DA</div>
-                                <h3>Modeling Inputs</h3>
+                                <div class="detailIcon">&#x23F1;</div>
+                                <h3>Time Modeling</h3>
                             </div>
-                            <p class="muted smallText">
-                                The lines were modeled from Bosch Excel datasets, shop-floor observation, and feedback
-                                from engineers and operators.
+                            <p class="smallText muted">
+                                Processing, loading, unloading, and transport durations are modeled through normal
+                                distributions based on imported measurements or manually defined parameters.
                             </p>
                         </div>
+
                         <div class="detailCard">
                             <div class="detailHeader">
-                                <div class="detailIcon">OP</div>
-                                <h3>Operator Modeling</h3>
+                                <div class="detailIcon">&#x2705;</div>
+                                <h3>Validation</h3>
                             </div>
-                            <p class="muted smallText">
-                                Operators were treated as resources with dynamic availability and cost, linked to
-                                manual or assisted tasks inside each station group.
+                            <p class="smallText muted">
+                                Before each run, the model is checked for missing links, incomplete definitions, and
+                                logical issues so bad scenarios are caught before execution.
                             </p>
                         </div>
+
                         <div class="detailCard">
                             <div class="detailHeader">
-                                <div class="detailIcon">L05C</div>
-                                <h3>L05C</h3>
+                                <div class="detailIcon">&#x1F4CA;</div>
+                                <h3>Logging and KPIs</h3>
                             </div>
-                            <p class="muted smallText">
-                                The more automated reference line, with four operators and a more balanced structure.
+                            <p class="smallText muted">
+                                Every run produces structured outputs that support throughput, cycle time,
+                                utilization, value-added time, and financial calculations.
                             </p>
                         </div>
+
                         <div class="detailCard">
                             <div class="detailHeader">
-                                <div class="detailIcon">L05B</div>
-                                <h3>L05B</h3>
+                                <div class="detailIcon">&#x26A0;</div>
+                                <h3>Known Limits</h3>
                             </div>
-                            <p class="muted smallText">
-                                The more manual baseline line, with three operators and heavier dependence on buffers.
+                            <p class="smallText muted">
+                                The thesis intentionally kept fatigue modeling, ergonomic analysis, live dashboards,
+                                and real failure data outside the final implementation scope.
                             </p>
                         </div>
                     </div>
 
-                    <h3>Modeled Line Comparison</h3>
-                    <div class="tableWrapper">
-                        <table class="comparisonTable">
-                            <thead>
-                            <tr>
-                                <th>Line</th>
-                                <th>Operators</th>
-                                <th>Structure</th>
-                                <th>Automation Profile</th>
-                                <th>Role in the Dissertation</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>L05C</td>
-                                <td>4</td>
-                                <td>Includes parallel middle branches</td>
-                                <td>More automated</td>
-                                <td>Reference line used for validation and comparison.</td>
-                            </tr>
-                            <tr>
-                                <td>L05B</td>
-                                <td>3</td>
-                                <td>Linear flow with stronger manual dependence</td>
-                                <td>More manual</td>
-                                <td>Baseline line used to identify bottlenecks and test improvement ideas.</td>
-                            </tr>
-                        </table>
+                    <h3 class="thesisSubheading">Interface walkthrough</h3>
+                    <article class="interfaceShowcaseCard interfaceShowcaseCard--hero">
+                        <div class="interfaceShowcaseHeader">
+                            <h4 class="interfaceShowcaseTitle">Where the full factory model comes together</h4>
+                            <p class="interfaceShowcaseText">
+                                This is the main window of the application and the visual center of the whole framework.
+                                It is where the production line is laid out, inspected, edited, and prepared for
+                                validation or execution.
+                            </p>
+                        </div>
+                        <div class="thesisMediaCanvas thesisMediaCanvas--wide">
+                            <img
+                                src="assets/img/tese/fullwindow.png"
+                                alt="Full simulation framework Qt workspace"
+                                class="galleryImage"
+                                loading="lazy"
+                            >
+                        </div>
+                    </article>
+
+                    <div class="interfaceShowcaseGrid">
+                        <article class="interfaceShowcaseCard">
+                            <div class="interfaceShowcaseHeader">
+                                <h4 class="interfaceShowcaseTitle">Quick actions for save, validate, and run</h4>
+                                <p class="interfaceShowcaseText">
+                                    The toolbar keeps the core actions close at hand, which makes iterative scenario work
+                                    much faster when you are constantly adjusting and testing the model.
+                                </p>
+                            </div>
+                            <div class="thesisMediaCanvas">
+                                <img
+                                    src="assets/img/tese/topmenu.png"
+                                    alt="Top menu and quick controls of the framework"
+                                    class="galleryImage"
+                                    loading="lazy"
+                                >
+                            </div>
+                        </article>
+
+                        <article class="interfaceShowcaseCard">
+                            <div class="interfaceShowcaseHeader">
+                                <h4 class="interfaceShowcaseTitle">The dialog where each element gets its behavior</h4>
+                                <p class="interfaceShowcaseText">
+                                    Each process, buffer, source, or operator can be configured from this dialog,
+                                    making the model feel like a real tool instead of a hard-coded prototype.
+                                </p>
+                            </div>
+                            <div class="thesisMediaCanvas">
+                                <img
+                                    src="assets/img/tese/AddElement.png"
+                                    alt="Add or edit element dialog in the framework"
+                                    class="galleryImage"
+                                    loading="lazy"
+                                >
+                            </div>
+                        </article>
+
+                        <article class="interfaceShowcaseCard">
+                            <div class="interfaceShowcaseHeader">
+                                <h4 class="interfaceShowcaseTitle">Import real timings instead of guessing them</h4>
+                                <p class="interfaceShowcaseText">
+                                    Real timings can be pasted directly into the framework so process distributions are
+                                    built from observed values instead of rough manual guesses.
+                                </p>
+                            </div>
+                            <div class="thesisMediaCanvas">
+                                <img
+                                    src="assets/img/tese/processtimeimport.png"
+                                    alt="Process time import dialog for statistical fitting"
+                                    class="galleryImage"
+                                    loading="lazy"
+                                >
+                            </div>
+                        </article>
+
+                        <article class="interfaceShowcaseCard">
+                            <div class="interfaceShowcaseHeader">
+                                <h4 class="interfaceShowcaseTitle">A clear green light before the run begins</h4>
+                                <p class="interfaceShowcaseText">
+                                    Before a run starts, the framework confirms the model is structurally consistent so
+                                    the user can trust the scenario setup.
+                                </p>
+                            </div>
+                            <div class="thesisMediaCanvas">
+                                <img
+                                    src="assets/img/tese/validation_sucess.png"
+                                    alt="Successful validation message for a simulation model"
+                                    class="galleryImage"
+                                    loading="lazy"
+                                >
+                            </div>
+                        </article>
+
+                        <article class="interfaceShowcaseCard">
+                            <div class="interfaceShowcaseHeader">
+                                <h4 class="interfaceShowcaseTitle">Errors are explained before they become wasted runs</h4>
+                                <p class="interfaceShowcaseText">
+                                    Invalid logic is surfaced immediately with specific feedback, which helps fix broken
+                                    paths or missing parameters before wasting time on a failed run.
+                                </p>
+                            </div>
+                            <div class="thesisMediaCanvas">
+                                <img
+                                    src="assets/img/tese/validation_error.png"
+                                    alt="Validation error message for an invalid simulation model"
+                                    class="galleryImage"
+                                    loading="lazy"
+                                >
+                            </div>
+                        </article>
+
+                        <article class="interfaceShowcaseCard">
+                            <div class="interfaceShowcaseHeader">
+                                <h4 class="interfaceShowcaseTitle">Operational and financial assumptions in one place</h4>
+                                <p class="interfaceShowcaseText">
+                                    Runtime and economic assumptions are defined here, linking operational simulation
+                                    results with the cost-benefit analysis presented later in the thesis.
+                                </p>
+                            </div>
+                            <div class="thesisMediaCanvas">
+                                <img
+                                    src="assets/img/tese/simparams.png"
+                                    alt="Simulation parameter dialog with runtime and financial fields"
+                                    class="galleryImage"
+                                    loading="lazy"
+                                >
+                            </div>
+                        </article>
                     </div>
 
-                    <h3>Modeling Workflow</h3>
+                    <h3 class="thesisSubheading">Workflow inside the tool</h3>
                     <div class="processSteps">
                         <div class="processStep">
                             <div class="stepNumber">1</div>
-                            <h4>Observe</h4>
-                            <p class="smallText muted">Study the real shop-floor flow and station responsibilities.</p>
+                            <h4>Create elements</h4>
+                            <p class="smallText muted">Define sources, buffers, processes, targets, and operators.</p>
                         </div>
                         <div class="processStep">
                             <div class="stepNumber">2</div>
-                            <h4>Map</h4>
-                            <p class="smallText muted">Create conceptual diagrams for the line structure and process order.</p>
+                            <h4>Build the flow</h4>
+                            <p class="smallText muted">Place components on the canvas and connect the production path.</p>
                         </div>
                         <div class="processStep">
                             <div class="stepNumber">3</div>
-                            <h4>Parameterize</h4>
-                            <p class="smallText muted">Assign task times from Bosch datasets and fit the simulation inputs.</p>
+                            <h4>Load times</h4>
+                            <p class="smallText muted">Import measured values and fit distributions for each operation.</p>
                         </div>
                         <div class="processStep">
                             <div class="stepNumber">4</div>
-                            <h4>Implement</h4>
-                            <p class="smallText muted">Recreate the line inside the framework using modular simulation entities.</p>
+                            <h4>Validate</h4>
+                            <p class="smallText muted">Check the model structure before launching the simulation.</p>
                         </div>
                         <div class="processStep">
                             <div class="stepNumber">5</div>
-                            <h4>Configure</h4>
-                            <p class="smallText muted">Run every scenario over a common 25-hour simulated period for fair comparison.</p>
+                            <h4>Run scenarios</h4>
+                            <p class="smallText muted">Set global runtime, profit, and cost assumptions for each study.</p>
+                        </div>
+                        <div class="processStep">
+                            <div class="stepNumber">6</div>
+                            <h4>Compare outputs</h4>
+                            <p class="smallText muted">Use the exported logs and dashboards to study bottlenecks and gains.</p>
                         </div>
                     </div>
                 </section>
 
-                <section id="chapter-5" class="contentSection sectionCard">
-                    <h2>Chapter 5 - Results and Evaluation</h2>
+                <section class="contentSection sectionCard">
+                    <h2>Case Study</h2>
                     <p class="muted">
-                        This chapter compares baseline and improved scenarios using operational and financial
-                        indicators. It first validates the model against real Bosch data, then uses the validated
-                        framework to explore a cobot-based improvement for L05B.
+                        The framework was applied to Bosch assembly lines for the Avenar fire detector. Two line
+                        configurations were modeled to compare a more automated reference line against a simpler and
+                        more manual alternative, then a new cobot-based improvement scenario was tested on top of the
+                        manual line.
                     </p>
+
+                    <div class="caseStudyModelCard">
+                        <div>
+                            <h3>L05C: the automated reference line</h3>
+                            <p class="muted">
+                                L05C was modeled first as the high-automation reference scenario. Its structure is more
+                                parallel, more synchronized, and closer to the real Bosch setup used for validation.
+                                That made it the best line for checking whether the framework could reproduce real
+                                throughput and cycle-time behavior with enough fidelity to be trusted.
+                            </p>
+                        </div>
+                        <div class="thesisMediaCanvas thesisMediaCanvas--wide">
+                            <img
+                                src="assets/img/tese/model_full_L05C.png"
+                                alt="Full simulation model for assembly line L05C"
+                                class="galleryImage"
+                                loading="lazy"
+                            >
+                        </div>
+                        <p class="thesisFigureCaption">
+                            Full model of the L05C line, showing its more automated and parallel production structure.
+                        </p>
+                    </div>
+
+                    <div class="caseStudyModelCard">
+                        <div>
+                            <h3>L05B: the manual line used for improvement studies</h3>
+                            <p class="muted">
+                                L05B represents a more manual and linear configuration, with fewer automation points
+                                and stronger dependence on operator pacing. This was the line where bottlenecks became
+                                more obvious, which is exactly why it became the base for the later L05B/V2 cobot
+                                improvement scenario.
+                            </p>
+                        </div>
+                        <div class="thesisMediaCanvas thesisMediaCanvas--wide">
+                            <img
+                                src="assets/img/tese/model_L05B_full.png"
+                                alt="Full simulation model for assembly line L05B"
+                                class="galleryImage"
+                                loading="lazy"
+                            >
+                        </div>
+                        <p class="thesisFigureCaption">
+                            Full model of the L05B line, used to expose structural waiting time and evaluate later changes.
+                        </p>
+                    </div>
+
+                    <div class="calloutBox calloutInfo">
+                        <div class="calloutIcon">&#x2139;</div>
+                        <div>
+                            <h4>How the framework was used</h4>
+                            <p class="smallText">
+                                I mapped the real process steps, grouped them into line segments, assigned measured
+                                times to each operation, validated the baseline models against Bosch data, and then
+                                introduced a cobot-centered scenario to compare operational and financial outcomes.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="contentSection sectionCard">
+                    <h2>Results</h2>
+                    <p class="muted">
+                        The baseline models were first checked against real production data, then the improved
+                        L05B/V2 scenario was evaluated. The main takeaway is that the framework was accurate enough
+                        to support scenario testing, while also making the key bottlenecks visible.
+                    </p>
+
+                    <div class="metricsGrid">
+                        <div class="metricCard">
+                            <div class="metricValue grad">158.48</div>
+                            <div class="metricLabel">L05C pcs/h</div>
+                            <p class="smallText muted">Validated reference line with only about 5.4% deviation from real data.</p>
+                        </div>
+                        <div class="metricCard">
+                            <div class="metricValue grad2">103.56</div>
+                            <div class="metricLabel">L05B pcs/h</div>
+                            <p class="smallText muted">Manual baseline with strong buffer accumulation and lower flow efficiency.</p>
+                        </div>
+                        <div class="metricCard">
+                            <div class="metricValue grad">123.40</div>
+                            <div class="metricLabel">L05B/V2 pcs/h</div>
+                            <p class="smallText muted">Improved scenario after cobot integration and task redistribution.</p>
+                        </div>
+                        <div class="metricCard">
+                            <div class="metricValue grad2">29.17 s</div>
+                            <div class="metricLabel">Best CTmed</div>
+                            <p class="smallText muted">The improved line reduced average cycle time from 34.76 to 29.17 seconds.</p>
+                        </div>
+                    </div>
 
                     <div class="tableWrapper">
                         <table class="comparisonTable">
                             <thead>
                             <tr>
                                 <th>Scenario</th>
-                                <th>Completed Pieces</th>
                                 <th>Throughput</th>
                                 <th>CTmed</th>
-                                <th>Key Reading</th>
+                                <th>Value-Added Time</th>
+                                <th>Main Reading</th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr>
                                 <td>L05C</td>
-                                <td>3962</td>
                                 <td>158.48 pcs/h</td>
                                 <td>22.72 s</td>
-                                <td>Close to real Bosch data and strong enough to validate the model.</td>
+                                <td>113.79 s per piece</td>
+                                <td>Balanced automated reference line used for validation.</td>
                             </tr>
                             <tr>
                                 <td>L05B</td>
-                                <td>2589</td>
                                 <td>103.56 pcs/h</td>
                                 <td>34.76 s</td>
-                                <td>Large waiting times in the middle and workstation buffers exposed a structural imbalance.</td>
+                                <td>120.84 s per piece</td>
+                                <td>Manual line with severe middle-buffer congestion.</td>
                             </tr>
                             <tr>
-                                <td class="highlight">L05B/V2</td>
-                                <td class="highlight">3085</td>
+                                <td>L05B/V2</td>
                                 <td class="highlight">123.40 pcs/h</td>
                                 <td class="highlight">29.17 s</td>
-                                <td>Targeted cobot integration improved throughput and reduced cycle time.</td>
+                                <td class="highlight">103.67 s per piece</td>
+                                <td>Partial automation improved rhythm, throughput, and payback potential.</td>
                             </tr>
                             </tbody>
                         </table>
                     </div>
 
-                    <div class="metricsGrid" style="margin-top: 1.5rem;">
-                        <div class="metricCard">
-                            <div class="metricValue grad">5.4%</div>
-                            <div class="metricLabel">L05C Deviation</div>
-                            <p class="smallText muted">The automated reference line stayed close to the real measured output.</p>
-                        </div>
-                        <div class="metricCard">
-                            <div class="metricValue grad2">9%</div>
-                            <div class="metricLabel">L05B Deviation</div>
-                            <p class="smallText muted">The manual line showed a slightly larger deviation, which is reasonable given human variability.</p>
-                        </div>
-                        <div class="metricCard">
-                            <div class="metricValue grad">+19%</div>
-                            <div class="metricLabel">Throughput Improvement</div>
-                            <p class="smallText muted">L05B/V2 raised throughput from 103.56 to 123.40 pieces per hour.</p>
-                        </div>
-                        <div class="metricCard">
-                            <div class="metricValue grad2">-5.59 s</div>
-                            <div class="metricLabel">Cycle-Time Reduction</div>
-                            <p class="smallText muted">The proposed solution reduced CTmed from 34.76 s to 29.17 s.</p>
-                        </div>
-                    </div>
+                    <p class="muted">
+                        One of the clearest changes appeared in the buffers. In the baseline L05B model, the middle
+                        buffer averaged 1970.46 seconds per piece and dominated utilization. In L05B/V2 that same
+                        area dropped to 810.31 seconds, showing that the cobot-centered sequence removed a large
+                        share of the structural waiting time even if the line was still not fully balanced.
+                    </p>
 
-                    <div class="projectStory">
-                        <div class="storyPhase storyPhase--challenge">
-                            <div class="storyPhaseContent">
-                                <div class="storyPhaseLabel">L05C Validation</div>
-                                <h3>Reference Model Confirmed</h3>
-                                <p class="muted">
-                                    The L05C model reproduced the behavior of the real automated line closely enough to
-                                    establish credibility for the framework.
-                                </p>
-                                <ul class="storyPhaseList">
-                                    <li>158.48 pcs/h simulated throughput</li>
-                                    <li>22.72 s cycle time</li>
-                                    <li>Useful as a trusted comparison baseline</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="storyPhase storyPhase--vision">
-                            <div class="storyPhaseContent">
-                                <div class="storyPhaseLabel">L05B Baseline</div>
-                                <h3>Bottlenecks Became Visible</h3>
-                                <p class="muted">
-                                    The manual line revealed the real issue clearly: excessive waiting time in the
-                                    middle buffer and weak synchronization between stages.
-                                </p>
-                                <ul class="storyPhaseList">
-                                    <li>Middle buffer average time of 1970.46 s</li>
-                                    <li>Workstation buffer average time of 678.34 s</li>
-                                    <li>Manual line flow was structurally unbalanced</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="storyPhase storyPhase--result">
-                            <div class="storyPhaseContent">
-                                <div class="storyPhaseLabel">L05B/V2 Solution</div>
-                                <h3>Cobot Integration Paid Off</h3>
-                                <p class="muted">
-                                    The improved solution automated the sensitivity test, welding, and standby test
-                                    sequence and also reassigned soldering responsibility to balance operator workload.
-                                </p>
-                                <ul class="storyPhaseList">
-                                    <li>3085 completed pieces in 25 hours</li>
-                                    <li>Extra 484 pieces in equal working time</li>
-                                    <li>Estimated payback time of 73.26 working days</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="calloutBox calloutTakeaway" style="margin-top: 1.5rem;">
-                        <div class="calloutIcon">ROI</div>
+                    <div class="calloutBox calloutInfo">
+                        <div class="calloutIcon">&#x2139;</div>
                         <div>
-                            <h4>Main takeaway</h4>
-                            <p class="muted smallText">
-                                The strongest result of the dissertation is not only the improved scenario itself, but
-                                the fact that the improvement can be justified with data before touching the real line.
-                                The framework turns layout and automation discussions into measurable decisions.
+                            <h4>Validation quality</h4>
+                            <p class="smallText">
+                                The simulation matched Bosch data closely enough to be useful in practice: around
+                                5.4% deviation for L05C and around 9% for the more human-dependent L05B line.
                             </p>
                         </div>
+                    </div>
+
+                    <div class="simulationMediaGrid">
+                        <figure class="simulationMediaCard">
+                            <div class="thesisMediaCanvas">
+                                <img
+                                    src="assets/img/tese/L05C_Dashboard.png"
+                                    alt="Operational dashboard generated from the simulation results"
+                                    class="galleryImage"
+                                    loading="lazy"
+                                >
+                            </div>
+                            <figcaption class="thesisFigureCaption">
+                                KPI dashboard view used to inspect throughput, station behavior, and flow performance.
+                            </figcaption>
+                        </figure>
+
+                        <figure class="simulationMediaCard">
+                            <div class="thesisMediaCanvas">
+                                <img
+                                    src="assets/img/tese/L05C_Financial.png"
+                                    alt="Financial dashboard generated from the simulation results"
+                                    class="galleryImage"
+                                    loading="lazy"
+                                >
+                            </div>
+                            <figcaption class="thesisFigureCaption">
+                                Financial view supporting cost-benefit interpretation for improvement scenarios.
+                            </figcaption>
+                        </figure>
                     </div>
                 </section>
 
-                <section id="chapter-6" class="contentSection sectionCard">
-                    <h2>Chapter 6 - Conclusions and Future Work</h2>
+                <section class="contentSection sectionCard">
+                    <h2>Conclusion</h2>
                     <p class="muted">
-                        The final chapter reflects on what the framework achieved, where it still falls short, and
-                        how it could evolve from a proof-of-concept decision-support system into a stronger planning
-                        and digital-twin foundation.
+                        The thesis delivered a lightweight but practical simulation framework capable of modeling
+                        real assembly-cell behavior and supporting structured what-if analysis. It proved especially
+                        useful for comparing manual and hybrid scenarios without interrupting production, and it
+                        showed that targeted automation can produce meaningful gains when it is applied to the right
+                        bottlenecks.
                     </p>
-
-                    <h3>Critical Assessment of the Framework</h3>
-                    <div class="detailGrid">
-                        <div class="detailCard">
-                            <div class="detailHeader">
-                                <div class="detailIcon">AG</div>
-                                <h3>Configurational Agility</h3>
-                            </div>
-                            <p class="muted smallText">
-                                Alternative layouts and task reallocations can be instantiated quickly, which is a major
-                                practical strength for scenario testing.
-                            </p>
-                        </div>
-                        <div class="detailCard">
-                            <div class="detailHeader">
-                                <div class="detailIcon">EF</div>
-                                <h3>Computational Efficiency</h3>
-                            </div>
-                            <p class="muted smallText">
-                                The discrete-event approach compresses long periods of physical production into fast
-                                computational experiments.
-                            </p>
-                        </div>
-                        <div class="detailCard">
-                            <div class="detailHeader">
-                                <div class="detailIcon">TR</div>
-                                <h3>Analytical Transparency</h3>
-                            </div>
-                            <p class="muted smallText">
-                                Detailed logs make the simulation inspectable, but built-in visualization and reporting
-                                are still limited.
-                            </p>
-                        </div>
-                        <div class="detailCard">
-                            <div class="detailHeader">
-                                <div class="detailIcon">LM</div>
-                                <h3>Current Limits</h3>
-                            </div>
-                            <p class="muted smallText">
-                                Ergonomics, operator fatigue, richer buffer logic, and live factory synchronization are
-                                not yet part of the framework.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="calloutBox calloutInfo" style="margin-top: 1.5rem;">
-                        <div class="calloutIcon">OBJ</div>
-                        <div>
-                            <h4>Alignment with the dissertation objectives</h4>
-                            <p class="muted smallText">
-                                According to the dissertation, all core objectives were addressed except the final step
-                                of producing more detailed optimization recommendations for the current Bosch processes.
-                                Time constraints limited that final layer, but the framework and results now provide the
-                                basis needed for it.
-                            </p>
-                        </div>
-                    </div>
-
-                    <h3>Future Work</h3>
-                    <div class="tipsGrid">
-                        <div class="tipsCard">
-                            <div class="tipsIcon">1</div>
-                            <div>
-                                <h4>Broadened resource modeling</h4>
-                                <p class="muted smallText">Add more machine types, richer buffer behavior, more cobot profiles, and ergonomic factors.</p>
-                            </div>
-                        </div>
-                        <div class="tipsCard">
-                            <div class="tipsIcon">2</div>
-                            <div>
-                                <h4>Automated analytics</h4>
-                                <p class="muted smallText">Generate dashboards, utilization heatmaps, and better built-in reporting directly from each run.</p>
-                            </div>
-                        </div>
-                        <div class="tipsCard">
-                            <div class="tipsIcon">3</div>
-                            <div>
-                                <h4>Empirical expansion</h4>
-                                <p class="muted smallText">Validate more use cases, more lines, and more production contexts to strengthen reliability.</p>
-                            </div>
-                        </div>
-                        <div class="tipsCard">
-                            <div class="tipsIcon">4</div>
-                            <div>
-                                <h4>Pathway to a digital twin</h4>
-                                <p class="muted smallText">Connect the framework to live production data and ongoing calibration for real-time decision support.</p>
-                            </div>
-                        </div>
-                    </div>
+                    <p class="muted">
+                        At the same time, the work also made the next steps clear. Richer ergonomic modeling,
+                        operator variability, live factory data integration, and stronger built-in analytics would
+                        move the tool closer to a fuller digital-twin workflow. Even in its current state, though,
+                        the project already works as a solid decision-support foundation for future industrial
+                        improvement studies.
+                    </p>
                 </section>
 
-                <section id="resources" class="contentSection sectionCard ctaSection">
-                    <h2>Dissertation Materials</h2>
-                    <p class="muted">
-                        The full written dissertation remains the main source for the complete architecture,
-                        methodology, and case-study detail. This page is the cleaner web summary of that work.
-                    </p>
+                <section class="contentSection sectionCard ctaSection">
+                    <h2>Project Links</h2>
+                    <p class="muted smallText">Open the full dissertation, check the presentation, or head back to all projects.</p>
                     <div class="projectLinks">
                         <a href="assets/img/tese/Tese.pdf" class="btn primary" target="_blank" rel="noopener">
-                            Read the Full Dissertation
+                            Read Thesis PDF
+                        </a>
+                        <a href="assets/img/tese/TeseApp.pdf" class="btn quaternary" target="_blank" rel="noopener">
+                            View Presentation
                         </a>
                         <a href="index.html#projects" class="btn secondary">
                             &larr; Back to Projects
@@ -828,6 +718,12 @@
     </article>
 
     <div id="siteFooter" class="siteFooter"></div>
+</div>
+
+<div id="lightbox" class="lightbox" aria-hidden="true">
+    <button class="lightboxClose" aria-label="Close lightbox">&#x2715;</button>
+    <img id="lightboxImg" src="" alt="" class="lightboxImage">
+    <div class="lightboxCaption" id="lightboxCaption"></div>
 </div>
 
 <script src="script.js"></script>
