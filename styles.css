@@ -5028,3 +5028,275 @@ body.light .ledWebsiteEmbed:hover {
 body.light .websiteFrame {
     background: #ffffff;
 }
+
+/* ============================================
+   THESIS PROJECT
+   ============================================ */
+
+.thesisProject .projectContent {
+    max-width: 1100px;
+}
+
+.thesisProject .projectMain {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.thesisProject .contentSection {
+    margin-bottom: 0;
+}
+
+.thesisProject .sectionCard {
+    position: relative;
+    overflow: hidden;
+    background:
+        linear-gradient(180deg, rgba(9, 16, 24, 0.96), rgba(12, 22, 31, 0.96)),
+        linear-gradient(rgba(76, 109, 138, 0.12) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(76, 109, 138, 0.12) 1px, transparent 1px);
+    background-size: auto, 22px 22px, 22px 22px;
+    border: 1px solid rgba(94, 234, 212, 0.16);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    box-shadow: 0 22px 48px rgba(2, 6, 23, 0.28);
+}
+
+.thesisProject .sectionCard::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 3px;
+    background: linear-gradient(90deg, #38bdf8, #34d399, #f59e0b);
+}
+
+.thesisProject .sectionCard::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(circle at top right, rgba(52, 211, 153, 0.1), transparent 34%),
+        radial-gradient(circle at bottom left, rgba(56, 189, 248, 0.09), transparent 42%);
+    pointer-events: none;
+}
+
+.thesisProject .sectionCard > * {
+    position: relative;
+    z-index: 1;
+}
+
+.thesisTitleIcon {
+    font-size: 0.82rem;
+    letter-spacing: 0.2em;
+    font-weight: 800;
+    padding-left: 0.2em;
+    background: rgba(52, 211, 153, 0.14);
+    color: #8df0c6;
+    border-color: rgba(52, 211, 153, 0.3);
+    box-shadow: 0 12px 26px rgba(52, 211, 153, 0.18);
+}
+
+.thesisProject .metricCard,
+.thesisProject .detailCard {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(148, 163, 184, 0.18);
+    backdrop-filter: blur(8px);
+}
+
+.thesisHeroGrid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.02fr) minmax(320px, 0.98fr);
+    gap: 1.5rem;
+    align-items: start;
+}
+
+.thesisHeroCopy {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.thesisWindowCard,
+.thesisStageCard,
+.thesisShotCard {
+    margin: 0;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    border: 1px solid rgba(148, 163, 184, 0.18);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.02));
+    box-shadow: 0 18px 34px rgba(2, 6, 23, 0.24);
+}
+
+.thesisWindowBar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.8rem 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.thesisWindowCard img,
+.thesisStageMedia img,
+.thesisShotCard img {
+    width: 100%;
+    display: block;
+    background: #eef3f9;
+}
+
+.thesisWindowCard figcaption,
+.thesisShotCard figcaption {
+    padding: 0.9rem 1rem 1rem;
+}
+
+.thesisStageGrid,
+.thesisModelGrid,
+.thesisMiniShotGrid,
+.thesisValidationGrid {
+    display: grid;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.thesisStageGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.thesisModelGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.thesisMiniShotGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.thesisValidationGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.thesisStageBody {
+    padding: 1rem 1.1rem 1.15rem;
+    display: grid;
+    gap: 0.55rem;
+}
+
+.thesisStageEyebrow {
+    display: inline-flex;
+    align-items: center;
+    width: fit-content;
+    padding: 0.36rem 0.72rem;
+    border-radius: 999px;
+    background: rgba(45, 212, 191, 0.12);
+    border: 1px solid rgba(45, 212, 191, 0.22);
+    color: #7aeedb;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.thesisArchitectureWrap {
+    display: grid;
+    grid-template-columns: minmax(0, 1.02fr) minmax(0, 0.98fr);
+    gap: 1.5rem;
+    align-items: start;
+    margin-top: 1.5rem;
+}
+
+.thesisModuleGrid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.thesisProject .imgSlider {
+    max-width: none;
+    margin-top: 1.25rem;
+    background:
+        linear-gradient(145deg, rgba(16, 185, 129, 0.08), transparent 55%),
+        linear-gradient(180deg, rgba(10, 17, 25, 0.96), rgba(12, 20, 29, 0.96));
+    border-color: rgba(148, 163, 184, 0.18);
+}
+
+.thesisProject .imgSlider::after {
+    border-color: rgba(52, 211, 153, 0.12);
+}
+
+.thesisProject .imgSliderViewport {
+    background: linear-gradient(180deg, rgba(56, 189, 248, 0.08), transparent 50%), rgba(255, 255, 255, 0.02);
+}
+
+body.light .thesisProject .sectionCard {
+    background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(246, 251, 249, 0.98)),
+        linear-gradient(rgba(148, 163, 184, 0.16) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(148, 163, 184, 0.16) 1px, transparent 1px);
+    background-size: auto, 22px 22px, 22px 22px;
+    border-color: rgba(15, 118, 110, 0.14);
+    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+}
+
+body.light .thesisTitleIcon {
+    background: rgba(5, 150, 105, 0.1);
+    color: var(--accent-emerald);
+    border-color: rgba(5, 150, 105, 0.2);
+    box-shadow: 0 12px 24px rgba(5, 150, 105, 0.12);
+}
+
+body.light .thesisProject .metricCard,
+body.light .thesisProject .detailCard,
+body.light .thesisWindowCard,
+body.light .thesisStageCard,
+body.light .thesisShotCard {
+    background: rgba(255, 255, 255, 0.8);
+    border-color: rgba(148, 163, 184, 0.24);
+    box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
+}
+
+body.light .thesisWindowBar {
+    background: rgba(15, 23, 42, 0.04);
+    border-bottom-color: rgba(148, 163, 184, 0.2);
+}
+
+body.light .thesisStageEyebrow {
+    background: rgba(5, 150, 105, 0.08);
+    border-color: rgba(5, 150, 105, 0.18);
+    color: var(--accent-emerald);
+}
+
+body.light .thesisProject .imgSlider {
+    background:
+        linear-gradient(145deg, rgba(5, 150, 105, 0.08), transparent 55%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(247, 250, 252, 0.98));
+    border-color: rgba(148, 163, 184, 0.22);
+}
+
+body.light .thesisProject .imgSliderViewport {
+    background: linear-gradient(180deg, rgba(2, 132, 199, 0.08), transparent 55%), rgba(255, 255, 255, 0.92);
+}
+
+@media (max-width: 1000px) {
+    .thesisHeroGrid,
+    .thesisArchitectureWrap,
+    .thesisStageGrid,
+    .thesisModelGrid,
+    .thesisMiniShotGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .thesisModuleGrid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 720px) {
+    .thesisValidationGrid,
+    .thesisModuleGrid {
+        grid-template-columns: 1fr;
+    }
+}

@@ -3,8 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Simulation Framework - Distributed systems framework for network clock synchronization research.">
-    <title>Simulation Framework — Project</title>
+    <meta
+        name="description"
+        content="Simulation Framework - Python desktop application from my Master's thesis at Bosch Ovar for visually modeling, validating, and analyzing discrete-event production line simulations."
+    >
+    <title>Simulation Framework - Project</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -14,130 +17,682 @@
     <div id="siteHeader" class="siteHeader"></div>
 
     <a href="index.html#projects" class="backLink">
-        ← Back to Projects
+        &larr; Back to Projects
     </a>
 
-    <article>
+    <article class="projectArticle thesisProject">
         <header class="projectHeader">
-            <h1 class="projectTitle">Simulation Framework</h1>
+            <h1 class="projectTitle">
+                <span class="projectTitleIcon thesisTitleIcon" aria-hidden="true">SIM</span>
+                Simulation Framework
+            </h1>
             <p class="lead">
-                A high-performance simulation framework for testing stochastic methods in network clock
-                synchronization, developed for distributed systems research at INESCTEC.
+                Developed during my Master's thesis at Bosch Ovar, this Python desktop application was built to
+                model production lines as discrete-event simulations using real shop-floor data. The tool combines a
+                visual line editor, spreadsheet-driven timing import, validation, execution, and dashboard analysis in
+                one engineering workflow.
             </p>
-            <div class="projectMeta">
-                <span class="badge">Research</span>
-                <span class="chip">C</span>
-                <span class="chip">Distributed Systems</span>
-                <span class="chip">Simulation</span>
+
+            <div class="quickFacts">
+                <div class="factItem">
+                    <span class="factLabel">Latest Update</span>
+                    <span class="factValue" data-project-latest-update>2026</span>
+                </div>
+                <div class="factItem">
+                    <span class="factLabel">Type</span>
+                    <span class="factValue">Master Thesis Project</span>
+                </div>
+                <div class="factItem">
+                    <span class="factLabel">Category</span>
+                    <span class="factValue">Industrial Simulation</span>
+                </div>
+                <div class="factItem">
+                    <span class="factLabel">Status</span>
+                    <span class="factValue grad">Complete</span>
+                </div>
             </div>
+
             <div class="projectLinks">
-                <a href="https://github.com/yourusername/simulation-framework" class="btn primary" target="_blank" rel="noopener">
-                    View on GitHub
+                <a href="assets/img/tese/Tese.pdf" class="btn primary" target="_blank" rel="noopener">
+                    Open Thesis PDF
                 </a>
-                <a href="#" class="btn">Read Paper</a>
+                <a href="#interface-walkthrough" class="btn">
+                    View Interface
+                </a>
             </div>
         </header>
 
         <div class="projectContent">
-            <section class="contentSection">
-                <h2>Overview</h2>
-                <p class="muted">
-                    This simulation framework enables researchers to test and validate stochastic clock
-                    synchronization algorithms in distributed network environments. Built for performance
-                    and extensibility, it supports large-scale experiments with real-time monitoring capabilities.
-                </p>
-            </section>
+            <div class="projectMain">
+                <section id="overview" class="contentSection sectionCard">
+                    <div class="thesisHeroGrid">
+                        <div class="thesisHeroCopy">
+                            <h2>Overview</h2>
+                            <p class="muted">
+                                This project was designed as an engineering tool, not just an academic artifact. It lets
+                                the user place sources, processes, buffers, operators, conveyors, and targets on a
+                                canvas, define their behavior from configuration dialogs, and run the resulting model
+                                from the same desktop application.
+                            </p>
+                            <p class="muted">
+                                The thesis work focused on bringing real production-line structure and data into a
+                                simulation environment that stays inspectable. Instead of jumping between drawings,
+                                spreadsheets, and separate scripts, the application keeps modeling, validation, logging,
+                                and dashboard views in one place.
+                            </p>
 
-            <div class="mediaSection">
-                <h3>System Architecture</h3>
-                <img
-                        src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 600'%3E%3Crect fill='%23252b42' width='1200' height='600'/%3E%3Ccircle cx='300' cy='300' r='60' fill='none' stroke='%237c5cff' stroke-width='3'/%3E%3Ccircle cx='600' cy='200' r='60' fill='none' stroke='%232dd4ff' stroke-width='3'/%3E%3Ccircle cx='900' cy='300' r='60' fill='none' stroke='%23a78bfa' stroke-width='3'/%3E%3Cline x1='360' y1='300' x2='540' y2='200' stroke='%239ba3b8' stroke-width='2' stroke-dasharray='5,5'/%3E%3Cline x1='660' y1='200' x2='840' y2='300' stroke='%239ba3b8' stroke-width='2' stroke-dasharray='5,5'/%3E%3Ctext x='50%25' y='90%25' text-anchor='middle' font-family='system-ui' font-size='24' fill='%239ba3b8'%3EDistributed Node Network%3C/text%3E%3C/svg%3E"
-                        alt="Simulation framework architecture diagram"
-                        loading="lazy"
-                >
-                <p class="smallText muted" style="margin-top: 0.5rem;">
-                    Distributed node architecture with stochastic synchronization
-                </p>
-            </div>
+                            <div class="calloutBox calloutInfo">
+                                <div class="calloutIcon">&#x2139;</div>
+                                <div>
+                                    <h4>Application-focused showcase</h4>
+                                    <p class="smallText">
+                                        This page is intentionally centered on the software itself: the interface,
+                                        workflow, and simulation tooling rather than the thesis results chapter.
+                                    </p>
+                                </div>
+                            </div>
 
-            <section class="contentSection">
-                <h2>Problem</h2>
-                <p class="muted">
-                    Network clock synchronization is critical for distributed systems, but testing
-                    synchronization algorithms in real networks is costly and difficult to reproduce.
-                    Researchers need a controlled environment to evaluate stochastic methods under various
-                    network conditions and failure scenarios.
-                </p>
-            </section>
+                            <div class="metricsGrid">
+                                <div class="metricCard">
+                                    <div class="metricValue grad">4</div>
+                                    <div class="metricLabel">Operator Roles</div>
+                                    <p class="smallText muted">
+                                        The modeled Bosch scenarios include dedicated operator views from OP1 to OP4.
+                                    </p>
+                                </div>
+                                <div class="metricCard">
+                                    <div class="metricValue grad2">2</div>
+                                    <div class="metricLabel">Line Layouts</div>
+                                    <p class="smallText muted">
+                                        Two Bosch line cases are represented through full-line and operator-focused
+                                        models.
+                                    </p>
+                                </div>
+                                <div class="metricCard">
+                                    <div class="metricValue grad">3</div>
+                                    <div class="metricLabel">Analysis Tabs</div>
+                                    <p class="smallText muted">
+                                        Dashboard, process analytics, and financial results stay inside the same run
+                                        view.
+                                    </p>
+                                </div>
+                                <div class="metricCard">
+                                    <div class="metricValue grad2">Excel</div>
+                                    <div class="metricLabel">Data Input</div>
+                                    <p class="smallText muted">
+                                        Timing samples and supporting data can be imported from spreadsheet-based work
+                                        packages.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
 
-            <section class="contentSection">
-                <h2>Solution</h2>
-                <p class="muted">
-                    I developed a C-based simulation framework that:
-                </p>
-                <ul>
-                    <li>Models distributed network nodes with configurable clock drift</li>
-                    <li>Implements multiple stochastic synchronization algorithms</li>
-                    <li>Simulates network delays, packet loss, and Byzantine failures</li>
-                    <li>Provides real-time performance metrics and visualization</li>
-                    <li>Supports large-scale experiments (1000+ nodes)</li>
-                </ul>
-            </section>
+                        <figure class="thesisWindowCard thesisWindowCard--hero">
+                            <div class="thesisWindowBar">
+                                <span>Application Workspace</span>
+                                <span>Visual editor + run controls</span>
+                            </div>
+                            <img
+                                src="assets/img/tese/fullwindow.png"
+                                alt="Full simulation framework desktop window"
+                                class="galleryImage"
+                                loading="eager"
+                            >
+                            <figcaption>
+                                Full desktop view with menu bar, element tree, workspace tabs, and editable simulation
+                                canvas.
+                            </figcaption>
+                        </figure>
+                    </div>
+                </section>
 
-            <section class="contentSection">
-                <h2>Technical Stack</h2>
-                <div class="techList">
-                    <span class="techItem">C</span>
-                    <span class="techItem">Makefiles</span>
-                    <span class="techItem">CMake</span>
-                    <span class="techItem">Git</span>
-                    <span class="techItem">Python (analysis)</span>
-                    <span class="techItem">gnuplot (visualization)</span>
-                </div>
-            </section>
+                <section class="contentSection sectionCard storySection">
+                    <div class="storyIntro">
+                        <h2>Project Story</h2>
+                        <p class="muted">
+                            The thesis was about turning line knowledge into a simulation workflow that felt usable in a
+                            real engineering context, not just demonstrable in a report.
+                        </p>
+                    </div>
 
-            <section class="contentSection">
-                <h2>Key Features</h2>
-                <h3>Stochastic Methods</h3>
-                <p class="muted">
-                    Implements probabilistic approaches to clock synchronization, allowing nodes to achieve
-                    consensus despite unreliable communication channels and Byzantine actors.
-                </p>
+                    <div class="storyFlow">
+                        <div class="storyCard storyProblem">
+                            <div class="storyCardHeader">
+                                <span class="storyIcon" aria-hidden="true">&#x1F3ED;</span>
+                                <span class="storyTag">Industrial Context</span>
+                            </div>
+                            <p class="muted">
+                                Evaluating changes to a production line is hard when information is spread across
+                                spreadsheets, drawings, and manual reasoning. The project needed a practical way to
+                                represent stations, buffers, conveyors, operators, and validation rules inside one
+                                workspace.
+                            </p>
+                            <p class="muted">
+                                The software had to stay approachable for engineering use while still supporting the
+                                structure needed for discrete-event simulation.
+                            </p>
+                        </div>
 
-                <h3>Performance Monitoring</h3>
-                <p class="muted">
-                    Real-time metrics track synchronization accuracy, convergence time, message overhead,
-                    and fault tolerance. Data exports enable detailed statistical analysis.
-                </p>
+                        <div class="storyCard storyIdea">
+                            <div class="storyCardHeader">
+                                <span class="storyIcon" aria-hidden="true">&#x2699;</span>
+                                <span class="storyTag">Design Goal</span>
+                            </div>
+                            <p class="muted">
+                                Build a desktop application that feels closer to an engineering tool than a one-off
+                                academic script. The interface should let a user build the flow visually, configure
+                                each node from dialogs, import timing samples, and run the model without changing code.
+                            </p>
+                            <p class="muted">
+                                That meant treating data import, validation, logging, and dashboard inspection as
+                                first-class parts of the application.
+                            </p>
+                        </div>
 
-                <h3>Extensible Architecture</h3>
-                <p class="muted">
-                    Modular design allows researchers to plug in new synchronization algorithms, network
-                    models, and failure scenarios without modifying core framework code.
-                </p>
-            </section>
+                        <div class="storyCard storySolution">
+                            <div class="storyCardHeader">
+                                <span class="storyIcon" aria-hidden="true">&#x2705;</span>
+                                <span class="storyTag">Built Outcome</span>
+                            </div>
+                            <p class="muted">
+                                The finished tool ties together modeling, validation, run parameters, logs, and KPI
+                                dashboards in one Python desktop application. It supports both full-line layouts and
+                                narrower operator-specific views, making the simulation easier to inspect from multiple
+                                angles.
+                            </p>
+                            <p class="muted">
+                                The result is a project page that is better understood as a simulation application
+                                showcase than as a thesis summary.
+                            </p>
+                        </div>
+                    </div>
+                </section>
 
-            <section class="contentSection">
-                <h2>Results</h2>
-                <ul>
-                    <li>Enabled testing of novel synchronization algorithms at scale</li>
-                    <li>Reduced research iteration time through reproducible experiments</li>
-                    <li>Published findings in distributed systems research community</li>
-                    <li>Provided foundation for follow-up hardware implementations</li>
-                </ul>
-            </section>
+                <section class="contentSection sectionCard">
+                    <h2>Technical Stack</h2>
+                    <div class="techList">
+                        <span class="techItem">Python</span>
+                        <span class="techItem">Qt Desktop GUI</span>
+                        <span class="techItem">Discrete-Event Simulation</span>
+                        <span class="techItem">Excel Import</span>
+                        <span class="techItem">Event Logging</span>
+                        <span class="techItem">KPI Dashboards</span>
+                    </div>
+                </section>
 
-            <div class="projectLinks" style="margin-top: 3rem;">
-                <a href="https://github.com/yourusername/simulation-framework" class="btn primary" target="_blank" rel="noopener">
-                    View Source Code
-                </a>
-                <a href="index.html#projects" class="btn">
-                    ← Back to Projects
-                </a>
+                <section id="workflow" class="contentSection sectionCard">
+                    <h2>Simulation Workflow</h2>
+                    <p class="muted">
+                        The application follows a clear sequence from line construction to run analysis, keeping the
+                        workflow visible instead of hiding everything behind a single execute button.
+                    </p>
+
+                    <div class="workflowTimeline">
+                        <div class="workflowStep">
+                            <div class="workflowIcon">&#x1F5FA;</div>
+                            <div class="workflowContent">
+                                <h4>Build the system on the canvas</h4>
+                                <p class="muted smallText">
+                                    Start with sources, processes, buffers, conveyors, operators, and targets, then
+                                    arrange them visually inside the tabbed workspace.
+                                </p>
+                            </div>
+                            <div class="workflowNumber">01</div>
+                        </div>
+
+                        <div class="workflowStep">
+                            <div class="workflowIcon">&#x2699;</div>
+                            <div class="workflowContent">
+                                <h4>Configure each element from dialogs</h4>
+                                <p class="muted smallText">
+                                    Dedicated add/edit windows capture connectors, operation modes, process times,
+                                    operator properties, images, and other node-level settings.
+                                </p>
+                            </div>
+                            <div class="workflowNumber">02</div>
+                        </div>
+
+                        <div class="workflowStep">
+                            <div class="workflowIcon">&#x1F4C8;</div>
+                            <div class="workflowContent">
+                                <h4>Import timing data from spreadsheets</h4>
+                                <p class="muted smallText">
+                                    Process-time samples can be pasted or imported, making it easier to bring real
+                                    industrial data into the simulation model.
+                                </p>
+                            </div>
+                            <div class="workflowNumber">03</div>
+                        </div>
+
+                        <div class="workflowStep">
+                            <div class="workflowIcon">&#x2705;</div>
+                            <div class="workflowContent">
+                                <h4>Validate the topology before running</h4>
+                                <p class="muted smallText">
+                                    Connector counts, missing source or target nodes, and other structural issues are
+                                    checked before the system is allowed to run.
+                                </p>
+                            </div>
+                            <div class="workflowNumber">04</div>
+                        </div>
+
+                        <div class="workflowStep">
+                            <div class="workflowIcon">&#x23F1;</div>
+                            <div class="workflowContent">
+                                <h4>Set simulation and business parameters</h4>
+                                <p class="muted smallText">
+                                    The runtime window captures time horizon, shift structure, implementation cost, and
+                                    unit profit so the model can be executed in a realistic scenario.
+                                </p>
+                            </div>
+                            <div class="workflowNumber">05</div>
+                        </div>
+
+                        <div class="workflowStep">
+                            <div class="workflowIcon">&#x1F4CA;</div>
+                            <div class="workflowContent">
+                                <h4>Inspect logs, KPIs, and financial views</h4>
+                                <p class="muted smallText">
+                                    After execution the application exposes operator traces, piece traces, utilization,
+                                    throughput, and financial summaries from the same desktop tool.
+                                </p>
+                            </div>
+                            <div class="workflowNumber">06</div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="contentSection sectionCard">
+                    <h2>Key Screens</h2>
+                    <p class="muted">
+                        The interface is organized around three main surfaces: building the model, configuring the
+                        nodes, and reviewing what the run produced.
+                    </p>
+
+                    <div class="thesisStageGrid">
+                        <article class="thesisStageCard">
+                            <div class="thesisStageMedia">
+                                <img
+                                    src="assets/img/tese/canvass.png"
+                                    alt="Simulation framework canvas view"
+                                    class="galleryImage"
+                                    loading="lazy"
+                                >
+                            </div>
+                            <div class="thesisStageBody">
+                                <span class="thesisStageEyebrow">Workspace</span>
+                                <h3>Canvas and element tree</h3>
+                                <p class="muted smallText">
+                                    The main window combines searchable elements, model tabs, and a grid canvas for
+                                    composing the line layout visually.
+                                </p>
+                            </div>
+                        </article>
+
+                        <article class="thesisStageCard">
+                            <div class="thesisStageMedia">
+                                <img
+                                    src="assets/img/tese/addedit_process.png"
+                                    alt="Process configuration dialog in the simulation application"
+                                    class="galleryImage"
+                                    loading="lazy"
+                                >
+                            </div>
+                            <div class="thesisStageBody">
+                                <span class="thesisStageEyebrow">Configuration</span>
+                                <h3>Dialog-driven setup</h3>
+                                <p class="muted smallText">
+                                    Element properties are edited from focused dialogs, keeping machine, process, and
+                                    operator setup readable and explicit.
+                                </p>
+                            </div>
+                        </article>
+
+                        <article class="thesisStageCard">
+                            <div class="thesisStageMedia">
+                                <img
+                                    src="assets/img/tese/L05C_Dashboard.png"
+                                    alt="Simulation KPI dashboard"
+                                    class="galleryImage"
+                                    loading="lazy"
+                                >
+                            </div>
+                            <div class="thesisStageBody">
+                                <span class="thesisStageEyebrow">Analysis</span>
+                                <h3>Integrated KPI dashboard</h3>
+                                <p class="muted smallText">
+                                    Production indicators, process analytics, and financial views live inside the same
+                                    application instead of being exported to a separate tool first.
+                                </p>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+
+                <section class="contentSection sectionCard">
+                    <h2>Architecture</h2>
+                    <p class="muted">
+                        The codebase is split into focused Python modules so the GUI, simulation logic, logging, and
+                        statistical analysis layers can evolve without collapsing into one monolithic file.
+                    </p>
+
+                    <div class="thesisArchitectureWrap">
+                        <figure class="thesisWindowCard">
+                            <div class="thesisWindowBar">
+                                <span>Python Module Layout</span>
+                                <span>System overview</span>
+                            </div>
+                            <img
+                                src="assets/img/tese/ArchitectureDiagram.png"
+                                alt="Simulation framework architecture diagram"
+                                class="galleryImage"
+                                loading="lazy"
+                            >
+                            <figcaption>
+                                Module split used in the thesis application, separating UI, dialogs, logic, logging,
+                                and statistical analysis.
+                            </figcaption>
+                        </figure>
+
+                        <div class="thesisModuleGrid">
+                            <div class="detailCard">
+                                <div class="detailHeader">
+                                    <div class="detailIcon">&#x1F5A5;</div>
+                                    <h3><code>main.py</code></h3>
+                                </div>
+                                <p class="smallText muted">
+                                    Owns the main application shell, menu actions, workspace tabs, and the overall user
+                                    entry point.
+                                </p>
+                            </div>
+
+                            <div class="detailCard">
+                                <div class="detailHeader">
+                                    <div class="detailIcon">&#x25A6;</div>
+                                    <h3><code>gui_elements.py</code></h3>
+                                </div>
+                                <p class="smallText muted">
+                                    Defines the canvas-side visual elements and the UI pieces used to render nodes and
+                                    interactions.
+                                </p>
+                            </div>
+
+                            <div class="detailCard">
+                                <div class="detailHeader">
+                                    <div class="detailIcon">&#x1F4DD;</div>
+                                    <h3><code>dialogs.py</code></h3>
+                                </div>
+                                <p class="smallText muted">
+                                    Handles the add/edit element windows and import flows that keep configuration work
+                                    structured.
+                                </p>
+                            </div>
+
+                            <div class="detailCard">
+                                <div class="detailHeader">
+                                    <div class="detailIcon">&#x2699;</div>
+                                    <h3><code>logic.py</code></h3>
+                                </div>
+                                <p class="smallText muted">
+                                    Contains the simulation behavior, connectivity rules, and the execution-side logic
+                                    behind the modeled system.
+                                </p>
+                            </div>
+
+                            <div class="detailCard">
+                                <div class="detailHeader">
+                                    <div class="detailIcon">&#x1F4CB;</div>
+                                    <h3><code>logger.py</code></h3>
+                                </div>
+                                <p class="smallText muted">
+                                    Records operator activity and other event traces so a run can be inspected after it
+                                    finishes.
+                                </p>
+                            </div>
+
+                            <div class="detailCard">
+                                <div class="detailHeader">
+                                    <div class="detailIcon">&#x1F4CA;</div>
+                                    <h3><code>statistical.py</code></h3>
+                                </div>
+                                <p class="smallText muted">
+                                    Converts run data into KPIs, process analytics, charts, and financial summaries
+                                    shown in the dashboard.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="interface-walkthrough" class="contentSection sectionCard">
+                    <h2>Interface Walkthrough</h2>
+                    <p class="muted">
+                        A screen-by-screen tour of the application, from the blank canvas and configuration dialogs to
+                        validation, logs, and dashboard inspection.
+                    </p>
+
+                    <div class="imgSlider" tabindex="0"
+                         data-autoplay="2400"
+                         data-images='[
+                             {"src":"assets/img/tese/fullwindow.png","alt":"Full simulation framework desktop window","caption":"Main desktop workspace"},
+                             {"src":"assets/img/tese/canvass.png","alt":"Tabbed simulation canvas","caption":"Tabbed simulation canvas"},
+                             {"src":"assets/img/tese/elementstree.png","alt":"Searchable element tree","caption":"Searchable element tree"},
+                             {"src":"assets/img/tese/addedit.png","alt":"Machine element configuration dialog","caption":"Machine configuration dialog"},
+                             {"src":"assets/img/tese/addedit_process.png","alt":"Process configuration dialog","caption":"Process configuration dialog"},
+                             {"src":"assets/img/tese/addedit_operator.png","alt":"Operator configuration dialog","caption":"Operator configuration dialog"},
+                             {"src":"assets/img/tese/processtimeimport.png","alt":"Process time import dialog","caption":"Process time import"},
+                             {"src":"assets/img/tese/simparams.png","alt":"Simulation parameter dialog","caption":"Simulation parameter setup"},
+                             {"src":"assets/img/tese/validation_sucess.png","alt":"Successful system validation dialog","caption":"Successful validation"},
+                             {"src":"assets/img/tese/validation_error.png","alt":"Validation error dialog","caption":"Validation feedback on connector issues"},
+                             {"src":"assets/img/tese/operatorlog.png","alt":"Operator log table","caption":"Operator activity log"},
+                             {"src":"assets/img/tese/piecelog.png","alt":"Piece log table","caption":"Piece trace log"},
+                             {"src":"assets/img/tese/L05C_Dashboard.png","alt":"Production KPI dashboard","caption":"Production KPI dashboard"},
+                             {"src":"assets/img/tese/L05C_Financial.png","alt":"Financial analysis dashboard","caption":"Financial analysis dashboard"}
+                         ]'>
+                        <div class="imgSliderViewport">
+                            <div class="imgSliderTopCounter">
+                                <span class="imgSliderIndex">1</span> / <span class="imgSliderTotal">14</span>
+                            </div>
+                            <img class="imgSliderImg" src="" alt="" loading="lazy">
+                            <button class="imgSliderOverlayBtn imgSliderOverlayPrev" aria-label="Previous image">&#8249;</button>
+                            <button class="imgSliderOverlayBtn imgSliderOverlayNext" aria-label="Next image">&#8250;</button>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="contentSection sectionCard">
+                    <h2>Bosch Line Models</h2>
+                    <p class="muted">
+                        The application was used to represent complete line layouts and narrower operator-focused slices,
+                        making the system easier to inspect at both the flow level and the workstation level.
+                    </p>
+
+                    <div class="thesisModelGrid">
+                        <figure class="thesisWindowCard">
+                            <div class="thesisWindowBar">
+                                <span>L05C</span>
+                                <span>Full line model</span>
+                            </div>
+                            <img
+                                src="assets/img/tese/model_full_L05C.png"
+                                alt="Full L05C line model inside the simulation framework"
+                                class="galleryImage"
+                                loading="lazy"
+                            >
+                            <figcaption>
+                                Full L05C model showing the flow from source through operator-supported processes to
+                                final packaging and target.
+                            </figcaption>
+                        </figure>
+
+                        <figure class="thesisWindowCard">
+                            <div class="thesisWindowBar">
+                                <span>L05B</span>
+                                <span>Full line model</span>
+                            </div>
+                            <img
+                                src="assets/img/tese/model_L05B_full.png"
+                                alt="Full L05B line model inside the simulation framework"
+                                class="galleryImage"
+                                loading="lazy"
+                            >
+                            <figcaption>
+                                L05B line representation with workstation buffers, soldering operations, and downstream
+                                testing and packaging.
+                            </figcaption>
+                        </figure>
+                    </div>
+
+                    <div class="thesisMiniShotGrid">
+                        <figure class="thesisShotCard">
+                            <img
+                                src="assets/img/tese/model_op1_L05C.png"
+                                alt="L05C upstream operator view"
+                                class="galleryImage"
+                                loading="lazy"
+                            >
+                            <figcaption class="smallText muted">L05C upstream view around OP1 and the first assembly stages.</figcaption>
+                        </figure>
+
+                        <figure class="thesisShotCard">
+                            <img
+                                src="assets/img/tese/model_op2_3_L05C.png"
+                                alt="L05C parallel operator view"
+                                class="galleryImage"
+                                loading="lazy"
+                            >
+                            <figcaption class="smallText muted">L05C middle section with parallel operator-supported testing cells.</figcaption>
+                        </figure>
+
+                        <figure class="thesisShotCard">
+                            <img
+                                src="assets/img/tese/model_op4_L05C.png"
+                                alt="L05C final operator view"
+                                class="galleryImage"
+                                loading="lazy"
+                            >
+                            <figcaption class="smallText muted">L05C downstream packaging and final-test area around OP4.</figcaption>
+                        </figure>
+
+                        <figure class="thesisShotCard">
+                            <img
+                                src="assets/img/tese/model_L05B_op1.png"
+                                alt="L05B upstream operator view"
+                                class="galleryImage"
+                                loading="lazy"
+                            >
+                            <figcaption class="smallText muted">L05B upstream section with manual assembly, soldering, and buffer handoff.</figcaption>
+                        </figure>
+
+                        <figure class="thesisShotCard">
+                            <img
+                                src="assets/img/tese/model_L05B_op2.png"
+                                alt="L05B middle operator view"
+                                class="galleryImage"
+                                loading="lazy"
+                            >
+                            <figcaption class="smallText muted">L05B middle section covering test, manual work, switching, and encasing.</figcaption>
+                        </figure>
+
+                        <figure class="thesisShotCard">
+                            <img
+                                src="assets/img/tese/model_L05B_op3.png"
+                                alt="L05B downstream operator view"
+                                class="galleryImage"
+                                loading="lazy"
+                            >
+                            <figcaption class="smallText muted">L05B downstream area for final test, color-ring check, packing, and target.</figcaption>
+                        </figure>
+                    </div>
+                </section>
+
+                <section class="contentSection sectionCard">
+                    <h2>Validation and Traceability</h2>
+                    <p class="muted">
+                        The tool does more than draw nodes. It validates connector counts before execution and records
+                        run-time activity so the behavior of operators and pieces can be inspected after the run.
+                    </p>
+
+                    <div class="thesisValidationGrid">
+                        <figure class="thesisShotCard">
+                            <img
+                                src="assets/img/tese/validation_error.png"
+                                alt="Validation error dialog"
+                                class="galleryImage"
+                                loading="lazy"
+                            >
+                            <figcaption class="smallText muted">
+                                Structural feedback when source, target, or connector expectations are not satisfied.
+                            </figcaption>
+                        </figure>
+
+                        <figure class="thesisShotCard">
+                            <img
+                                src="assets/img/tese/validation_sucess.png"
+                                alt="Validation success dialog"
+                                class="galleryImage"
+                                loading="lazy"
+                            >
+                            <figcaption class="smallText muted">
+                                Successful validation once the modeled system is connected correctly.
+                            </figcaption>
+                        </figure>
+
+                        <figure class="thesisShotCard">
+                            <img
+                                src="assets/img/tese/operatorlog.png"
+                                alt="Operator activity log table"
+                                class="galleryImage"
+                                loading="lazy"
+                            >
+                            <figcaption class="smallText muted">
+                                Operator-centered trace showing requests, releases, waits, and handoffs across the line.
+                            </figcaption>
+                        </figure>
+
+                        <figure class="thesisShotCard">
+                            <img
+                                src="assets/img/tese/piecelog.png"
+                                alt="Piece trace log table"
+                                class="galleryImage"
+                                loading="lazy"
+                            >
+                            <figcaption class="smallText muted">
+                                Piece-level history for following how a single unit moves through the simulated system.
+                            </figcaption>
+                        </figure>
+                    </div>
+                </section>
+
+                <section class="contentSection sectionCard ctaSection">
+                    <h2>Project Files</h2>
+                    <p class="muted smallText">
+                        Open the thesis document, jump straight to the software chapter, or head back to the full
+                        project list.
+                    </p>
+                    <div class="projectLinks">
+                        <a href="assets/img/tese/Tese.pdf" class="btn primary" target="_blank" rel="noopener">
+                            Open Thesis PDF
+                        </a>
+                        <a href="assets/img/tese/Chapter3.pdf" class="btn" target="_blank" rel="noopener">
+                            Open Chapter 3
+                        </a>
+                        <a href="index.html#projects" class="btn secondary">
+                            &larr; Back to Projects
+                        </a>
+                    </div>
+                </section>
             </div>
         </div>
     </article>
+
     <div id="siteFooter" class="siteFooter"></div>
+</div>
+
+<div id="lightbox" class="lightbox" aria-hidden="true">
+    <button class="lightboxClose" aria-label="Close lightbox">&#x2715;</button>
+    <img id="lightboxImg" src="" alt="" class="lightboxImage">
+    <div class="lightboxCaption" id="lightboxCaption"></div>
 </div>
 
 <script src="script.js"></script>
