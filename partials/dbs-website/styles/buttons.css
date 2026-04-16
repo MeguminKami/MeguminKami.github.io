@@ -51,7 +51,7 @@
     margin-left: 10%;
     width: 35px;
     height: 35px;
-    background-image: url('https://gnomo.fe.up.pt/~up201906465/dbs/assets/icons/edit.png');
+    background-image: url('../assets/icons/edit.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -66,7 +66,7 @@
     margin-top: 4%;
     width: 35px;
     height: 35px;
-    background-image: url('https://gnomo.fe.up.pt/~up201906465/dbs/assets/icons/delete.png');
+    background-image: url('../assets/icons/delete.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -81,7 +81,7 @@
     margin-top: 20px;
     width: 35px;
     height: 35px;
-    background-image: url('https://gnomo.fe.up.pt/~up201906465/dbs/assets/icons/view.png');
+    background-image: url('../assets/icons/view.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -95,7 +95,7 @@
 .add-button {
     min-width: 35px;
     min-height: 35px;
-    background-image: url('https://gnomo.fe.up.pt/~up201906465/dbs/assets/icons/add.png');
+    background-image: url('../assets/icons/add.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -114,7 +114,7 @@
 .remove-button {
     min-width: 35px;
     min-height: 35px;
-    background-image: url('https://gnomo.fe.up.pt/~up201906465/dbs/assets/icons/minus.png');
+    background-image: url('../assets/icons/minus.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

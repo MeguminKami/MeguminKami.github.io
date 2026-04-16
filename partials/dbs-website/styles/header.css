@@ -68,30 +68,30 @@ header {
 }
 
 #user-icon {
-    background-image: url('https://gnomo.fe.up.pt/~up201906465/dbs/assets/icons/user.png');
+    background-image: url('../assets/icons/user.png');
 }
 
 #user-icon:hover {
     transition: opacity 0.666s ease-in-out;
-    background-image: url('https://gnomo.fe.up.pt/~up201906465/dbs/assets/icons/user-hover.png');
+    background-image: url('../assets/icons/user-hover.png');
 }
 
 #cart-icon {
-    background-image: url('https://gnomo.fe.up.pt/~up201906465/dbs/assets/icons/shopping-cart.png');
+    background-image: url('../assets/icons/shopping-cart.png');
 }
 
 #cart-icon:hover {
     transition: opacity 0.666s ease-in-out;
-    background-image: url('https://gnomo.fe.up.pt/~up201906465/dbs/assets/icons/shopping-cart-hover.png');
+    background-image: url('../assets/icons/shopping-cart-hover.png');
 }
 
 #settings-icon {
-    background-image: url('https://gnomo.fe.up.pt/~up201906465/dbs/assets/icons/settings.png');
+    background-image: url('../assets/icons/settings.png');
 }
 
 #settings-icon:hover {
     transition: opacity 0.666s ease-in-out;
-    background-image: url('https://gnomo.fe.up.pt/~up201906465/dbs/assets/icons/settings-hover.png');
+    background-image: url('../assets/icons/settings-hover.png');
 }
 
 .header-menu{

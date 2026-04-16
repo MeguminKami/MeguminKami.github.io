@@ -1,199 +1,117 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta
-        name="description"
-        content="Djabusabi static website demo rebuilt from the original PHP store so it can run on GitHub Pages."
-    >
-    <title>Djabusabi - Static Demo</title>
-    <link rel="icon" href="../dbs_php/assets/logos/logo_vigo.png" type="image/png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Manrope:wght@400;500;600;700&display=swap"
-        rel="stylesheet"
-    >
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Djabusabi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Pacifico&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/body.css">
+  <link rel="stylesheet" href="styles/header.css">
+  <link rel="stylesheet" href="styles/footer.css">
+  <link rel="stylesheet" href="styles/containers.css">
+  <link rel="stylesheet" href="styles/messages.css">
+  <link rel="stylesheet" href="styles/buttons.css">
+  <link rel="stylesheet" href="styles/forms.css">
+  <link rel="stylesheet" href="styles/details.css">
+  <link rel="stylesheet" href="styles/app.css">
 </head>
-<body data-page="home">
-<div class="backgroundOrbs" aria-hidden="true">
-    <span class="orb orbA"></span>
-    <span class="orb orbB"></span>
-    <span class="orb orbC"></span>
-</div>
+<body>
+  <header class="header">
+    <div class="header-left">
+      <a href="index.html"><img src="assets/logos/logo_branco.png" alt="Djabusabi"></a>
+      <a href="#eventos">Eventos</a>
+      <a href="store.html">Loja</a>
+      <a href="#equipas">Equipas</a>
+    </div>
+    <div class="header-right">
+      <input type="checkbox" id="toggle-header-menu" style="display:none;">
+      <label for="toggle-header-menu" class="background"></label>
+      <label for="toggle-header-menu" class="header-icon" id="user-icon" aria-label="Abrir menu"></label>
+      <a href="store.html" class="header-icon" id="cart-icon" aria-label="Abrir loja"></a>
 
-<div class="siteShell">
-    <header id="siteHeader"></header>
+      <div class="header-menu">
+        <div class="header-menu-top">
+          <div style="margin:20px;">
+            <h1 class="header-menu-text-big">Como assim ainda não és um Djabusabi?</h1>
+            <p class="header-menu-text-small">Versão estática da identidade visual, sem PHP nem base de dados.</p>
+          </div>
+          <div class="header-menu-buttons">
+            <a href="signup.html" class="sign-up">Regista-te</a>
+            <a href="login.html" class="log-in">Iniciar Sessão</a>
+          </div>
+        </div>
+        <div class="header-menu-bot">
+          <a href="account.html" class="user-buttons"><span>Dados Pessoais</span></a>
+          <a href="store.html" class="user-buttons"><span>Encomendas e Faturas</span></a>
+          <a href="#footer" class="user-buttons"><span>Apoio ao Cliente</span></a>
+        </div>
+        <div class="header-menu-bot">
+          <img src="assets/logos/logo_vigo.png" alt="Logo" class="logo-img">
+        </div>
+      </div>
+    </div>
+  </header>
 
-    <main class="pageWrap">
-        <section class="heroPanel heroPanel--home">
-            <div class="heroCopy">
-                <span class="eyebrow">GitHub Pages rebuild</span>
-                <h1>Djabusabi, now as a static HTML, CSS and JavaScript website.</h1>
-                <p class="leadText">
-                    This version keeps the original store concept, account flows, and admin tools, but replaces the
-                    PHP session/database layer with a browser-side demo powered by <code>localStorage</code>.
-                </p>
+  <div class="body-content">
+    <section class="main-page-left-section">
+      <div class="hero-copy">
+        <h1>Djabusabi</h1>
+        <p>Bem-vindo ao website dos Djabusabi. Esta versão recria o visual do projeto original apenas com HTML, CSS e JavaScript, mantendo o ambiente dark, o destaque tipográfico e a loja com mock data local.</p>
+      </div>
 
-                <div class="buttonRow">
-                    <a href="store.html" class="btn btnPrimary">Abrir Loja</a>
-                    <a href="account.html" class="btn btnGhost">Conta Demo</a>
-                    <a href="../dbs_php/sie-ex3-report.pdf" class="btn btnGhost" target="_blank" rel="noopener">
-                        Download Report
-                    </a>
-                </div>
+      <div class="main-cta-group">
+        <a href="store.html" class="save-button">Explorar Loja</a>
+        <a href="signup.html" class="save-button">Criar Conta</a>
+      </div>
 
-                <div class="miniStats">
-                    <div class="statCard">
-                        <span class="statValue" data-home-stat="products">0</span>
-                        <span class="statLabel">Produtos demo</span>
-                    </div>
-                    <div class="statCard">
-                        <span class="statValue">4</span>
-                        <span class="statLabel">Páginas estáticas</span>
-                    </div>
-                    <div class="statCard">
-                        <span class="statValue" data-home-stat="users">0</span>
-                        <span class="statLabel">Utilizadores seed</span>
-                    </div>
-                </div>
-            </div>
+      <div class="main-page-left-image-flex-container" id="eventos">
+        <div class="main-page-left-image-item">
+          <a href="store.html"><img src="assets/store/capa_cinza.png" alt="Capa Cinza"></a>
+          <p>Vestuário</p>
+        </div>
+        <div class="main-page-left-image-item">
+          <a href="store.html"><img src="assets/store/mousepad_cinza.png" alt="Mousepad Cinza"></a>
+          <p>Utilitários</p>
+        </div>
+        <div class="main-page-left-image-item">
+          <a href="signup.html"><img src="assets/logos/logo_vigo.png" alt="Comunidade"></a>
+          <p>Comunidade</p>
+        </div>
+        <div class="main-page-left-image-item">
+          <a href="account.html"><img src="assets/logos/logo_branco.png" alt="Conta"></a>
+          <p>Conta</p>
+        </div>
+      </div>
+    </section>
 
-            <div class="heroSpotlight">
-                <div class="spotlightCard">
-                    <div class="spotlightTop">
-                        <img src="../dbs_php/assets/logos/logo_branco.png" alt="Djabusabi logo" class="spotlightLogo">
-                        <span class="pillTag">Static demo</span>
-                    </div>
-                    <div class="spotlightPreview">
-                        <img src="../dbs_php/assets/images/mainpage-image1.jpg" alt="Djabusabi preview">
-                    </div>
-                    <div class="spotlightFoot">
-                        <p>
-                            Inclui catálogo filtrável, autenticação demo, perfil de utilizador, carrinho persistente e
-                            um painel de administração funcional no browser.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <section class="main-page-right-section" id="equipas">
+      <div class="main-page-right-image-container">
+        <img src="assets/store/capa_cinza.png" alt="Produto capa cinza">
+        <img src="assets/store/mousepad_cinza.png" alt="Produto mousepad cinza">
+        <img src="assets/store/capa_cinza.png" alt="Produto capa cinza">
+        <img src="assets/store/mousepad_cinza.png" alt="Produto mousepad cinza">
+      </div>
+    </section>
+  </div>
 
-        <section class="contentSection">
-            <div class="sectionHeading">
-                <div>
-                    <span class="eyebrow">Áreas principais</span>
-                    <h2>Mesma ideia, nova entrega</h2>
-                </div>
-                <p class="sectionLead">
-                    O objetivo aqui foi transformar o projeto original numa demo navegável e fácil de publicar sem
-                    backend.
-                </p>
-            </div>
+  <footer class="footer" id="footer">
+    <div class="footer-container">
+      <div class="footer-item left"><p>&copy; 2026 Djabusabi. Todos os direitos reservados.</p></div>
+      <div class="footer-item center">
+        <a href="#">Instagram</a>
+        <a href="#">YouTube</a>
+        <a href="#">Spotify</a>
+        <a href="#">Discord</a>
+      </div>
+      <div class="footer-item right">
+        <a href="#">Sobre os Djabusabi</a>
+        <a href="#">Recrutamento</a>
+      </div>
+    </div>
+  </footer>
 
-            <div class="featureGrid">
-                <article class="featureCard">
-                    <h3>Loja filtrável</h3>
-                    <p>Pesquisa por categoria, disponibilidade, ordenação, e carrinho persistente entre páginas.</p>
-                    <a href="store.html" class="textLink">Explorar catálogo</a>
-                </article>
-                <article class="featureCard">
-                    <h3>Conta demo</h3>
-                    <p>Login, registo, edição de dados pessoais, morada, e alteração de password com validação local.</p>
-                    <a href="account.html" class="textLink">Abrir conta</a>
-                </article>
-                <article class="featureCard">
-                    <h3>Painel admin</h3>
-                    <p>Adicionar, editar e remover produtos e utilizadores sem depender de PHP ou PostgreSQL.</p>
-                    <a href="admin.html" class="textLink">Abrir administração</a>
-                </article>
-                <article class="featureCard">
-                    <h3>Pronto para GitHub Pages</h3>
-                    <p>Sem rotas de servidor, sem sessões PHP, e sem ficheiros dinâmicos que falham em hosting estático.</p>
-                    <a href="../../project-dbs-item-shop.html" class="textLink">Ver página do projeto</a>
-                </article>
-            </div>
-        </section>
-
-        <section class="contentSection">
-            <div class="sectionHeading">
-                <div>
-                    <span class="eyebrow">Categorias</span>
-                    <h2>Entradas rápidas para a loja</h2>
-                </div>
-            </div>
-
-            <div class="categoryGrid">
-                <a href="store.html?filter=vestuario" class="categoryCard">
-                    <img src="../dbs_php/assets/images/vestuario.png" alt="Vestuário">
-                    <div>
-                        <h3>Vestuário</h3>
-                        <p>Roupa e acessórios com a identidade Djabusabi.</p>
-                    </div>
-                </a>
-                <a href="store.html?filter=material-escolar" class="categoryCard">
-                    <img src="../dbs_php/assets/images/material-escolar.png" alt="Material escolar">
-                    <div>
-                        <h3>Material Escolar</h3>
-                        <p>Itens de estudo, organização e secretária.</p>
-                    </div>
-                </a>
-                <a href="store.html?filter=utilitarios" class="categoryCard">
-                    <img src="../dbs_php/assets/images/mala-dinheiro.jpg" alt="Utilitários">
-                    <div>
-                        <h3>Utilitários</h3>
-                        <p>Produtos práticos para uso diário.</p>
-                    </div>
-                </a>
-                <a href="store.html?stock=soonavailable" class="categoryCard">
-                    <img src="../dbs_php/assets/images/brevemente.png" alt="Novas adições">
-                    <div>
-                        <h3>Novas Adições</h3>
-                        <p>Produtos marcados como brevemente disponíveis.</p>
-                    </div>
-                </a>
-            </div>
-        </section>
-
-        <section class="contentSection">
-            <div class="sectionHeading">
-                <div>
-                    <span class="eyebrow">Produtos em destaque</span>
-                    <h2>Exemplo do catálogo local</h2>
-                </div>
-                <p class="sectionLead">
-                    Estes cartões são renderizados a partir dos dados demo usados também pela loja e pelo painel admin.
-                </p>
-            </div>
-
-            <div id="featuredProducts" class="productGrid"></div>
-        </section>
-
-        <section class="contentSection contentSection--compact">
-            <div class="infoBanner">
-                <div>
-                    <span class="eyebrow">Contas demo</span>
-                    <h2>Credenciais para testar tudo rapidamente</h2>
-                </div>
-                <div class="demoCredentials">
-                    <div>
-                        <strong>Admin</strong>
-                        <p><code>admin@djabusabi.pt</code> / <code>Admin123</code></p>
-                    </div>
-                    <div>
-                        <strong>Cliente</strong>
-                        <p><code>cliente@djabusabi.pt</code> / <code>Cliente123</code></p>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer id="siteFooter"></footer>
-</div>
-
-<div id="toast" class="toast" aria-live="polite" aria-atomic="true"></div>
+  <script src="js/app.js"></script>
 </body>
 </html>

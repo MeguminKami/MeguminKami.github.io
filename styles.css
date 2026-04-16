@@ -5029,6 +5029,474 @@ body.light .websiteFrame {
     background: #ffffff;
 }
 
+.dbsProject .projectContent {
+    max-width: 1100px;
+}
+
+.dbsProject .projectMain {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.dbsProject .contentSection {
+    margin-bottom: 0;
+}
+
+.dbsProject .sectionCard {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    box-shadow: var(--shadow-sm);
+}
+
+.dbsHeroLayout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.02fr) minmax(340px, 0.98fr);
+    gap: 1.5rem;
+    align-items: stretch;
+}
+
+.dbsHeroCopy {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.dbsHeroCopy .projectMeta {
+    margin-top: 0;
+}
+
+.dbsHeroNote {
+    max-width: 66ch;
+}
+
+.dbsHeroVisual {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(45, 212, 255, 0.16);
+    background:
+        radial-gradient(circle at top right, rgba(45, 212, 255, 0.12), transparent 28%),
+        radial-gradient(circle at bottom left, rgba(124, 92, 255, 0.14), transparent 34%),
+        linear-gradient(165deg, rgba(7, 10, 18, 0.98), rgba(12, 15, 26, 0.96));
+    box-shadow: 0 28px 48px rgba(4, 8, 18, 0.4);
+}
+
+.dbsHeroVisual::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    pointer-events: none;
+}
+
+.dbsWindowChrome {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.95rem 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.dbsWindowDot {
+    width: 0.7rem;
+    height: 0.7rem;
+    border-radius: 50%;
+}
+
+.dbsWindowDot--muted { background: rgba(148, 163, 184, 0.45); }
+.dbsWindowDot--cyan { background: rgba(45, 212, 255, 0.8); }
+.dbsWindowDot--violet { background: rgba(167, 139, 250, 0.8); }
+
+.dbsVisualSurface {
+    display: grid;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.dbsVisualTopbar,
+.dbsVisualFilters,
+.dbsVisualCatalog {
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.04);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+
+.dbsVisualTopbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.8rem 0.9rem;
+    border-radius: 1.1rem;
+}
+
+.dbsBrandLockup {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.dbsBrandLockup img {
+    width: 1.85rem;
+    height: 1.85rem;
+    border-radius: 50%;
+    box-shadow: 0 8px 18px rgba(45, 212, 255, 0.18);
+}
+
+.dbsVisualNav,
+.dbsVisualOrderRow,
+.dbsFilterGroup {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.dbsVisualNav span,
+.dbsVisualCart,
+.dbsPill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.4rem 0.72rem;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.04);
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 0.75rem;
+    line-height: 1;
+}
+
+.dbsVisualCart,
+.dbsPill--active {
+    background: rgba(45, 212, 255, 0.12);
+    border-color: rgba(45, 212, 255, 0.28);
+    color: #ffffff;
+}
+
+.dbsVisualWorkspace {
+    display: grid;
+    grid-template-columns: minmax(180px, 0.44fr) minmax(0, 0.56fr);
+    gap: 0.9rem;
+}
+
+.dbsVisualFilters,
+.dbsVisualCatalog {
+    border-radius: 1.25rem;
+    padding: 1rem;
+}
+
+.dbsPanelLabel {
+    display: block;
+    margin-bottom: 0.7rem;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.dbsVisualFilters .dbsPanelLabel:not(:first-child) {
+    margin-top: 1rem;
+}
+
+.dbsVisualProductGrid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.85rem;
+}
+
+.dbsVisualProductCard {
+    overflow: hidden;
+    border-radius: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(7, 10, 18, 0.75);
+}
+
+.dbsVisualProductMedia {
+    aspect-ratio: 1 / 0.82;
+    padding: 0.7rem;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0));
+}
+
+.dbsVisualProductMedia img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    border-radius: 0.85rem;
+    background: rgba(255, 255, 255, 0.96);
+}
+
+.dbsVisualProductBody {
+    display: grid;
+    gap: 0.35rem;
+    padding: 0.85rem;
+    color: #ffffff;
+}
+
+.dbsVisualProductMeta {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.75rem;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.74rem;
+}
+
+.dbsVisualFootnote {
+    margin-top: 0.9rem;
+    padding: 0.85rem 0.9rem;
+    border-radius: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.04);
+    color: rgba(255, 255, 255, 0.76);
+    font-size: 0.8rem;
+    line-height: 1.55;
+}
+
+.dbsProject .quickFacts {
+    margin-top: 1.75rem;
+}
+
+.dbsProject .quickFacts .factItem {
+    gap: 0.45rem;
+    min-height: 96px;
+    padding: 1rem 1.1rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background:
+        linear-gradient(180deg, rgba(45, 212, 255, 0.04), transparent 85%),
+        var(--surface);
+    box-shadow: var(--shadow-sm);
+}
+
+.dbsOverviewGrid,
+.dbsVersionGrid {
+    display: grid;
+    gap: 1rem;
+}
+
+.dbsOverviewGrid {
+    grid-template-columns: minmax(0, 1.16fr) minmax(280px, 0.84fr);
+    align-items: start;
+}
+
+.dbsNotePanel,
+.dbsVersionCard {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface-2);
+    box-shadow: var(--shadow-sm);
+}
+
+.dbsNotePanel {
+    padding: 1.25rem;
+}
+
+.dbsNoteEyebrow,
+.dbsVersionEyebrow {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.35rem 0.75rem;
+    border-radius: 999px;
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.dbsNoteEyebrow {
+    color: var(--accent-blue);
+    background: rgba(45, 212, 255, 0.08);
+    border: 1px solid rgba(45, 212, 255, 0.18);
+}
+
+.dbsNotePanel h3 {
+    margin: 0.7rem 0 0.9rem;
+    font-size: 1.18rem;
+}
+
+.dbsListCompact,
+.dbsVersionList {
+    margin: 0;
+    padding-left: 1.2rem;
+}
+
+.dbsVersionGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-top: 1.25rem;
+}
+
+.dbsVersionCard {
+    padding: 1.3rem;
+}
+
+.dbsVersionCard::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto;
+    height: 3px;
+}
+
+.dbsVersionCard--backend::before {
+    background: var(--grad-amber-rose);
+}
+
+.dbsVersionCard--static::before {
+    background: var(--grad-emerald-teal);
+}
+
+.dbsVersionCard--backend .dbsVersionEyebrow {
+    color: var(--accent-amber);
+    background: var(--accent-amber-soft);
+    border: 1px solid rgba(251, 191, 36, 0.2);
+}
+
+.dbsVersionCard--static .dbsVersionEyebrow {
+    color: var(--accent-emerald);
+    background: var(--accent-emerald-soft);
+    border: 1px solid rgba(52, 211, 153, 0.2);
+}
+
+.dbsVersionCard h3 {
+    margin: 0.8rem 0 0.9rem;
+    font-size: 1.12rem;
+}
+
+.dbsVersionList {
+    color: var(--text-muted);
+}
+
+.dbsVersionCard--backend .dbsVersionList li::marker {
+    color: var(--accent-amber);
+}
+
+.dbsVersionCard--static .dbsVersionList li::marker {
+    color: var(--accent-emerald);
+}
+
+.dbsPreviewLinks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin: 1rem 0 1.25rem;
+}
+
+.dbsPreviewLink {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.58rem 0.95rem;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--surface-2);
+    color: var(--text);
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.dbsPreviewLink:hover {
+    transform: translateY(-1px);
+    border-color: rgba(45, 212, 255, 0.3);
+    background: rgba(45, 212, 255, 0.08);
+    box-shadow: 0 10px 24px rgba(45, 212, 255, 0.12);
+}
+
+.dbsCtaSection {
+    position: relative;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at top right, rgba(45, 212, 255, 0.09), transparent 26%),
+        linear-gradient(180deg, rgba(124, 92, 255, 0.08), transparent 72%),
+        var(--surface);
+}
+
+.dbsCtaHeader {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.dbsCtaLogo {
+    width: 3.25rem;
+    height: 3.25rem;
+    border-radius: 50%;
+    box-shadow: 0 16px 28px rgba(45, 212, 255, 0.18);
+    flex-shrink: 0;
+}
+
+.dbsCtaSection .projectLinks {
+    position: relative;
+    z-index: 1;
+}
+
+body.light .dbsProject .quickFacts .factItem {
+    background:
+        linear-gradient(180deg, rgba(2, 132, 199, 0.05), transparent 85%),
+        var(--surface);
+}
+
+body.light .dbsPreviewLink:hover {
+    border-color: rgba(2, 132, 199, 0.35);
+    background: rgba(2, 132, 199, 0.08);
+    box-shadow: 0 10px 24px rgba(2, 132, 199, 0.12);
+}
+
+@media (max-width: 980px) {
+    .dbsHeroLayout,
+    .dbsOverviewGrid,
+    .dbsVersionGrid,
+    .dbsVisualWorkspace {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 700px) {
+    .dbsVisualTopbar {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .dbsVisualProductGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .dbsCtaHeader {
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 600px) {
+    .dbsProject .quickFacts {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .dbsHeroVisual,
+    .dbsProject .sectionCard {
+        border-radius: var(--radius);
+    }
+
+    .dbsWindowChrome,
+    .dbsVisualSurface,
+    .dbsVisualFilters,
+    .dbsVisualCatalog {
+        padding-left: 0.85rem;
+        padding-right: 0.85rem;
+    }
+}
+
 .simulationProject .projectContent {
     max-width: 1100px;
 }
