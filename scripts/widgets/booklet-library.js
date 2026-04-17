@@ -13,6 +13,7 @@ class BookletLibrary {
         this.prevButton = root.querySelector("[data-booklet-prev]");
         this.nextButton = root.querySelector("[data-booklet-next]");
         this.directory = String(root.dataset.bookletDir || "").trim();
+        this.manifest = String(root.dataset.bookletManifest || "").trim();
         this.books = [];
         this.index = 0;
 
@@ -49,35 +50,91 @@ class BookletLibrary {
     async discoverBooks(directory) {
         if (!directory) return [];
 
-        const response = await fetch(directory, { cache: "no-store" });
-        if (!response.ok) {
-            throw new Error(`Failed to load booklet directory (${response.status})`);
+        const fromDirectory = await this.discoverBooksFromDirectory(directory);
+        if (fromDirectory.length) {
+            return this.normalizeBooks(fromDirectory);
         }
 
-        const html = await response.text();
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(html, "text/html");
-        const directoryUrl = new URL(response.url, window.location.href);
-        const pdfLinks = new Map();
+        const fromManifest = await this.discoverBooksFromManifest(directory, this.manifest);
+        return this.normalizeBooks(fromManifest);
+    }
 
-        doc.querySelectorAll("a[href]").forEach((linkElement) => {
-            const href = String(linkElement.getAttribute("href") || "").trim();
-            if (!href || !/\.pdf(?:$|[?#])/i.test(href)) return;
-
-            const absoluteUrl = new URL(href, directoryUrl).href;
-            const fileName = this.fileNameFromPath(absoluteUrl);
-            if (!fileName) return;
-
-            pdfLinks.set(fileName.toLowerCase(), absoluteUrl);
-        });
-
-        return [...pdfLinks.values()]
+    normalizeBooks(files) {
+        return files
             .map((file, index) => this.buildBookFromFile(file, index))
             .sort((a, b) => {
                 if (a.sortGroup !== b.sortGroup) return a.sortGroup - b.sortGroup;
                 if (a.sortOrder !== b.sortOrder) return a.sortOrder - b.sortOrder;
                 return a.title.localeCompare(b.title);
             });
+    }
+
+    async discoverBooksFromDirectory(directory) {
+        try {
+            const response = await fetch(directory, { cache: "no-store" });
+            if (!response.ok) {
+                return [];
+            }
+
+            const html = await response.text();
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, "text/html");
+            const directoryUrl = new URL(response.url, window.location.href);
+            const pdfLinks = new Map();
+
+            doc.querySelectorAll("a[href]").forEach((linkElement) => {
+                const href = String(linkElement.getAttribute("href") || "").trim();
+                if (!href || !/\.pdf(?:$|[?#])/i.test(href)) return;
+
+                const absoluteUrl = new URL(href, directoryUrl).href;
+                const fileName = this.fileNameFromPath(absoluteUrl);
+                if (!fileName) return;
+
+                pdfLinks.set(fileName.toLowerCase(), absoluteUrl);
+            });
+
+            return [...pdfLinks.values()];
+        } catch {
+            return [];
+        }
+    }
+
+    resolveManifestPath(directory, explicitManifestPath) {
+        const directoryWithSlash = String(directory || "").endsWith("/")
+            ? String(directory || "")
+            : `${String(directory || "")}/`;
+
+        const rawPath = String(explicitManifestPath || "").trim() || `${directoryWithSlash}booklets.json`;
+        return new URL(rawPath, window.location.href).href;
+    }
+
+    async discoverBooksFromManifest(directory, explicitManifestPath) {
+        const manifestUrl = this.resolveManifestPath(directory, explicitManifestPath);
+        const response = await fetch(manifestUrl, { cache: "no-store" });
+        if (!response.ok) {
+            throw new Error(`Failed to load booklet manifest (${response.status})`);
+        }
+
+        const payload = await response.json();
+        const files = Array.isArray(payload)
+            ? payload
+            : (Array.isArray(payload?.files) ? payload.files : []);
+
+        const manifestBaseUrl = new URL(manifestUrl, window.location.href);
+        const links = new Map();
+
+        files.forEach((entry) => {
+            const href = String(entry || "").trim();
+            if (!href || !/\.pdf(?:$|[?#])/i.test(href)) return;
+
+            const absoluteUrl = new URL(href, manifestBaseUrl).href;
+            const fileName = this.fileNameFromPath(absoluteUrl);
+            if (!fileName) return;
+
+            links.set(fileName.toLowerCase(), absoluteUrl);
+        });
+
+        return [...links.values()];
     }
 
     renderOptions() {
