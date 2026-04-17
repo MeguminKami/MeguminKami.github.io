@@ -81,7 +81,7 @@
       "title": "Production Planner",
       "badge": "Python Project",
       "status": "incomplete",
-      "latestUpdate": "2025-12-20",
+      "latestUpdate": "2020-12-20",
       "description": "Developed as a secondary project during my Master's thesis, this application focuses on optimizing production schedules.",
       "bullets": [
         "Application to optimize production schedules or assembly lines",
@@ -107,8 +107,7 @@
       "badge": "Arduino Project",
       "status": "complete",
       "latestUpdate": {
-        "date": "2026-03-28",
-        "label": "28 March 2026"
+        "date": "2026-03-28"
       },
       "description": "WiFi-enabled ESP32 LED strip controller firmware with a responsive web UI.",
       "bullets": [
@@ -159,7 +158,7 @@
       "title": "Batalha Naval RPG",
       "badge": "C++ OOP Game",
       "status": "complete",
-      "latestUpdate": "2025-09-17",
+      "latestUpdate": "2020-09-17",
       "description": "Custom Battleship-style tactical RPG built with C++ and Qt for a Master's course. Features character classes, skill-based attacks, AI opponent logic, and online multiplayer support.",
       "bullets": [
         "Turn-based naval combat with RPG elements: characters, passives, skills, action points and varied AOEs",
@@ -182,34 +181,34 @@
     },
     {
       "title": "DBS Item Shop",
-      "badge": "PHP + Static Demo",
+      "badge": "PHP Course Project",
       "status": "complete",
-      "latestUpdate": "2026-04-14",
-      "description": "Course storefront originally built in PHP and now rebuilt as a static GitHub Pages demo with local account, cart, and admin flows.",
+      "latestUpdate": "2024-04-24",
+      "description": "PHP coursework project for Concecao de SIE centered on the Djabusabi online store, customer shopping flows, and administration.",
       "bullets": [
-        "Original PHP/PostgreSQL project with auth, profile management, product browsing, and admin CRUD",
-        "New static HTML/CSS/JS rebuild keeps the storefront, account, cart, and admin experience working on GitHub Pages",
-        "Browser-side demo state uses localStorage for seeded users, products, login state, and cart persistence"
+        "Authentication, signup, searchable catalog, product pages, cart, checkout, and order history for customers",
+        "Administrator area for product CRUD, user CRUD, and broader store management responsibilities",
+        "Course report documents the original PHP application; the portfolio demo only helps visualize the interface"
       ],
-      "tags": ["PHP", "JavaScript", "HTML/CSS", "Static Demo"],
+      "tags": ["PHP", "JavaScript", "HTML/CSS", "Web App"],
       "tagsData": ["php","js"],
       "viewHref": "project-dbs-item-shop.html",
       "cover": {
         "ariaLabel": "DBS Item Shop landing page preview",
-        "image": "partials/dbs_php/assets/images/mainpage-image1.jpg"
+        "image": "assets/img/dbs/thumbnail.png"
       },
       "modal": {
         "title": "DBS Item Shop",
-        "sub": "Course project — PHP/MySQL online store",
-        "desc": "An item shop web application built with PHP and MySQL for a Master's course. Features include user registration/login, product pages, cart management, checkout with multiple payment methods, and an admin dashboard for managing products and users.",
-        "img": ""
+        "sub": "Concecao de SIE PHP online store project",
+        "desc": "A course web application created for the Djabusabi group and implemented as an online store. The report covers its data model, documented use cases, customer shopping flow, order handling, administrator product and user management, shared templates, and phased development plan.",
+        "img": "partials/djabuloja/assets/images/mainpage-image1.jpg"
       }
     },
     {
       "title": "Terminal Games Collection",
       "badge": "C++ Projects",
       "status": "complete",
-      "latestUpdate": "2025-07-09",
+      "latestUpdate": "2022-07-01",
       "description": "A collection of terminal-based C++ games developed during a Bachelor's Programming course. Includes maze and dungeon-style games that exercise game loops, movement logic, randomization and simple AI.",
       "bullets": [
         "Several small CLI games showcasing map/maze logic, entity movement and collision checks",
@@ -234,7 +233,7 @@
       "title": "Conveyor Sorting State Machines",
       "badge": "C / PLC Project",
       "status": "complete",
-      "latestUpdate": "2025-06-18",
+      "latestUpdate": "2026-03-30",
       "description": "A PLC-style controller written in C that implements multiple interacting finite state machines connected by Modbus TCP to the sim env Factorio.",
       "bullets": [
         "PLC controller in C with multiple finite state machines for operator panel and two conveyor subsystems",

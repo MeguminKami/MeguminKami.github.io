@@ -1,0 +1,18 @@
+[
+  {
+    "id": 32,
+    "userid": 2,
+    "cost": 39.97,
+    "date": "27/01/2025",
+    "items": [
+      {
+        "storeitemid": 1,
+        "quantity": 1
+      },
+      {
+        "storeitemid": 6,
+        "quantity": 2
+      }
+    ]
+  }
+]

@@ -9,7 +9,7 @@
     >
     <title>ESP32 LED Controller - Project</title>
     <link rel="icon" type="image/png" href="assets/img/espledcontroller/logo.png">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
 <div class="bgGlow"></div>
@@ -21,40 +21,46 @@
         &larr; Back to Projects
     </a>
 
-    <article class="projectArticle ledProject">
+    <article class="projectArticle projectArticle--wide projectArticle--metrics-spaced ledProject">
         <header class="projectHeader">
-            <h1 class="projectTitle">
-                <img
-                    src="assets/img/espledcontroller/logo.png"
-                    alt=""
-                    class="projectTitleIcon"
-                    aria-hidden="true"
-                    loading="eager"
-                >
-                ESP32 LED Controller
-            </h1>
-            <p class="lead">
-                ESP32 LED Controller is a Wi-Fi lighting system built as a standalone product, not just a browser demo.
-                The interface is served directly from the ESP32, the firmware renders animations on-device with
-                <code>FastLED</code>, and the strip keeps running smoothly even if the browser disconnects.
-            </p>
+            <div class="projectHero">
+                <div class="projectHeroMedia">
+                    <img
+                        src="assets/img/espledcontroller/logo.png"
+                        alt=""
+                        class="projectTitleIcon"
+                        aria-hidden="true"
+                        loading="eager"
+                    >
+                </div>
+                <div class="projectHeroBody">
+                    <div class="projectHeroIntro">
+                        <h1 class="projectTitle">ESP32 LED Controller</h1>
+                        <p class="lead">
+                            ESP32 LED Controller is a Wi-Fi lighting system built as a standalone product, not just a browser demo.
+                            The interface is served directly from the ESP32, the firmware renders animations on-device with
+                            <code>FastLED</code>, and the strip keeps running smoothly even if the browser disconnects.
+                        </p>
+                    </div>
 
-            <div class="quickFacts">
-                <div class="factItem">
-                    <span class="factLabel">Latest Update</span>
-                    <span class="factValue" data-project-latest-update>28 March 2026</span>
-                </div>
-                <div class="factItem">
-                    <span class="factLabel">Type</span>
-                    <span class="factValue">Solo Project</span>
-                </div>
-                <div class="factItem">
-                    <span class="factLabel">Category</span>
-                    <span class="factValue">Embedded + Web UI</span>
-                </div>
-                <div class="factItem">
-                    <span class="factLabel">Status</span>
-                    <span class="factValue grad">Complete</span>
+                    <div class="quickFacts">
+                        <div class="factItem">
+                            <span class="factLabel">Latest Update</span>
+                            <span class="factValue" data-project-latest-update>28 March 2026</span>
+                        </div>
+                        <div class="factItem">
+                            <span class="factLabel">Type</span>
+                            <span class="factValue">Solo Project</span>
+                        </div>
+                        <div class="factItem">
+                            <span class="factLabel">Category</span>
+                            <span class="factValue">Embedded + Web UI</span>
+                        </div>
+                        <div class="factItem">
+                            <span class="factLabel">Status</span>
+                            <span class="factValue grad">Complete</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </header>
@@ -791,6 +797,6 @@
     <div class="lightboxCaption" id="lightboxCaption"></div>
 </div>
 
-<script src="script.js"></script>
+<script type="module" src="scripts/main.js"></script>
 </body>
 </html>

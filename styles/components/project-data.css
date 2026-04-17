@@ -1,0 +1,415 @@
+﻿/* Callout Boxes */
+.calloutBox {
+    display: flex;
+    gap: 1rem;
+    padding: 1.25rem;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin: 1.5rem 0;
+    border-left: 4px solid;
+}
+
+.calloutInfo {
+    border-left-color: var(--info);
+}
+
+.calloutWarning {
+    border-left-color: var(--warning);
+}
+
+.calloutQuote {
+    border-left-color: var(--accent-purple);
+}
+
+.calloutTakeaway {
+    border-left-color: var(--success);
+}
+
+.calloutIcon {
+    font-size: 1.5rem;
+    line-height: 1;
+}
+
+.calloutBox h4 {
+    margin-bottom: 0.5rem;
+}
+
+.calloutBox blockquote {
+    margin: 0;
+    font-style: italic;
+    line-height: 1.6;
+}
+
+.calloutBox cite {
+    display: block;
+    margin-top: 0.5rem;
+}
+
+.calloutBox ul {
+    margin: 0.5rem 0 0;
+    padding-left: 1.25rem;
+}
+
+/* Metrics */
+.metricsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.25rem;
+}
+
+.metricCard {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.metricValue {
+    font-size: 2.5rem;
+    font-weight: 800;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+}
+
+.metricLabel {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.375rem;
+    color: var(--text);
+}
+
+/* Tables */
+.tableWrapper {
+    overflow-x: auto;
+    margin: 1.5rem 0;
+}
+
+.comparisonTable {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+}
+
+.comparisonTable thead {
+    background: var(--bg-alt);
+}
+
+.comparisonTable th,
+.comparisonTable td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+}
+
+.comparisonTable th {
+    font-weight: 600;
+    color: var(--text);
+}
+
+.comparisonTable td {
+    color: var(--text-muted);
+}
+
+.comparisonTable tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.comparisonTable .highlight {
+    color: var(--accent-blue);
+    font-weight: 600;
+}
+
+/* Timeline */
+.timeline {
+    position: relative;
+    padding-left: 2rem;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 0.5rem;
+    top: 0.5rem;
+    bottom: 0.5rem;
+    width: 2px;
+    background: var(--border);
+}
+
+.timelineItem {
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+.timelineDot {
+    position: absolute;
+    left: -1.8125rem;
+    top: 0.375rem;
+    width: 14px;
+    height: 14px;
+    background: var(--accent-blue);
+    border: 3px solid var(--bg);
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.timelineContent {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.25rem;
+}
+
+.timelineDate {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--accent-blue);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+}
+
+.timelineContent h4 {
+    margin-bottom: 0.5rem;
+}
+
+/* Process Steps */
+.processSteps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+}
+
+.processStep {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.25rem;
+    text-align: center;
+    transition: all 0.2s ease;
+}
+
+.processStep:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent-blue);
+}
+
+.stepNumber {
+    width: 40px;
+    height: 40px;
+    background: var(--accent-gradient);
+    color: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.125rem;
+    margin: 0 auto 0.75rem;
+}
+
+.processStep h4 {
+    margin-bottom: 0.375rem;
+    font-size: 0.9375rem;
+}
+
+/* Code Blocks */
+.codeBlock {
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin: 1.5rem 0;
+}
+
+.codeHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    background: var(--surface-2);
+    border-bottom: 1px solid var(--border);
+}
+
+.codeTitle {
+    font-family: 'SF Mono', 'Monaco', 'Courier New', monospace;
+    font-size: 0.8125rem;
+    color: var(--text-muted);
+}
+
+.copyBtn {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.375rem 0.75rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    color: var(--text);
+    font-size: 0.8125rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.copyBtn:hover {
+    background: var(--bg);
+}
+
+.copyBtn.copied .copyText::after {
+    content: ' âœ“';
+    color: var(--success);
+}
+
+.copyIcon {
+    font-size: 1rem;
+}
+
+.codeBlock pre {
+    margin: 0;
+    padding: 1.25rem;
+    overflow-x: auto;
+}
+
+.codeBlock code {
+    font-family: 'SF Mono', 'Monaco', 'Courier New', monospace;
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: var(--text);
+}
+
+/* Architecture Diagram */
+.architectureBox {
+    text-align: center;
+    margin: 1.5rem 0;
+}
+
+.architectureDiagram {
+    width: 100%;
+    max-width: 700px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+}
+
+/* Architecture Overview Cards */
+.architectureGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.architectureGrid--threeColumn {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+@media (max-width: 1000px) {
+    .architectureGrid--threeColumn {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .architectureGrid--threeColumn {
+        grid-template-columns: 1fr;
+    }
+}
+
+.architectureCard {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.25rem;
+    display: grid;
+    gap: 0.5rem;
+}
+
+.architectureCard h3 {
+    font-size: 1rem;
+    margin: 0;
+}
+
+.architectureIcon {
+    width: 36px;
+    height: 36px;
+    border-radius: 12px;
+    display: grid;
+    place-items: center;
+    font-size: 1.1rem;
+    background: var(--accent-blue-soft);
+    color: var(--accent-blue);
+    border: 1px solid rgba(45, 212, 255, 0.2);
+}
+
+body.light .architectureIcon {
+    border-color: rgba(2, 132, 199, 0.25);
+}
+
+/* Implementation Details */
+.detailGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    margin-top: 1.25rem;
+}
+
+.detailGrid--threeColumn {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+@media (max-width: 1000px) {
+    .detailGrid--threeColumn {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .detailGrid--threeColumn {
+        grid-template-columns: 1fr;
+    }
+}
+
+.detailCard {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.25rem;
+    box-shadow: var(--shadow-sm);
+}
+
+.detailHeader {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+}
+
+.detailHeader h3 {
+    font-size: 1rem;
+    margin: 0;
+}
+
+.detailIcon {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    display: grid;
+    place-items: center;
+    font-size: 1rem;
+    background: var(--accent-purple-soft);
+    color: var(--accent-purple);
+    border: 1px solid rgba(124, 92, 255, 0.2);
+}
+
+body.light .detailIcon {
+    border-color: rgba(91, 61, 245, 0.25);
+}
+
+.detailCard ul {
+    margin: 0.5rem 0 0;
+    padding-left: 1.25rem;
+}
+

@@ -1,0 +1,138 @@
+﻿/* ============================================
+
+
+/* ---------- DARK ---------- */
+:root {
+    /* === DARK THEME (default) === */
+    --bg: #1a1f2e;
+    --bg-alt: #20263a;
+    --surface: #252b42;
+    --surface-2: #2d3450;
+    --text: #e8ecf5;
+    --text-muted: #9ba3b8;
+    --border: rgba(255, 255, 255, 0.08);
+    --shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.2);
+
+    --chip-bg: #2d3450;
+
+    /* Accent colors */
+    --accent-blue: #2dd4ff;
+    --accent-purple: #7c5cff;
+    --accent-violet: #a78bfa;
+    --accent-gradient: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+
+
+    /* Semantic colors */
+    --success: #22c55e;
+    --warning: #f59e0b;
+    --error: #ef4444;
+    --info: #3b82f6;
+
+    /* Spacing & Layout */
+    --radius: 16px;
+    --radius-sm: 12px;
+    --radius-lg: 20px;
+    --gap: 16px;
+    --gap-sm: 12px;
+    --gap-lg: 24px;
+
+    /* More accents */
+    --accent-cyan: #22d3ee;
+    --accent-sky: #38bdf8;
+    --accent-teal: #2dd4bf;
+    --accent-emerald: #34d399;
+    --accent-lime: #a3e635;
+    --accent-amber: #fbbf24;
+    --accent-orange: #fb923c;
+    --accent-rose: #fb7185;
+    --accent-pink: #f472b6;
+    --accent-red: #f87171;
+    --accent-indigo: #818cf8;
+    --accent-slate: #94a3b8;
+
+    /* Accent â€œsoftâ€ (useful for subtle hovers/badges) */
+    --accent-blue-soft: rgba(45, 212, 255, 0.18);
+    --accent-purple-soft: rgba(124, 92, 255, 0.18);
+    --accent-violet-soft: rgba(167, 139, 250, 0.18);
+    --accent-teal-soft: rgba(45, 212, 191, 0.16);
+    --accent-emerald-soft: rgba(52, 211, 153, 0.16);
+    --accent-amber-soft: rgba(251, 191, 36, 0.16);
+    --accent-rose-soft: rgba(251, 113, 133, 0.16);
+
+    /* Gradients (names stay identical in light mode) */
+    --grad-blue-purple: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+    --grad-violet-blue: linear-gradient(135deg, var(--accent-violet), var(--accent-blue));
+    --grad-indigo-violet: linear-gradient(135deg, var(--accent-indigo), var(--accent-violet));
+    --grad-teal-blue: linear-gradient(135deg, var(--accent-teal), var(--accent-blue));
+    --grad-emerald-teal: linear-gradient(135deg, var(--accent-emerald), var(--accent-teal));
+    --grad-lime-teal: linear-gradient(135deg, var(--accent-lime), var(--accent-teal));
+    --grad-amber-rose: linear-gradient(135deg, var(--accent-amber), var(--accent-rose));
+    --grad-sunset: linear-gradient(135deg, var(--accent-orange), var(--accent-rose));
+    --grad-pink-purple: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
+    --grad-aurora: linear-gradient(135deg, var(--accent-lime), var(--accent-teal), var(--accent-blue));
+
+    /* Glow colors (for shadows/borders) */
+    --glow-blue: rgba(45, 212, 255, 0.35);
+    --glow-purple: rgba(124, 92, 255, 0.35);
+    --glow-rose: rgba(251, 113, 133, 0.30);
+}
+
+/* ---------- LIGHT ---------- */
+body.light {
+
+    --bg: #f0f2f5;
+    --bg-alt: #e8ebf0;
+    --surface: #ffffff;
+    --surface-2: #f8f9fb;
+    --text: #0b0f15;
+    --text-muted: #364152;
+    --border: rgba(26, 31, 46, 1);
+    --shadow: 0 20px 60px rgba(26, 31, 46, 0.08);
+    --shadow-sm: 0 4px 12px rgba(26, 31, 46, 0.04);
+
+    /* Light-mode accents (darker, higher contrast on light surfaces) */
+    --accent-blue: #0284c7;     /* deeper than #2dd4ff */
+    --accent-purple: #5b3df5;   /* deeper than #7c5cff */
+    --accent-violet: #7c3aed;
+
+    --accent-cyan: #0891b2;
+    --accent-sky: #0369a1;
+    --accent-teal: #0f766e;
+    --accent-emerald: #059669;
+    --accent-lime: #4d7c0f;
+    --accent-amber: #b45309;
+    --accent-orange: #c2410c;
+    --accent-rose: #e11d48;
+    --accent-pink: #be185d;
+    --accent-red: #dc2626;
+    --accent-indigo: #4f46e5;
+    --accent-slate: #475569;
+
+    /* Soft accents (a bit more visible on light backgrounds) */
+    --accent-blue-soft: rgba(2, 132, 199, 0.16);
+    --accent-purple-soft: rgba(91, 61, 245, 0.16);
+    --accent-violet-soft: rgba(124, 58, 237, 0.16);
+    --accent-teal-soft: rgba(15, 118, 110, 0.14);
+    --accent-emerald-soft: rgba(5, 150, 105, 0.14);
+    --accent-amber-soft: rgba(180, 83, 9, 0.14);
+    --accent-rose-soft: rgba(225, 29, 72, 0.14);
+
+    /* Gradients keep the SAME names; they automatically update via swapped accents */
+    --accent-gradient: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+    --grad-violet-blue: linear-gradient(135deg, var(--accent-violet), var(--accent-blue));
+    --grad-indigo-violet: linear-gradient(135deg, var(--accent-indigo), var(--accent-violet));
+    --grad-teal-blue: linear-gradient(135deg, var(--accent-teal), var(--accent-blue));
+    --grad-emerald-teal: linear-gradient(135deg, var(--accent-emerald), var(--accent-teal));
+    --grad-lime-teal: linear-gradient(135deg, var(--accent-lime), var(--accent-teal));
+    --grad-amber-rose: linear-gradient(135deg, var(--accent-amber), var(--accent-rose));
+    --grad-sunset: linear-gradient(135deg, var(--accent-orange), var(--accent-rose));
+    --grad-pink-purple: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
+    --grad-aurora: linear-gradient(135deg, var(--accent-lime), var(--accent-teal), var(--accent-blue));
+
+    /* Glow colors tuned for light mode */
+    --glow-blue: rgba(2, 132, 199, 0.28);
+    --glow-purple: rgba(91, 61, 245, 0.26);
+    --glow-rose: rgba(225, 29, 72, 0.22);
+}
+

@@ -1,0 +1,27 @@
+﻿/* ============================================
+   ABOUT SECTION
+   ============================================ */
+
+.aboutGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--gap-lg);
+}
+
+.panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+}
+
+.panelTitle {
+    font-size: 1.125rem;
+    margin-bottom: 0.75rem;
+    color: var(--text);
+}
+
+.panel .smallText + .smallText {
+    margin-top: 0.85rem;
+}
+

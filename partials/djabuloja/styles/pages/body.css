@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Knewave&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    font-family: 'Lato', sans-serif;
+    min-height: 100vh;
+    max-width: 100%;
+    overflow-x: hidden;
+    background-color: rgb(20,20,20);
+    display: flex;
+    flex-direction: column;
+}
+
+#page-root {
+    flex: 1 0 auto;
+}
+
+#app-footer {
+    margin-top: auto;
+}
+
+.body-content{
+    display: flex;
+    width: 100%;
+}
+
+.main-page-section {
+    position: relative;
+    height: 100vh;
+    background: url('../../assets/images/background.jpg') no-repeat center center/cover;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-bottom: black 3px solid;
+    border-top: black 3px solid;
+    color: white;
+}
+
+.main-page-company-name {
+    font-size: 8rem;
+    font-family: 'Knewave', normal, serif;
+    margin-bottom: 1rem;
+}
+
+.main-page-divider {
+    width: 50%;
+    border: 1px solid white;
+    margin: 1rem auto;
+}
+
+.main-page-key-sentence {
+    font-size: 1.2rem;
+    margin: 1rem 0 2rem;
+}
+
+.main-page-buttons {
+    display: flex;
+    gap: 1rem;
+}
+
+.main-page-button {
+    padding: 0.8rem 1.5rem;
+    background-color: white;
+    color: rgb(40,40,40);
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.main-page-button:hover {
+    background-color: rgb(40,40,40);
+    color: white;
+}

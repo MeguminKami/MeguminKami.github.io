@@ -1,0 +1,224 @@
+/* ============================================
+   PROJECT PAGE SHELL
+   ============================================ */
+
+.backLink {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-muted);
+    font-size: 0.9375rem;
+    margin-bottom: 2rem;
+    transition: color 0.2s ease;
+}
+
+.backLink:hover {
+    color: var(--text);
+}
+
+.projectHeader {
+    --project-title-icon-size: 18rem;
+    --project-title-gap: clamp(1.5rem, 2.5vw, 2.25rem);
+    margin-bottom: 2.5rem;
+}
+
+.projectHero {
+    display: grid;
+    grid-template-columns: var(--project-title-icon-size) minmax(0, 1fr);
+    gap: var(--project-title-gap);
+    align-items: stretch;
+}
+
+.projectHeroMedia {
+    display: flex;
+    align-items: flex-start;
+}
+
+.projectHeroBody {
+    min-height: var(--project-title-icon-size);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1.25rem;
+}
+
+.projectHeroIntro {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+}
+
+.projectHeroIntro .projectMeta {
+    margin-top: 0;
+}
+
+.projectHeroIntro .lead {
+    max-width: none;
+}
+
+.projectTitle {
+    font-size: 2.5rem;
+    margin: 0;
+    line-height: 1.06;
+}
+
+.projectTitleIcon {
+    width: 100%;
+    max-width: var(--project-title-icon-size);
+    aspect-ratio: 1;
+    display: block;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.projectHeader .quickFacts {
+    margin: 0;
+    align-self: stretch;
+}
+
+.projectHeroBody > .quickFacts {
+    margin-top: auto;
+}
+
+body.light .projectTitleIcon {
+    border-color: rgba(2, 132, 199, 0.25);
+    box-shadow: 0 16px 36px rgba(2, 132, 199, 0.12);
+}
+
+@media (max-width: 900px) {
+    .projectHeader {
+        --project-title-icon-size: 14rem;
+    }
+
+    .projectHero {
+        grid-template-columns: 1fr;
+    }
+
+    .projectHeroMedia {
+        justify-content: center;
+    }
+
+    .projectHeroBody {
+        min-height: 0;
+    }
+}
+
+@media (max-width: 600px) {
+    .projectHeader {
+        --project-title-icon-size: min(100%, 12rem);
+    }
+
+    .projectTitle {
+        font-size: 2rem;
+    }
+}
+
+.projectMeta {
+    display: flex;
+    gap: 0.625rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+}
+
+.projectArticle .projectContent {
+    max-width: 800px;
+}
+
+.projectArticle--wide .projectContent {
+    max-width: 1100px;
+}
+
+.projectArticle .projectMain {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.projectArticle .contentSection {
+    margin-bottom: 0;
+}
+
+.projectArticle .sectionCard {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    box-shadow: var(--shadow-sm);
+}
+
+.projectArticle--metrics-spaced .metricsGrid {
+    margin-top: 1.5rem;
+}
+
+.contentSection {
+    margin-bottom: 3rem;
+}
+
+.contentSection h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.contentSection h3 {
+    font-size: 1.125rem;
+    margin: 1.5rem 0 0.75rem;
+}
+
+.contentSection > p.muted:not(:last-child) {
+    margin-bottom: 1rem;
+}
+
+.contentSection ul {
+    margin: 0.75rem 0;
+    padding-left: 1.5rem;
+    color: var(--text-muted);
+}
+
+.contentSection ul li {
+    margin: 0.5rem 0;
+    line-height: 1.6;
+}
+
+.projectLinks {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+}
+
+.mediaSection {
+    margin: 2rem 0;
+    padding: 2rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+}
+
+.mediaSection img,
+.mediaSection video {
+    width: 100%;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+}
+
+.techList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.625rem;
+    margin: 1rem 0;
+}
+
+.techItem {
+    padding: 0.5rem 1rem;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+@media (max-width: 640px) {
+    .projectArticle .sectionCard {
+        padding: 1.1rem;
+    }
+}

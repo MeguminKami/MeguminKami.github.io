@@ -1,0 +1,152 @@
+﻿/* Interface Components */
+.interfaceComponents {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.interfaceCard {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    padding: 2rem;
+    background: linear-gradient(
+        135deg,
+        rgba(45, 212, 255, 0.03) 0%,
+        rgba(124, 92, 255, 0.03) 100%
+    );
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.interfaceCard::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.interfaceCard:hover {
+    transform: translateY(-4px);
+    border-color: rgba(45, 212, 255, 0.4);
+    box-shadow: 0 12px 32px rgba(45, 212, 255, 0.15);
+}
+
+.interfaceCard:hover::before {
+    opacity: 1;
+}
+
+.interfaceCard:hover .interfaceIconLarge {
+    transform: scale(1.1);
+    box-shadow: 0 8px 24px rgba(45, 212, 255, 0.3);
+}
+
+.interfaceIconLarge {
+    width: 4.5rem;
+    height: 4.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.25rem;
+    background: linear-gradient(135deg, rgba(45, 212, 255, 0.15), rgba(124, 92, 255, 0.15));
+    border: 2px solid rgba(45, 212, 255, 0.3);
+    border-radius: var(--radius);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 16px rgba(45, 212, 255, 0.12);
+}
+
+.interfaceBody {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.interfaceBody h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text);
+    margin: 0;
+}
+
+.interfaceBody p {
+    margin: 0;
+    line-height: 1.6;
+}
+
+.interfaceTag {
+    display: inline-block;
+    padding: 0.375rem 0.875rem;
+    background: rgba(45, 212, 255, 0.1);
+    border: 1px solid rgba(45, 212, 255, 0.25);
+    border-radius: 999px;
+    color: var(--accent-blue);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    width: fit-content;
+    margin-top: 0.5rem;
+}
+
+body.light .interfaceCard {
+    background: linear-gradient(
+        135deg,
+        rgba(2, 132, 199, 0.04) 0%,
+        rgba(91, 61, 245, 0.04) 100%
+    );
+}
+
+body.light .interfaceCard:hover {
+    border-color: rgba(2, 132, 199, 0.4);
+    box-shadow: 0 12px 32px rgba(2, 132, 199, 0.15);
+}
+
+body.light .interfaceCard::before {
+    background: linear-gradient(90deg, rgba(2, 132, 199, 1), rgba(91, 61, 245, 1));
+}
+
+body.light .interfaceIconLarge {
+    background: linear-gradient(135deg, rgba(2, 132, 199, 0.12), rgba(91, 61, 245, 0.12));
+    border-color: rgba(2, 132, 199, 0.3);
+    box-shadow: 0 4px 16px rgba(2, 132, 199, 0.12);
+}
+
+body.light .interfaceCard:hover .interfaceIconLarge {
+    box-shadow: 0 8px 24px rgba(2, 132, 199, 0.25);
+}
+
+body.light .interfaceTag {
+    background: rgba(2, 132, 199, 0.1);
+    border-color: rgba(2, 132, 199, 0.25);
+    color: rgba(2, 132, 199, 1);
+}
+
+@media (max-width: 768px) {
+    .interfaceComponents {
+        grid-template-columns: 1fr;
+    }
+
+    .interfaceCard {
+        padding: 1.5rem;
+    }
+
+    .interfaceIconLarge {
+        width: 3.5rem;
+        height: 3.5rem;
+        font-size: 1.875rem;
+    }
+
+    .interfaceBody h3 {
+        font-size: 1.125rem;
+    }
+}
+

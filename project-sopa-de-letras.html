@@ -6,7 +6,7 @@
     <meta name="description" content="Gerador de Sopas de Letras - printable word-search book generator with multiple page layouts and LaTeX export.">
     <title>Gerador de Sopas de Letras - Project</title>
     <link rel="icon" type="image/png" href="assets/img/sopadeletras/icon.png">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
 <div class="bgGlow"></div>
@@ -18,43 +18,46 @@
         &larr; Back to Projects
     </a>
 
-    <article class="projectArticle wordSearchProject">
+    <article class="projectArticle projectArticle--wide projectArticle--metrics-spaced wordSearchProject">
         <header class="projectHeader">
-            <h1 class="projectTitle">
-                <img
-                    src="assets/img/sopadeletras/icon.png"
-                    alt=""
-                    class="projectTitleIcon"
-                    aria-hidden="true"
-                    loading="eager"
-                >
-                Gerador de Sopas de Letras
-            </h1>
-            <p class="lead">
-                The project is built around automatic generation of puzzle page files in <code>LaTeX</code>. Its purpose is to create organized collections of word-search pages with multiple page formats, including both battle-style pages and standard single-puzzle pages. 
-            </p>
+            <div class="projectHero">
+                <div class="projectHeroMedia">
+                    <img
+                        src="assets/img/sopadeletras/icon.png"
+                        alt=""
+                        class="projectTitleIcon"
+                        aria-hidden="true"
+                        loading="eager"
+                    >
+                </div>
+                <div class="projectHeroBody">
+                    <div class="projectHeroIntro">
+                        <h1 class="projectTitle">Gerador de Sopas de Letras</h1>
+                        <p class="lead">
+                            The project is built around automatic generation of puzzle page files in <code>LaTeX</code>. Its purpose is to create organized collections of word-search pages with multiple page formats, including both battle-style pages and standard single-puzzle pages.
+                        </p>
+                    </div>
 
-            <div class="quickFacts">    
-                <div class="factItem">
-                    <span class="factLabel">Latest Update</span>
-                    <span class="factValue" data-project-latest-update>2025</span>
-                </div>
-                <div class="factItem">
-                    <span class="factLabel">Type</span>
-                    <span class="factValue">Solo Project</span>
-                </div>
-                <div class="factItem">
-                    <span class="factLabel">Category</span>
-                    <span class="factValue">Python Terminal Application</span>
-                </div>
-                <div class="factItem">
-                    <span class="factLabel">Status</span>
-                    <span class="factValue grad">Complete</span>
+                    <div class="quickFacts">
+                        <div class="factItem">
+                            <span class="factLabel">Latest Update</span>
+                            <span class="factValue" data-project-latest-update>2025</span>
+                        </div>
+                        <div class="factItem">
+                            <span class="factLabel">Type</span>
+                            <span class="factValue">Solo Project</span>
+                        </div>
+                        <div class="factItem">
+                            <span class="factLabel">Category</span>
+                            <span class="factValue">Python Terminal Application</span>
+                        </div>
+                        <div class="factItem">
+                            <span class="factLabel">Status</span>
+                            <span class="factValue grad">Complete</span>
+                        </div>
+                    </div>
                 </div>
             </div>
-
-
-            
         </header>
 
         <div class="projectContent">
@@ -473,6 +476,6 @@
     <div id="siteFooter" class="siteFooter"></div>
 </div>
 
-<script src="script.js"></script>
+<script type="module" src="scripts/main.js"></script>
 </body>
 </html>

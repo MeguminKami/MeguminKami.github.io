@@ -1,0 +1,33 @@
+@import "./base/theme.css";
+@import "./base/reset.css";
+@import "./base/typography.css";
+@import "./base/layout.css";
+
+@import "./components/navigation.css";
+@import "./components/hero.css";
+@import "./components/buttons.css";
+@import "./components/filters.css";
+@import "./components/cards.css";
+@import "./components/about.css";
+@import "./components/ai-credits.css";
+@import "./components/footer.css";
+@import "./components/modal.css";
+@import "./components/project-shell.css";
+@import "./components/project-flow.css";
+@import "./components/project-interfaces.css";
+@import "./components/project-phases.css";
+@import "./components/template.css";
+@import "./components/project-overview.css";
+@import "./components/project-story.css";
+@import "./components/project-media.css";
+@import "./components/project-data.css";
+@import "./components/project-support.css";
+@import "./components/contact-modal.css";
+@import "./components/image-slider.css";
+@import "./components/led-embed.css";
+
+@import "./pages/led.css";
+@import "./pages/ytdl.css";
+@import "./pages/sopa.css";
+@import "./pages/dbs.css";
+@import "./pages/simulation.css";

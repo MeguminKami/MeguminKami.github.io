@@ -1,0 +1,68 @@
+﻿/* ============================================
+   FILTERS
+   ============================================ */
+
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin: 1.5rem 0;
+}
+
+.pill {
+    padding: 0.5rem 1rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    color: var(--text-muted);
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.pill:hover {
+    background: var(--surface-2);
+    color: var(--text);
+}
+
+.pill.isActive {
+    background: rgba(124, 92, 255, 0.15);
+    border-color: var(--accent-purple);
+    color: var(--text);
+}
+
+body.light .pill.isActive {
+    background: rgba(124, 92, 255, 0.1);
+}
+
+/* Status filter pills with color coding */
+.pill.status-pill[data-status="complete"].isActive {
+    background: rgba(34, 197, 94, 0.15);
+    border-color: #22c55e;
+}
+
+.pill.status-pill[data-status="in-progress"].isActive {
+    background: rgba(59, 130, 246, 0.15);
+    border-color: #3b82f6;
+}
+
+.pill.status-pill[data-status="paused"].isActive {
+    background: rgba(245, 158, 11, 0.15);
+    border-color: #f59e0b;
+}
+
+.pill.status-pill[data-status="incomplete"].isActive {
+    background: rgba(239, 68, 68, 0.15);
+    border-color: var(--accent-red);
+}
+
+.pill.status-pill[data-status="to-be-started"].isActive {
+    background: rgba(168, 85, 247, 0.15);
+    border-color: #a855f7;
+}
+
+.filters + .filters {
+    margin-top: 0.75rem;
+}
+

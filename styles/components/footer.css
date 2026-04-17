@@ -1,0 +1,36 @@
+﻿/* ============================================
+   FOOTER
+   ============================================ */
+
+.footer {
+    margin-top: 5rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid var(--border);
+}
+
+.footerRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.footerTitle {
+    font-size: 1.50rem;
+    margin-bottom: 0.5rem;
+}
+
+.footerLinks {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.footerBottom {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+    text-align: center;
+}
+

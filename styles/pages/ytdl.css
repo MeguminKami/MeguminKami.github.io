@@ -1,0 +1,63 @@
+﻿.ytdlProject .imgSlider {
+    max-width: 1026px;
+}
+
+.ytdlProject .imgSliderViewport {
+    aspect-ratio: 1026 / 800;
+}
+
+.ytdlProject .imgSliderImg {
+    object-fit: contain;
+    background: var(--bg);
+}
+
+/* ytdl before/after: set correct aspect ratio for 1180Ã—890 images */
+.ytdlProject .baContainer {
+    aspect-ratio: 1180 / 890;
+    max-width: 1180px;
+    margin: 0 auto;
+}
+
+/* ytdl limitations list */
+.limitationsList {
+    display: grid;
+    gap: 1.25rem;
+    margin-top: 1.5rem;
+}
+
+.limitationItem {
+    padding: 1.25rem;
+    background: rgba(255, 69, 58, 0.04);
+    border-left: 3px solid rgba(255, 69, 58, 0.5);
+    border-radius: var(--radius-sm);
+    transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.limitationItem:hover {
+    background: rgba(255, 69, 58, 0.08);
+    border-left-color: rgba(255, 69, 58, 0.7);
+}
+
+.limitationItem h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text);
+    margin: 0 0 0.5rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.limitationItem p {
+    margin: 0;
+}
+
+body.light .limitationItem {
+    background: rgba(255, 59, 48, 0.06);
+    border-left-color: rgba(255, 59, 48, 0.4);
+}
+
+body.light .limitationItem:hover {
+    background: rgba(255, 59, 48, 0.1);
+    border-left-color: rgba(255, 59, 48, 0.6);
+}

@@ -6,7 +6,7 @@
     <meta name="description" content="Flight Deal Finder - A privacy-first local desktop app for discovering cheap round trips inside a date window.">
     <title>Flight Deal Finder — Project</title>
     <link rel="icon" type="image/png" href="assets/img/flightdealfinder/icon.png">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
 <div class="bgGlow"></div>
@@ -18,44 +18,49 @@
         ← Back to Projects
     </a>
 
-    <article class="projectArticle flightProject">
+    <article class="projectArticle projectArticle--wide flightProject">
         <header class="projectHeader">
-            <h1 class="projectTitle">
-                <img
-                    src="assets/img/flightdealfinder/icon.png"
-                    alt=""
-                    class="projectTitleIcon"
-                    aria-hidden="true"
-                    loading="eager"
-                >
-                Flight Deal Finder
-            </h1>
-            <p class="lead">
-                Flight Deal Finder is built around how I actually plan trips: choose a travel window, set the trip
-                length, and instantly rank the cheapest round trips first. It runs as a privacy-first local desktop app,
-                searches cached fares from Amadeus and Travelpayouts, and opens Google Flights or Booking with your
-                dates already filled in.
-            </p>
+            <div class="projectHero">
+                <div class="projectHeroMedia">
+                    <img
+                        src="assets/img/flightdealfinder/icon.png"
+                        alt=""
+                        class="projectTitleIcon"
+                        aria-hidden="true"
+                        loading="eager"
+                    >
+                </div>
+                <div class="projectHeroBody">
+                    <div class="projectHeroIntro">
+                        <h1 class="projectTitle">Flight Deal Finder</h1>
+                        <p class="lead">
+                            Flight Deal Finder is built around how I actually plan trips: choose a travel window, set the trip
+                            length, and instantly rank the cheapest round trips first. It runs as a privacy-first local desktop app,
+                            searches cached fares from Amadeus and Travelpayouts, and opens Google Flights or Booking with your
+                            dates already filled in.
+                        </p>
+                    </div>
 
-            <div class="quickFacts">    
-                <div class="factItem">
-                    <span class="factLabel">Latest Update</span>
-                    <span class="factValue" data-project-latest-update>2025</span>
-                </div>
-                <div class="factItem">
-                    <span class="factLabel">Type</span>
-                    <span class="factValue">Solo Project</span>
-                </div>
-                <div class="factItem">
-                    <span class="factLabel">Category</span>
-                    <span class="factValue">Python Webapp</span>
-                </div>
-                <div class="factItem">
-                    <span class="factLabel">Status</span>
-                    <span class="factValue grad">Prototype Complete</span>
+                    <div class="quickFacts">
+                        <div class="factItem">
+                            <span class="factLabel">Latest Update</span>
+                            <span class="factValue" data-project-latest-update>2025</span>
+                        </div>
+                        <div class="factItem">
+                            <span class="factLabel">Type</span>
+                            <span class="factValue">Solo Project</span>
+                        </div>
+                        <div class="factItem">
+                            <span class="factLabel">Category</span>
+                            <span class="factValue">Python Webapp</span>
+                        </div>
+                        <div class="factItem">
+                            <span class="factLabel">Status</span>
+                            <span class="factValue grad">Prototype Complete</span>
+                        </div>
+                    </div>
                 </div>
             </div>
-
         </header>
 
         <div class="projectContent">
@@ -68,10 +73,6 @@
                             direct links to booking tools with the dates already filled. It runs 100% locally with no tracking
                             and is meant for inspiration rather than final booking.
                         </p>
-                    </section>
-
-                    <section class="contentSection sectionCard storySection">
-
                         <div class="storyFlow">
                             <div class="storyCard storyProblem">
                                 <div class="storyCardHeader">
@@ -522,6 +523,6 @@
     <div class="lightboxCaption" id="lightboxCaption"></div>
 </div>
 
-<script src="script.js"></script>
+<script type="module" src="scripts/main.js"></script>
 </body>
 </html>

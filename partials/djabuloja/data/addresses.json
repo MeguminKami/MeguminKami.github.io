@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "street": "Rua da Administracao 1",
+    "city": "Porto",
+    "postalcode": "4000-100",
+    "phonenumber": "912345678",
+    "nif": "123456789"
+  },
+  {
+    "id": 2,
+    "street": "Rua dos Djabusabi 12",
+    "city": "Vila Nova de Gaia",
+    "postalcode": "4400-321",
+    "phonenumber": "934567890",
+    "nif": "234567891"
+  }
+]

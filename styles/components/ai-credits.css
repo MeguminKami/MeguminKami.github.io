@@ -1,0 +1,83 @@
+﻿/* ============================================
+   AI CREDITS SECTION
+   ============================================ */
+
+.aiCredits {
+    border-top: 1px dashed var(--border);
+    padding-top: 2rem;
+    margin-top: 4rem;
+}
+
+.aiCreditsInner {
+    display: flex;
+    align-items: baseline;
+    gap: 2rem 3rem;
+    flex-wrap: wrap;
+}
+
+.aiCreditsLeft {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    flex-shrink: 0;
+}
+
+.aiCreditsTag {
+    font-size: 0.75rem;
+    color: var(--accent-blue);
+    opacity: 0.7;
+    letter-spacing: 0.04em;
+}
+
+.aiCreditsHeading {
+    font-size: 1.1rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.aiCreditsText {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.8;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.aiCreditsText strong {
+    color: var(--text);
+}
+
+.aiChip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+    font-size: 0.8rem;
+    font-weight: 500;
+    transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+    vertical-align: middle;
+}
+
+.aiChip:hover {
+    color: var(--accent-blue);
+    border-color: var(--accent-blue);
+    background: var(--accent-blue-soft);
+}
+
+body.light .aiChip {
+    background: var(--surface);
+}
+
+@media (max-width: 640px) {
+    .aiCreditsInner {
+        flex-direction: column;
+        gap: 1rem;
+    }
+}
+

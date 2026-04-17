@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta
         name="description"
-        content="DBS Item Shop - university PHP storefront case study rebuilt as a static HTML, CSS, and JavaScript portfolio demo for GitHub Pages."
+        content="DBS Item Shop - PHP course project for SIE UC focused on the Djabusabi online store, user flows, catalog management, checkout, and administration."
     >
     <title>DBS Item Shop - Project</title>
-    <link rel="icon" type="image/png" href="partials/dbs-website/assets/logos/logo_vigo.png">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="partials/djabuloja/assets/logos/logo_vigo.png">
+    <link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
 <div class="bgGlow"></div>
@@ -21,162 +21,54 @@
         &larr; Back to Projects
     </a>
 
-    <article class="projectArticle dbsProject">
+    <article class="projectArticle projectArticle--wide dbsProject">
         <header class="projectHeader">
-            <div class="dbsHeroLayout">
-                <div class="dbsHeroCopy">
-                    <div class="projectMeta">
-                        <span class="chipPrimary">University Storefront</span>
-                        <span class="chip">Static Portfolio Rebuild</span>
-                        <span class="chipTertiary">Djabusabi / DBS</span>
-                    </div>
-
-                    <h1 class="projectTitle">
-                        <img
-                            src="partials/dbs-website/assets/logos/logo_vigo.png"
-                            alt=""
-                            class="projectTitleIcon"
-                            aria-hidden="true"
-                            loading="eager"
-                        >
-                        DBS Item Shop
-                    </h1>
-
-                    <p class="lead">
-                        DBS Item Shop began as a university PHP storefront built around product browsing, authentication,
-                        account flows, and admin-oriented CRUD thinking. For this portfolio, it was rebuilt as a static
-                        HTML, CSS, and JavaScript experience so the project can be deployed directly on GitHub Pages
-                        while still communicating the original store structure and Djabusabi identity.
-                    </p>
-
-                    <p class="muted smallText dbsHeroNote">
-                        This page presents the original backend-oriented scope and the static rebuild side by side, so
-                        the project still reads like a real storefront system rather than a disconnected mock landing
-                        page.
-                    </p>
-
-                    <div class="projectLinks">
-                        <a href="partials/dbs-website/index.html" class="btn primary" target="_blank" rel="noopener">
-                            Open Static Demo
-                        </a>
-                        <a href="#dbs-preserved" class="btn tertiary">
-                            See Preserved Features
-                        </a>
-                        <a href="#dbs-demo" class="btn secondary">
-                            Jump to Live Preview
-                        </a>
-                    </div>
+            <div class="projectHero">
+                <div class="projectHeroMedia">
+                    <img
+                        src="partials/djabuloja/assets/logos/logo_vigo.png"
+                        alt=""
+                        class="projectTitleIcon"
+                        aria-hidden="true"
+                        loading="eager"
+                    >
                 </div>
+                <div class="projectHeroBody">
+                    <div class="projectHeroIntro">
 
-                <div class="dbsHeroVisual" aria-hidden="true">
-                    <div class="dbsWindowChrome">
-                        <span class="dbsWindowDot dbsWindowDot--muted"></span>
-                        <span class="dbsWindowDot dbsWindowDot--cyan"></span>
-                        <span class="dbsWindowDot dbsWindowDot--violet"></span>
-                        <span class="mono">dbs-item-shop / static portfolio build</span>
+                        <h1 class="projectTitle">DBS Item Shop</h1>
+
+                        <p class="lead">
+                            DBS Item Shop was developed for the <em>SIE UC</em> course as a PHP web application for
+                            the Djabusabi group: an online store with authentication, searchable catalog pages, product
+                            detail screens, cart and checkout flows, order history, and administrator tools for products and users.
+                        </p>
+
+                        <p class="muted smallText dbsHeroNote">
+                            Project report, wireframes, and development plan:
+                            <code>partials/djabuloja/ex4_report.pdf</code>. Interface preview:
+                            <code>partials/djabuloja/index.html</code>.
+                        </p>
                     </div>
 
-                    <div class="dbsVisualSurface">
-                        <div class="dbsVisualTopbar">
-                            <div class="dbsBrandLockup">
-                                <img src="partials/dbs-website/assets/logos/logo_vigo.png" alt="">
-                                <span>Djabusabi</span>
-                            </div>
-
-                            <div class="dbsVisualNav">
-                                <span>Eventos</span>
-                                <span>Loja</span>
-                                <span>Equipas</span>
-                            </div>
-
-                            <div class="dbsVisualCart">6 items</div>
+                    <div class="quickFacts">
+                        <div class="factItem">
+                            <span class="factLabel">Latest Update</span>
+                            <span class="factValue" data-project-latest-update>2026-04-17</span>
                         </div>
-
-                        <div class="dbsVisualWorkspace">
-                            <aside class="dbsVisualFilters">
-                                <span class="dbsPanelLabel">Store Filters</span>
-
-                                <div class="dbsFilterGroup">
-                                    <span class="dbsPill dbsPill--active">Todos</span>
-                                    <span class="dbsPill">Vestu&aacute;rio</span>
-                                    <span class="dbsPill">Utilit&aacute;rios</span>
-                                </div>
-
-                                <span class="dbsPanelLabel">Status</span>
-                                <div class="dbsFilterGroup">
-                                    <span class="dbsPill">Dispon&iacute;vel</span>
-                                    <span class="dbsPill">Last Units</span>
-                                </div>
-
-                                <span class="dbsPanelLabel">Customer / Admin</span>
-                                <div class="dbsFilterGroup">
-                                    <span class="dbsPill">Account</span>
-                                    <span class="dbsPill">Profile</span>
-                                    <span class="dbsPill">CRUD DNA</span>
-                                </div>
-                            </aside>
-
-                            <div class="dbsVisualCatalog">
-                                <div class="dbsVisualOrderRow">
-                                    <span class="dbsPill dbsPill--active">Price Asc</span>
-                                    <span class="dbsPill">A-Z</span>
-                                    <span class="dbsPill">Newest</span>
-                                </div>
-
-                                <div class="dbsVisualProductGrid">
-                                    <article class="dbsVisualProductCard">
-                                        <div class="dbsVisualProductMedia">
-                                            <img src="partials/dbs-website/assets/store/capa_cinza.png" alt="">
-                                        </div>
-                                        <div class="dbsVisualProductBody">
-                                            <strong>Capa Cinza</strong>
-                                            <div class="dbsVisualProductMeta">
-                                                <span>Vestu&aacute;rio</span>
-                                                <span>19.90&euro;</span>
-                                            </div>
-                                        </div>
-                                    </article>
-
-                                    <article class="dbsVisualProductCard">
-                                        <div class="dbsVisualProductMedia">
-                                            <img src="partials/dbs-website/assets/store/mousepad_cinza.png" alt="">
-                                        </div>
-                                        <div class="dbsVisualProductBody">
-                                            <strong>Mousepad Cinza</strong>
-                                            <div class="dbsVisualProductMeta">
-                                                <span>Utilit&aacute;rios</span>
-                                                <span>12.50&euro;</span>
-                                            </div>
-                                        </div>
-                                    </article>
-                                </div>
-
-                                <div class="dbsVisualFootnote">
-                                    Fixed-header store framing, filters, ordering, account flows, and admin thinking stay
-                                    visible even after moving the project to a static-friendly delivery model.
-                                </div>
-                            </div>
+                        <div class="factItem">
+                            <span class="factLabel">Course</span>
+                            <span class="factValue">MEEC SIE 24/25</span>
+                        </div>
+                        <div class="factItem">
+                            <span class="factLabel">Original Build</span>
+                            <span class="factValue">PHP + HTML/CSS/JS</span>
+                        </div>
+                        <div class="factItem">
+                            <span class="factLabel">Authors</span>
+                            <span class="factValue grad">Joao Ferreira + Joao Pessoa</span>
                         </div>
                     </div>
-                </div>
-            </div>
-
-            <div class="quickFacts">
-                <div class="factItem">
-                    <span class="factLabel">Latest Update</span>
-                    <span class="factValue" data-project-latest-update>2026-04-14</span>
-                </div>
-                <div class="factItem">
-                    <span class="factLabel">Original Build</span>
-                    <span class="factValue">PHP + Database</span>
-                </div>
-                <div class="factItem">
-                    <span class="factLabel">Portfolio Rebuild</span>
-                    <span class="factValue">HTML + CSS + JS</span>
-                </div>
-                <div class="factItem">
-                    <span class="factLabel">Status</span>
-                    <span class="factValue grad">Complete</span>
                 </div>
             </div>
         </header>
@@ -184,101 +76,64 @@
         <div class="projectContent">
             <div class="projectMain">
                 <section class="contentSection sectionCard">
-                    <div class="dbsOverviewGrid">
-                        <div>
-                            <h2>Overview</h2>
-                            <p class="muted">
-                                The original DBS Item Shop was shaped like a proper course storefront: branded navigation,
-                                role-aware thinking, product listings, customer account management, and admin-side data
-                                operations. That structure is what gives the project value, so the rebuild focuses on
-                                preserving the product logic and experience framing, not just recreating a homepage.
-                            </p>
-                            <p class="muted">
-                                Because GitHub Pages cannot run PHP sessions or database queries, the portfolio version
-                                keeps the visual language and user journeys while moving the deployable layer into static
-                                HTML, CSS, and JavaScript. The result is a cleaner, easier-to-open project page that
-                                still reads like the same DBS ecosystem.
-                            </p>
-                        </div>
-
-                        <aside class="dbsNotePanel">
-                            <span class="dbsNoteEyebrow">Rebuild Goal</span>
-                            <h3>Static deployment without flattening the project</h3>
-                            <ul class="dbsListCompact smallText muted">
-                                <li>Remove PHP includes, sessions, and database dependence.</li>
-                                <li>Keep the fixed-header shop framing and structured page organization.</li>
-                                <li>Preserve the brand tone, store filters, account area, and portfolio credibility.</li>
-                            </ul>
-                        </aside>
-                    </div>
-
-                    <div class="metricsGrid">
-                        <div class="metricCard">
-                            <div class="metricValue grad2">5</div>
-                            <div class="metricLabel">Static Views</div>
-                            <p class="smallText muted">Landing, store, login, signup, and account pages remain browseable.</p>
-                        </div>
-                        <div class="metricCard">
-                            <div class="metricValue grad">3</div>
-                            <div class="metricLabel">Core Journeys</div>
-                            <p class="smallText muted">Browse merchandise, create or enter an account, and manage profile details.</p>
-                        </div>
-                        <div class="metricCard">
-                            <div class="metricValue grad2">2</div>
-                            <div class="metricLabel">Seed Products</div>
-                            <p class="smallText muted">The demo catalog stays intentionally small and focused for static delivery.</p>
-                        </div>
-                        <div class="metricCard">
-                            <div class="metricValue grad">0</div>
-                            <div class="metricLabel">Server Requirements</div>
-                            <p class="smallText muted">No PHP runtime, no sessions, and no database setup are needed to open it.</p>
-                        </div>
-                    </div>
+                        <h2>Overview</h2>
+                        <p class="muted">
+                            DBS Item Shop started from the idea of creating a website for the Djabusabi group that
+                            could represent its identity and activities. In the delivered course version, that idea
+                            takes the form of an online store where users can browse products, authenticate, manage
+                            personal data, place orders, and move through a structured shopping flow.
+                        </p>
+                        <p class="muted">
+                            The store is the central delivered implementation for SIE, but the website was designed as
+                            a base that could grow with new Djabusabi-related features later on. That broader direction
+                            is what gives the project its mix of customer journeys, administration, reusable templates,
+                            and a structured database model.
+                        </p>
                 </section>
 
                 <section class="contentSection sectionCard">
                     <h2>Technical Stack</h2>
                     <div class="techList">
                         <span class="techItem">PHP</span>
-                        <span class="techItem">Database-backed Storefront</span>
+                        <span class="techItem">SQL</span>
                         <span class="techItem">HTML</span>
                         <span class="techItem">CSS</span>
                         <span class="techItem">JavaScript</span>
-                        <span class="techItem">Static Hosting</span>
-                        <span class="techItem">GitHub Pages</span>
+                        <span class="techItem">CRUD Patterns</span>
                     </div>
+                </section>
 
-                    <div class="dbsVersionGrid">
-                        <article class="dbsVersionCard dbsVersionCard--backend">
-                            <span class="dbsVersionEyebrow">Original Backend Project</span>
-                            <h3>Server-side storefront built with course-project structure</h3>
-                            <ul class="dbsVersionList smallText">
-                                <li>Authentication, sessions, and database-driven product flows.</li>
-                                <li>Role-based behavior with customer and admin responsibilities.</li>
-                                <li>CRUD mindset for users, products, and store management tasks.</li>
-                                <li>Structured file organization with reusable layout and navigation pieces.</li>
-                            </ul>
-                        </article>
-
-                        <article class="dbsVersionCard dbsVersionCard--static">
-                            <span class="dbsVersionEyebrow">Portfolio Static Rebuild</span>
-                            <h3>Deployable front-end version designed for easy access</h3>
-                            <ul class="dbsVersionList smallText">
-                                <li>Static HTML pages that open directly from the portfolio repository.</li>
-                                <li>Reused Djabusabi brand assets, dark surfaces, and storefront composition.</li>
-                                <li>Client-side catalog rendering, sorting, filters, and tabbed account presentation.</li>
-                                <li>Project storytelling that keeps the original backend scope visible and credible.</li>
-                            </ul>
-                        </article>
+                <section class="contentSection sectionCard storySection">
+                    <div class="metricsGrid">
+                        <div class="metricCard">
+                            <div class="metricValue grad2">18</div>
+                            <div class="metricLabel">Use Cases</div>
+                            <p class="smallText muted">Customer, administrator, and support-oriented interactions are mapped across the application.</p>
+                        </div>
+                        <div class="metricCard">
+                            <div class="metricValue grad">8</div>
+                            <div class="metricLabel">Main Data Tables</div>
+                            <p class="smallText muted">Users, personal data, addresses, products, filters, stock states, orders, and order items define the core model.</p>
+                        </div>
+                        <div class="metricCard">
+                            <div class="metricValue grad2">4</div>
+                            <div class="metricLabel">Delivery Phases</div>
+                            <p class="smallText muted">The implementation plan is broken into four phases covering authentication, admin, catalog, and cart/order work.</p>
+                        </div>
+                        <div class="metricCard">
+                            <div class="metricValue grad">All</div>
+                            <div class="metricLabel">Dynamic Pages</div>
+                            <p class="smallText muted">The application features a set of dynamic pages that respond to user interactions and data changes.</p>
+                        </div>
                     </div>
                 </section>
 
                 <section class="contentSection sectionCard storySection">
                     <div class="storyIntro">
-                        <h2>Problem to Rebuild to Result</h2>
+                        <h2>Project Breakdown</h2>
                         <p class="muted">
-                            The portfolio version is strongest when it explains not only what DBS looked like, but why a
-                            second implementation was needed and what that second implementation keeps alive.
+                            DBS Item Shop goes beyond a simple product grid by combining group identity, customer
+                            shopping flows, and administrator responsibility inside one web application.
                         </p>
                     </div>
 
@@ -286,84 +141,80 @@
                         <div class="storyCard storyProblem">
                             <div class="storyCardHeader">
                                 <span class="storyIcon" aria-hidden="true">&#x26A0;</span>
-                                <span class="storyTag">Problem</span>
+                                <span class="storyTag">Theme</span>
                             </div>
                             <p class="muted">
-                                The course project depended on a classic server-side stack. Once removed from that
-                                environment, the original deployment model could no longer show its navigation, forms,
-                                product browsing, and role-based logic directly inside the portfolio.
+                                The project theme was to build a website for the Djabusabi group. In the SIE
+                                coursework version, that identity is expressed through an online store that could later
+                                grow into a broader community website.
                             </p>
                             <ul class="muted">
-                                <li>PHP includes and server sessions do not run on GitHub Pages.</li>
-                                <li>Database queries cannot power live product or account state on a static host.</li>
-                                <li>The project risked being reduced to screenshots instead of an explorable demo.</li>
+                                <li>The store is the present implementation, not the limit of the concept.</li>
+                                <li>The website is meant to represent both identity and activity.</li>
+                                <li>Reusable templates and shared structure support that broader direction.</li>
                             </ul>
                         </div>
 
                         <div class="storyCard storyIdea">
                             <div class="storyCardHeader">
                                 <span class="storyIcon" aria-hidden="true">&#x1F4A1;</span>
-                                <span class="storyTag">Rebuild</span>
+                                <span class="storyTag">Customer</span>
                             </div>
                             <p class="muted">
-                                Reframe the project as a static case-study experience: keep the same brand, store layout,
-                                fixed-header feel, filters, account pages, and practical UI blocks, then rebuild the
-                                portfolio-facing version with clean front-end code.
+                                On the customer side, the application includes login and signup, product search,
+                                product detail pages, cart management, checkout, and order history as the core shopping journey.
                             </p>
                             <ul class="muted">
-                                <li>Preserve the store-oriented information architecture.</li>
-                                <li>Highlight what belonged to the original backend and what belongs to the rebuild.</li>
-                                <li>Use the portfolio's existing cards, badges, glow, and CTA system throughout.</li>
+                                <li>Search includes price, alphabetical ordering, and product-type filters.</li>
+                                <li>Product pages expose image, description, price, stock, and quantity selection.</li>
+                                <li>Checkout progresses through delivery, payment, and confirmation.</li>
                             </ul>
                         </div>
 
                         <div class="storyCard storySolution">
                             <div class="storyCardHeader">
                                 <span class="storyIcon" aria-hidden="true">&#x2705;</span>
-                                <span class="storyTag">Result</span>
+                                <span class="storyTag">Admin</span>
                             </div>
                             <p class="muted">
-                                A more premium portfolio project page and a static demo that feel integrated with the
-                                rest of the website, while still reading unmistakably as DBS Item Shop and clearly
-                                respecting the original course-project scope.
+                                The administrator scope is equally important: product maintenance, user maintenance,
+                                and access to dedicated management pages are all part of the original application.
                             </p>
                             <ul class="muted">
-                                <li>Sharper hierarchy, richer widgets, and stronger section transitions.</li>
-                                <li>Clearer separation between backend origin and static delivery model.</li>
-                                <li>Believable, portfolio-ready presentation without changing the product identity.</li>
+                                <li>Administrators can add, edit, and remove products from the catalog.</li>
+                                <li>They can also list, add, edit, and remove users.</li>
+                                <li>The project scope also leaves room for ticket-based support interactions.</li>
                             </ul>
                         </div>
                     </div>
                 </section>
 
                 <section id="dbs-preserved" class="contentSection sectionCard">
-                    <h2>What the Static Version Preserves</h2>
+                    <h2>Main Functional Areas</h2>
                     <p class="muted">
-                        The static rebuild is not trying to pretend the backend still exists. Its job is to preserve the
-                        product language, customer-facing structure, and key interaction cues that made the original
-                        project feel like a real item shop.
+                        These are the main application areas represented throughout the use cases, mockups, and database model.
                     </p>
 
                     <div class="interfaceComponents">
                         <article class="interfaceCard">
                             <div class="interfaceIconLarge">&#x1F4F1;</div>
                             <div class="interfaceBody">
-                                <h3>Fixed-Header Store Framing</h3>
+                                <h3>Authentication and Signup</h3>
                                 <p class="muted smallText">
-                                    The demo keeps the branded top navigation, strong route hierarchy, and store-first
-                                    presentation style that defined the original browsing experience.
+                                    Login and signup are first-class use cases, with credential verification, validation
+                                    rules, error feedback, and the distinction between authenticated and non-authenticated states.
                                 </p>
-                                <div class="interfaceTag">Navigation DNA</div>
+                                <div class="interfaceTag">Entry Flow</div>
                             </div>
                         </article>
 
                         <article class="interfaceCard">
                             <div class="interfaceIconLarge">&#x1F50D;</div>
                             <div class="interfaceBody">
-                                <h3>Filters and Ordering</h3>
+                                <h3>Catalog Search and Filters</h3>
                                 <p class="muted smallText">
-                                    Category selection, availability cues, and ordering controls remain part of the shop
-                                    flow so the listing still feels practical and store-oriented instead of decorative.
+                                    The store page is designed around search, price ordering, alphabetical ordering, and
+                                    product-type filters so the catalog behaves like a usable store instead of a simple gallery.
                                 </p>
                                 <div class="interfaceTag">Catalog Flow</div>
                             </div>
@@ -372,94 +223,104 @@
                         <article class="interfaceCard">
                             <div class="interfaceIconLarge">&#x1F464;</div>
                             <div class="interfaceBody">
-                                <h3>Account-Side Structure</h3>
+                                <h3>Product Detail and Cart</h3>
                                 <p class="muted smallText">
-                                    Login, signup, and account-management views still communicate the personal-data,
-                                    password, and address-management scope from the original customer area.
+                                    The product page exposes image, name, technical description, price, stock, and quantity,
+                                    while the cart supports product review, removal, and transition into checkout.
                                 </p>
-                                <div class="interfaceTag">User Area</div>
+                                <div class="interfaceTag">Store Interaction</div>
                             </div>
                         </article>
 
                         <article class="interfaceCard">
                             <div class="interfaceIconLarge">&#x2699;</div>
                             <div class="interfaceBody">
-                                <h3>Admin / CRUD Mindset</h3>
+                                <h3>Personal Area and Orders</h3>
                                 <p class="muted smallText">
-                                    Even when not running from a live backend, the project page keeps the original admin
-                                    story visible: product and user management were central to the course implementation.
+                                    Authenticated users can manage personal data, change password, edit delivery and billing
+                                    address details, and consult order history and invoices.
                                 </p>
-                                <div class="interfaceTag">Backend Scope</div>
+                                <div class="interfaceTag">User Area</div>
                             </div>
                         </article>
 
                         <article class="interfaceCard">
                             <div class="interfaceIconLarge">&#x1F3A8;</div>
                             <div class="interfaceBody">
-                                <h3>Djabusabi Brand Personality</h3>
+                                <h3>Checkout Flow</h3>
                                 <p class="muted smallText">
-                                    Dark surfaces, strong contrast, rounded geometry, and the original logo assets keep
-                                    the page grounded in the same DBS visual identity instead of drifting into a generic case study.
+                                    The checkout is split into delivery, payment, and confirmation pages, making the buying
+                                    process explicit throughout the application flow.
                                 </p>
-                                <div class="interfaceTag">Visual Identity</div>
+                                <div class="interfaceTag">Purchase Flow</div>
                             </div>
                         </article>
 
                         <article class="interfaceCard">
                             <div class="interfaceIconLarge">&#x1F4E6;</div>
                             <div class="interfaceBody">
-                                <h3>Static-Friendly Delivery</h3>
+                                <h3>Admin and Support Tools</h3>
                                 <p class="muted smallText">
-                                    The rebuild is lightweight, portable, and easy to open, which makes the project much
-                                    easier to evaluate inside the portfolio without sacrificing the original concept.
+                                    The administration area covers product CRUD and user CRUD, alongside a ticket tab
+                                    for users who need additional information.
                                 </p>
-                                <div class="interfaceTag">Portfolio Ready</div>
+                                <div class="interfaceTag">CRUD Scope</div>
                             </div>
                         </article>
                     </div>
                 </section>
 
                 <section class="contentSection sectionCard">
-                    <h2>Original Project Capabilities</h2>
+                    <h2>Capability Map</h2>
                     <p class="muted">
-                        The table below makes the separation explicit: what belonged to the original backend build, and
-                        how that same idea is now represented in the portfolio-friendly version.
+                        The project is organized around pages, entities, and responsibilities. This table keeps that
+                        application-centered view.
                     </p>
 
                     <div class="tableWrapper">
                         <table class="comparisonTable">
                             <thead>
                             <tr>
-                                <th>Capability</th>
-                                <th>Original Backend Project</th>
-                                <th>Portfolio Rebuild</th>
+                                <th>Area</th>
+                                <th>Pages / Entities</th>
+                                <th>Scope</th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr>
-                                <td>Store navigation</td>
-                                <td>Fixed-header routing and branded store structure across multiple pages.</td>
-                                <td class="highlight">Preserved visually with the same dark, structured storefront feel.</td>
+                                <td>User data</td>
+                                <td><code>users</code>, <code>personaldata</code>, <code>address</code></td>
+                                <td class="highlight">Authentication, permissions, editable personal data, and delivery / billing information.</td>
                             </tr>
                             <tr>
-                                <td>Catalog browsing</td>
-                                <td>Database-backed products, category views, and store listings.</td>
-                                <td>Static catalog cards with front-end filters and ordering controls.</td>
+                                <td>Product data</td>
+                                <td><code>storeitems</code>, <code>filters</code>, <code>stock</code></td>
+                                <td>Catalog listings, filterable store browsing, stock state, and administrator product management.</td>
                             </tr>
                             <tr>
-                                <td>User accounts</td>
-                                <td>Authenticated profile, password, and address management flows.</td>
-                                <td>Static account, login, and signup pages that preserve the UI and journey shape.</td>
+                                <td>Orders</td>
+                                <td><code>order</code>, <code>order_item</code></td>
+                                <td>Order history per client plus the items and quantities inside each purchase.</td>
                             </tr>
                             <tr>
-                                <td>Admin tools</td>
-                                <td>Role-aware management for users and products with CRUD logic.</td>
-                                <td>Presented on this page as part of the original scope and reflected in the system narrative.</td>
+                                <td>Customer pages</td>
+                                <td>Login, signup, loja, produto, carrinho, checkout, encomendas</td>
+                                <td>End-to-end shopping flow from entry to confirmation, including search, details, cart, and history.</td>
                             </tr>
                             <tr>
-                                <td>Data layer</td>
-                                <td>Sessions plus server-side persistence and query-driven behavior.</td>
-                                <td class="highlight">Replaced by static pages and front-end state so the project stays deployable.</td>
+                                <td>Admin pages</td>
+                                <td>Adicionar produto, lista de utilizadores, adicionar utilizador</td>
+                                <td>CRUD-oriented maintenance for products and users through dedicated administration screens.</td>
+                            </tr>
+                            <tr>
+                                <td>UI templates</td>
+                                <td>Base page, side menu, login/signup pages, shared CSS resources</td>
+                                <td>Reusable structure and styling across the application, with specific templates for auth and main navigation.</td>
+                            </tr>
+                            <tr>
+                                <td>Support / extension</td>
+                                <td>Ticket tab and future site growth</td>
+                                <td class="highlight">The store is the delivered implementation, with room for future expansion of the Djabusabi website.</td>
                             </tr>
                             </tbody>
                         </table>
@@ -468,32 +329,31 @@
                     <div class="calloutBox calloutInfo">
                         <div class="calloutIcon">&#x2139;</div>
                         <div>
-                            <h4>Important distinction</h4>
+                            <h4>Project Scope</h4>
                             <p class="smallText">
-                                The static rebuild preserves presentation, flows, and portfolio accessibility. The
-                                original course project is still the source of the server-side logic, CRUD behavior,
-                                and role-based backend scope referenced throughout this page.
+                                Delivered scope: the original PHP application. Project report and interface preview
+                                cover the structure, screens, and navigation flow.
                             </p>
                         </div>
                     </div>
                 </section>
 
                 <section class="contentSection sectionCard">
-                    <h2>Project Journey</h2>
+                    <h2>Development Plan</h2>
                     <p class="muted">
-                        DBS Item Shop works best as a short journey: first a course assignment, then a structured
-                        backend storefront, then a deployable static rebuild, and finally a stronger portfolio case study.
+                        The implementation was divided into four phases, with responsibilities shared between the two
+                        authors across data, authentication, administration, catalog, and cart/order features.
                     </p>
 
                     <div class="timeline">
                         <div class="timelineItem">
                             <div class="timelineDot"></div>
                             <div class="timelineContent">
-                                <div class="timelineDate">Phase 01</div>
-                                <h4>University brief</h4>
+                                <div class="timelineDate">Phase 01 - 16/12-22/12</div>
+                                <h4>Base structure, navigation, login, and signup</h4>
                                 <p class="muted smallText">
-                                    Build a branded item shop with the expected ecommerce foundations: user flows, catalog
-                                    browsing, structured pages, and admin-oriented data management.
+                                    Joao Ferreira handled the base database structure and initial navigation, while
+                                    Joao Pessoa worked on authentication and the signup flow with validation.
                                 </p>
                             </div>
                         </div>
@@ -501,11 +361,11 @@
                         <div class="timelineItem">
                             <div class="timelineDot"></div>
                             <div class="timelineContent">
-                                <div class="timelineDate">Phase 02</div>
-                                <h4>Backend storefront implementation</h4>
+                                <div class="timelineDate">Phase 02 - 23/12-30/12</div>
+                                <h4>User management and administration</h4>
                                 <p class="muted smallText">
-                                    The project grows into a PHP-based store with navigation, authentication,
-                                    role-sensitive behavior, and CRUD-minded organization around products and users.
+                                    The second phase focused on adding users through the database, listing users,
+                                    removing users, and editing usernames, emails, and permissions.
                                 </p>
                             </div>
                         </div>
@@ -513,11 +373,11 @@
                         <div class="timelineItem">
                             <div class="timelineDot"></div>
                             <div class="timelineContent">
-                                <div class="timelineDate">Phase 03</div>
-                                <h4>Static migration for portfolio delivery</h4>
+                                <div class="timelineDate">Phase 03 - 31/12-09/01</div>
+                                <h4>Catalog search, product detail, and product CRUD</h4>
                                 <p class="muted smallText">
-                                    The store is re-expressed as static HTML, CSS, and JavaScript so it can be opened
-                                    instantly from a repo or static host without server provisioning.
+                                    This phase delivered product search with filters and ordering, product detail pages,
+                                    catalog insertion, and administrator editing/removal of store items.
                                 </p>
                             </div>
                         </div>
@@ -525,11 +385,11 @@
                         <div class="timelineItem">
                             <div class="timelineDot"></div>
                             <div class="timelineContent">
-                                <div class="timelineDate">Phase 04</div>
-                                <h4>Premium portfolio presentation</h4>
+                                <div class="timelineDate">Phase 04 - 10/01-24/01</div>
+                                <h4>Cart, orders, and ticket interface</h4>
                                 <p class="muted smallText">
-                                    The case-study page is upgraded to match the rest of the portfolio system with richer
-                                    widgets, stronger hierarchy, and a clearer backend-versus-static narrative.
+                                    The final phase covered adding products to the cart, cart management, the order-history
+                                    page, and a ticket interface for additional user support.
                                 </p>
                             </div>
                         </div>
@@ -537,60 +397,52 @@
                 </section>
 
                 <section id="dbs-demo" class="contentSection sectionCard">
-                    <h2>Live Static Demo</h2>
+                    <h2>Interface Preview</h2>
                     <p class="muted">
-                        The embed below loads the GitHub Pages friendly version built in
-                        <code>partials/dbs-website</code>. You can also jump directly into the main routes that carry
-                        the store, account, and entry-flow presentation.
+                        Embedded Djabusabi screens presenting the catalog layout, product page, login flow, and
+                        storefront navigation used in the project. This is a static website version from the original. Full project report:
+                        <code>partials/djabuloja/ex4_report.pdf</code>.
                     </p>
 
                     <div class="dbsPreviewLinks">
-                        <a href="partials/dbs-website/index.html" class="dbsPreviewLink" target="_blank" rel="noopener">
-                            Landing View
+                        <a href="partials/djabuloja/ex4_report.pdf" class="dbsPreviewLink" target="_blank" rel="noopener">
+                            Project Report
                         </a>
-                        <a href="partials/dbs-website/store.html" class="dbsPreviewLink" target="_blank" rel="noopener">
-                            Store View
+                        <a href="partials/djabuloja/index.html" class="dbsPreviewLink" target="_blank" rel="noopener">
+                            Preview Home
                         </a>
-                        <a href="partials/dbs-website/account.html" class="dbsPreviewLink" target="_blank" rel="noopener">
-                            Account View
+                        <a href="partials/djabuloja/store/index.html" class="dbsPreviewLink" target="_blank" rel="noopener">
+                            Preview Store
                         </a>
-                        <a href="partials/dbs-website/login.html" class="dbsPreviewLink" target="_blank" rel="noopener">
-                            Login View
+                        <a href="partials/djabuloja/store/item/index.html?itemId=1" class="dbsPreviewLink" target="_blank" rel="noopener">
+                            Preview Product
+                        </a>
+                        <a href="partials/djabuloja/account/login/index.html" class="dbsPreviewLink" target="_blank" rel="noopener">
+                            Preview Login
                         </a>
                     </div>
-
-                    <div class="calloutBox calloutTakeaway">
-                        <div class="calloutIcon">&#x2728;</div>
-                        <div>
-                            <h4>What this embed demonstrates</h4>
-                            <p class="smallText">
-                                The live demo focuses on the navigable front-end experience and brand continuity. It is
-                                intentionally static-friendly, which is why the original backend logic is documented on
-                                this page rather than simulated as a fake server.
-                            </p>
+            
+                        <div class="ledWebsiteEmbed ledWebsiteEmbed--main dbsWebsiteEmbed">
+                            <div class="embedHeader">
+                                <a href="partials/djabuloja/index.html" class="embedBadge" target="_blank" rel="noopener">
+                                    Open in New Tab
+                                </a>
+                            </div>
+                            <iframe
+                                src="partials/djabuloja/index.html"
+                                class="websiteFrame"
+                                title="DBS Item Shop interface preview"
+                                loading="lazy"
+                            ></iframe>
                         </div>
-                    </div>
 
-                    <div class="ledWebsiteEmbed ledWebsiteEmbed--main dbsWebsiteEmbed">
-                        <div class="embedHeader">
-                            <span class="embedLabel">DBS static rebuild inside the portfolio</span>
-                            <a href="partials/dbs-website/index.html" class="embedBadge" target="_blank" rel="noopener">
-                                Open in New Tab
-                            </a>
-                        </div>
-                        <iframe
-                            src="partials/dbs-website/index.html"
-                            class="websiteFrame"
-                            title="DBS Item Shop static website demo"
-                            loading="lazy"
-                        ></iframe>
                     </div>
                 </section>
 
                 <section class="contentSection sectionCard ctaSection dbsCtaSection">
                     <div class="dbsCtaHeader">
                         <img
-                            src="partials/dbs-website/assets/logos/logo_vigo.png"
+                            src="partials/djabuloja/assets/logos/logo_vigo.png"
                             alt=""
                             class="dbsCtaLogo"
                             aria-hidden="true"
@@ -598,20 +450,20 @@
                         <div>
                             <h2>Project Links</h2>
                             <p class="muted smallText">
-                                Browse the static rebuild, open the key store routes, or head back to the wider project list.
+                                Project report, interface preview, and direct access to the related Djabusabi screens.
                             </p>
                         </div>
                     </div>
 
                     <div class="projectLinks">
-                        <a href="partials/dbs-website/index.html" class="btn primary" target="_blank" rel="noopener">
-                            Open Static Demo
+                        <a href="partials/djabuloja/ex4_report.pdf" class="btn primary" target="_blank" rel="noopener">
+                            Open Project Report
                         </a>
-                        <a href="partials/dbs-website/store.html" class="btn quaternary" target="_blank" rel="noopener">
-                            Open Store Page
+                        <a href="partials/djabuloja/index.html" class="btn quaternary" target="_blank" rel="noopener">
+                            Open Interface Preview
                         </a>
-                        <a href="partials/dbs-website/account.html" class="btn" target="_blank" rel="noopener">
-                            Open Account Page
+                        <a href="partials/djabuloja/store/index.html" class="btn" target="_blank" rel="noopener">
+                            Open Preview Store
                         </a>
                         <a href="index.html#projects" class="btn secondary">
                             &larr; Back to Projects
@@ -625,6 +477,6 @@
     <div id="siteFooter" class="siteFooter"></div>
 </div>
 
-<script src="script.js"></script>
+<script type="module" src="scripts/main.js"></script>
 </body>
 </html>

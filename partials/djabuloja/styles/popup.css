@@ -1,0 +1,38 @@
+
+.popup {
+    position: fixed;
+    top: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 15px 30px;
+    border-radius: 8px;
+    background-color: rgb(60, 60, 60);
+    color: white;
+    font-size: 16px;
+    z-index: 1000;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.5s ease, top 0.5s ease;
+}
+
+.popup.show {
+    display: block;
+    opacity: 1;
+}
+
+.popup.hidden {
+    display: none;
+}
+
+.popup.show.success {
+    color: lightgreen;
+}
+
+.popup.show.error {
+    color: lightcoral;
+}
+
+.popup.show.info {
+    color: darkorange;
+}
+

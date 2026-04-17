@@ -1,0 +1,132 @@
+﻿/* ============================================
+    BUTTONS
+    ============================================ */
+
+.btn {
+     display: inline-flex;
+     align-items: center;
+     justify-content: center;
+     padding: 0.625rem 1.125rem;
+     border: 1px solid var(--border);
+     background: var(--surface);
+     color: var(--text);
+     font-size: 0.9375rem;
+     font-weight: 500;
+     border-radius: var(--radius-sm);
+     cursor: pointer;
+     transition: all 0.2s ease;
+     white-space: nowrap;
+}
+
+.btn:hover {
+     background: var(--surface-2);
+     transform: translateY(-2px);
+     box-shadow: var(--shadow-sm);
+}
+
+.btn:focus-visible {
+     outline: 2px solid var(--accent-blue);
+     outline-offset: 2px;
+}
+
+.btn.primary {
+     background: var(--accent-gradient);
+     border-color: transparent;
+     color: #ffffff;
+     font-weight: 600;
+     position: relative;
+     overflow: hidden;
+}
+
+.btn.primary::before {
+     position: absolute;
+     inset: 0;
+     background: var(--accent-gradient);
+     opacity: 0;
+     transition: opacity 0.3s ease;
+     filter: brightness(1.2);
+}
+
+.btn.primary:hover::before {
+    opacity: 1;
+}
+
+.btn.primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px var(--glow-blue);
+}
+
+.btn.secondary {
+     background: var(--surface-2);
+     border: 1px solid var(--accent-blue);
+     color: var(--accent-blue);
+     font-weight: 600;
+}
+
+.btn.secondary:hover {
+     background: var(--accent-blue-soft);
+     box-shadow: 0 0 20px var(--glow-blue);
+}
+
+.btn.tertiary {
+     background: transparent;
+     border: 1px solid var(--border);
+     color: var(--text);
+     font-weight: 500;
+     position: relative;
+     overflow: hidden;
+}
+
+.btn.tertiary::before {
+     content: '';
+     position: absolute;
+     inset: 0;
+     background: var(--grad-violet-blue);
+     opacity: 0;
+     transition: opacity 0.3s ease;
+}
+
+.btn.tertiary:hover::before {
+     opacity: 0.1;
+}
+
+.btn.tertiary:hover {
+     border-color: var(--accent-purple);
+     color: var(--accent-purple);
+}
+
+.btn.quaternary {
+     background: var(--grad-pink-purple);
+     border: 2px solid transparent;
+     color: #ffffff;
+     font-weight: 600;
+     position: relative;
+     background-clip: padding-box;
+}
+
+.btn.quaternary::before {
+     content: '';
+     position: absolute;
+     inset: -2px;
+     background: var(--grad-pink-purple);
+     border-radius: var(--radius-sm);
+     z-index: -1;
+     filter: blur(8px);
+     opacity: 0;
+     transition: opacity 0.3s ease;
+}
+
+.btn.quaternary:hover::before {
+     opacity: 0.6;
+}
+
+.btn.quaternary:hover {
+     transform: translateY(-2px);
+     box-shadow: 0 8px 32px var(--glow-purple);
+}
+
+.btn.small {
+     padding: 0.5rem 0.875rem;
+     font-size: 0.8125rem;
+}
+

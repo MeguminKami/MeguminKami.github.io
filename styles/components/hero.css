@@ -1,0 +1,180 @@
+﻿/* ============================================
+   HERO SECTION
+   ============================================ */
+
+.hero {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: var(--gap-lg);
+    margin-top: var(--gap-lg);
+}
+
+@media (max-width: 900px) {
+    .hero {
+        grid-template-columns: 1fr;
+    }
+}
+
+.hero h1 {
+    font-size: 1.82rem;
+    line-height: 1.15;
+    margin-bottom: 1rem;
+    margin-top: 2rem;
+}
+
+@media (max-width: 600px) {
+    .hero h1 {
+        font-size: 2rem;
+    }
+}
+
+.lead {
+    color: var(--text-muted);
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    max-width: 70ch;
+}
+
+.ctaRow {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+}
+
+.chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.625rem;
+    margin-top: 2.5rem;
+}
+
+.chips h2 {
+    width: 100%;
+    margin-top: 0.5rem;
+    display: block; 
+    color: var(--text);
+}
+
+.chips p {
+    font-size: 0.875rem;
+    width: 100%;
+    margin-bottom: 0.75rem;
+    display: block; 
+    color: var(--text-muted);
+}
+
+.chip {
+    padding: 0.5rem 0.875rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    font-size: 0.8125rem;
+    color: var(--text-muted);
+}
+
+.chipPrimary {
+    background: var(--surface-2);
+    border: 1px solid var(--accent-blue);
+    color: var(--text);
+    border-radius: 999px;
+    font-size: 0.8125rem;
+    padding: 0.5rem 0.875rem;
+}
+
+body.light .chipPrimary {
+    background: rgba(124, 92, 255, 0.1);
+}
+
+.chipTertiary {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    border-radius: 999px;
+    font-size: 0.8125rem;
+    padding: 0.5rem 0.875rem;
+}
+
+body.light .chipTertiary {
+    background: transparent;
+}
+
+/* Hero Card */
+.heroCard {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+}
+
+.heroCardTop {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface-2);
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.dot1 { background: rgba(100, 100, 100, 0.5); }
+.dot2 { background: var(--accent-blue); opacity: 0.4; }
+.dot3 { background: var(--accent-purple); opacity: 0.4; }
+
+.mono {
+    margin-left: auto;
+    font-family: 'SF Mono', 'Monaco', 'Courier New', monospace;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.heroCardBody {
+    padding: 1.5rem 1.25rem;
+}
+
+.stat {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+}
+
+.statN {
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+}
+
+.statL {
+    color: var(--text-muted);
+    font-size: 0.9375rem;
+}
+
+.mini {
+    margin-top: 1.25rem;
+    padding-top: 1rem;
+    border-top: 1px dashed var(--border);
+}
+
+.miniRow {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    font-size: 0.8125rem;
+}
+
+.k {
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.v {
+    color: var(--text);
+}
+

@@ -1,0 +1,153 @@
+﻿/* Quick Facts */
+.quickFacts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+}
+
+.factItem {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.factLabel {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+}
+
+.factValue {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--text);
+}
+
+/* Tools Grid */
+.toolsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.toolCard {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 1.25rem;
+    text-align: center;
+    transition: all 0.2s ease;
+}
+
+.toolCard:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent-blue);
+}
+
+.toolIcon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.toolCard h4 {
+    margin: 0.5rem 0 0.375rem;
+}
+
+/* Problem â†’ Solution */
+.problemSolutionGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+@media (max-width: 768px) {
+    .problemSolutionGrid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.psBlock {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+}
+
+.problemBlock {
+    border-left: 4px solid var(--warning);
+}
+
+.solutionBlock {
+    border-left: 4px solid var(--success);
+}
+
+.psIcon {
+    font-size: 2rem;
+    margin-bottom: 0.75rem;
+}
+
+.psBlock h3 {
+    margin-bottom: 0.75rem;
+}
+
+.psBlock ul {
+    margin-top: 1rem;
+}
+
+/* Search Steps */
+.searchSteps {
+    list-style: none;
+    margin: 1rem 0 0;
+    padding: 0;
+    display: grid;
+    gap: 0.75rem;
+    counter-reset: searchStep;
+}
+
+.searchSteps li {
+    position: relative;
+    padding: 0.85rem 1rem 0.85rem 3.25rem;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    color: var(--text);
+}
+
+.searchSteps li::before {
+    counter-increment: searchStep;
+    content: counter(searchStep);
+    position: absolute;
+    left: 0.95rem;
+    top: 0.85rem;
+    width: 1.75rem;
+    height: 1.75rem;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: var(--text);
+    background: var(--grad-violet-blue);
+    box-shadow: 0 8px 18px rgba(124, 92, 255, 0.2);
+}
+
+.searchSteps li::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    border: 1px solid rgba(45, 212, 255, 0.08);
+    pointer-events: none;
+}
+
+body.light .searchSteps li {
+    box-shadow: var(--shadow-sm);
+}
+
+body.light .searchSteps li::after {
+    border-color: rgba(2, 132, 199, 0.12);
+}
+

@@ -1,0 +1,75 @@
+﻿/* ============================================
+   TEMPLATE PAGE STYLES
+   ============================================ */
+
+.tocBox {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 2rem;
+    margin-bottom: 3rem;
+}
+
+.tocBox h2 {
+    margin-bottom: 0.5rem;
+}
+
+.tocNav {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+}
+
+.tocLink {
+    padding: 0.625rem 1rem;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-size: 0.875rem;
+    transition: all 0.2s ease;
+}
+
+.tocLink:hover {
+    background: var(--bg-alt);
+    transform: translateX(4px);
+    border-color: var(--accent-blue);
+}
+
+.templateSection {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 2px solid var(--border);
+}
+
+.sectionLabel {
+    margin-bottom: 2rem;
+}
+
+.sectionLabel h2 {
+    margin-bottom: 0.5rem;
+}
+
+.hint {
+    display: inline-block;
+    margin-top: 0.5rem;
+    padding: 0.5rem 0.875rem;
+    background: rgba(45, 212, 255, 0.08);
+    border: 1px solid rgba(45, 212, 255, 0.2);
+    border-radius: var(--radius-sm);
+    font-size: 0.8125rem;
+    color: var(--text-muted);
+}
+
+.componentDemo {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 2rem;
+}
+
+.demoTitle {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    color: var(--accent-blue);
+}

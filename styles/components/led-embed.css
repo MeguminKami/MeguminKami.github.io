@@ -1,0 +1,131 @@
+﻿/* ============================================
+   LED Website Embed Styles
+   ============================================ */
+
+.ledWebsiteEmbed {
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    background: var(--surface-2);
+    overflow: hidden;
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    margin-top: 2rem;
+}
+
+.ledWebsiteEmbed:hover {
+    transform: translateY(-4px);
+    border-color: rgba(45, 212, 255, 0.28);
+    box-shadow: 0 16px 34px rgba(10, 16, 30, 0.34);
+}
+
+.embedHeader {
+    padding: 1rem 1.25rem;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.embedLabel {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.embedBadge {
+    padding: 0.35rem 0.75rem;
+    background: var(--accent-blue-soft);
+    border: 1px solid rgba(45, 212, 255, 0.2);
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--accent-blue);
+    text-decoration: none;
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    display: inline-block;
+}
+
+.embedBadge:hover {
+    background: var(--accent-blue);
+    border-color: var(--accent-blue);
+    color: white;
+    transform: translateY(-1px);
+}
+
+.websiteFrame {
+    width: 100%;
+    height: 700px;
+    border: none;
+    display: block;
+    background: #1a1f2e;
+}
+
+.ledWebsiteEmbed--main .websiteFrame {
+    height: 800px;
+}
+
+.ledWebsiteEmbed--special .websiteFrame {
+    height: 900px;
+}
+
+.ledGalleryGrid {
+    display: grid;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+@media (max-width: 900px) {
+    .websiteFrame {
+        height: 600px;
+    }
+
+    .ledWebsiteEmbed--main .websiteFrame {
+        height: 700px;
+    }
+
+    .ledWebsiteEmbed--special .websiteFrame {
+        height: 800px;
+    }
+}
+
+@media (max-width: 600px) {
+    .websiteFrame {
+        height: 500px;
+    }
+
+    .ledWebsiteEmbed--main .websiteFrame {
+        height: 600px;
+    }
+
+    .ledWebsiteEmbed--special .websiteFrame {
+        height: 700px;
+    }
+}
+
+body.light .ledWebsiteEmbed {
+    background: var(--surface);
+}
+
+body.light .embedHeader {
+    background: var(--surface-2);
+}
+
+body.light .embedBadge {
+    background: rgba(2, 132, 199, 0.12);
+    border-color: rgba(2, 132, 199, 0.25);
+    color: var(--accent-blue);
+}
+
+body.light .embedBadge:hover {
+    background: var(--accent-blue);
+    border-color: var(--accent-blue);
+    color: white;
+}
+
+body.light .ledWebsiteEmbed:hover {
+    border-color: rgba(2, 132, 199, 0.35);
+    box-shadow: 0 16px 34px rgba(2, 132, 199, 0.15);
+}
+
+body.light .websiteFrame {
+    background: #ffffff;

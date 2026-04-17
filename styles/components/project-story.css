@@ -1,0 +1,213 @@
+﻿/* Story Section (Idea, Problem & Solution) */
+.storySection {
+    position: relative;
+    overflow: hidden;
+}
+
+.storySection::after {
+    content: "";
+    position: absolute;
+    top: -120px;
+    right: -120px;
+    width: 260px;
+    height: 260px;
+    background: radial-gradient(circle, var(--accent-blue-soft), transparent 70%);
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+.storyIntro {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    z-index: 1;
+}
+
+.storyEyebrow {
+    align-self: flex-start;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 0.3rem 0.75rem;
+}
+
+.storyFlow {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.25rem;
+    position: relative;
+    z-index: 1;
+}
+
+@media (max-width: 980px) {
+    .storyFlow {
+        grid-template-columns: 1fr;
+    }
+}
+
+.storyCard {
+    position: relative;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+}
+
+.storyCard::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--grad-violet-blue);
+}
+
+.storyIdea::before {
+    background: var(--grad-violet-blue);
+}
+
+.storyProblem::before {
+    background: var(--grad-amber-rose);
+}
+
+.storySolution::before {
+    background: var(--grad-emerald-teal);
+}
+
+.storyCardHeader {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+}
+
+.storyIcon {
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 0.75rem;
+    display: grid;
+    place-items: center;
+    font-size: 1.25rem;
+    border: 1px solid var(--border);
+    background: var(--surface);
+}
+
+.storyIdea .storyIcon {
+    background: var(--accent-violet-soft);
+    color: var(--accent-violet);
+    border-color: transparent;
+}
+
+.storyProblem .storyIcon {
+    background: var(--accent-amber-soft);
+    color: var(--accent-amber);
+    border-color: transparent;
+}
+
+.storySolution .storyIcon {
+    background: var(--accent-emerald-soft);
+    color: var(--accent-emerald);
+    border-color: transparent;
+}
+
+.storyTag {
+    font-size: 0.98rem;
+    font-weight: 700;
+    color: var(--text-muted);
+}
+
+.storyCard .muted {
+    font-size: 0.985rem;
+    line-height: 1.68;
+    letter-spacing: 0.005em;
+}
+
+.storyCard p.muted {
+    text-wrap: pretty;
+}
+
+.storyCard p.muted + p.muted {
+    margin-top: 0.85rem;
+}
+
+.storyCard ul {
+    margin: 0.75rem 0 0;
+    padding-left: 1.25rem;
+}
+
+.storyCard ul li {
+    margin-bottom: 0.5rem;
+    line-height: 1.58;
+}
+
+.storyCard ul li:last-child {
+    margin-bottom: 0;
+}
+
+.storyIdea ul li::marker {
+    color: var(--accent-violet);
+}
+
+.storyProblem ul li::marker {
+    color: var(--accent-amber);
+}
+
+.storySolution ul li::marker {
+    color: var(--accent-emerald);
+}
+
+/* Feature Cards */
+.featureGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.25rem;
+}
+
+.featureGrid--threeColumn {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+@media (max-width: 1100px) {
+    .featureGrid--threeColumn {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 700px) {
+    .featureGrid--threeColumn {
+        grid-template-columns: 1fr;
+    }
+}
+
+.featureCard {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    transition: all 0.2s ease;
+}
+
+.featureCard:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+}
+
+.featureIcon {
+    font-size: 2rem;
+    margin-bottom: 0.75rem;
+}
+
+.featureCard h3 {
+    font-size: 1.0625rem;
+    margin-bottom: 0.5rem;
+}
+

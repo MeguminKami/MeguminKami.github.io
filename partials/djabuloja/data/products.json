@@ -1,0 +1,132 @@
+[
+  {
+    "id": 1,
+    "name": "T-Shirt Preta Ver\u00e3o",
+    "description": "T-shirt preta leve com o estilo simples dos Djabusabi.",
+    "price": 19.99,
+    "stock": 1,
+    "filter": 1,
+    "image": "tshirt-preta-verao.png",
+    "imageType": "asset"
+  },
+  {
+    "id": 2,
+    "name": "T-Shirt Branca Ver\u00e3o",
+    "description": "Vers\u00e3o branca da t-shirt de ver\u00e3o com corte regular.",
+    "price": 19.99,
+    "stock": 1,
+    "filter": 1,
+    "image": "tshirt-branca-verao.png",
+    "imageType": "asset"
+  },
+  {
+    "id": 3,
+    "name": "Caveada Branca Ver\u00e3o",
+    "description": "Top caveado branco para os dias mais quentes.",
+    "price": 17.99,
+    "stock": 2,
+    "filter": 1,
+    "image": "Caveada Branca Ver\u00e3o.png",
+    "imageType": "asset"
+  },
+  {
+    "id": 4,
+    "name": "Bucket Hat Djabusabi",
+    "description": "Bucket hat cl\u00e1ssico para completar o look Djabusabi.",
+    "price": 14.99,
+    "stock": 1,
+    "filter": 1,
+    "image": "buckethat.png",
+    "imageType": "asset"
+  },
+  {
+    "id": 5,
+    "name": "Bon\u00e9 Preto",
+    "description": "Bon\u00e9 preto minimalista com visual urbano.",
+    "price": 12.99,
+    "stock": 2,
+    "filter": 1,
+    "image": "cap.png",
+    "imageType": "asset"
+  },
+  {
+    "id": 6,
+    "name": "Caderno Djabusabi",
+    "description": "Caderno pr\u00e1tico para aulas, notas e grandes neg\u00f3cios.",
+    "price": 9.99,
+    "stock": 1,
+    "filter": 2,
+    "image": "caderno.png",
+    "imageType": "asset"
+  },
+  {
+    "id": 7,
+    "name": "Case Djabusabi",
+    "description": "Case compacta para guardar os essenciais do dia a dia.",
+    "price": 8.99,
+    "stock": 2,
+    "filter": 2,
+    "image": "case.png",
+    "imageType": "asset"
+  },
+  {
+    "id": 8,
+    "name": "Capa Cinza",
+    "description": "Capa cinza resistente para material de estudo e transporte.",
+    "price": 11.99,
+    "stock": 1,
+    "filter": 2,
+    "image": "capa_cinza.png",
+    "imageType": "asset"
+  },
+  {
+    "id": 9,
+    "name": "Mousepad Cinza",
+    "description": "Mousepad cinza com acabamento simples e moderno.",
+    "price": 10.99,
+    "stock": 4,
+    "filter": 2,
+    "image": "mousepad_cinza.png",
+    "imageType": "asset"
+  },
+  {
+    "id": 10,
+    "name": "Raquete Djabusabi",
+    "description": "Raquete leve para dar energia \u00e0 rotina escolar e desportiva.",
+    "price": 21.99,
+    "stock": 1,
+    "filter": 2,
+    "image": "raquete.png",
+    "imageType": "asset"
+  },
+  {
+    "id": 11,
+    "name": "Mochila Astra",
+    "description": "Mochila Astra com espa\u00e7o para cadernos e acess\u00f3rios.",
+    "price": 24.99,
+    "stock": 1,
+    "filter": 2,
+    "image": "astra.jpeg",
+    "imageType": "asset"
+  },
+  {
+    "id": 12,
+    "name": "Pasta 301672",
+    "description": "Pasta escolar estruturada para folhas, apontamentos e projetos.",
+    "price": 13.99,
+    "stock": 3,
+    "filter": 2,
+    "image": "301672_1_grande.png",
+    "imageType": "asset"
+  },
+  {
+    "id": 13,
+    "name": "Bolsa 14976",
+    "description": "Bolsa utilit\u00e1ria para material do dia a dia.",
+    "price": 15.49,
+    "stock": 1,
+    "filter": 2,
+    "image": "14976.jpg",
+    "imageType": "asset"
+  }
+]

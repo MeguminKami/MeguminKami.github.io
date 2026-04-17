@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "username": "admin",
+    "email": "admin@djabusabi.pt",
+    "password": "Admin1",
+    "permissions": "admin"
+  },
+  {
+    "id": 2,
+    "username": "primo",
+    "email": "primo@djabusabi.pt",
+    "password": "Djabu1",
+    "permissions": "client"
+  }
+]

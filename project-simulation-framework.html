@@ -8,8 +8,8 @@
         content="Master's thesis project focused on a Python-based discrete-event simulation framework for evaluating human-machine collaboration in Bosch assembly lines."
     >
     <title>Simulation Framework - Project</title>
-    <link rel="icon" type="image/png" href="assets/img/tese/thumbnail.png">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="assets/img/tese/logo.png">
+    <link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
 <div class="bgGlow"></div>
@@ -21,56 +21,53 @@
         &larr; Back to Projects
     </a>
 
-    <article class="projectArticle simulationProject thesisProject">
+    <article class="projectArticle projectArticle--wide simulationProject thesisProject">
         <header class="projectHeader">
-            <h1 class="projectTitle">Simulation Framework</h1>
-            <p class="lead">
-                This project was developed as part of my Master's thesis and focuses on a discrete-event
-                simulation framework for evaluating human-machine collaboration in industrial assembly cells.
-                The goal was to model real Bosch production lines, test alternative configurations safely, and
-                support engineering decisions before making changes on the factory floor.
-            </p>
-            <p class="muted smallText">
-                Dissertation focus: simulation-driven decision support for task allocation, cobot integration,
-                and line-balancing analysis in mixed human-machine workspaces.
-            </p>
+            <div class="projectHero">
+                <div class="projectHeroMedia">
+                    <img
+                        src="assets/img/tese/logo.png"
+                        alt=""
+                        class="projectTitleIcon"
+                        aria-hidden="true"
+                        loading="eager"
+                    >
+                </div>
+                <div class="projectHeroBody">
+                    <div class="projectHeroIntro">
+                        <h1 class="projectTitle">Simulation Framework</h1>
+                        <p class="lead">
+                            This project was developed as part of my Master's thesis and focuses on a discrete-event
+                            simulation framework for evaluating human-machine collaboration in industrial assembly cells.
+                            The goal was to model real Bosch production lines, test alternative configurations safely, and
+                            support engineering decisions before making changes on the factory floor.
+                        </p>
+                    </div>
 
-            <div class="quickFacts">
-                <div class="factItem">
-                    <span class="factLabel">Latest Update</span>
-                    <span class="factValue" data-project-latest-update>2026-01-15</span>
-                </div>
-                <div class="factItem">
-                    <span class="factLabel">Type</span>
-                    <span class="factValue">Master's Thesis</span>
-                </div>
-                <div class="factItem">
-                    <span class="factLabel">Category</span>
-                    <span class="factValue">Python Simulation Tool</span>
-                </div>
-                <div class="factItem">
-                    <span class="factLabel">Status</span>
-                    <span class="factValue grad">Complete</span>
+                    <div class="quickFacts">
+                        <div class="factItem">
+                            <span class="factLabel">Latest Update</span>
+                            <span class="factValue" data-project-latest-update>2026-01-15</span>
+                        </div>
+                        <div class="factItem">
+                            <span class="factLabel">Type</span>
+                            <span class="factValue">Master's Thesis</span>
+                        </div>
+                        <div class="factItem">
+                            <span class="factLabel">Category</span>
+                            <span class="factValue">Python Simulation Tool</span>
+                        </div>
+                        <div class="factItem">
+                            <span class="factLabel">Status</span>
+                            <span class="factValue grad">Complete</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </header>
 
         <div class="projectContent">
             <div class="projectMain">
-                <section class="contentSection sectionCard">
-                    <h2>Technical Stack</h2>
-                    <div class="techList">
-                        <span class="techItem">Python</span>
-                        <span class="techItem">SimPy</span>
-                        <span class="techItem">Qt</span>
-                        <span class="techItem">Discrete-Event Simulation</span>
-                        <span class="techItem">Statistical Time Models</span>
-                        <span class="techItem">Excel Data Import</span>
-                        <span class="techItem">KPI Logging</span>
-                        <span class="techItem">Industrial Case Study Data</span>
-                    </div>
-                </section>
-
                 <section class="contentSection sectionCard">
                     <h2>Overview</h2>
                     <p class="muted">
@@ -140,6 +137,20 @@
                                 Keep the tool modular enough to support other lines and future digital-twin evolution.
                             </p>
                         </div>
+                    </div>
+                </section>
+
+                <section class="contentSection sectionCard">
+                    <h2>Technical Stack</h2>
+                    <div class="techList">
+                        <span class="techItem">Python</span>
+                        <span class="techItem">SimPy</span>
+                        <span class="techItem">Qt</span>
+                        <span class="techItem">Discrete-Event Simulation</span>
+                        <span class="techItem">Statistical Time Models</span>
+                        <span class="techItem">Excel Data Import</span>
+                        <span class="techItem">KPI Logging</span>
+                        <span class="techItem">Industrial Case Study Data</span>
                     </div>
                 </section>
 
@@ -726,6 +737,6 @@
     <div class="lightboxCaption" id="lightboxCaption"></div>
 </div>
 
-<script src="script.js"></script>
+<script type="module" src="scripts/main.js"></script>
 </body>
 </html>

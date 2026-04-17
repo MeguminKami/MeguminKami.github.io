@@ -1,0 +1,28 @@
+﻿/* ============================================
+   LAYOUT
+   ============================================ */
+
+.wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1.25rem;
+}
+
+@media (max-width: 768px) {
+    .wrap {
+        padding: 1.5rem 1rem;
+    }
+}
+
+.section {
+    margin-top: 5rem;
+}
+
+.sectionTitle {
+    margin-bottom: 2rem;
+}
+
+.sectionTitle h2 {
+    margin-bottom: 0.5rem;
+}
+

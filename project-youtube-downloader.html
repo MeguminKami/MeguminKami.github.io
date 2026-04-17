@@ -9,7 +9,7 @@
     >
     <title>YTGrab - Project</title>
     <link rel="icon" type="image/png" href="assets/img/ytdownloader/logo.png">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
 <div class="bgGlow"></div>
@@ -21,40 +21,46 @@
         &larr; Back to Projects
     </a>
 
-    <article class="projectArticle ytdlProject">
+    <article class="projectArticle projectArticle--wide projectArticle--metrics-spaced ytdlProject">
         <header class="projectHeader">
-            <h1 class="projectTitle">
-                <img
-                    src="assets/img/ytdownloader/logo.png"
-                    alt=""
-                    class="projectTitleIcon"
-                    aria-hidden="true"
-                    loading="eager"
-                >
-                YTGrab
-            </h1>
-            <p class="lead">
-                YTGrab is a desktop YouTube downloader built for a cleaner, more reliable workflow. Users can paste a
-                watch link, Shorts URL, or playlist, preview the media, choose MP4 or MP3, pick the quality they want,
-                queue multiple downloads, and track everything from one polished desktop app.
-            </p>
+            <div class="projectHero">
+                <div class="projectHeroMedia">
+                    <img
+                        src="assets/img/ytdownloader/logo.png"
+                        alt=""
+                        class="projectTitleIcon"
+                        aria-hidden="true"
+                        loading="eager"
+                    >
+                </div>
+                <div class="projectHeroBody">
+                    <div class="projectHeroIntro">
+                        <h1 class="projectTitle">YTGrab</h1>
+                        <p class="lead">
+                            YTGrab is a desktop YouTube downloader built for a cleaner, more reliable workflow. Users can paste a
+                            watch link, Shorts URL, or playlist, preview the media, choose MP4 or MP3, pick the quality they want,
+                            queue multiple downloads, and track everything from one polished desktop app.
+                        </p>
+                    </div>
 
-            <div class="quickFacts">
-                <div class="factItem">
-                    <span class="factLabel">Latest Update</span>
-                    <span class="factValue" data-project-latest-update>2026-03-22</span>
-                </div>
-                <div class="factItem">
-                    <span class="factLabel">Type</span>
-                    <span class="factValue">Solo Project</span>
-                </div>
-                <div class="factItem">
-                    <span class="factLabel">Category</span>
-                    <span class="factValue">Python Desktop App</span>
-                </div>
-                <div class="factItem">
-                    <span class="factLabel">Status</span>
-                    <span class="factValue grad">Complete</span>
+                    <div class="quickFacts">
+                        <div class="factItem">
+                            <span class="factLabel">Latest Update</span>
+                            <span class="factValue" data-project-latest-update>2026-03-22</span>
+                        </div>
+                        <div class="factItem">
+                            <span class="factLabel">Type</span>
+                            <span class="factValue">Solo Project</span>
+                        </div>
+                        <div class="factItem">
+                            <span class="factLabel">Category</span>
+                            <span class="factValue">Python Desktop App</span>
+                        </div>
+                        <div class="factItem">
+                            <span class="factLabel">Status</span>
+                            <span class="factValue grad">Complete</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </header>
@@ -498,6 +504,6 @@
     <div class="lightboxCaption" id="lightboxCaption"></div>
 </div>
 
-<script src="script.js"></script>
+<script type="module" src="scripts/main.js"></script>
 </body>
 </html>
