@@ -3,6 +3,9 @@
   const views = ['homeView', 'setupView', 'gameView', 'resultsView', 'historyView', 'historyDetailView'];
   let questions = [];
   let historyGames = [];
+  let selectedQuestionCount = null;
+  let selectedMode = null;
+  let setupStep = 'count';
 
   const seaFacts = [
     '?', 'Neuropsicologia Clínica', 'setting', 'autocuidado', 'mindfulness', 'validação', 'empatia',
@@ -17,6 +20,30 @@
     views.forEach((viewId) => $(viewId).classList.toggle('active', viewId === id));
     document.body.classList.toggle('in-game', id === 'gameView');
     window.scrollTo(0, 0);
+  }
+
+  function updateSetupControls() {
+    $('countSetupStep').hidden = setupStep !== 'count';
+    $('modeSetupStep').hidden = setupStep !== 'mode';
+    document.querySelectorAll('.question-count').forEach((btn) => {
+      const selected = Number(btn.dataset.count) === selectedQuestionCount;
+      btn.classList.toggle('is-selected', selected);
+      btn.setAttribute('aria-pressed', String(selected));
+    });
+    document.querySelectorAll('.mode-card').forEach((btn) => {
+      const selected = btn.dataset.mode === selectedMode;
+      btn.classList.toggle('is-selected', selected);
+      btn.setAttribute('aria-pressed', String(selected));
+    });
+    $('startGameBtn').disabled = !(selectedQuestionCount && selectedMode);
+  }
+
+  function openSetup() {
+    selectedQuestionCount = null;
+    selectedMode = null;
+    setupStep = 'count';
+    updateSetupControls();
+    showView('setupView');
   }
 
   async function loadQuestions() {
@@ -65,14 +92,31 @@
     }).format(date);
   }
 
+  function getGameStats(game) {
+    const answers = Array.isArray(game.answers) ? game.answers : [];
+    const total = Number(game.totalQuestions ?? game.total ?? answers.length);
+    const correct = Number(game.score ?? game.correct ?? answers.filter((item) => item.isCorrect).length);
+    const wrong = Number(game.wrong ?? Math.max(0, total - correct));
+    const percentage = Number(game.percentage ?? (total ? Math.round((correct / total) * 100) : 0));
+    return {
+      total: Number.isFinite(total) ? total : answers.length,
+      correct: Number.isFinite(correct) ? correct : 0,
+      wrong: Number.isFinite(wrong) ? wrong : 0,
+      percentage: Number.isFinite(percentage) ? percentage : 0,
+      mode: String(game.mode) === '4' ? '4' : '2'
+    };
+  }
+
   function renderSummary(game, targetId) {
     const target = $(targetId);
     target.innerHTML = '';
+    const stats = getGameStats(game);
     const cards = [
-      ['Total', game.total],
-      ['Corretas', game.correct],
-      ['Erradas', game.wrong],
-      ['Acerto', `${game.percentage}%`]
+      ['Total', stats.total],
+      ['Corretas', stats.correct],
+      ['Erradas', stats.wrong],
+      ['Acerto', `${stats.percentage}%`],
+      ['Modo', `${stats.mode} opções`]
     ];
     cards.forEach(([label, value]) => {
       const card = document.createElement('article');
@@ -101,34 +145,48 @@
       .replaceAll("'", '&#039;');
   }
 
-  function getChosenAnswer(item) {
-    const selectedCard = String(item.selectedCard || '');
-    if (item.timedOut || !selectedCard || selectedCard.startsWith('Sem resposta')) return '';
-    if (item.selectedLabel === 'correctCard' || selectedCard === item.correctCard) return 'correct';
-    if (item.selectedLabel === 'wrongCard' || selectedCard === item.wrongCard) return 'wrong';
-    return '';
+  function getOptionsShown(item) {
+    const rawOptions = item.optionsShown || item.cardOrder;
+    if (Array.isArray(rawOptions) && rawOptions.length) {
+      return rawOptions.map((option) => {
+        const text = typeof option === 'object' && option !== null ? option.text : option;
+        const hasCorrectFlag = typeof option === 'object' && option !== null && typeof option.isCorrect === 'boolean';
+        return {
+          text: String(text ?? ''),
+          isCorrect: hasCorrectFlag ? option.isCorrect : String(text ?? '') === item.correctCard
+        };
+      }).filter((option) => option.text);
+    }
+    const wrongCards = Array.isArray(item.wrongCards) ? item.wrongCards : [item.wrongCard].filter(Boolean);
+    return [item.correctCard, ...wrongCards].filter(Boolean).map((text) => ({
+      text: String(text),
+      isCorrect: String(text) === String(item.correctCard ?? '')
+    }));
   }
 
   function reviewDetailsHTML(item, index, total) {
-    const chosenAnswer = getChosenAnswer(item);
-    const hasTimedOut = item.timedOut || String(item.selectedCard || '').startsWith('Sem resposta');
-    const timeUsed = item.timeUsedSeconds == null ? 'Não indicado' : `${escapeHTML(item.timeUsedSeconds)}s`;
+    const selectedAnswer = String(item.selectedAnswer ?? item.selectedCard ?? '');
+    const hasTimedOut = item.timedOut || selectedAnswer.startsWith('Sem resposta');
+    const time = item.timeUsed ?? item.timeUsedSeconds;
+    const timeUsed = time == null ? 'Não indicado' : `${escapeHTML(time)}s`;
+    const options = getOptionsShown(item);
+    const optionsHTML = options.map((option) => {
+      const chosen = !hasTimedOut && selectedAnswer === option.text;
+      return `
+        <div class="review-answer-card ${option.isCorrect ? 'correct-answer' : 'wrong-answer'} ${chosen ? 'chosen-answer' : ''}">
+          <span class="answer-label">${option.isCorrect ? 'Resposta correta' : 'Resposta errada'}</span>
+          <p>${escapeHTML(option.text)}</p>
+          ${chosen ? '<span class="chosen-badge">Escolhida</span>' : ''}
+        </div>
+      `;
+    }).join('');
     return `
       <div class="review-question-expanded">
         <span class="tiny-bubble-label">Pergunta ${index + 1}/${total}</span>
         <p>${escapeHTML(item.question)}</p>
       </div>
-      <div class="review-answer-grid">
-        <div class="review-answer-card correct-answer ${chosenAnswer === 'correct' ? 'chosen-answer' : ''}">
-          <span class="answer-label">Resposta correcta</span>
-          <p>${escapeHTML(item.correctCard)}</p>
-          ${chosenAnswer === 'correct' ? '<span class="chosen-badge">Escolhida</span>' : ''}
-        </div>
-        <div class="review-answer-card wrong-answer ${chosenAnswer === 'wrong' ? 'chosen-answer' : ''}">
-          <span class="answer-label">Resposta incorrecta</span>
-          <p>${escapeHTML(item.wrongCard)}</p>
-          ${chosenAnswer === 'wrong' ? '<span class="chosen-badge">Escolhida</span>' : ''}
-        </div>
+      <div class="review-options-grid ${options.length > 2 ? 'four-options' : 'two-options'}">
+        ${optionsHTML || '<div class="empty-state">Não existem opções guardadas para esta pergunta.</div>'}
       </div>
       ${hasTimedOut ? '<div class="soft-note timeout-note">Sem resposta - tempo esgotado.</div>' : ''}
       <div class="review-comment">
@@ -162,7 +220,7 @@
         <div class="review-summary">
           <span class="review-number">${index + 1}.</span>
           <p class="review-question-preview">${escapeHTML(item.question)}</p>
-          <span class="review-status ${item.isCorrect ? 'is-correct' : 'is-wrong'}">${item.isCorrect ? 'Correcta' : 'Incorrecta'}</span>
+          <span class="review-status ${item.isCorrect ? 'is-correct' : 'is-wrong'}">${item.isCorrect ? 'Correta' : 'Incorreta'}</span>
           <button class="review-toggle-btn" type="button" aria-expanded="false" aria-controls="${detailsId}">Ver mais</button>
         </div>
         <div id="${detailsId}" class="review-details" hidden>
@@ -193,12 +251,14 @@
     }
 
     historyGames.forEach((game, index) => {
+      const stats = getGameStats(game);
       const item = document.createElement('article');
       item.className = 'history-item';
       item.innerHTML = `
         <div>
-          <div class="review-title">${escapeHTML(formatDate(game.dateISO))}</div>
-          <div class="review-meta pastel-caption">${escapeHTML(game.correct)}/${escapeHTML(game.total)} corretas · ${escapeHTML(game.wrong)} erradas · ${escapeHTML(game.percentage)}% de acerto</div>
+          <div class="review-title">${escapeHTML(formatDate(game.date ?? game.dateISO))}</div>
+          <div class="review-meta pastel-caption">${escapeHTML(stats.correct)}/${escapeHTML(stats.total)} corretas · ${escapeHTML(stats.wrong)} erradas · ${escapeHTML(stats.percentage)}% de acerto</div>
+          <span class="review-mode-badge">Modo: ${escapeHTML(stats.mode)} opções</span>
         </div>
         <button class="btn small pastel blue" type="button">Ver detalhes</button>
       `;
@@ -252,20 +312,36 @@
   }
 
   function bindEvents() {
-    $('goSetupBtn').addEventListener('click', () => showView('setupView'));
+    $('goSetupBtn').addEventListener('click', openSetup);
     $('goHistoryBtn').addEventListener('click', () => { renderHistory(''); showView('historyView'); });
     document.querySelectorAll('.back-home').forEach((btn) => btn.addEventListener('click', () => showView('homeView')));
 
     document.querySelectorAll('.question-count').forEach((btn) => {
       btn.addEventListener('click', () => {
-        const count = Number(btn.dataset.count);
-        showView('gameView');
-        GameEngine.start(count);
+        selectedQuestionCount = Number(btn.dataset.count);
+        setupStep = 'mode';
+        updateSetupControls();
       });
+    });
+    $('backToCountBtn').addEventListener('click', () => {
+      selectedMode = null;
+      setupStep = 'count';
+      updateSetupControls();
+    });
+    document.querySelectorAll('.mode-card').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        selectedMode = btn.dataset.mode;
+        updateSetupControls();
+      });
+    });
+    $('startGameBtn').addEventListener('click', () => {
+      if (!selectedQuestionCount || !selectedMode) return;
+      showView('gameView');
+      GameEngine.start(selectedQuestionCount, selectedMode);
     });
 
     $('resultsHomeBtn').addEventListener('click', () => showView('homeView'));
-    $('playAgainBtn').addEventListener('click', () => showView('setupView'));
+    $('playAgainBtn').addEventListener('click', openSetup);
     $('resultsHistoryBtn').addEventListener('click', () => { renderHistory(''); showView('historyView'); });
 
     $('exportHistoryBtn').addEventListener('click', exportHistory);
@@ -288,8 +364,9 @@
       questions = await loadQuestions();
       GameEngine.init(questions, {
         onFinish(game) {
-          HistoryStore.add(game);
-          renderResults(game);
+          const savedGame = HistoryStore.normaliseGame(game);
+          HistoryStore.add(savedGame);
+          renderResults(savedGame);
         },
         onQuit() {
           showView('homeView');

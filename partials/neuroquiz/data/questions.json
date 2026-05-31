@@ -3,7 +3,11 @@
     "id": 1,
     "question": "Que entidades são apresentadas como reguladoras da Neuropsicologia em Portugal?",
     "correctCard": "A Ordem dos Psicólogos Portugueses e a Sociedade Portuguesa de Neuropsicologia.",
-    "wrongCard": "Hospitais, clínicas privadas e centros de dia enquanto instituições de atuação clínica.",
+    "wrongCards": [
+      "Hospitais, clínicas privadas e centros de dia enquanto instituições de atuação clínica.",
+      "Apenas a Ordem dos Médicos e a Direção-Geral da Saúde.",
+      "Apenas universidades, centros de investigação e hospitais públicos."
+    ],
     "explanation": "Os slides destacam a OPP e a SPNPsy como entidades reguladoras associadas à Neuropsicologia em Portugal.",
     "source": "LCNC - Aula 2(3).pdf, slide 3",
     "category": "Neuropsicologia em Portugal",
@@ -13,7 +17,11 @@
     "id": 2,
     "question": "Quais são as duas dimensões principais da Neuropsicologia Clínica apresentadas nos slides?",
     "correctCard": "Diagnóstico/avaliação e terapia/intervenção.",
-    "wrongCard": "Testemunho pericial e consultoria em contextos de direito.",
+    "wrongCards": [
+      "Testemunho pericial e consultoria em contextos de direito.",
+      "Apenas avaliação escolar e consultoria jurídica.",
+      "Comunicação não verbal e desenvolvimento profissional contínuo."
+    ],
     "explanation": "A Neuropsicologia Clínica é apresentada com duas dimensões: diagnóstico (avaliação) e terapia (intervenção).",
     "source": "LCNC - Aula 2(3).pdf, slide 4",
     "category": "Neuropsicologia Clínica",
@@ -23,7 +31,11 @@
     "id": 3,
     "question": "Quais são os três modos de atuação indicados para a Neuropsicologia Clínica?",
     "correctCard": "Restituição de funções, substituição e/ou compensação, e reintegração.",
-    "wrongCard": "Investigação, testemunhos periciais e elaboração de pareceres judiciais.",
+    "wrongCards": [
+      "Investigação, testemunhos periciais e elaboração de pareceres judiciais.",
+      "Proxémia, cinésia e paralinguagem.",
+      "Avaliação forense, testemunho pericial e consultoria em direito."
+    ],
     "explanation": "Os três modos de atuação clínica referidos são restituição, substituição/compensação e reintegração.",
     "source": "LCNC - Aula 2(3).pdf, slide 4",
     "category": "Neuropsicologia Clínica",
@@ -33,7 +45,11 @@
     "id": 4,
     "question": "O que caracteriza a Neuropsicologia Forense, segundo os slides?",
     "correctCard": "A condução e/ou utilização de resultados de avaliação neuropsicológica em contexto judicial.",
-    "wrongCard": "A aplicação dos princípios da neuropsicologia em contextos escolares de aprendizagem.",
+    "wrongCards": [
+      "A aplicação dos princípios da neuropsicologia em contextos escolares de aprendizagem.",
+      "A restituição de funções cognitivas em contexto de intervenção clínica regular.",
+      "A intervenção em dificuldades de aprendizagem em contexto escolar."
+    ],
     "explanation": "A vertente forense é associada ao contexto judicial, à resposta a questões e à tomada de decisão.",
     "source": "LCNC - Aula 2(3).pdf, slide 4",
     "category": "Neuropsicologia Forense",
@@ -43,7 +59,11 @@
     "id": 5,
     "question": "Qual é o foco da Neuropsicologia Educacional apresentado na aula?",
     "correctCard": "Aplicar princípios da neuropsicologia em contextos de aprendizagem, nomeadamente escolares.",
-    "wrongCard": "Avaliar a veracidade ou o grau de severidade de sintomas em contexto legal.",
+    "wrongCards": [
+      "Avaliar a veracidade ou o grau de severidade de sintomas em contexto legal.",
+      "Conduzir testemunhos periciais e pareceres em contextos de direito.",
+      "Planear apenas estratégias de autocuidado para psicólogos/as."
+    ],
     "explanation": "A Neuropsicologia Educacional é ligada ao ensino-aprendizagem, às práticas baseadas nas neurociências e às DEA.",
     "source": "LCNC - Aula 2(3).pdf, slide 4",
     "category": "Neuropsicologia Educacional",
@@ -53,7 +73,11 @@
     "id": 6,
     "question": "Que conjunto corresponde a fontes principais de referenciação para Neuropsicologia?",
     "correctCard": "Neurologia, Medicina Geral e Familiar, Psiquiatria, Fisiatria e Pediatria.",
-    "wrongCard": "Instituições de ensino, empresas, associações e unidades de investigação.",
+    "wrongCards": [
+      "Instituições de ensino, empresas, associações e unidades de investigação.",
+      "Proxémia, cinésia, paralinguagem, silêncio e comunicação paradoxal.",
+      "Workshops, palestras, webcasts, podcasts e fóruns de discussão."
+    ],
     "explanation": "As fontes de referenciação listadas incluem Neurologia, cuidados de saúde primários, Psiquiatria, Fisiatria e Pediatria.",
     "source": "LCNC - Aula 2(3).pdf, slide 5",
     "category": "Referenciação em Neuropsicologia",
@@ -63,7 +87,11 @@
     "id": 7,
     "question": "Que condições diagnósticas surgem como motivos frequentes de referenciação para Neuropsicologia?",
     "correctCard": "Demência, lesão cerebral adquirida, perturbações do neurodesenvolvimento, epilepsia e outras condições médicas/neurológicas.",
-    "wrongCard": "Proxémia, cinésia, paralinguagem e funções autonómicas.",
+    "wrongCards": [
+      "Proxémia, cinésia, paralinguagem e funções autonómicas.",
+      "Apenas ansiedade de desempenho, stress ocupacional e cansaço profissional.",
+      "Somente dificuldades de comunicação verbal e não verbal."
+    ],
     "explanation": "Os slides indicam estas condições como principais motivos diagnósticos de referenciação.",
     "source": "LCNC - Aula 2(3).pdf, slide 6",
     "category": "Referenciação em Neuropsicologia",
@@ -73,7 +101,11 @@
     "id": 8,
     "question": "Segundo a OPP, a atividade do especialista em neuropsicologia envolve principalmente o quê?",
     "correctCard": "Exploração clínica e avaliação sistematizada com testes psicológicos/neuropsicológicos e outras fontes de informação.",
-    "wrongCard": "Apenas uma conversa informal, sem recurso a testes nem a fontes complementares de informação.",
+    "wrongCards": [
+      "Apenas uma conversa informal, sem recurso a testes nem a fontes complementares de informação.",
+      "Somente intervenção por chat escrito, sem avaliação sistematizada.",
+      "Apenas gestão de caso e comunicação entre profissionais."
+    ],
     "explanation": "A definição citada nos slides sublinha avaliação sistematizada, testes e outras fontes de informação.",
     "source": "LCNC - Aula 2(3).pdf, slide 7",
     "category": "Competências em Neuropsicologia",
@@ -83,7 +115,11 @@
     "id": 9,
     "question": "Ao caracterizar a função cognitiva e comportamental, que aspetos deve a avaliação considerar?",
     "correctCard": "Linha de base cognitiva, impacto da condição de saúde, pontos fortes e fracos e impacto nas AVDs.",
-    "wrongCard": "Apenas a cor do espaço terapêutico e a organização estética dos materiais.",
+    "wrongCards": [
+      "Apenas a cor do espaço terapêutico e a organização estética dos materiais.",
+      "Somente o estilo de comunicação do/a profissional e as suas crenças pessoais.",
+      "Apenas a escolha entre avaliação presencial e online."
+    ],
     "explanation": "A caracterização inclui linha de base, impacto da condição, pontos fortes/fracos e impacto nas atividades de vida diária.",
     "source": "LCNC - Aula 2(3).pdf, slide 8",
     "category": "Avaliação Neuropsicológica",
@@ -93,7 +129,11 @@
     "id": 10,
     "question": "O que pode incluir a realização de diagnósticos diferenciais em Neuropsicologia Clínica?",
     "correctCard": "Estabelecer, confirmar ou diferenciar diagnósticos e avaliar a demência e possíveis etiologias.",
-    "wrongCard": "Definir apenas a distância interpessoal entre clínico e paciente.",
+    "wrongCards": [
+      "Definir apenas a distância interpessoal entre clínico e paciente.",
+      "Determinar apenas se a pessoa prefere perguntas abertas ou fechadas.",
+      "Avaliar só a qualidade vocal e a distância interpessoal."
+    ],
     "explanation": "Os diagnósticos diferenciais incluem contribuições psicológicas, confirmação/diferenciação diagnóstica e avaliação da demência.",
     "source": "LCNC - Aula 2(3).pdf, slide 8",
     "category": "Avaliação Neuropsicológica",
@@ -103,7 +143,11 @@
     "id": 11,
     "question": "No planeamento e monitorização do tratamento, que estratégias são mencionadas?",
     "correctCard": "Estratégias de restituição, compensatórias e adaptações personalizadas, com monitorização de mudanças cognitivas.",
-    "wrongCard": "Evitar recomendações e não acompanhar mudanças ao longo do tempo.",
+    "wrongCards": [
+      "Evitar recomendações e não acompanhar mudanças ao longo do tempo.",
+      "Usar apenas perguntas fechadas e evitar adaptações individualizadas.",
+      "Substituir o tratamento por leitura autónoma de publicações."
+    ],
     "explanation": "Os slides indicam planeamento, monitorização, prognóstico e recomendações, incluindo estratégias personalizadas.",
     "source": "LCNC - Aula 2(3).pdf, slide 8",
     "category": "Intervenção Neuropsicológica",
@@ -113,7 +157,11 @@
     "id": 12,
     "question": "Que exemplos pertencem a questões legais, funcionais ou outras na avaliação neuropsicológica?",
     "correctCard": "Determinar a interferência dos défices cognitivos em capacidades e avaliar veracidade/severidade dos sintomas.",
-    "wrongCard": "Escolher exclusivamente entre cursos e-learning, webcasts e coaching.",
+    "wrongCards": [
+      "Escolher exclusivamente entre cursos e-learning, webcasts e coaching.",
+      "Descrever apenas a iluminação da sala e a posição das cadeiras.",
+      "Escolher exclusivamente estratégias de mindfulness para reduzir stress."
+    ],
     "explanation": "Estas questões incluem capacidades, apoios, veracidade/severidade de sintomas e capacidade/competência.",
     "source": "LCNC - Aula 2(3).pdf, slide 8",
     "category": "Avaliação Neuropsicológica",
@@ -123,7 +171,11 @@
     "id": 13,
     "question": "Que contextos aparecem no mapa de contextos neuropsicológicos?",
     "correctCard": "Forense, educacional, saúde, privado e público, entre outros âmbitos de funcionamento.",
-    "wrongCard": "Apenas sala presencial, chamada de vídeo e chat escrito.",
+    "wrongCards": [
+      "Apenas sala presencial, chamada de vídeo e chat escrito.",
+      "Apenas ética, deontologia e autocuidado profissional.",
+      "Somente comunicação verbal, não verbal e paralinguagem."
+    ],
     "explanation": "Os slides apresentam contextos como forense, educacional, saúde, privado e público, com várias funções e instituições.",
     "source": "LCNC - Aula 2(3).pdf, slide 9",
     "category": "Contextos Neuropsicológicos",
@@ -133,7 +185,11 @@
     "id": 14,
     "question": "O setting neuropsicológico é composto por que elementos centrais?",
     "correctCard": "Ambiente físico e relação entre neuropsicólogo/a e pessoa.",
-    "wrongCard": "Somente a lista de testes neuropsicológicos aplicados.",
+    "wrongCards": [
+      "Somente a lista de testes neuropsicológicos aplicados.",
+      "Apenas a plataforma digital e o chat utilizado.",
+      "Somente os objetivos de desenvolvimento profissional contínuo."
+    ],
     "explanation": "O slide do setting apresenta o ambiente físico e a relação clínica como componentes do setting neuropsicológico.",
     "source": "LCNC - Aula 2(3).pdf, slide 11",
     "category": "Setting Neuropsicológico",
@@ -143,7 +199,11 @@
     "id": 15,
     "question": "Como é descrito o setting tradicional presencial?",
     "correctCard": "Neuropsicólogo/a e pessoa estão na mesma sala, geralmente sentados à mesa, frente a frente.",
-    "wrongCard": "A interação acontece apenas por videochamada ou chamada telefónica.",
+    "wrongCards": [
+      "A interação acontece apenas por videochamada ou chamada telefónica.",
+      "Pessoa e neuropsicólogo/a interagem sobretudo por chat assíncrono.",
+      "O/a neuropsicólogo/a recolhe dados sem estabelecer relação clínica."
+    ],
     "explanation": "O setting presencial pressupõe co-presença na mesma sala, normalmente à mesa e frente a frente.",
     "source": "LCNC - Aula 2(3).pdf, slide 12",
     "category": "Setting Neuropsicológico",
@@ -153,7 +213,11 @@
     "id": 16,
     "question": "Que característica deve ter o ambiente presencial de avaliação/intervenção?",
     "correctCard": "Ser isento de potenciais distrações ou interferências, mas diferente de um ambiente médico/cirúrgico.",
-    "wrongCard": "Ser o mais semelhante possível a um ambiente médico/cirúrgico, com múltiplas fontes de estímulo.",
+    "wrongCards": [
+      "Ser o mais semelhante possível a um ambiente médico/cirúrgico, com múltiplas fontes de estímulo.",
+      "Ser ruidoso e altamente estimulante para testar a atenção.",
+      "Ser sempre idêntico a uma sala cirúrgica ou hospitalar."
+    ],
     "explanation": "O ambiente deve reduzir distrações sem se transformar num espaço médico/cirúrgico.",
     "source": "LCNC - Aula 2(3).pdf, slide 12",
     "category": "Setting Neuropsicológico",
@@ -163,7 +227,11 @@
     "id": 17,
     "question": "Como devem ser definidos os objetivos das sessões neuropsicológicas?",
     "correctCard": "Em conjunto com a pessoa em acompanhamento, de forma explícita e com a compreensão avaliada.",
-    "wrongCard": "Unicamente pelo/a neuropsicólogo/a, sem necessidade de explicação à pessoa.",
+    "wrongCards": [
+      "Unicamente pelo/a neuropsicólogo/a, sem necessidade de explicação à pessoa.",
+      "De forma implícita, sem verificar se a pessoa compreendeu.",
+      "Apenas pelos cuidadores, sem participação da pessoa acompanhada."
+    ],
     "explanation": "Os slides referem que os objetivos devem ser definidos em conjunto, explicitados e compreendidos.",
     "source": "LCNC - Aula 2(3).pdf, slide 12",
     "category": "Setting Neuropsicológico",
@@ -173,7 +241,11 @@
     "id": 18,
     "question": "Que papel deve ser encorajado na pessoa acompanhada?",
     "correctCard": "Um papel ativo e envolvimento ao longo de todo o processo.",
-    "wrongCard": "Um papel passivo, sem participação nas decisões ou atividades.",
+    "wrongCards": [
+      "Um papel passivo, sem participação nas decisões ou atividades.",
+      "Um papel de observador/a externo/a, sem envolvimento no processo.",
+      "Um papel centrado apenas em responder “sim” ou “não”."
+    ],
     "explanation": "A pessoa deve ser encorajada a desempenhar um papel ativo e envolver-se no processo.",
     "source": "LCNC - Aula 2(3).pdf, slide 13",
     "category": "Relação Clínica",
@@ -183,7 +255,11 @@
     "id": 19,
     "question": "Que contributo podem dar cuidadores ou pessoas significativas?",
     "correctCard": "Informação adicional sobre comportamento e funcionalidade nas AVDs, podendo atuar como co-terapeutas.",
-    "wrongCard": "Apenas escolher os procedimentos financeiros e substituir a avaliação clínica.",
+    "wrongCards": [
+      "Apenas escolher os procedimentos financeiros e substituir a avaliação clínica.",
+      "Definir sozinhos o diagnóstico diferencial e substituir os testes.",
+      "Impedir a participação ativa da pessoa em acompanhamento."
+    ],
     "explanation": "Os cuidadores podem complementar a informação sobre comportamento e atividades de vida diária e apoiar a intervenção.",
     "source": "LCNC - Aula 2(3).pdf, slide 13",
     "category": "Rede de Apoio",
@@ -193,7 +269,11 @@
     "id": 20,
     "question": "Como é descrita a teleneuropsicologia?",
     "correctCard": "Interação por chamadas de vídeo ou telefónicas, com maior validade ecológica mas ambiente menos controlado.",
-    "wrongCard": "Interação sempre presencial, em sala totalmente controlada e sem questões técnicas.",
+    "wrongCards": [
+      "Interação sempre presencial, em sala totalmente controlada e sem questões técnicas.",
+      "Avaliação exclusivamente em ambiente médico/cirúrgico presencial.",
+      "Aplicação de testes sem considerar privacidade, Internet ou interrupções."
+    ],
     "explanation": "O setting remoto ocorre por telemóvel/computador e exige atenção a elementos técnicos e pragmáticos.",
     "source": "LCNC - Aula 2(3).pdf, slide 14",
     "category": "Teleneuropsicologia",
@@ -203,7 +283,11 @@
     "id": 21,
     "question": "Que aspetos devem ser avaliados nas fases iniciais da teleneuropsicologia?",
     "correctCard": "Literacia digital, equipamento, qualidade da Internet, privacidade, interrupções inesperadas e questões financeiras.",
-    "wrongCard": "Somente a escolha de materiais manipuláveis e a disposição da mesa presencial.",
+    "wrongCards": [
+      "Somente a escolha de materiais manipuláveis e a disposição da mesa presencial.",
+      "Apenas a distância interpessoal e a movimentação corporal.",
+      "Somente o número de perguntas abertas e fechadas usado na sessão."
+    ],
     "explanation": "Os slides listam estas questões como aspetos a avaliar/definir no acompanhamento remoto.",
     "source": "LCNC - Aula 2(3).pdf, slide 15",
     "category": "Teleneuropsicologia",
@@ -213,7 +297,11 @@
     "id": 22,
     "question": "Na teleneuropsicologia, que cuidado é referido sobre os chats das plataformas?",
     "correctCard": "A escrita nos chats deve ser alvo de reflexão.",
-    "wrongCard": "A escrita nos chats deve substituir toda a interação clínica verbal.",
+    "wrongCards": [
+      "A escrita nos chats deve substituir toda a interação clínica verbal.",
+      "Os chats devem ser usados sem qualquer reflexão clínica.",
+      "Os chats eliminam a necessidade de considerar privacidade e segurança."
+    ],
     "explanation": "Os slides assinalam que o uso de chat nas plataformas merece reflexão especial.",
     "source": "LCNC - Aula 2(3).pdf, slide 14",
     "category": "Teleneuropsicologia",
@@ -223,7 +311,11 @@
     "id": 23,
     "question": "Qual é a finalidade da comunicação entre clínico e paciente, segundo os slides?",
     "correctCard": "Conceber o outro como um todo singular e complexo, atendendo a necessidades, medos e preocupações.",
-    "wrongCard": "Recolher apenas dados objetivos, ignorando necessidades, medos e preocupações.",
+    "wrongCards": [
+      "Recolher apenas dados objetivos, ignorando necessidades, medos e preocupações.",
+      "Orientar a consulta apenas para tópicos definidos pelo/a clínico/a.",
+      "Valorizar apenas o que é dito verbalmente, sem atender às dimensões não verbais."
+    ],
     "explanation": "A comunicação clínica deve atender à pessoa como um todo, singular e complexo.",
     "source": "aula 3(1).pdf, slide 3",
     "category": "Comunicação Clínica",
@@ -233,7 +325,11 @@
     "id": 24,
     "question": "O que é sublinhado sobre o silêncio na comunicação clínica?",
     "correctCard": "Mesmo quando optamos por não falar, estamos a comunicar com o outro.",
-    "wrongCard": "Quando não falamos, não existe qualquer comunicação clínica.",
+    "wrongCards": [
+      "Quando não falamos, não existe qualquer comunicação clínica.",
+      "O silêncio deve ser sempre preenchido pelo/a clínico/a com novas perguntas.",
+      "A comunicação só existe quando há palavras explícitas."
+    ],
     "explanation": "O slide destaca que o silêncio também comunica.",
     "source": "aula 3(1).pdf, slide 3",
     "category": "Comunicação Clínica",
@@ -243,7 +339,11 @@
     "id": 25,
     "question": "Na regra dos 3Vs, que percentagem corresponde às palavras?",
     "correctCard": "7%.",
-    "wrongCard": "55%.",
+    "wrongCards": [
+      "55%.",
+      "38%.",
+      "93%."
+    ],
     "explanation": "A regra dos 3Vs apresentada atribui 7% às palavras, 38% às qualidades vocais e 55% ao comportamento não verbal.",
     "source": "aula 3(1).pdf, slide 4",
     "category": "Comunicação Clínica",
@@ -253,7 +353,11 @@
     "id": 26,
     "question": "Na regra dos 3Vs, que percentagem corresponde às qualidades vocais?",
     "correctCard": "38%.",
-    "wrongCard": "7%.",
+    "wrongCards": [
+      "7%.",
+      "55%.",
+      "93%."
+    ],
     "explanation": "As qualidades vocais são apresentadas como 38% na regra dos 7%-38%-55%.",
     "source": "aula 3(1).pdf, slide 4",
     "category": "Comunicação Clínica",
@@ -263,7 +367,11 @@
     "id": 27,
     "question": "Na regra dos 3Vs, que percentagem corresponde ao comportamento não verbal/visual?",
     "correctCard": "55%.",
-    "wrongCard": "38%.",
+    "wrongCards": [
+      "38%.",
+      "7%.",
+      "93%."
+    ],
     "explanation": "O comportamento não verbal/visual é indicado como 55% da comunicação nesta regra.",
     "source": "aula 3(1).pdf, slide 4",
     "category": "Comunicação Clínica",
@@ -273,7 +381,11 @@
     "id": 28,
     "question": "Para que servem os encorajamentos verbais curtos?",
     "correctCard": "Encorajam a continuação do relato sem orientar o paciente para tópicos particulares.",
-    "wrongCard": "Interrompem o relato para introduzir imediatamente um novo tópico clínico.",
+    "wrongCards": [
+      "Interrompem o relato para introduzir imediatamente um novo tópico clínico.",
+      "Reformular o discurso acrescentando interpretações pessoais do clínico.",
+      "Fazer várias perguntas ao mesmo tempo para acelerar a entrevista."
+    ],
     "explanation": "Exemplos como “Sim”, “Pois” e “Continue” ajudam a pessoa a prosseguir o relato.",
     "source": "aula 3(1).pdf, slide 5",
     "category": "Comunicação Verbal",
@@ -283,7 +395,11 @@
     "id": 29,
     "question": "O que caracteriza a reflexão em espelho?",
     "correctCard": "Usar expressões do paciente para explorar um assunto sem introduzir significado dado pelo clínico.",
-    "wrongCard": "Reformular o discurso acrescentando interpretações pessoais do clínico.",
+    "wrongCards": [
+      "Reformular o discurso acrescentando interpretações pessoais do clínico.",
+      "Interrompem o relato para introduzir imediatamente um novo tópico clínico.",
+      "Fazer várias perguntas ao mesmo tempo para acelerar a entrevista."
+    ],
     "explanation": "A reflexão em espelho retoma palavras/expressões do paciente, sem impor novo significado.",
     "source": "aula 3(1).pdf, slide 5",
     "category": "Comunicação Verbal",
@@ -293,7 +409,11 @@
     "id": 30,
     "question": "Qual é a função da clarificação?",
     "correctCard": "Pedir explicação ou exemplos, como “Poderia explicar-me?” ou “Lembra-se de alguns exemplos?”.",
-    "wrongCard": "Fazer várias perguntas ao mesmo tempo para acelerar a entrevista.",
+    "wrongCards": [
+      "Fazer várias perguntas ao mesmo tempo para acelerar a entrevista.",
+      "Interrompem o relato para introduzir imediatamente um novo tópico clínico.",
+      "Reformular o discurso acrescentando interpretações pessoais do clínico."
+    ],
     "explanation": "A clarificação procura tornar a informação mais clara através de pedidos de explicação ou exemplos.",
     "source": "aula 3(1).pdf, slide 5",
     "category": "Comunicação Verbal",
@@ -303,7 +423,11 @@
     "id": 31,
     "question": "O que é a paráfrase ou reflexão de conteúdo?",
     "correctCard": "Devolver a essência do que a pessoa disse.",
-    "wrongCard": "Evitar devolver qualquer conteúdo para não influenciar a pessoa.",
+    "wrongCards": [
+      "Evitar devolver qualquer conteúdo para não influenciar a pessoa.",
+      "Interrompem o relato para introduzir imediatamente um novo tópico clínico.",
+      "Reformular o discurso acrescentando interpretações pessoais do clínico."
+    ],
     "explanation": "A paráfrase resume a essência do relato da pessoa para confirmar compreensão.",
     "source": "aula 3(1).pdf, slide 5",
     "category": "Comunicação Verbal",
@@ -313,7 +437,11 @@
     "id": 32,
     "question": "O que faz o resumo enquanto estratégia de comunicação verbal?",
     "correctCard": "Resume o que o paciente disse ou trechos da consulta, verificando se foi compreendido.",
-    "wrongCard": "Sugere respostas e limita a pessoa a responder “sim” ou “não”.",
+    "wrongCards": [
+      "Sugere respostas e limita a pessoa a responder “sim” ou “não”.",
+      "Interrompem o relato para introduzir imediatamente um novo tópico clínico.",
+      "Reformular o discurso acrescentando interpretações pessoais do clínico."
+    ],
     "explanation": "O resumo sintetiza informação e permite confirmar a compreensão do clínico.",
     "source": "aula 3(1).pdf, slide 6",
     "category": "Comunicação Verbal",
@@ -323,7 +451,11 @@
     "id": 33,
     "question": "O que é o redirecionamento respeitoso?",
     "correctCard": "Adiar um assunto para refocar no tópico em mãos, reconhecendo a sua importância.",
-    "wrongCard": "Ignorar o assunto trazido pela pessoa e mudar de tema sem explicação.",
+    "wrongCards": [
+      "Ignorar o assunto trazido pela pessoa e mudar de tema sem explicação.",
+      "Interrompem o relato para introduzir imediatamente um novo tópico clínico.",
+      "Reformular o discurso acrescentando interpretações pessoais do clínico."
+    ],
     "explanation": "A estratégia reconhece o assunto e combina voltar a ele, enquanto foca o tema atual.",
     "source": "aula 3(1).pdf, slide 6",
     "category": "Comunicação Verbal",
@@ -333,7 +465,11 @@
     "id": 34,
     "question": "Como são descritas as perguntas abertas?",
     "correctCard": "Solicitam informação sem limitar o campo de resposta e começam frequentemente por “Como”, “Qual”, “O que” ou “Por que”.",
-    "wrongCard": "Limitam a resposta a “sim” ou “não” e pedem informação muito curta.",
+    "wrongCards": [
+      "Limitam a resposta a “sim” ou “não” e pedem informação muito curta.",
+      "Interrompem o relato para introduzir imediatamente um novo tópico clínico.",
+      "Reformular o discurso acrescentando interpretações pessoais do clínico."
+    ],
     "explanation": "As perguntas abertas dão a palavra ao paciente e tendem a gerar mais informação.",
     "source": "aula 3(1).pdf, slide 7",
     "category": "Comunicação Verbal",
@@ -343,7 +479,11 @@
     "id": 35,
     "question": "Como são descritas as perguntas fechadas?",
     "correctCard": "Limitam o campo de resposta e incitam respostas curtas, como “sim” ou “não”.",
-    "wrongCard": "Solicitam informação ampla sem limitar o campo de resposta.",
+    "wrongCards": [
+      "Solicitam informação ampla sem limitar o campo de resposta.",
+      "Interrompem o relato para introduzir imediatamente um novo tópico clínico.",
+      "Reformular o discurso acrescentando interpretações pessoais do clínico."
+    ],
     "explanation": "As perguntas fechadas restringem o campo de resposta e costumam gerar respostas breves.",
     "source": "aula 3(1).pdf, slide 7",
     "category": "Comunicação Verbal",
@@ -353,7 +493,11 @@
     "id": 36,
     "question": "Que perguntas devem ser evitadas na comunicação clínica?",
     "correctCard": "Perguntas múltiplas, sugestivas, antagónicas e pela negativa.",
-    "wrongCard": "Perguntas abertas, clarificações, resumos e paráfrases.",
+    "wrongCards": [
+      "Perguntas abertas, clarificações, resumos e paráfrases.",
+      "Interrompem o relato para introduzir imediatamente um novo tópico clínico.",
+      "Reformular o discurso acrescentando interpretações pessoais do clínico."
+    ],
     "explanation": "Os slides indicam estes quatro tipos de perguntas como perguntas a evitar.",
     "source": "aula 3(1).pdf, slide 7",
     "category": "Comunicação Verbal",
@@ -363,7 +507,11 @@
     "id": 37,
     "question": "A que se refere a proxémia na comunicação não verbal?",
     "correctCard": "À distância interpessoal.",
-    "wrongCard": "À movimentação corporal.",
+    "wrongCards": [
+      "À movimentação corporal.",
+      "Às qualidades vocais que acompanham a fala.",
+      "À contradição entre mensagem verbal e não verbal."
+    ],
     "explanation": "A proxémia é apresentada como a dimensão relativa à distância interpessoal.",
     "source": "aula 3(1).pdf, slide 8",
     "category": "Comunicação Não Verbal",
@@ -373,7 +521,11 @@
     "id": 38,
     "question": "A que se refere a cinésia na comunicação não verbal?",
     "correctCard": "À movimentação corporal.",
-    "wrongCard": "À distância interpessoal.",
+    "wrongCards": [
+      "À distância interpessoal.",
+      "Às qualidades vocais que acompanham a fala.",
+      "À gestão dos chats em teleneuropsicologia."
+    ],
     "explanation": "A cinésia é a dimensão relacionada com a movimentação corporal.",
     "source": "aula 3(1).pdf, slide 8",
     "category": "Comunicação Não Verbal",
@@ -383,7 +535,11 @@
     "id": 39,
     "question": "O que são qualidades vocais ou paralinguagem?",
     "correctCard": "Aspetos da voz que acompanham aquilo que é dito.",
-    "wrongCard": "Procedimentos para proteger a privacidade em ambientes online.",
+    "wrongCards": [
+      "Procedimentos para proteger a privacidade em ambientes online.",
+      "À distância interpessoal entre clínico e paciente.",
+      "À movimentação corporal durante a comunicação."
+    ],
     "explanation": "A paralinguagem refere-se aos aspetos vocais que acompanham a fala.",
     "source": "aula 3(1).pdf, slide 8",
     "category": "Comunicação Não Verbal",
@@ -393,7 +549,11 @@
     "id": 40,
     "question": "O que caracteriza a comunicação paradoxal?",
     "correctCard": "Mensagens contraditórias ou mistas, quando o verbal não é congruente com o que a pessoa transmite.",
-    "wrongCard": "Mensagens sempre coerentes entre palavras, voz e comportamento não verbal.",
+    "wrongCards": [
+      "Mensagens sempre coerentes entre palavras, voz e comportamento não verbal.",
+      "Recolher apenas dados objetivos, ignorando necessidades, medos e preocupações.",
+      "Quando não falamos, não existe qualquer comunicação clínica."
+    ],
     "explanation": "Os slides definem comunicação paradoxal como situações de incongruência entre o que se diz e o que se transmite.",
     "source": "aula 3(1).pdf, slides 11-12",
     "category": "Comunicação Clínica",
@@ -403,7 +563,11 @@
     "id": 41,
     "question": "Perante comunicação paradoxal, que respostas clínicas são indicadas nos slides?",
     "correctCard": "Reflexão e normalização na terceira pessoa.",
-    "wrongCard": "Perguntas múltiplas e perguntas sugestivas.",
+    "wrongCards": [
+      "Perguntas múltiplas e perguntas sugestivas.",
+      "Recolher apenas dados objetivos, ignorando necessidades, medos e preocupações.",
+      "Quando não falamos, não existe qualquer comunicação clínica."
+    ],
     "explanation": "A resposta sugerida inclui reflexão e normalização na terceira pessoa.",
     "source": "aula 3(1).pdf, slide 12",
     "category": "Comunicação Clínica",
@@ -413,7 +577,11 @@
     "id": 42,
     "question": "O que é deontologia, segundo os slides?",
     "correctCard": "O Código de Ética Profissional com direitos, deveres e responsabilidades de uma categoria profissional.",
-    "wrongCard": "Um método de avaliação de objetivos individualizados em reabilitação.",
+    "wrongCards": [
+      "Um método de avaliação de objetivos individualizados em reabilitação.",
+      "Um tipo de aprendizagem informal no desenvolvimento profissional contínuo.",
+      "Uma técnica de validação emocional de Linehan."
+    ],
     "explanation": "A deontologia é apresentada como código de ética profissional, ligado a deveres e responsabilidades.",
     "source": "pyEziu-LCNC - Aula 8(2).pdf, slide 3",
     "category": "Ética e Deontologia",
@@ -423,7 +591,11 @@
     "id": 43,
     "question": "Qual é o significado de ética apresentado nos slides?",
     "correctCard": "Modo de ser ou carácter, orientado para a pessoa na relação com o outro.",
-    "wrongCard": "Apenas uma técnica para organizar a rotina diária de forma independente.",
+    "wrongCards": [
+      "Apenas uma técnica para organizar a rotina diária de forma independente.",
+      "Um método para medir objetivos individualizados na reabilitação.",
+      "Apenas um conjunto de regras técnicas de aplicação de testes."
+    ],
     "explanation": "Ética surge associada ao éthos, ao modo de ser/carácter e à relação com o outro.",
     "source": "pyEziu-LCNC - Aula 8(2).pdf, slide 4",
     "category": "Ética e Deontologia",
@@ -433,7 +605,11 @@
     "id": 44,
     "question": "Como é descrita a ética profissional?",
     "correctCard": "Modo de ser na relação com o cliente e aplicação da ética no campo das atividades profissionais.",
-    "wrongCard": "Uma estratégia de substituir toda a intervenção por fóruns de discussão online.",
+    "wrongCards": [
+      "Uma estratégia de substituir toda a intervenção por fóruns de discussão online.",
+      "Um método de avaliação de objetivos individualizados em reabilitação.",
+      "Apenas uma técnica para organizar a rotina diária de forma independente."
+    ],
     "explanation": "Os slides ligam ética profissional ao modo de ser na relação com o cliente e à vivência de princípios/valores no trabalho.",
     "source": "pyEziu-LCNC - Aula 8(2).pdf, slides 4 e 6",
     "category": "Ética e Deontologia",
@@ -443,7 +619,11 @@
     "id": 45,
     "question": "Segundo Chaui, a moral é apresentada como estando relacionada com quê?",
     "correctCard": "Valores sobre o bem e o mal, o permitido e o proibido, e a conduta correta.",
-    "wrongCard": "Apenas níveis de base, esperado, acima do esperado e muito acima do esperado.",
+    "wrongCards": [
+      "Apenas níveis de base, esperado, acima do esperado e muito acima do esperado.",
+      "Valores sobre níveis de validação e respostas empáticas.",
+      "Apenas estratégias de restituição, compensação e adaptação."
+    ],
     "explanation": "A citação nos slides define moral como valores relativos ao bem/mal, permitido/proibido e conduta correta.",
     "source": "pyEziu-LCNC - Aula 8(2).pdf, slide 5",
     "category": "Ética e Deontologia",
@@ -453,7 +633,11 @@
     "id": 46,
     "question": "Qual é o objetivo do Código Deontológico da OPP apresentado na aula?",
     "correctCard": "Guiar práticas de excelência, tendo como referência o máximo ético e não o mínimo aceitável.",
-    "wrongCard": "Eliminar a necessidade de formação contínua e de responsabilidade profissional.",
+    "wrongCards": [
+      "Eliminar a necessidade de formação contínua e de responsabilidade profissional.",
+      "Proxémia, cinésia, paralinguagem, funções autonómicas e redirecionamento.",
+      "Substituir sempre as decisões da pessoa pelas decisões do profissional."
+    ],
     "explanation": "O Código integra princípios éticos para qualquer atividade em Psicologia e pretende orientar práticas de excelência.",
     "source": "pyEziu-LCNC - Aula 8(2).pdf, slide 7",
     "category": "Código Deontológico",
@@ -463,7 +647,11 @@
     "id": 47,
     "question": "Quais são os princípios gerais do Código Deontológico da OPP indicados nos slides?",
     "correctCard": "Respeito pela dignidade e direitos da pessoa, competência, responsabilidade, integridade, beneficência e não-maleficência.",
-    "wrongCard": "Proxémia, cinésia, paralinguagem, funções autonómicas e redirecionamento.",
+    "wrongCards": [
+      "Proxémia, cinésia, paralinguagem, funções autonómicas e redirecionamento.",
+      "Eliminar a necessidade de formação contínua e de responsabilidade profissional.",
+      "Substituir sempre as decisões da pessoa pelas decisões do profissional."
+    ],
     "explanation": "Estes cinco princípios gerais são listados no slide do Código Deontológico da OPP.",
     "source": "pyEziu-LCNC - Aula 8(2).pdf, slide 7",
     "category": "Código Deontológico",
@@ -473,7 +661,11 @@
     "id": 48,
     "question": "O que implica respeitar a dignidade humana?",
     "correctCard": "Aceitar decisões da pessoa quando enquadradas num exercício de racionalidade e respeito pelo outro.",
-    "wrongCard": "Substituir sempre as decisões da pessoa pelas decisões do profissional.",
+    "wrongCards": [
+      "Substituir sempre as decisões da pessoa pelas decisões do profissional.",
+      "Eliminar a necessidade de formação contínua e de responsabilidade profissional.",
+      "Proxémia, cinésia, paralinguagem, funções autonómicas e redirecionamento."
+    ],
     "explanation": "O respeito pela dignidade passa por reconhecer decisões racionais e refletidas no contexto social da pessoa.",
     "source": "pyEziu-LCNC - Aula 8(2).pdf, slide 8",
     "category": "Código Deontológico",
@@ -483,7 +675,11 @@
     "id": 49,
     "question": "No princípio do respeito pela dignidade e direitos, como deve ser vista a pessoa?",
     "correctCard": "Como ser único, com vontade própria, autonomia e autodeterminação a respeitar e promover.",
-    "wrongCard": "Como alguém sem preferências, crenças ou características relevantes para a relação clínica.",
+    "wrongCards": [
+      "Como alguém sem preferências, crenças ou características relevantes para a relação clínica.",
+      "Eliminar a necessidade de formação contínua e de responsabilidade profissional.",
+      "Proxémia, cinésia, paralinguagem, funções autonómicas e redirecionamento."
+    ],
     "explanation": "O slide sublinha a pessoa como única e a importância de promover autonomia e autodeterminação.",
     "source": "pyEziu-LCNC - Aula 8(2).pdf, slide 9",
     "category": "Código Deontológico",
@@ -493,7 +689,11 @@
     "id": 50,
     "question": "O que exige o princípio da competência?",
     "correctCard": "Exercer com pressupostos técnicos e científicos, formação adequada e atualização profissional constante.",
-    "wrongCard": "Atuar sem limites próprios, mesmo quando não se possuem qualificações para a função.",
+    "wrongCards": [
+      "Atuar sem limites próprios, mesmo quando não se possuem qualificações para a função.",
+      "Eliminar a necessidade de formação contínua e de responsabilidade profissional.",
+      "Proxémia, cinésia, paralinguagem, funções autonómicas e redirecionamento."
+    ],
     "explanation": "Competência envolve formação teórica/prática especializada, atualização e reconhecimento dos próprios limites.",
     "source": "pyEziu-LCNC - Aula 8(2).pdf, slide 10",
     "category": "Código Deontológico",
@@ -503,7 +703,11 @@
     "id": 51,
     "question": "Porque é importante a consciência individual no princípio da competência?",
     "correctCard": "Porque cada psicólogo deve ser juiz da sua competência, perante a dificuldade do controlo formal.",
-    "wrongCard": "Porque elimina a necessidade de formação contínua, supervisão e intervisão.",
+    "wrongCards": [
+      "Porque elimina a necessidade de formação contínua, supervisão e intervisão.",
+      "Eliminar a necessidade de formação contínua e de responsabilidade profissional.",
+      "Proxémia, cinésia, paralinguagem, funções autonómicas e redirecionamento."
+    ],
     "explanation": "Os slides referem que a consciência individual é central para o bom desempenho e para reconhecer limites.",
     "source": "pyEziu-LCNC - Aula 8(2).pdf, slide 11",
     "category": "Código Deontológico",
@@ -513,7 +717,11 @@
     "id": 52,
     "question": "Quais são as três dimensões da responsabilidade apresentadas?",
     "correctCard": "Responsabilidade individual, responsabilidade profissional e responsabilidade social.",
-    "wrongCard": "Responsabilidade verbal, responsabilidade vocal e responsabilidade visual.",
+    "wrongCards": [
+      "Responsabilidade verbal, responsabilidade vocal e responsabilidade visual.",
+      "Auto-observação, autocrítica e estilo individual.",
+      "Prestar atenção, refletir e ler o não dito."
+    ],
     "explanation": "O princípio da responsabilidade é desdobrado nestas três dimensões.",
     "source": "pyEziu-LCNC - Aula 8(2).pdf, slides 12-13",
     "category": "Código Deontológico",
@@ -523,7 +731,11 @@
     "id": 53,
     "question": "O que caracteriza o princípio da integridade?",
     "correctCard": "Ser fiel aos princípios da profissão e prevenir, evitar ou resolver conflitos de interesse.",
-    "wrongCard": "Privilegiar conflitos de interesse quando estes facilitem a intervenção.",
+    "wrongCards": [
+      "Privilegiar conflitos de interesse quando estes facilitem a intervenção.",
+      "Eliminar a necessidade de formação contínua e de responsabilidade profissional.",
+      "Proxémia, cinésia, paralinguagem, funções autonómicas e redirecionamento."
+    ],
     "explanation": "Integridade envolve fidelidade aos princípios profissionais e gestão adequada de conflitos de interesse.",
     "source": "pyEziu-LCNC - Aula 8(2).pdf, slide 14",
     "category": "Código Deontológico",
@@ -533,7 +745,11 @@
     "id": 54,
     "question": "O que implica a beneficência e não-maleficência?",
     "correctCard": "Promover e proteger interesses legítimos dos clientes, evitando prejudicá-los por ações ou omissões.",
-    "wrongCard": "Intervir mesmo quando se sabe que a duplicação de intervenções será prejudicial.",
+    "wrongCards": [
+      "Intervir mesmo quando se sabe que a duplicação de intervenções será prejudicial.",
+      "Eliminar a necessidade de formação contínua e de responsabilidade profissional.",
+      "Proxémia, cinésia, paralinguagem, funções autonómicas e redirecionamento."
+    ],
     "explanation": "O princípio coloca o bem-estar da pessoa no centro e exige evitar dano.",
     "source": "pyEziu-LCNC - Aula 8(2).pdf, slide 15",
     "category": "Código Deontológico",
@@ -543,7 +759,11 @@
     "id": 55,
     "question": "Antes de contactar outros colegas de profissão sobre um cliente, o que deve ser obtido?",
     "correctCard": "O consentimento informado do cliente.",
-    "wrongCard": "Apenas a autorização informal de um cuidador, sem envolver o cliente.",
+    "wrongCards": [
+      "Apenas a autorização informal de um cuidador, sem envolver o cliente.",
+      "Eliminar a necessidade de formação contínua e de responsabilidade profissional.",
+      "Proxémia, cinésia, paralinguagem, funções autonómicas e redirecionamento."
+    ],
     "explanation": "Os slides indicam a necessidade de obter consentimento informado antes de contactar colegas.",
     "source": "pyEziu-LCNC - Aula 8(2).pdf, slide 16",
     "category": "Código Deontológico",
@@ -553,7 +773,11 @@
     "id": 56,
     "question": "Que norma específica consta do Código Deontológico apresentado?",
     "correctCard": "Privacidade e confidencialidade.",
-    "wrongCard": "Escolha obrigatória de cores pastel na comunicação clínica.",
+    "wrongCards": [
+      "Escolha obrigatória de cores pastel na comunicação clínica.",
+      "Eliminar a necessidade de formação contínua e de responsabilidade profissional.",
+      "Proxémia, cinésia, paralinguagem, funções autonómicas e redirecionamento."
+    ],
     "explanation": "Entre as normas específicas surgem consentimento informado, privacidade/confidencialidade, relações profissionais e outras.",
     "source": "pyEziu-LCNC - Aula 8(2).pdf, slide 17",
     "category": "Código Deontológico",
@@ -563,7 +787,11 @@
     "id": 57,
     "question": "O que é auto-observação no exercício clínico?",
     "correctCard": "Monitorizar e refletir sobre os próprios pensamentos, emoções, comportamentos e reações.",
-    "wrongCard": "Avaliar apenas os pensamentos e comportamentos do paciente, sem refletir sobre o profissional.",
+    "wrongCards": [
+      "Avaliar apenas os pensamentos e comportamentos do paciente, sem refletir sobre o profissional.",
+      "Evitar feedback e impedir mudanças no estilo clínico.",
+      "Autodepreciação sem objetivo de melhoria e sem abertura a feedback."
+    ],
     "explanation": "A auto-observação é centrada na monitorização e reflexão do/a profissional sobre si próprio/a.",
     "source": "LCNC - Aula 9(2).pdf, slide 4",
     "category": "Meta-competências",
@@ -573,7 +801,11 @@
     "id": 58,
     "question": "Para que serve a auto-observação?",
     "correctCard": "Identificar padrões ou gatilhos que possam dificultar a relação terapêutica, avaliação ou intervenção.",
-    "wrongCard": "Evitar feedback e impedir mudanças no estilo clínico.",
+    "wrongCards": [
+      "Evitar feedback e impedir mudanças no estilo clínico.",
+      "Avaliar apenas os pensamentos e comportamentos do paciente, sem refletir sobre o profissional.",
+      "Autodepreciação sem objetivo de melhoria e sem abertura a feedback."
+    ],
     "explanation": "Os slides referem a identificação de padrões/gatilhos que interferem na relação e no trabalho clínico.",
     "source": "LCNC - Aula 9(2).pdf, slide 4",
     "category": "Meta-competências",
@@ -583,7 +815,11 @@
     "id": 59,
     "question": "O que caracteriza a autocrítica nos slides?",
     "correctCard": "Autorreflexão crítica e avaliação para aprimorar competências clínicas, práticas de atendimento e crescimento profissional.",
-    "wrongCard": "Autodepreciação sem objetivo de melhoria e sem abertura a feedback.",
+    "wrongCards": [
+      "Autodepreciação sem objetivo de melhoria e sem abertura a feedback.",
+      "Avaliar apenas os pensamentos e comportamentos do paciente, sem refletir sobre o profissional.",
+      "Evitar feedback e impedir mudanças no estilo clínico."
+    ],
     "explanation": "A autocrítica apresentada é construtiva e orientada para melhoria clínica e profissional.",
     "source": "LCNC - Aula 9(2).pdf, slide 5",
     "category": "Meta-competências",
@@ -593,7 +829,11 @@
     "id": 60,
     "question": "Que atitude faz parte da autocrítica construtiva?",
     "correctCard": "Reconhecer pontos fortes e fracos, estar aberto a feedback e a melhorar.",
-    "wrongCard": "Recusar feedback e evitar reconhecer áreas de melhoria.",
+    "wrongCards": [
+      "Recusar feedback e evitar reconhecer áreas de melhoria.",
+      "Avaliar apenas os pensamentos e comportamentos do paciente, sem refletir sobre o profissional.",
+      "Evitar feedback e impedir mudanças no estilo clínico."
+    ],
     "explanation": "Os slides associam autocrítica a introspeção, autoconsciência, reconhecimento de forças/fragilidades e feedback.",
     "source": "LCNC - Aula 9(2).pdf, slide 5",
     "category": "Meta-competências",
@@ -603,7 +843,11 @@
     "id": 61,
     "question": "O que inclui o estilo individual do/a profissional?",
     "correctCard": "Comportamento, estilo de comunicação, valores e crenças.",
-    "wrongCard": "Apenas o número de perguntas de uma sessão de avaliação.",
+    "wrongCards": [
+      "Apenas o número de perguntas de uma sessão de avaliação.",
+      "Avaliar apenas os pensamentos e comportamentos do paciente, sem refletir sobre o profissional.",
+      "Evitar feedback e impedir mudanças no estilo clínico."
+    ],
     "explanation": "O estilo individual é descrito como abordagem pessoal composta por comportamento, comunicação, valores e crenças.",
     "source": "LCNC - Aula 9(2).pdf, slide 6",
     "category": "Meta-competências",
@@ -613,7 +857,11 @@
     "id": 62,
     "question": "Que elementos podem fazer parte do estilo individual?",
     "correctCard": "Empatia e compaixão, adaptabilidade, flexibilidade, aprendizagem contínua e abordagem colaborativa.",
-    "wrongCard": "Perguntas sugestivas, antagónicas, múltiplas e pela negativa como estilo ideal.",
+    "wrongCards": [
+      "Perguntas sugestivas, antagónicas, múltiplas e pela negativa como estilo ideal.",
+      "Avaliar apenas os pensamentos e comportamentos do paciente, sem refletir sobre o profissional.",
+      "Evitar feedback e impedir mudanças no estilo clínico."
+    ],
     "explanation": "O slide enumera componentes como empatia, adaptabilidade e compromisso com a aprendizagem contínua.",
     "source": "LCNC - Aula 9(2).pdf, slide 6",
     "category": "Meta-competências",
@@ -623,7 +871,11 @@
     "id": 63,
     "question": "O que deve incluir o “mapa do eu clínico” proposto na atividade?",
     "correctCard": "Pontos fortes, fragilidades/tendências, valores pessoais e estilo relacional predominante.",
-    "wrongCard": "Apenas referências bibliográficas e uma lista de equipamentos tecnológicos.",
+    "wrongCards": [
+      "Apenas referências bibliográficas e uma lista de equipamentos tecnológicos.",
+      "Avaliar apenas os pensamentos e comportamentos do paciente, sem refletir sobre o profissional.",
+      "Evitar feedback e impedir mudanças no estilo clínico."
+    ],
     "explanation": "A atividade propõe construir um mapa com forças, fragilidades, valores e estilo relacional.",
     "source": "LCNC - Aula 9(2).pdf, slide 7",
     "category": "Meta-competências",
@@ -633,7 +885,11 @@
     "id": 64,
     "question": "O que engloba o desenvolvimento pessoal e profissional contínuo?",
     "correctCard": "Experiências de aprendizagem que permitem desenvolver e melhorar a prática profissional.",
-    "wrongCard": "A interrupção da atualização profissional após a formação inicial.",
+    "wrongCards": [
+      "A interrupção da atualização profissional após a formação inicial.",
+      "Apenas uma atividade formal obrigatória feita no fim da carreira.",
+      "Somente autocuidado e mindfulness, sem ligação à prática profissional."
+    ],
     "explanation": "O DPC é apresentado como um conjunto de experiências de aprendizagem para melhorar a prática.",
     "source": "LCNC - Aula 10.pdf, slide 3",
     "category": "Desenvolvimento Profissional Contínuo",
@@ -643,7 +899,11 @@
     "id": 65,
     "question": "O que caracteriza a aprendizagem informal no DPC?",
     "correctCard": "Acontece naturalmente no trabalho, incluindo orientação/aprendizagem com colegas, conferências e networking.",
-    "wrongCard": "Acontece apenas em cursos estruturados presenciais ou online.",
+    "wrongCards": [
+      "Acontece apenas em cursos estruturados presenciais ou online.",
+      "A interrupção da atualização profissional após a formação inicial.",
+      "É apenas leitura reflexiva de publicações e participação em fóruns de discussão online."
+    ],
     "explanation": "A aprendizagem informal ocorre no trabalho e inclui aprendizagem com colegas, conferências e networking.",
     "source": "LCNC - Aula 10.pdf, slide 3",
     "category": "Desenvolvimento Profissional Contínuo",
@@ -653,7 +913,11 @@
     "id": 66,
     "question": "O que caracteriza a aprendizagem formal no DPC?",
     "correctCard": "Tem lugar num ambiente estruturado, como cursos presenciais ou online, workshops e palestras.",
-    "wrongCard": "É apenas leitura reflexiva de publicações e participação em fóruns de discussão online.",
+    "wrongCards": [
+      "É apenas leitura reflexiva de publicações e participação em fóruns de discussão online.",
+      "A interrupção da atualização profissional após a formação inicial.",
+      "Acontece apenas em cursos estruturados presenciais ou online."
+    ],
     "explanation": "A aprendizagem formal corresponde a contextos estruturados de formação.",
     "source": "LCNC - Aula 10.pdf, slide 3",
     "category": "Desenvolvimento Profissional Contínuo",
@@ -663,7 +927,11 @@
     "id": 67,
     "question": "O que caracteriza a aprendizagem não formal?",
     "correctCard": "Pode incluir aprendizagem reflexiva, leitura de publicações e participação em fóruns de discussão online.",
-    "wrongCard": "Só ocorre através de supervisão presencial obrigatória.",
+    "wrongCards": [
+      "Só ocorre através de supervisão presencial obrigatória.",
+      "A interrupção da atualização profissional após a formação inicial.",
+      "Acontece apenas em cursos estruturados presenciais ou online."
+    ],
     "explanation": "A aprendizagem não formal é descrita como reflexiva e pode incluir leituras e fóruns online.",
     "source": "LCNC - Aula 10.pdf, slide 3",
     "category": "Desenvolvimento Profissional Contínuo",
@@ -673,7 +941,11 @@
     "id": 68,
     "question": "Quais são as fases do modelo circular de desenvolvimento profissional contínuo?",
     "correctCard": "Identificar, planear, agir e refletir/avaliar.",
-    "wrongCard": "Perguntar, resumir, redirecionar e fechar.",
+    "wrongCards": [
+      "Perguntar, resumir, redirecionar e fechar.",
+      "Diagnosticar, testar, interpretar e arquivar.",
+      "Prestar atenção, refletir, compreender e demonstrar igualdade."
+    ],
     "explanation": "O modelo circular e contínuo apresentado inclui identificar, planear, agir e refletir/avaliar.",
     "source": "LCNC - Aula 10.pdf, slide 4",
     "category": "Desenvolvimento Profissional Contínuo",
@@ -683,7 +955,11 @@
     "id": 69,
     "question": "O DPC corresponde a que tipo de atividades?",
     "correctCard": "Atividades que mantêm ou melhoram a competência profissional e capacitam para problemas emergentes ou novas tecnologias.",
-    "wrongCard": "Atividades que substituem a competência profissional por intuição sem atualização.",
+    "wrongCards": [
+      "Atividades que substituem a competência profissional por intuição sem atualização.",
+      "A interrupção da atualização profissional após a formação inicial.",
+      "Acontece apenas em cursos estruturados presenciais ou online."
+    ],
     "explanation": "Os slides definem o DPC como atividades relevantes para a prática presente/futura e para lidar com desafios emergentes.",
     "source": "LCNC - Aula 10.pdf, slide 5",
     "category": "Desenvolvimento Profissional Contínuo",
@@ -693,7 +969,11 @@
     "id": 70,
     "question": "Que benefício é atribuído ao desenvolvimento profissional contínuo?",
     "correctCard": "Construção e manutenção de padrões profissionais e éticos e prestação de serviços com maior qualidade.",
-    "wrongCard": "Redução da qualidade das intervenções por afastamento da atualização científica.",
+    "wrongCards": [
+      "Redução da qualidade das intervenções por afastamento da atualização científica.",
+      "A interrupção da atualização profissional após a formação inicial.",
+      "Acontece apenas em cursos estruturados presenciais ou online."
+    ],
     "explanation": "Entre os benefícios estão padrões éticos/profissionais, atualização e melhoria da qualidade dos serviços.",
     "source": "LCNC - Aula 10.pdf, slide 6",
     "category": "Desenvolvimento Profissional Contínuo",
@@ -703,7 +983,11 @@
     "id": 71,
     "question": "Que outros benefícios do DPC são mencionados?",
     "correctCard": "Partilha de conhecimentos, redes profissionais, aumento da confiança/desempenho e prevenção do burnout.",
-    "wrongCard": "Isolamento profissional, diminuição da confiança e ausência de aprendizagem ao longo da vida.",
+    "wrongCards": [
+      "Isolamento profissional, diminuição da confiança e ausência de aprendizagem ao longo da vida.",
+      "A interrupção da atualização profissional após a formação inicial.",
+      "Acontece apenas em cursos estruturados presenciais ou online."
+    ],
     "explanation": "Os slides associam DPC a redes, confiança, desempenho, responsabilidade pessoal e prevenção do burnout.",
     "source": "LCNC - Aula 10.pdf, slide 7",
     "category": "Desenvolvimento Profissional Contínuo",
@@ -713,7 +997,11 @@
     "id": 72,
     "question": "Que estratégias são exemplos de desenvolvimento profissional contínuo?",
     "correctCard": "Pós-graduações, cursos, conferências, e-learning, supervisão/intervisão, investigação, leitura e reflexão sistemática.",
-    "wrongCard": "Evitar cursos, investigação, leitura e reflexão sobre a prática.",
+    "wrongCards": [
+      "Evitar cursos, investigação, leitura e reflexão sobre a prática.",
+      "A interrupção da atualização profissional após a formação inicial.",
+      "Acontece apenas em cursos estruturados presenciais ou online."
+    ],
     "explanation": "O slide apresenta várias estratégias de formação, supervisão, investigação e reflexão.",
     "source": "LCNC - Aula 10.pdf, slide 9",
     "category": "Desenvolvimento Profissional Contínuo",
@@ -723,7 +1011,11 @@
     "id": 73,
     "question": "Porque é importante falar da saúde mental dos/as psicólogos/as?",
     "correctCard": "Porque, apesar da formação e experiência, também são vulneráveis a dificuldades e problemas de saúde psicológica.",
-    "wrongCard": "Porque a formação em Psicologia elimina qualquer vulnerabilidade psicológica ao longo da vida.",
+    "wrongCards": [
+      "Porque a formação em Psicologia elimina qualquer vulnerabilidade psicológica ao longo da vida.",
+      "Porque a formação elimina totalmente o stress ocupacional.",
+      "Porque os/as psicólogos/as não precisam de autocuidado quando têm experiência."
+    ],
     "explanation": "Os slides sublinham que psicólogos/as também são vulneráveis, como todas as pessoas.",
     "source": "LCNC - Aula 11.pdf, slide 4",
     "category": "Saúde Mental e Autocuidado",
@@ -733,7 +1025,11 @@
     "id": 74,
     "question": "Que característica da prática da Psicologia pode aumentar a vulnerabilidade do/a psicólogo/a?",
     "correctCard": "O foco nas necessidades do outro e o nível elevado de envolvimento do/a psicólogo/a.",
-    "wrongCard": "A ausência de contacto com necessidades, sofrimento ou envolvimento com outras pessoas.",
+    "wrongCards": [
+      "A ausência de contacto com necessidades, sofrimento ou envolvimento com outras pessoas.",
+      "Porque a formação em Psicologia elimina qualquer vulnerabilidade psicológica ao longo da vida.",
+      "Uma opção sem ligação ao desempenho profissional ou à qualidade dos serviços."
+    ],
     "explanation": "A profissão exige foco no outro e alto envolvimento, o que pode aumentar vulnerabilidade.",
     "source": "LCNC - Aula 11.pdf, slide 4",
     "category": "Saúde Mental e Autocuidado",
@@ -743,7 +1039,11 @@
     "id": 75,
     "question": "Como é descrito o autocuidado para psicólogos/as?",
     "correctCard": "Uma responsabilidade pessoal e obrigação ética que protege bem-estar, qualidade de vida, desempenho e qualidade dos serviços.",
-    "wrongCard": "Uma opção sem ligação ao desempenho profissional ou à qualidade dos serviços.",
+    "wrongCards": [
+      "Uma opção sem ligação ao desempenho profissional ou à qualidade dos serviços.",
+      "Porque a formação em Psicologia elimina qualquer vulnerabilidade psicológica ao longo da vida.",
+      "A ausência de contacto com necessidades, sofrimento ou envolvimento com outras pessoas."
+    ],
     "explanation": "O autocuidado é apresentado como obrigação ética e ligado ao bem-estar e à qualidade do serviço.",
     "source": "LCNC - Aula 11.pdf, slide 5",
     "category": "Saúde Mental e Autocuidado",
@@ -753,7 +1053,11 @@
     "id": 76,
     "question": "Qual é o paradoxo de Saúde Mental referido nos slides?",
     "correctCard": "Defender falar sobre saúde psicológica na população, mas ter dificuldade em falar sobre isso no próprio grupo profissional.",
-    "wrongCard": "Falar demasiado sobre as vivências dos psicólogos/as e nunca sobre a população.",
+    "wrongCards": [
+      "Falar demasiado sobre as vivências dos psicólogos/as e nunca sobre a população.",
+      "Porque a formação em Psicologia elimina qualquer vulnerabilidade psicológica ao longo da vida.",
+      "A ausência de contacto com necessidades, sofrimento ou envolvimento com outras pessoas."
+    ],
     "explanation": "O paradoxo é a discrepância entre defender a conversa pública sobre saúde mental e silenciar a vivência na profissão.",
     "source": "LCNC - Aula 11.pdf, slide 5",
     "category": "Saúde Mental e Autocuidado",
@@ -763,7 +1067,11 @@
     "id": 77,
     "question": "Qual é a take-home message da aula sobre autocuidado?",
     "correctCard": "O/a próprio/a psicólogo/a é a principal ferramenta de trabalho; o autocuidado é uma obrigação ética.",
-    "wrongCard": "O autocuidado é secundário, porque a principal ferramenta de trabalho são apenas os testes.",
+    "wrongCards": [
+      "O autocuidado é secundário, porque a principal ferramenta de trabalho são apenas os testes.",
+      "Porque a formação em Psicologia elimina qualquer vulnerabilidade psicológica ao longo da vida.",
+      "A ausência de contacto com necessidades, sofrimento ou envolvimento com outras pessoas."
+    ],
     "explanation": "A mensagem final afirma que o/a psicólogo/a é a principal ferramenta e que o autocuidado é obrigação ética.",
     "source": "LCNC - Aula 11.pdf, slide 10",
     "category": "Saúde Mental e Autocuidado",
@@ -773,7 +1081,11 @@
     "id": 78,
     "question": "Segundo a citação de James Baraz, o que envolve mindfulness?",
     "correctCard": "Estar atento ao momento presente sem desejar que seja diferente; desfrutar do agradável sem o agarrar e estar com o desagradável sem o tornar permanente.",
-    "wrongCard": "Controlar o momento presente para que só existam experiências agradáveis.",
+    "wrongCards": [
+      "Controlar o momento presente para que só existam experiências agradáveis.",
+      "Reagir automaticamente ao desagradável e agarrar o agradável.",
+      "Evitar o momento presente até que a experiência desagradável desapareça."
+    ],
     "explanation": "A citação descreve atenção ao presente, não-apego ao agradável e não-fusão com o desagradável.",
     "source": "Mindfulness - Aula.pdf, pág. 1, slide 2",
     "category": "Mindfulness",
@@ -783,7 +1095,11 @@
     "id": 79,
     "question": "Como é definido mindfulness na aula?",
     "correctCard": "Estado de atenção plena ao momento presente e às coisas como elas são, com intencionalidade, consciência e não julgamento.",
-    "wrongCard": "Estado de afastamento emocional, apatia e luta contra pensamentos intensos.",
+    "wrongCards": [
+      "Estado de afastamento emocional, apatia e luta contra pensamentos intensos.",
+      "Controlar o momento presente para que só existam experiências agradáveis.",
+      "É obrigatoriamente uma postura passiva perante toda a experiência."
+    ],
     "explanation": "Mindfulness é apresentado como atenção plena ao presente, intencional e sem julgamento.",
     "source": "Mindfulness - Aula.pdf, pág. 2, slide 3",
     "category": "Mindfulness",
@@ -793,7 +1109,11 @@
     "id": 80,
     "question": "O que mindfulness não é, segundo os slides?",
     "correctCard": "Não é apatia, distância emocional ou uma posição de luta com emoções e pensamentos intensos.",
-    "wrongCard": "É obrigatoriamente uma postura passiva perante toda a experiência.",
+    "wrongCards": [
+      "É obrigatoriamente uma postura passiva perante toda a experiência.",
+      "Um método para suprimir pensamentos e emoções intensas.",
+      "Uma técnica para garantir experiências sempre agradáveis."
+    ],
     "explanation": "Os slides esclarecem que mindfulness não é apatia nem passividade; é uma nova relação com a experiência interna.",
     "source": "Mindfulness - Aula.pdf, pág. 2, slide 4",
     "category": "Mindfulness",
@@ -803,7 +1123,11 @@
     "id": 81,
     "question": "Que benefícios são associados ao treino de mindfulness?",
     "correctCard": "Redução de stress, ansiedade e humor deprimido; melhoria do sono, atenção, memória, aprendizagem, auto-compaixão e empatia.",
-    "wrongCard": "Aumento deliberado da reatividade e diminuição dos padrões de sono.",
+    "wrongCards": [
+      "Aumento deliberado da reatividade e diminuição dos padrões de sono.",
+      "Controlar o momento presente para que só existam experiências agradáveis.",
+      "Estado de afastamento emocional, apatia e luta contra pensamentos intensos."
+    ],
     "explanation": "Os slides listam benefícios psicológicos, cognitivos, relacionais, físicos e imunitários.",
     "source": "Mindfulness - Aula.pdf, pág. 3, slides 5-6",
     "category": "Mindfulness",
@@ -813,7 +1137,11 @@
     "id": 82,
     "question": "O que significa “dar um passo atrás” ou descentrar na resposta do mindfulness?",
     "correctCard": "Promover uma pausa e observar o que está presente para ganhar uma nova perspetiva da experiência.",
-    "wrongCard": "Fundir-se com os pensamentos e reagir imediatamente à experiência.",
+    "wrongCards": [
+      "Fundir-se com os pensamentos e reagir imediatamente à experiência.",
+      "Controlar o momento presente para que só existam experiências agradáveis.",
+      "Estado de afastamento emocional, apatia e luta contra pensamentos intensos."
+    ],
     "explanation": "Descentrar cria espaço para observar a experiência em vez de reagir automaticamente.",
     "source": "Mindfulness - Aula.pdf, pág. 4, slide 8",
     "category": "Mindfulness",
@@ -823,7 +1151,11 @@
     "id": 83,
     "question": "Qual é a função da curiosidade gentil no mindfulness?",
     "correctCard": "Abordar a dificuldade de forma diferente da fuga/luta, distinguindo pensamentos, emoções e sensações corporais.",
-    "wrongCard": "Eliminar pensamentos e emoções negativas através de esforço intenso.",
+    "wrongCards": [
+      "Eliminar pensamentos e emoções negativas através de esforço intenso.",
+      "Controlar o momento presente para que só existam experiências agradáveis.",
+      "Estado de afastamento emocional, apatia e luta contra pensamentos intensos."
+    ],
     "explanation": "A curiosidade gentil permite explorar a experiência de forma segura e distinguir as suas dimensões.",
     "source": "Mindfulness - Aula.pdf, pág. 4, slide 8",
     "category": "Mindfulness",
@@ -833,7 +1165,11 @@
     "id": 84,
     "question": "Como o mindfulness propõe relacionar-se com os pensamentos?",
     "correctCard": "Vê-los como eventos mentais, criando espaço para os observar em vez de tentar mudá-los diretamente.",
-    "wrongCard": "Aceitá-los sempre como factos objetivos que devem comandar a ação.",
+    "wrongCards": [
+      "Aceitá-los sempre como factos objetivos que devem comandar a ação.",
+      "Controlar o momento presente para que só existam experiências agradáveis.",
+      "Estado de afastamento emocional, apatia e luta contra pensamentos intensos."
+    ],
     "explanation": "O objetivo indicado é desenvolver um espaço de observação dos pensamentos.",
     "source": "Mindfulness - Aula.pdf, pág. 4, slide 8",
     "category": "Mindfulness",
@@ -843,7 +1179,11 @@
     "id": 85,
     "question": "O que significa mudar o foco de atenção na prática de mindfulness?",
     "correctCard": "Aprender a direcionar a atenção para outras experiências do presente, mesmo que experiências negativas continuem presentes.",
-    "wrongCard": "Garantir que as experiências negativas desaparecem antes de se prestar atenção ao presente.",
+    "wrongCards": [
+      "Garantir que as experiências negativas desaparecem antes de se prestar atenção ao presente.",
+      "Controlar o momento presente para que só existam experiências agradáveis.",
+      "Estado de afastamento emocional, apatia e luta contra pensamentos intensos."
+    ],
     "explanation": "Os slides referem que experiências negativas podem continuar presentes, mas não precisam de ser o foco.",
     "source": "Mindfulness - Aula.pdf, pág. 5, slide 9",
     "category": "Mindfulness",
@@ -853,7 +1193,11 @@
     "id": 86,
     "question": "Que elementos são apresentados como base para a prática do mindfulness?",
     "correctCard": "Atitude, com recetividade e aceitação, e compromisso, com energia.",
-    "wrongCard": "Pressa, julgamento e procura rígida de um resultado imediato.",
+    "wrongCards": [
+      "Pressa, julgamento e procura rígida de um resultado imediato.",
+      "Controlar o momento presente para que só existam experiências agradáveis.",
+      "Estado de afastamento emocional, apatia e luta contra pensamentos intensos."
+    ],
     "explanation": "A base da prática é apresentada como atitude e compromisso.",
     "source": "Mindfulness - Aula.pdf, pág. 6, slide 11",
     "category": "Mindfulness",
@@ -863,7 +1207,11 @@
     "id": 87,
     "question": "O que acontece quando categorizamos e julgamos a experiência de forma habitual?",
     "correctCard": "Podem surgir reações mecânicas, por vezes inconscientes e sem objetivo ou fundamento.",
-    "wrongCard": "Aumenta sempre a aceitação e reduz automaticamente a reatividade.",
+    "wrongCards": [
+      "Aumenta sempre a aceitação e reduz automaticamente a reatividade.",
+      "Controlar o momento presente para que só existam experiências agradáveis.",
+      "Estado de afastamento emocional, apatia e luta contra pensamentos intensos."
+    ],
     "explanation": "Os slides associam o hábito de julgar a reações automáticas/mecânicas.",
     "source": "Mindfulness - Aula.pdf, pág. 6, slide 12",
     "category": "Mindfulness",
@@ -873,7 +1221,11 @@
     "id": 88,
     "question": "Como é descrita a aceitação no mindfulness?",
     "correctCard": "Não é passividade, abandono ou desistência; é base para agir de forma apropriada.",
-    "wrongCard": "É desistir de agir e aceitar tudo de forma passiva.",
+    "wrongCards": [
+      "É desistir de agir e aceitar tudo de forma passiva.",
+      "Controlar o momento presente para que só existam experiências agradáveis.",
+      "Estado de afastamento emocional, apatia e luta contra pensamentos intensos."
+    ],
     "explanation": "Os slides distinguem aceitação de passividade, apresentando-a como base de ação adaptativa.",
     "source": "Mindfulness - Aula.pdf, pág. 9, slide 18",
     "category": "Mindfulness",
@@ -883,7 +1235,11 @@
     "id": 89,
     "question": "Quais são os componentes da auto-compaixão segundo Kristin Neff?",
     "correctCard": "Auto-bondade, sentido de humanidade comum e mindfulness.",
-    "wrongCard": "Auto-julgamento, isolamento e luta contra a experiência.",
+    "wrongCards": [
+      "Auto-julgamento, isolamento e luta contra a experiência.",
+      "Autocrítica, isolamento e identificação excessiva.",
+      "Proxémia, cinésia e paralinguagem."
+    ],
     "explanation": "A auto-compaixão inclui auto-bondade, humanidade comum e mindfulness.",
     "source": "Mindfulness - Aula.pdf, pág. 11, slide 22",
     "category": "Auto-compaixão",
@@ -893,7 +1249,11 @@
     "id": 90,
     "question": "O que é apraxia ideomotora, segundo os slides?",
     "correctCard": "Dificuldade em executar movimentos dirigidos a um objetivo, apesar de o conhecimento da tarefa estar preservado.",
-    "wrongCard": "Ausência de conhecimento da tarefa sem dificuldades na execução de movimentos.",
+    "wrongCards": [
+      "Ausência de conhecimento da tarefa sem dificuldades na execução de movimentos.",
+      "Apenas qualidade e estabilidade do sinal da Internet.",
+      "Sobrecarregar todas as pessoas com a máxima informação possível, apenas oralmente."
+    ],
     "explanation": "A apraxia ideomotora relaciona-se com dificuldades de execução apesar do conhecimento preservado.",
     "source": "SGUERREIRO_lUSÓFONA_2026(2).pdf, slide 5",
     "category": "Comunicação com Intervenientes",
@@ -903,7 +1263,11 @@
     "id": 91,
     "question": "A apraxia ideomotora está associada a dificuldades em que níveis?",
     "correctCard": "Organização temporal, sequencial e espacial dos movimentos.",
-    "wrongCard": "Apenas qualidade e estabilidade do sinal da Internet.",
+    "wrongCards": [
+      "Apenas qualidade e estabilidade do sinal da Internet.",
+      "Ausência de conhecimento da tarefa sem dificuldades na execução de movimentos.",
+      "Sobrecarregar todas as pessoas com a máxima informação possível, apenas oralmente."
+    ],
     "explanation": "Os slides associam apraxia ideomotora à organização temporal, sequencial e espacial dos movimentos.",
     "source": "SGUERREIRO_lUSÓFONA_2026(2).pdf, slide 5",
     "category": "Comunicação com Intervenientes",
@@ -913,7 +1277,11 @@
     "id": 92,
     "question": "No caso João, que áreas de funcionalidade foram destacadas?",
     "correctCard": "Higiene e cuidado pessoal, alimentação, tarefas domésticas e outras atividades como escrever, conduzir ou fazer compras.",
-    "wrongCard": "Apenas participação em conferências, networking e leitura de publicações.",
+    "wrongCards": [
+      "Apenas participação em conferências, networking e leitura de publicações.",
+      "Comunicação sempre pausada, organizada e com plena consciência das dificuldades.",
+      "Comportamento impulsivo com discurso verborreico, por vezes inoportuno, e falta de consciência de si."
+    ],
     "explanation": "O slide enumera dificuldades em AVDs como higiene, alimentação, tarefas domésticas e outras atividades.",
     "source": "SGUERREIRO_lUSÓFONA_2026(2).pdf, slide 7",
     "category": "Estudos de Caso",
@@ -923,7 +1291,11 @@
     "id": 93,
     "question": "No caso Miguel, que alteração comportamental é descrita?",
     "correctCard": "Comportamento impulsivo com discurso verborreico, por vezes inoportuno, e falta de consciência de si.",
-    "wrongCard": "Comunicação sempre pausada, organizada e com plena consciência das dificuldades.",
+    "wrongCards": [
+      "Comunicação sempre pausada, organizada e com plena consciência das dificuldades.",
+      "Apenas participação em conferências, networking e leitura de publicações.",
+      "Higiene e cuidado pessoal, alimentação, tarefas domésticas e outras atividades como escrever, conduzir ou fazer compras."
+    ],
     "explanation": "O caso Miguel destaca impulsividade, discurso verborreico/inoportuno e baixa consciência de si.",
     "source": "SGUERREIRO_lUSÓFONA_2026(2).pdf, slide 15",
     "category": "Estudos de Caso",
@@ -933,7 +1305,11 @@
     "id": 94,
     "question": "Qual é o papel do gestor de caso numa equipa multidisciplinar?",
     "correctCard": "Assegurar a boa comunicação entre todas as partes envolvidas no processo.",
-    "wrongCard": "Impedir que os objetivos de curto prazo se articulem com os objetivos de longo prazo.",
+    "wrongCards": [
+      "Impedir que os objetivos de curto prazo se articulem com os objetivos de longo prazo.",
+      "Modo de ser ou carácter, orientado para a relação com o outro.",
+      "Atenção plena ao presente, intencionalidade e não julgamento."
+    ],
     "explanation": "Os slides indicam que o gestor de caso assegura a comunicação e alinhamento de objetivos.",
     "source": "SGUERREIRO_lUSÓFONA_2026(2).pdf, slide 17",
     "category": "Equipa Multidisciplinar",
@@ -943,7 +1319,11 @@
     "id": 95,
     "question": "O que é o Goal Attainment Scaling (GAS)?",
     "correctCard": "Um método de medição para avaliar programas de reabilitação e quantificar o sucesso de objetivos individualizados.",
-    "wrongCard": "Uma técnica de comunicação não verbal relacionada com a distância interpessoal.",
+    "wrongCards": [
+      "Uma técnica de comunicação não verbal relacionada com a distância interpessoal.",
+      "Uma escala para medir apenas a proximidade física na relação clínica.",
+      "Uma técnica de reflexão em espelho usada na entrevista clínica."
+    ],
     "explanation": "O GAS permite medir o sucesso de objetivos individualizados em reabilitação.",
     "source": "SGUERREIRO_lUSÓFONA_2026(2).pdf, slide 18",
     "category": "Reabilitação e Objetivos",
@@ -953,7 +1333,11 @@
     "id": 96,
     "question": "No GAS, que valores correspondem ao nível de base e ao nível esperado?",
     "correctCard": "O nível de base é -1 e o nível esperado é 0.",
-    "wrongCard": "O nível de base é +2 e o nível esperado é -2.",
+    "wrongCards": [
+      "O nível de base é +2 e o nível esperado é -2.",
+      "O nível de base é 0 e o nível esperado é +2.",
+      "O nível de base é +1 e o nível esperado é -1."
+    ],
     "explanation": "O slide define -1 como nível de base, 0 como esperado, +1 acima do esperado e +2 muito acima do esperado.",
     "source": "SGUERREIRO_lUSÓFONA_2026(2).pdf, slide 18",
     "category": "Reabilitação e Objetivos",
@@ -963,7 +1347,11 @@
     "id": 97,
     "question": "Na fase de avaliação, que recomendação é feita antes de atender o cliente?",
     "correctCard": "Conhecer a história clínica, fazer um resumo da informação lida e atualizá-la.",
-    "wrongCard": "Pedir ao cliente que conte sempre tudo desde o início, independentemente dos registos existentes.",
+    "wrongCards": [
+      "Pedir ao cliente que conte sempre tudo desde o início, independentemente dos registos existentes.",
+      "Reabilitação como resposta instantânea sem necessidade de tempo.",
+      "Falar depressa, usar frases longas e preencher todos os silêncios imediatamente."
+    ],
     "explanation": "Os slides sugerem conhecer a história clínica para evitar que a pessoa repita toda a história desnecessariamente.",
     "source": "SGUERREIRO_lUSÓFONA_2026(2).pdf, slide 23",
     "category": "Comunicação na Avaliação",
@@ -973,7 +1361,11 @@
     "id": 98,
     "question": "Que metáfora é sugerida para falar da reabilitação?",
     "correctCard": "Reabilitação como corrida de longo curso, não como sprint.",
-    "wrongCard": "Reabilitação como resposta instantânea sem necessidade de tempo.",
+    "wrongCards": [
+      "Reabilitação como resposta instantânea sem necessidade de tempo.",
+      "Pedir ao cliente que conte sempre tudo desde o início, independentemente dos registos existentes.",
+      "Falar depressa, usar frases longas e preencher todos os silêncios imediatamente."
+    ],
     "explanation": "Os slides sugerem metáforas como a corrida de longo curso para reforçar o esforço de recuperação.",
     "source": "SGUERREIRO_lUSÓFONA_2026(2).pdf, slide 23",
     "category": "Comunicação na Avaliação",
@@ -983,7 +1375,11 @@
     "id": 99,
     "question": "Que recomendações comunicacionais são dadas para a avaliação?",
     "correctCard": "Usar ritmo pausado, frases curtas, manter silêncio quando útil e estar atento ao estado emocional.",
-    "wrongCard": "Falar depressa, usar frases longas e preencher todos os silêncios imediatamente.",
+    "wrongCards": [
+      "Falar depressa, usar frases longas e preencher todos os silêncios imediatamente.",
+      "Pedir ao cliente que conte sempre tudo desde o início, independentemente dos registos existentes.",
+      "Reabilitação como resposta instantânea sem necessidade de tempo."
+    ],
     "explanation": "Os slides recomendam ritmo pausado, frases curtas e respeito pelo silêncio e pelo estado emocional.",
     "source": "SGUERREIRO_lUSÓFONA_2026(2).pdf, slide 24",
     "category": "Comunicação na Avaliação",
@@ -993,7 +1389,11 @@
     "id": 100,
     "question": "Como usar a comunicação não verbal para expressar atenção e apoio?",
     "correctCard": "Inclinar-se para a frente, olhar para o cliente, acenar com a cabeça, sorrir e transmitir calma no tom e ritmo.",
-    "wrongCard": "Evitar olhar para o cliente, não acenar, manter postura distante e acelerar o discurso.",
+    "wrongCards": [
+      "Evitar olhar para o cliente, não acenar, manter postura distante e acelerar o discurso.",
+      "À movimentação corporal.",
+      "À distância interpessoal."
+    ],
     "explanation": "O slide propõe sinais não verbais de atenção, interesse, apoio, calma e sintonia.",
     "source": "SGUERREIRO_lUSÓFONA_2026(2).pdf, slide 25",
     "category": "Comunicação Não Verbal",
@@ -1003,7 +1403,11 @@
     "id": 101,
     "question": "Que cuidados devem existir ao fornecer informação à pessoa?",
     "correctCard": "Dar informação simples e clara, complementar por escrito como auxiliar de memória e adaptar a quantidade caso a caso.",
-    "wrongCard": "Sobrecarregar todas as pessoas com a máxima informação possível, apenas oralmente.",
+    "wrongCards": [
+      "Sobrecarregar todas as pessoas com a máxima informação possível, apenas oralmente.",
+      "Ausência de conhecimento da tarefa sem dificuldades na execução de movimentos.",
+      "Apenas qualidade e estabilidade do sinal da Internet."
+    ],
     "explanation": "Os slides recomendam clareza, apoio escrito e adaptação à necessidade de informação de cada pessoa.",
     "source": "SGUERREIRO_lUSÓFONA_2026(2).pdf, slide 27",
     "category": "Comunicação com Intervenientes",
@@ -1013,7 +1417,11 @@
     "id": 102,
     "question": "Como promover o envolvimento ativo do cliente?",
     "correctCard": "Dar informação para tomada de decisão, reforçar sentido de agência, evitar conselhos impositivos e oferecer alternativas.",
-    "wrongCard": "Tomar todas as decisões pelo cliente e apresentar uma única estratégia obrigatória.",
+    "wrongCards": [
+      "Tomar todas as decisões pelo cliente e apresentar uma única estratégia obrigatória.",
+      "Ausência de conhecimento da tarefa sem dificuldades na execução de movimentos.",
+      "Apenas qualidade e estabilidade do sinal da Internet."
+    ],
     "explanation": "O envolvimento ativo exige participação, controlo, perguntas facilitadoras e estratégias alternativas.",
     "source": "SGUERREIRO_lUSÓFONA_2026(2).pdf, slide 28",
     "category": "Comunicação com Intervenientes",
@@ -1023,7 +1431,11 @@
     "id": 103,
     "question": "O que deve ser evitado quando a pessoa partilha sofrimento ou preocupação?",
     "correctCard": "Usar clichés como “o tempo cura tudo” ou “com força de vontade tudo se alcança”.",
-    "wrongCard": "Agradecer a partilha e permitir que a pessoa fale, se quiser.",
+    "wrongCards": [
+      "Agradecer a partilha e permitir que a pessoa fale, se quiser.",
+      "Modo de ser ou carácter, orientado para a relação com o outro.",
+      "Atenção plena ao presente, intencionalidade e não julgamento."
+    ],
     "explanation": "Os slides alertam para evitar clichés e não mostrar frustração se a pessoa não quiser falar.",
     "source": "SGUERREIRO_lUSÓFONA_2026(2).pdf, slide 29",
     "category": "Comunicação Empática",
@@ -1033,7 +1445,11 @@
     "id": 104,
     "question": "Como é definida a empatia nos slides?",
     "correctCard": "Compreender a experiência do outro e reagir emocionalmente às emoções.",
-    "wrongCard": "Corrigir de imediato a experiência emocional do outro para que não a sinta.",
+    "wrongCards": [
+      "Corrigir de imediato a experiência emocional do outro para que não a sinta.",
+      "Sim; não é necessário que a pessoa perceba empatia no comportamento do profissional.",
+      "Perguntas antagónicas, perguntas sugestivas, interrupção e conselhos impositivos."
+    ],
     "explanation": "A definição apresentada liga empatia à compreensão da experiência do outro e resposta emocional.",
     "source": "SGUERREIRO_lUSÓFONA_2026(2).pdf, slide 30",
     "category": "Empatia e Validação",
@@ -1043,7 +1459,11 @@
     "id": 105,
     "question": "Segundo os slides, basta sentir empatia?",
     "correctCard": "Não; é importante mostrar empatia através da resposta comportamental.",
-    "wrongCard": "Sim; não é necessário que a pessoa perceba empatia no comportamento do profissional.",
+    "wrongCards": [
+      "Sim; não é necessário que a pessoa perceba empatia no comportamento do profissional.",
+      "Corrigir de imediato a experiência emocional do outro para que não a sinta.",
+      "Perguntas antagónicas, perguntas sugestivas, interrupção e conselhos impositivos."
+    ],
     "explanation": "A investigação citada nos slides sublinha a importância de a empatia ser expressa comportamentalmente.",
     "source": "SGUERREIRO_lUSÓFONA_2026(2).pdf, slide 31",
     "category": "Empatia e Validação",
@@ -1053,7 +1473,11 @@
     "id": 106,
     "question": "Que componentes da empatia são exemplificados nos slides?",
     "correctCard": "Reflexão, exploração, validação, apoio, respeito e aliança.",
-    "wrongCard": "Perguntas antagónicas, perguntas sugestivas, interrupção e conselhos impositivos.",
+    "wrongCards": [
+      "Perguntas antagónicas, perguntas sugestivas, interrupção e conselhos impositivos.",
+      "Corrigir de imediato a experiência emocional do outro para que não a sinta.",
+      "Sim; não é necessário que a pessoa perceba empatia no comportamento do profissional."
+    ],
     "explanation": "Os slides apresentam estes componentes com frases exemplo para a comunicação empática.",
     "source": "SGUERREIRO_lUSÓFONA_2026(2).pdf, slides 33-34",
     "category": "Empatia e Validação",
@@ -1063,7 +1487,11 @@
     "id": 107,
     "question": "Qual das opções exemplifica validação no caso do exame de anatomia?",
     "correctCard": "“Imagino que te estejas a sentir frustrada por não teres ido ao exame, passar nessa cadeira era mesmo importante para ti.”",
-    "wrongCard": "“Tens de te preparar melhor para esses exames, já sabes que ficas nervosa.”",
+    "wrongCards": [
+      "“Tens de te preparar melhor para esses exames, já sabes que ficas nervosa.”",
+      "“Isso não é assim tão grave, para a próxima corres melhor.”",
+      "“Tens de deixar de ficar frustrada, isso só atrapalha.”"
+    ],
     "explanation": "A opção validante reconhece a frustração e a importância da cadeira para a pessoa.",
     "source": "SGUERREIRO_lUSÓFONA_2026(2).pdf, slides 36-37",
     "category": "Empatia e Validação",
@@ -1073,7 +1501,11 @@
     "id": 108,
     "question": "O que é validar?",
     "correctCard": "Ir ao encontro dos sentimentos mais profundos, reconhecer a sua existência e aceitá-los tal como são.",
-    "wrongCard": "Desmentir o sentimento da pessoa e mostrar rapidamente porque está errada.",
+    "wrongCards": [
+      "Desmentir o sentimento da pessoa e mostrar rapidamente porque está errada.",
+      "Corrigir de imediato a experiência emocional do outro para que não a sinta.",
+      "Sim; não é necessário que a pessoa perceba empatia no comportamento do profissional."
+    ],
     "explanation": "O slide descreve validação como reconhecimento e aceitação dos sentimentos verdadeiros, mesmo confusos.",
     "source": "SGUERREIRO_lUSÓFONA_2026(2).pdf, slide 38",
     "category": "Empatia e Validação",
@@ -1083,7 +1515,11 @@
     "id": 109,
     "question": "Segundo Linehan e Koerner, como pode ser definida a validação?",
     "correctCard": "Comunicar que o ponto de vista e o sentimento do cliente são apropriados e compreensíveis.",
-    "wrongCard": "Comunicar que o ponto de vista do cliente deve ser substituído pelo do profissional.",
+    "wrongCards": [
+      "Comunicar que o ponto de vista do cliente deve ser substituído pelo do profissional.",
+      "Corrigir de imediato a experiência emocional do outro para que não a sinta.",
+      "Sim; não é necessário que a pessoa perceba empatia no comportamento do profissional."
+    ],
     "explanation": "A validação é apresentada como estratégia de aceitação que comunica que a perspetiva faz sentido.",
     "source": "SGUERREIRO_lUSÓFONA_2026(2).pdf, slide 43",
     "category": "Empatia e Validação",
@@ -1093,7 +1529,11 @@
     "id": 110,
     "question": "Quais são os três primeiros níveis de validação de Linehan?",
     "correctCard": "Prestar atenção, refletir o que a pessoa disse e ler o não dito.",
-    "wrongCard": "Corrigir, aconselhar e encerrar a conversa.",
+    "wrongCards": [
+      "Corrigir, aconselhar e encerrar a conversa.",
+      "Aceitar o que é válido, demonstrar igualdade e resolver o problema.",
+      "Corrigir a emoção, aconselhar rapidamente e mudar de tema."
+    ],
     "explanation": "Os níveis 1 a 3 são prestar atenção, refletir e ler o não dito, confirmando com a pessoa.",
     "source": "SGUERREIRO_lUSÓFONA_2026(2).pdf, slide 45",
     "category": "Empatia e Validação",
@@ -1103,7 +1543,11 @@
     "id": 111,
     "question": "Quais são os níveis 4 a 6 de validação de Linehan apresentados?",
     "correctCard": "Compreender, aceitar o que é válido e demonstrar igualdade.",
-    "wrongCard": "Sugerir, insistir e comparar com outras pessoas.",
+    "wrongCards": [
+      "Sugerir, insistir e comparar com outras pessoas.",
+      "Prestar atenção, refletir o que a pessoa disse e ler o não dito.",
+      "Ignorar, corrigir e substituir o ponto de vista da pessoa."
+    ],
     "explanation": "Os níveis 4 a 6 envolvem compreender a experiência, normalizar o válido e tratar o outro como igual.",
     "source": "SGUERREIRO_lUSÓFONA_2026(2).pdf, slide 46",
     "category": "Empatia e Validação",
@@ -1113,7 +1557,11 @@
     "id": 112,
     "question": "Que resultados são atribuídos à validação?",
     "correctCard": "Promove regulação emocional, minimiza reações negativas e fortalece a aliança terapêutica.",
-    "wrongCard": "Aumenta a intensidade das reações negativas e enfraquece a aliança terapêutica.",
+    "wrongCards": [
+      "Aumenta a intensidade das reações negativas e enfraquece a aliança terapêutica.",
+      "Corrigir de imediato a experiência emocional do outro para que não a sinta.",
+      "Sim; não é necessário que a pessoa perceba empatia no comportamento do profissional."
+    ],
     "explanation": "Os slides indicam efeitos positivos na regulação emocional e na aliança terapêutica.",
     "source": "SGUERREIRO_lUSÓFONA_2026(2).pdf, slide 47",
     "category": "Empatia e Validação",
@@ -1123,7 +1571,11 @@
     "id": 113,
     "question": "O que deve ser validado quando há comportamentos desadaptativos?",
     "correctCard": "Os sentimentos subjacentes que desencadeiam os comportamentos, não necessariamente os comportamentos em si.",
-    "wrongCard": "Apenas os comportamentos perturbadores, sem atender aos sentimentos que os desencadeiam.",
+    "wrongCards": [
+      "Apenas os comportamentos perturbadores, sem atender aos sentimentos que os desencadeiam.",
+      "Corrigir de imediato a experiência emocional do outro para que não a sinta.",
+      "Sim; não é necessário que a pessoa perceba empatia no comportamento do profissional."
+    ],
     "explanation": "Os slides destacam que se validam sentimentos subjacentes para que a pessoa se sinta vista.",
     "source": "SGUERREIRO_lUSÓFONA_2026(2).pdf, slide 48",
     "category": "Empatia e Validação",
@@ -1133,7 +1585,11 @@
     "id": 114,
     "question": "Quando se deve tentar resolver o problema numa resposta validante?",
     "correctCard": "Depois de validar; caso contrário, a pessoa pode sentir-se invalidada.",
-    "wrongCard": "Antes de validar, para evitar falar sobre sentimentos.",
+    "wrongCards": [
+      "Antes de validar, para evitar falar sobre sentimentos.",
+      "Corrigir de imediato a experiência emocional do outro para que não a sinta.",
+      "Sim; não é necessário que a pessoa perceba empatia no comportamento do profissional."
+    ],
     "explanation": "O slide recomenda oferecer ajuda ou resolver apenas após a validação.",
     "source": "SGUERREIRO_lUSÓFONA_2026(2).pdf, slide 48",
     "category": "Empatia e Validação",

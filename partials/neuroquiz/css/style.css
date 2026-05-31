@@ -295,8 +295,42 @@ h3 { font-size: clamp(1.25rem, 3vw, 1.8rem); }
 .panel.narrow { width: min(760px, 100%); }
 .panel.wide { width: min(1040px, 100%); }
 .panel > .back-home + h2 { margin-top: 28px; }
+.setup-section { margin-top: 28px; }
+.setup-section h3 { margin-bottom: 10px; }
+.setup-step-back { margin-bottom: 24px; }
 .choice-row { margin-top: 24px; }
 .choice-row .btn { flex: 1 1 150px; min-height: 72px; }
+.choice-row .btn.is-selected, .mode-card.is-selected {
+  transform: translateY(-3px);
+  box-shadow: 0 0 0 4px rgba(54, 129, 255, .24), 0 8px 0 rgba(28,27,31,.18);
+}
+.mode-selector {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 20px;
+}
+.mode-card {
+  appearance: none;
+  min-height: 112px;
+  padding: 18px;
+  border: var(--border);
+  border-radius: 22px;
+  background: var(--pastel-blue);
+  box-shadow: 0 5px 0 rgba(28,27,31,.17);
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+  transition: transform .15s ease, box-shadow .15s ease, filter .15s ease;
+}
+.mode-card:nth-child(2) { background: var(--pastel-pink); }
+.mode-card:hover { transform: translateY(-2px); box-shadow: 0 7px 0 rgba(28,27,31,.16); filter: saturate(1.04); }
+.mode-card:active { transform: translateY(3px); box-shadow: 0 2px 0 rgba(28,27,31,.18); }
+.mode-card:focus-visible { outline: 4px solid rgba(54, 129, 255, .35); outline-offset: 3px; }
+.mode-card strong, .mode-card span { display: block; }
+.mode-card strong { margin-bottom: 8px; font-size: 1.25rem; }
+.mode-card span { color: rgba(28,27,31,.76); font-weight: 800; }
+.start-game-btn { width: 100%; margin-top: 30px; }
 
 .game-view {
   min-height: 100vh;
@@ -381,6 +415,10 @@ h3 { font-size: clamp(1.25rem, 3vw, 1.8rem); }
   gap: clamp(12px, 4vw, 28px);
   align-items: stretch;
 }
+.cards-area.four-options {
+  width: min(940px, 100%);
+  gap: clamp(10px, 2.2vw, 18px);
+}
 .answer-card {
   min-height: clamp(180px, 31vh, 270px);
   padding: clamp(18px, 4vw, 26px);
@@ -399,6 +437,7 @@ h3 { font-size: clamp(1.25rem, 3vw, 1.8rem); }
   transition: transform .18s ease, box-shadow .18s ease;
   user-select: none;
 }
+.answer-option-card { min-height: clamp(132px, 20vh, 190px); }
 .answer-card.left { background: linear-gradient(160deg, #fffdf6, #dff6ff); }
 .answer-card.right { background: linear-gradient(160deg, #fffdf6, #ffe1ed); }
 .answer-card:hover { box-shadow: 0 12px 0 rgba(28,27,31,.14), 0 19px 34px rgba(61,79,112,.18); filter: saturate(1.06); }
@@ -424,7 +463,7 @@ h3 { font-size: clamp(1.25rem, 3vw, 1.8rem); }
 
 .summary-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
   gap: 12px;
   margin: 20px 0 24px;
 }
@@ -436,6 +475,7 @@ h3 { font-size: clamp(1.25rem, 3vw, 1.8rem); }
 .summary-card:nth-child(2) { background: var(--pastel-green); }
 .summary-card:nth-child(3) { background: var(--pastel-pink); }
 .summary-card:nth-child(4) { background: var(--pastel-yellow); }
+.summary-card:nth-child(5) { background: var(--pastel-lilac); }
 .summary-card strong { display: block; font-size: clamp(1.5rem, 5vw, 2.4rem); }
 .summary-card span { font-weight: 800; }
 .review-section-title {
@@ -545,11 +585,12 @@ h3 { font-size: clamp(1.25rem, 3vw, 1.8rem); }
   font-weight: 900;
   line-height: 1.35;
 }
-.review-answer-grid {
+.review-answer-grid, .review-options-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 14px;
 }
+.review-options-grid.four-options { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .review-answer-card {
   position: relative;
   min-width: 0;
@@ -572,6 +613,17 @@ h3 { font-size: clamp(1.25rem, 3vw, 1.8rem); }
 .chosen-badge {
   margin-top: 12px;
   background: var(--pastel-yellow);
+}
+.review-mode-badge {
+  display: inline-flex;
+  width: fit-content;
+  margin-top: 8px;
+  padding: 5px 9px;
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  background: var(--pastel-lilac);
+  font-size: .82rem;
+  font-weight: 1000;
 }
 .review-comment { background: var(--pastel-yellow); }
 .review-comment .pastel-caption {
@@ -685,6 +737,7 @@ h3 { font-size: clamp(1.25rem, 3vw, 1.8rem); }
   .hero-card { min-height: auto; border-radius: 28px; }
   .hero-card::after, .panel::after { display: none; }
   .home-actions .btn, .choice-row .btn, .result-actions .btn, .history-tools .btn { width: 100%; justify-content: center; text-align: center; }
+  .mode-selector { grid-template-columns: 1fr; }
   .info-grid { grid-template-columns: 1fr; }
   .cards-area { grid-template-columns: 1fr; gap: 12px; }
   .answer-card { min-height: 145px; }
@@ -692,7 +745,7 @@ h3 { font-size: clamp(1.25rem, 3vw, 1.8rem); }
   .review-summary { grid-template-columns: auto minmax(0, 1fr); gap: 10px; }
   .review-status { grid-column: 1; justify-self: start; }
   .review-toggle-btn { grid-column: 2; width: 100%; }
-  .review-answer-grid { grid-template-columns: 1fr; }
+  .review-answer-grid, .review-options-grid, .review-options-grid.four-options { grid-template-columns: 1fr; }
   .history-item { grid-template-columns: 1fr; }
   .history-item .btn { width: 100%; }
   .detail-actions .btn { width: 100%; }
@@ -700,6 +753,7 @@ h3 { font-size: clamp(1.25rem, 3vw, 1.8rem); }
   .game-stage { justify-content: flex-start; padding-top: 6px; }
   .question-title { margin-bottom: 12px; }
   .swipe-hint { font-size: .9rem; }
+  .answer-option-card { min-height: 110px; }
 }
 
 @media (max-width: 420px) {

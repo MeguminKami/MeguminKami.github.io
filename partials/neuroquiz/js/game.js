@@ -9,6 +9,7 @@
     currentIndex: 0,
     currentCards: [],
     answers: [],
+    mode: '2',
     timerId: null,
     startedAt: 0,
     remaining: GAME_SECONDS,
@@ -26,6 +27,7 @@
     els.moon = document.getElementById('moonTimer');
     els.time = document.getElementById('timeText');
     els.cardsArea = document.getElementById('cardsArea');
+    els.swipeHint = document.getElementById('swipeHint');
     els.quit = document.getElementById('quitGameBtn');
   }
 
@@ -40,6 +42,23 @@
 
   function sampleQuestions(allQuestions, count) {
     return shuffle(allQuestions).slice(0, Math.min(count, allQuestions.length));
+  }
+
+  function normaliseQuestion(question) {
+    const wrongCards = Array.isArray(question.wrongCards)
+      ? question.wrongCards
+      : [question.wrongCard].filter(Boolean);
+    return { ...question, wrongCards: wrongCards.slice() };
+  }
+
+  function buildOptions(question) {
+    const wrongCards = state.mode === '4'
+      ? question.wrongCards.slice(0, 3)
+      : shuffle(question.wrongCards).slice(0, 1);
+    return shuffle([
+      { text: question.correctCard, isCorrect: true },
+      ...wrongCards.map((text) => ({ text, isCorrect: false }))
+    ]);
   }
 
   function stopTimer() {
@@ -87,21 +106,22 @@
     els.category.textContent = `${q.category} · ${q.difficulty}`;
     els.question.textContent = q.question;
 
-    state.currentCards = shuffle([
-      { text: q.correctCard, isCorrect: true, label: 'correctCard' },
-      { text: q.wrongCard, isCorrect: false, label: 'wrongCard' }
-    ]);
+    state.currentCards = buildOptions(q);
 
     els.cardsArea.innerHTML = '';
+    els.cardsArea.className = `cards-area options-grid ${state.mode === '4' ? 'four-options' : 'two-options'}`;
+    els.swipeHint.textContent = state.mode === '4'
+      ? 'Toca num cartão ou arrasta-o horizontalmente para responder.'
+      : 'Swipe principal: esquerda ← ou direita →. Também podes tocar num cartão.';
     state.currentCards.forEach((card, index) => {
-      const side = index === 0 ? 'left' : 'right';
+      const side = index % 2 === 0 ? 'left' : 'right';
       const cardEl = document.createElement('button');
       cardEl.type = 'button';
-      cardEl.className = `answer-card ${side}`;
+      cardEl.className = `answer-card ${side} ${state.mode === '4' ? 'answer-option-card' : ''}`;
       cardEl.dataset.index = String(index);
       cardEl.dataset.side = side;
-      cardEl.dataset.swipe = side === 'left' ? '← arrasta' : 'arrasta →';
-      cardEl.setAttribute('aria-label', `Seleccionar cartão ${side === 'left' ? 'da esquerda' : 'da direita'}`);
+      cardEl.dataset.swipe = state.mode === '4' ? '← ou →' : (side === 'left' ? '← arrasta' : 'arrasta →');
+      cardEl.setAttribute('aria-label', `Selecionar opção ${index + 1} de ${state.currentCards.length}`);
       cardEl.textContent = card.text;
       addSwipeHandlers(cardEl, index, side);
       cardEl.addEventListener('click', (event) => {
@@ -147,9 +167,11 @@
       dragging = false;
       cardEl.classList.remove('dragging');
       const threshold = Math.max(75, cardEl.offsetWidth * 0.28);
-      const accepted = (side === 'left' && dx < -threshold) || (side === 'right' && dx > threshold);
+      const accepted = state.mode === '4'
+        ? Math.abs(dx) > threshold
+        : (side === 'left' && dx < -threshold) || (side === 'right' && dx > threshold);
       if (accepted) {
-        choose(index, cardEl, false);
+        choose(index, cardEl, false, dx < 0 ? 'left' : 'right');
       } else {
         cardEl.style.transform = '';
       }
@@ -165,7 +187,7 @@
     });
   }
 
-  function choose(index, cardEl, timedOut) {
+  function choose(index, cardEl, timedOut, flyDirection) {
     if (state.locked) return;
     state.locked = true;
     stopTimer();
@@ -175,24 +197,25 @@
     const timeUsed = Math.min(GAME_SECONDS, Math.max(0, (Date.now() - state.startedAt) / 1000));
 
     state.answers.push({
-      id: q.id,
+      questionId: q.id,
       question: q.question,
       correctCard: q.correctCard,
-      wrongCard: q.wrongCard,
+      wrongCards: q.wrongCards.slice(),
+      optionsShown: state.currentCards.map((card) => ({ text: card.text, isCorrect: card.isCorrect })),
+      selectedAnswer: chosen ? chosen.text : '',
+      isCorrect: Boolean(chosen && chosen.isCorrect),
       explanation: q.explanation,
       source: q.source,
       category: q.category,
       difficulty: q.difficulty,
-      selectedCard: chosen ? chosen.text : 'Sem resposta — tempo esgotado',
-      selectedLabel: chosen ? chosen.label : null,
-      isCorrect: Boolean(chosen && chosen.isCorrect),
+      timeUsed: Number(timeUsed.toFixed(1)),
+      mode: state.mode,
       timedOut: Boolean(timedOut),
-      timeUsedSeconds: Number(timeUsed.toFixed(1)),
-      cardOrder: state.currentCards.map((card) => ({ text: card.text, isCorrect: card.isCorrect }))
     });
 
     if (cardEl) {
-      cardEl.classList.add(cardEl.dataset.side === 'left' ? 'fly-left' : 'fly-right');
+      const direction = flyDirection || cardEl.dataset.side;
+      cardEl.classList.add(direction === 'left' ? 'fly-left' : 'fly-right');
     }
 
     window.setTimeout(() => {
@@ -205,15 +228,12 @@
   function finish() {
     stopTimer();
     const correct = state.answers.filter((item) => item.isCorrect).length;
-    const wrong = state.answers.length - correct;
-    const percentage = state.answers.length ? Math.round((correct / state.answers.length) * 100) : 0;
     const game = {
       gameId: `jogo-${Date.now()}`,
-      dateISO: new Date().toISOString(),
-      total: state.answers.length,
-      correct,
-      wrong,
-      percentage,
+      date: new Date().toISOString(),
+      totalQuestions: state.answers.length,
+      score: correct,
+      mode: state.mode,
       answers: state.answers.slice()
     };
     if (typeof state.callbacks.onFinish === 'function') state.callbacks.onFinish(game);
@@ -222,7 +242,7 @@
   const GameEngine = {
     init(questions, callbacks = {}) {
       cacheEls();
-      state.questions = Array.isArray(questions) ? questions : [];
+      state.questions = Array.isArray(questions) ? questions.map(normaliseQuestion) : [];
       state.callbacks = callbacks;
       els.quit.addEventListener('click', () => {
         stopTimer();
@@ -230,10 +250,11 @@
       });
     },
 
-    start(count) {
+    start(count, mode) {
       state.session = sampleQuestions(state.questions, count);
       state.currentIndex = 0;
       state.answers = [];
+      state.mode = String(mode) === '4' ? '4' : '2';
       renderQuestion();
     },
 

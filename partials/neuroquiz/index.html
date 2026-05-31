@@ -30,7 +30,7 @@
         </div>
       </div>
       <div class="info-grid">
-        <article class="info-card"><strong>Como jogar</strong><span class="pastel-caption">Arrasta o cartão da esquerda para a esquerda ou o da direita para a direita.</span></article>
+        <article class="info-card"><strong>Como jogar</strong><span class="pastel-caption">Escolhe entre um desafio rápido com 2 opções ou uma grelha mais desafiante com 4 opções.</span></article>
         <article class="info-card"><strong>Sem pistas</strong><span class="pastel-caption">As respostas só são reveladas no final do jogo.</span></article>
         <article class="info-card"><strong>Histórico</strong><span class="pastel-caption">Os resultados ficam guardados neste navegador com localStorage.</span></article>
       </div>
@@ -39,14 +39,33 @@
     <section id="setupView" class="view sea-view" aria-labelledby="setupTitle">
       <div class="panel doodle-card narrow">
         <button class="btn ghost back-home" type="button">← Menu principal</button>
-        <h2 id="setupTitle">Escolhe a maré de perguntas</h2>
-        <p class="cute-helper-text">Seleciona quantas perguntas queres responder nesta ronda.</p>
-        <div class="choice-row" role="group" aria-label="Número de perguntas">
-          <button class="btn pastel yellow question-count" data-count="5">5 perguntas</button>
-          <button class="btn pastel lilac question-count" data-count="10">10 perguntas</button>
-          <button class="btn pastel peach question-count" data-count="15">15 perguntas</button>
+        <h2 id="setupTitle">Prepara a tua maré</h2>
+        <div id="countSetupStep" class="setup-section">
+          <h3>Quantas perguntas queres jogar?</h3>
+          <p class="cute-helper-text">Escolhe o tamanho desta ronda.</p>
+          <div class="choice-row" role="group" aria-label="Número de perguntas">
+            <button class="btn pastel yellow question-count" type="button" data-count="5" aria-pressed="false">5 perguntas</button>
+            <button class="btn pastel lilac question-count" type="button" data-count="10" aria-pressed="false">10 perguntas</button>
+            <button class="btn pastel peach question-count" type="button" data-count="15" aria-pressed="false">15 perguntas</button>
+          </div>
         </div>
-        <div class="soft-note">Cada jogo escolhe perguntas aleatórias e baralha a posição dos cartões.</div>
+        <div id="modeSetupStep" class="setup-section" hidden>
+          <button id="backToCountBtn" class="btn ghost small setup-step-back" type="button">← Alterar número de perguntas</button>
+          <h3>Escolhe o tipo de desafio</h3>
+          <p class="cute-helper-text">As respostas são sempre baralhadas antes de aparecerem.</p>
+          <div class="mode-selector" role="group" aria-label="Tipo de desafio">
+            <button class="mode-card" type="button" data-mode="2" aria-pressed="false">
+              <strong>2 opções</strong>
+              <span>Mais rápido</span>
+            </button>
+            <button class="mode-card" type="button" data-mode="4" aria-pressed="false">
+              <strong>4 opções</strong>
+              <span>Mais desafiante</span>
+            </button>
+          </div>
+          <button id="startGameBtn" class="btn btn-primary big start-game-btn" type="button" disabled>Começar jogo</button>
+          <div class="soft-note">Cada jogo escolhe perguntas aleatórias e baralha a posição dos cartões.</div>
+        </div>
       </div>
     </section>
 
@@ -63,7 +82,7 @@
           <div id="timeText" class="time-text">30 s</div>
         </div>
         <div id="cardsArea" class="cards-area" aria-label="Cartões de resposta"></div>
-        <p class="swipe-hint cute-helper-text">Swipe principal: esquerda ← ou direita →. Também podes tocar num cartão.</p>
+        <p id="swipeHint" class="swipe-hint cute-helper-text">Também podes tocar num cartão para responder.</p>
       </div>
     </section>
 
