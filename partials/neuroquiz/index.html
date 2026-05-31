@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#c7f2e5" />
+  <title>Mar de Perguntas — LCNC</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div id="seaBackground" class="sea-background" aria-hidden="true"></div>
+
+  <main id="app" class="app-shell">
+    <section id="homeView" class="view active sea-view" aria-labelledby="homeTitle">
+      <div class="hero-card doodle-card">
+        <div class="eyebrow">Laboratório de Competências em Neuropsicologia Clínica</div>
+        <h1 id="homeTitle">Mar de Perguntas</h1>
+        <p class="lead">Um jogo fofo de estudo com cartões, swipes e curiosidades dos slides.</p>
+        <div class="hero-illustration" aria-hidden="true">
+          <span class="wave-line"></span>
+          <span class="bubble b1">?</span>
+          <span class="bubble b2">✦</span>
+          <span class="bubble b3">nota</span>
+          <span class="card-mini">Q</span>
+          <span class="card-mini second">A</span>
+        </div>
+        <div class="home-actions">
+          <button id="goSetupBtn" class="btn btn-primary big">Jogar</button>
+          <button id="goHistoryBtn" class="btn btn-secondary big">Ver histórico</button>
+        </div>
+      </div>
+      <div class="info-grid">
+        <article class="info-card"><strong>Como jogar</strong><span class="pastel-caption">Arrasta o cartão da esquerda para a esquerda ou o da direita para a direita.</span></article>
+        <article class="info-card"><strong>Sem pistas</strong><span class="pastel-caption">As respostas só são reveladas no final do jogo.</span></article>
+        <article class="info-card"><strong>Histórico</strong><span class="pastel-caption">Os resultados ficam guardados neste navegador com localStorage.</span></article>
+      </div>
+    </section>
+
+    <section id="setupView" class="view sea-view" aria-labelledby="setupTitle">
+      <div class="panel doodle-card narrow">
+        <button class="btn ghost back-home" type="button">← Menu principal</button>
+        <h2 id="setupTitle">Escolhe a maré de perguntas</h2>
+        <p class="cute-helper-text">Seleciona quantas perguntas queres responder nesta ronda.</p>
+        <div class="choice-row" role="group" aria-label="Número de perguntas">
+          <button class="btn pastel yellow question-count" data-count="5">5 perguntas</button>
+          <button class="btn pastel lilac question-count" data-count="10">10 perguntas</button>
+          <button class="btn pastel peach question-count" data-count="15">15 perguntas</button>
+        </div>
+        <div class="soft-note">Cada jogo escolhe perguntas aleatórias e baralha a posição dos cartões.</div>
+      </div>
+    </section>
+
+    <section id="gameView" class="view game-view" aria-labelledby="gameQuestion">
+      <div class="game-topbar">
+        <button id="quitGameBtn" class="btn ghost small" type="button">Sair</button>
+        <div id="progressText" class="progress-pill">Pergunta 1/5</div>
+      </div>
+      <div id="gameStage" class="game-stage">
+        <p id="categoryPill" class="category-pill">Tema</p>
+        <h2 id="gameQuestion" class="question-title">Pergunta</h2>
+        <div class="timer-wrap" aria-live="polite">
+          <div id="moonTimer" class="moon" style="--empty: 0%; --moon-colour: #8ee6c8" aria-hidden="true"></div>
+          <div id="timeText" class="time-text">30 s</div>
+        </div>
+        <div id="cardsArea" class="cards-area" aria-label="Cartões de resposta"></div>
+        <p class="swipe-hint cute-helper-text">Swipe principal: esquerda ← ou direita →. Também podes tocar num cartão.</p>
+      </div>
+    </section>
+
+    <section id="resultsView" class="view sea-view" aria-labelledby="resultsTitle">
+      <div class="panel wide doodle-card">
+        <h2 id="resultsTitle">Resultado final</h2>
+        <div id="summaryCards" class="summary-grid"></div>
+        <div class="result-actions">
+          <button id="playAgainBtn" class="btn btn-primary">Jogar novamente</button>
+          <button id="resultsHomeBtn" class="btn btn-secondary">Menu principal</button>
+          <button id="resultsHistoryBtn" class="btn pastel blue">Ver histórico</button>
+        </div>
+        <h3 class="review-section-title"><span aria-hidden="true">✦</span> Respostas desta ronda</h3>
+        <div id="resultsList" class="review-list"></div>
+      </div>
+    </section>
+
+    <section id="historyView" class="view sea-view" aria-labelledby="historyTitle">
+      <div class="panel wide doodle-card">
+        <div class="detail-nav-top">
+          <button class="btn ghost back-home" type="button">← Menu principal</button>
+        </div>
+        <h2 id="historyTitle">Histórico de jogos</h2>
+        <p class="cute-helper-text">O histórico é guardado apenas neste navegador. Podes exportar e importar em JSON.</p>
+        <div class="history-tools">
+          <button id="exportHistoryBtn" class="btn pastel green" type="button">Exportar JSON</button>
+          <button id="importHistoryBtn" class="btn pastel blue" type="button">Importar JSON</button>
+          <input id="importHistoryInput" type="file" accept="application/json,.json" />
+          <button id="clearHistoryBtn" class="btn pastel pink" type="button">Limpar histórico</button>
+        </div>
+        <div id="historyMessage" class="message" role="status"></div>
+        <div id="historyList" class="history-list"></div>
+      </div>
+    </section>
+
+    <section id="historyDetailView" class="view sea-view" aria-labelledby="historyDetailTitle">
+      <div class="panel wide doodle-card">
+        <div class="detail-nav-top">
+          <button id="backToHistoryBtn" class="btn ghost" type="button">← Voltar ao histórico</button>
+          <button id="historyDetailHomeBtn" class="btn ghost" type="button">Menu principal</button>
+        </div>
+        <h2 id="historyDetailTitle">Revisão do jogo</h2>
+        <div id="historyGameSummary" class="summary-grid"></div>
+        <h3 class="review-section-title"><span aria-hidden="true">✦</span> Respostas deste jogo</h3>
+        <div id="historyReviewList" class="review-list"></div>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/questions-data.js"></script>
+  <script src="js/history.js"></script>
+  <script src="js/game.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

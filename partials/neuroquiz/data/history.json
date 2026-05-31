@@ -1,0 +1,5 @@
+{
+  "version": 1,
+  "description": "Estrutura inicial/exemplo. O histórico real é guardado no localStorage do navegador.",
+  "games": []
+}
