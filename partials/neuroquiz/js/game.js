@@ -1,6 +1,6 @@
 /* Lógica principal do jogo: selecção aleatória, temporizador e swipe. */
 (function () {
-  const GAME_SECONDS = 30;
+  const DEFAULT_GAME_SECONDS = 30;
   const backgrounds = ['#fff0a8', '#ffd6e7', '#c9e8ff', '#c7f2d5', '#e7d8ff', '#ffd9c7', '#c7f2e5'];
 
   const state = {
@@ -10,9 +10,11 @@
     currentCards: [],
     answers: [],
     mode: '2',
+    course: null,
+    timeLimitSeconds: DEFAULT_GAME_SECONDS,
     timerId: null,
     startedAt: 0,
-    remaining: GAME_SECONDS,
+    remaining: DEFAULT_GAME_SECONDS,
     locked: false,
     callbacks: {}
   };
@@ -67,13 +69,14 @@
   }
 
   function updateTimer() {
+    if (state.timeLimitSeconds === null) return;
     const elapsed = (Date.now() - state.startedAt) / 1000;
-    state.remaining = Math.max(0, GAME_SECONDS - elapsed);
-    const progress = state.remaining / GAME_SECONDS;
+    state.remaining = Math.max(0, state.timeLimitSeconds - elapsed);
+    const progress = state.remaining / state.timeLimitSeconds;
     const empty = `${Math.min(100, Math.max(0, 100 - progress * 100)).toFixed(1)}%`;
     let colour = '#8ee6c8';
-    if (state.remaining <= 10) colour = '#ff9fb8';
-    else if (state.remaining <= 20) colour = '#ffd179';
+    if (progress <= 1 / 3) colour = '#ff9fb8';
+    else if (progress <= 2 / 3) colour = '#ffd179';
     els.moon.style.setProperty('--empty', empty);
     els.moon.style.setProperty('--moon-colour', colour);
     els.time.textContent = `${Math.ceil(state.remaining)} s`;
@@ -86,7 +89,14 @@
   function startTimer() {
     stopTimer();
     state.startedAt = Date.now();
-    state.remaining = GAME_SECONDS;
+    if (state.timeLimitSeconds === null) {
+      state.remaining = null;
+      els.moon.style.setProperty('--empty', '0%');
+      els.moon.style.setProperty('--moon-colour', '#8ee6c8');
+      els.time.textContent = 'Sem limite';
+      return;
+    }
+    state.remaining = state.timeLimitSeconds;
     updateTimer();
     state.timerId = setInterval(updateTimer, 200);
   }
@@ -194,7 +204,8 @@
 
     const q = currentQuestion();
     const chosen = Number.isInteger(index) ? state.currentCards[index] : null;
-    const timeUsed = Math.min(GAME_SECONDS, Math.max(0, (Date.now() - state.startedAt) / 1000));
+    const elapsed = Math.max(0, (Date.now() - state.startedAt) / 1000);
+    const timeUsed = state.timeLimitSeconds === null ? elapsed : Math.min(state.timeLimitSeconds, elapsed);
 
     state.answers.push({
       questionId: q.id,
@@ -208,7 +219,10 @@
       source: q.source,
       category: q.category,
       difficulty: q.difficulty,
+      courseSigla: state.course.sigla,
+      courseName: state.course.name,
       timeUsed: Number(timeUsed.toFixed(1)),
+      timeLimitSeconds: state.timeLimitSeconds,
       mode: state.mode,
       timedOut: Boolean(timedOut),
     });
@@ -234,6 +248,9 @@
       totalQuestions: state.answers.length,
       score: correct,
       mode: state.mode,
+      timeLimitSeconds: state.timeLimitSeconds,
+      courseSigla: state.course.sigla,
+      courseName: state.course.name,
       answers: state.answers.slice()
     };
     if (typeof state.callbacks.onFinish === 'function') state.callbacks.onFinish(game);
@@ -250,11 +267,21 @@
       });
     },
 
-    start(count, mode) {
+    setCourse(course, questions) {
+      stopTimer();
+      state.course = course ? { sigla: String(course.sigla), name: String(course.name) } : null;
+      state.questions = Array.isArray(questions) ? questions.map(normaliseQuestion) : [];
+    },
+
+    start(count, mode, timeLimitSeconds = DEFAULT_GAME_SECONDS) {
+      if (!state.course || !state.questions.length) return;
       state.session = sampleQuestions(state.questions, count);
       state.currentIndex = 0;
       state.answers = [];
       state.mode = String(mode) === '4' ? '4' : '2';
+      state.timeLimitSeconds = timeLimitSeconds === null
+        ? null
+        : ([15, 30, 60].includes(Number(timeLimitSeconds)) ? Number(timeLimitSeconds) : DEFAULT_GAME_SECONDS);
       renderQuestion();
     },
 

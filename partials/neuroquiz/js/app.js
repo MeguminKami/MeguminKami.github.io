@@ -1,20 +1,42 @@
-/* Aplicação de página única: navegação, resultados e histórico. */
+/* Aplicacao de pagina unica: cadeiras, navegacao, resultados e historico. */
 (function () {
-  const views = ['homeView', 'setupView', 'gameView', 'resultsView', 'historyView', 'historyDetailView'];
-  let questions = [];
+  const COURSES = {
+    LCNC: {
+      sigla: 'LCNC',
+      name: 'Laborat\u00f3rio de Compet\u00eancias em Neuropsicologia Cl\u00ednica',
+      file: 'data/questions_LCNC.json',
+      description: 'Comunica\u00e7\u00e3o cl\u00ednica, \u00e9tica, compet\u00eancias profissionais e bem-estar.'
+    },
+    MADN: {
+      sigla: 'MADN',
+      name: 'M\u00e9todos de An\u00e1lise de Dados em Neuropsicologia Cl\u00ednica',
+      file: 'data/questions_MADN.json',
+      description: 'Correla\u00e7\u00e3o, regress\u00e3o, ANCOVA, MANOVA, revis\u00e3o sistem\u00e1tica e meta-an\u00e1lise.'
+    }
+  };
+
+  const views = ['homeView', 'courseMenuView', 'setupView', 'gameView', 'resultsView', 'historyView', 'historyDetailView'];
+  const questionBanks = {};
   let historyGames = [];
+  let displayedHistoryGames = [];
+  let selectedCourseSigla = null;
   let selectedQuestionCount = null;
   let selectedMode = null;
+  let selectedTimeLimit = undefined;
   let setupStep = 'count';
+  let historyFilter = 'current';
 
   const seaFacts = [
-    '?', 'Neuropsicologia Clínica', 'setting', 'autocuidado', 'mindfulness', 'validação', 'empatia',
-    '7% palavras', '38% voz', '55% não verbal', 'GAS', 'AVDs', 'teleneuropsicologia', 'auto-observação',
-    'intervisão', 'consentimento informado', 'privacidade', 'dignidade', 'competência', 'responsabilidade',
-    'não julgamento', 'auto-compaixão', 'apraxia', 'aliança terapêutica', 'curiosidade gentil', 'ritmo pausado'
+    '?', 'Neuropsicologia', 'correla\u00e7\u00e3o', 'regress\u00e3o', 'ANCOVA', 'MANOVA', 'mindfulness',
+    'valida\u00e7\u00e3o', 'empatia', 'meta-an\u00e1lise', 'GAS', 'AVDs', 'autocuidado', 'privacidade',
+    'dignidade', 'compet\u00eancia', 'responsabilidade', 'revis\u00e3o sistem\u00e1tica', 'alian\u00e7a terap\u00eautica'
   ];
 
   const $ = (id) => document.getElementById(id);
+
+  function getCourse(courseSigla = selectedCourseSigla) {
+    return COURSES[courseSigla] || null;
+  }
 
   function showView(id) {
     views.forEach((viewId) => $(viewId).classList.toggle('active', viewId === id));
@@ -22,43 +44,95 @@
     window.scrollTo(0, 0);
   }
 
+  function showCourseMenu() {
+    if (!getCourse()) {
+      showView('homeView');
+      return;
+    }
+    updateCourseUI();
+    showView('courseMenuView');
+  }
+
+  function updateCourseUI() {
+    const course = getCourse();
+    document.querySelectorAll('.course-card').forEach((button) => {
+      const selected = button.dataset.course === selectedCourseSigla;
+      button.classList.toggle('selected', selected);
+      button.setAttribute('aria-pressed', String(selected));
+    });
+    if (!course) return;
+
+    $('courseMenuBadge').textContent = course.sigla;
+    $('courseMenuName').textContent = course.name;
+    $('courseMenuDescription').textContent = course.description;
+    $('goSetupBtn').textContent = `Jogar ${course.sigla}`;
+    document.querySelectorAll('.current-course-pill').forEach((pill) => {
+      pill.textContent = `Cadeira: ${course.sigla}`;
+    });
+  }
+
+  function selectCourse(courseSigla) {
+    if (!COURSES[courseSigla]) return;
+    selectedCourseSigla = courseSigla;
+    updateCourseUI();
+    showCourseMenu();
+  }
+
   function updateSetupControls() {
     $('countSetupStep').hidden = setupStep !== 'count';
     $('modeSetupStep').hidden = setupStep !== 'mode';
-    document.querySelectorAll('.question-count').forEach((btn) => {
-      const selected = Number(btn.dataset.count) === selectedQuestionCount;
-      btn.classList.toggle('is-selected', selected);
-      btn.setAttribute('aria-pressed', String(selected));
+    $('timeSetupStep').hidden = setupStep !== 'time';
+    document.querySelectorAll('.question-count').forEach((button) => {
+      const selected = Number(button.dataset.count) === selectedQuestionCount;
+      button.classList.toggle('is-selected', selected);
+      button.setAttribute('aria-pressed', String(selected));
     });
-    document.querySelectorAll('.mode-card').forEach((btn) => {
-      const selected = btn.dataset.mode === selectedMode;
-      btn.classList.toggle('is-selected', selected);
-      btn.setAttribute('aria-pressed', String(selected));
+    document.querySelectorAll('.mode-card').forEach((button) => {
+      const selected = button.dataset.mode === selectedMode;
+      button.classList.toggle('is-selected', selected);
+      button.setAttribute('aria-pressed', String(selected));
     });
-    $('startGameBtn').disabled = !(selectedQuestionCount && selectedMode);
+    document.querySelectorAll('.time-limit').forEach((button) => {
+      const value = button.dataset.timeLimit === 'none' ? null : Number(button.dataset.timeLimit);
+      const selected = value === selectedTimeLimit;
+      button.classList.toggle('is-selected', selected);
+      button.setAttribute('aria-pressed', String(selected));
+    });
+    $('startGameBtn').disabled = !(selectedQuestionCount && selectedMode && selectedTimeLimit !== undefined);
   }
 
   function openSetup() {
+    if (!getCourse()) return showView('homeView');
     selectedQuestionCount = null;
     selectedMode = null;
+    selectedTimeLimit = undefined;
     setupStep = 'count';
+    updateCourseUI();
     updateSetupControls();
     showView('setupView');
   }
 
-  async function loadQuestions() {
-    // Quando o site é aberto por file://, alguns navegadores bloqueiam fetch().
-    // Por isso existe js/questions-data.js como cópia local de data/questions.json.
-    try {
-      const response = await fetch('data/questions.json', { cache: 'no-store' });
-      if (!response.ok) throw new Error('Não foi possível carregar questions.json.');
-      const data = await response.json();
-      if (!Array.isArray(data) || data.length < 75) throw new Error('questions.json não tem perguntas suficientes.');
-      return data;
-    } catch (error) {
-      if (Array.isArray(window.QUESTION_BANK) && window.QUESTION_BANK.length >= 75) return window.QUESTION_BANK;
-      throw error;
+  function validateQuestionBank(data, course) {
+    if (!Array.isArray(data) || !data.length) {
+      throw new Error(`O ficheiro de perguntas de ${course.sigla} est\u00e1 vazio ou inv\u00e1lido.`);
     }
+    return data;
+  }
+
+  async function loadQuestions(course) {
+    if (questionBanks[course.sigla]) return questionBanks[course.sigla];
+
+    try {
+      const response = await fetch(course.file, { cache: 'no-store' });
+      if (!response.ok) throw new Error(`N\u00e3o foi poss\u00edvel carregar ${course.file}.`);
+      questionBanks[course.sigla] = validateQuestionBank(await response.json(), course);
+    } catch (error) {
+      const fallback = window.QUESTION_BANKS && window.QUESTION_BANKS[course.sigla];
+      const legacyFallback = course.sigla === 'LCNC' ? window.QUESTION_BANK : null;
+      questionBanks[course.sigla] = validateQuestionBank(fallback || legacyFallback, course);
+    }
+
+    return questionBanks[course.sigla];
   }
 
   function createSeaBackground() {
@@ -66,18 +140,14 @@
     container.innerHTML = '';
     seaFacts.forEach((fact, index) => {
       const span = document.createElement('span');
+      const duration = 22 + Math.random() * 18;
       span.className = 'floating-fact';
       span.textContent = fact;
-      const x = Math.round(-35 + Math.random() * 115);
-      const y = Math.round(-30 + Math.random() * 100);
-      const rotate = Math.round(-14 + Math.random() * 28);
-      const duration = 22 + Math.random() * 18;
-      const delay = -Math.random() * duration;
-      span.style.setProperty('--x', `${x}vw`);
-      span.style.setProperty('--y', `${y}vh`);
-      span.style.setProperty('--rotate', `${rotate}deg`);
+      span.style.setProperty('--x', `${Math.round(-35 + Math.random() * 115)}vw`);
+      span.style.setProperty('--y', `${Math.round(-30 + Math.random() * 100)}vh`);
+      span.style.setProperty('--rotate', `${Math.round(-14 + Math.random() * 28)}deg`);
       span.style.animationDuration = `${duration}s`;
-      span.style.animationDelay = `${delay - index * 0.7}s`;
+      span.style.animationDelay = `${-Math.random() * duration - index * 0.7}s`;
       span.style.background = ['#fff0a8cc', '#ffd6e7cc', '#c9e8ffcc', '#c7f2d5cc', '#e7d8ffcc', '#ffd9c7cc'][index % 6];
       container.appendChild(span);
     });
@@ -85,11 +155,17 @@
 
   function formatDate(iso) {
     const date = new Date(iso);
-    if (Number.isNaN(date.getTime())) return 'Data não indicada';
-    return new Intl.DateTimeFormat('pt-PT', {
-      dateStyle: 'short',
-      timeStyle: 'short'
-    }).format(date);
+    if (Number.isNaN(date.getTime())) return 'Data n\u00e3o indicada';
+    return new Intl.DateTimeFormat('pt-PT', { dateStyle: 'short', timeStyle: 'short' }).format(date);
+  }
+
+  function escapeHTML(text) {
+    return String(text ?? '')
+      .replaceAll('&', '&amp;')
+      .replaceAll('<', '&lt;')
+      .replaceAll('>', '&gt;')
+      .replaceAll('"', '&quot;')
+      .replaceAll("'", '&#039;');
   }
 
   function getGameStats(game) {
@@ -107,17 +183,23 @@
     };
   }
 
+  function formatTimeLimit(timeLimitSeconds) {
+    return timeLimitSeconds === null ? 'Sem limite' : `${Number(timeLimitSeconds) || 30}s`;
+  }
+
   function renderSummary(game, targetId) {
     const target = $(targetId);
-    target.innerHTML = '';
     const stats = getGameStats(game);
     const cards = [
+      ['Cadeira', game.courseSigla || 'LCNC'],
       ['Total', stats.total],
       ['Corretas', stats.correct],
       ['Erradas', stats.wrong],
       ['Acerto', `${stats.percentage}%`],
-      ['Modo', `${stats.mode} opções`]
+      ['Modo', `${stats.mode} op\u00e7\u00f5es`],
+      ['Tempo', formatTimeLimit(game.timeLimitSeconds)]
     ];
+    target.innerHTML = '';
     cards.forEach(([label, value]) => {
       const card = document.createElement('article');
       const strong = document.createElement('strong');
@@ -132,17 +214,8 @@
 
   function renderResults(game) {
     renderSummary(game, 'summaryCards');
-    renderReviewList(game.answers, 'resultsList', 'results');
+    renderReviewList(game.answers, 'resultsList', 'results', game);
     showView('resultsView');
-  }
-
-  function escapeHTML(text) {
-    return String(text ?? '')
-      .replaceAll('&', '&amp;')
-      .replaceAll('<', '&lt;')
-      .replaceAll('>', '&gt;')
-      .replaceAll('"', '&quot;')
-      .replaceAll("'", '&#039;');
   }
 
   function getOptionsShown(item) {
@@ -164,11 +237,12 @@
     }));
   }
 
-  function reviewDetailsHTML(item, index, total) {
+  function reviewDetailsHTML(item, index, total, game) {
     const selectedAnswer = String(item.selectedAnswer ?? item.selectedCard ?? '');
     const hasTimedOut = item.timedOut || selectedAnswer.startsWith('Sem resposta');
     const time = item.timeUsed ?? item.timeUsedSeconds;
-    const timeUsed = time == null ? 'Não indicado' : `${escapeHTML(time)}s`;
+    const timeUsed = time == null ? 'N\u00e3o indicado' : `${escapeHTML(time)}s`;
+    const courseSigla = item.courseSigla || game.courseSigla || 'LCNC';
     const options = getOptionsShown(item);
     const optionsHTML = options.map((option) => {
       const chosen = !hasTimedOut && selectedAnswer === option.text;
@@ -186,29 +260,32 @@
         <p>${escapeHTML(item.question)}</p>
       </div>
       <div class="review-options-grid ${options.length > 2 ? 'four-options' : 'two-options'}">
-        ${optionsHTML || '<div class="empty-state">Não existem opções guardadas para esta pergunta.</div>'}
+        ${optionsHTML || '<div class="empty-state">N\u00e3o existem op\u00e7\u00f5es guardadas para esta pergunta.</div>'}
       </div>
       ${hasTimedOut ? '<div class="soft-note timeout-note">Sem resposta - tempo esgotado.</div>' : ''}
       <div class="review-comment">
-        <span class="pastel-caption">Comentário</span>
-        <p>${escapeHTML(item.explanation || 'Comentário não indicado.')}</p>
+        <span class="pastel-caption">Coment\u00e1rio</span>
+        <p>${escapeHTML(item.explanation || 'Coment\u00e1rio n\u00e3o indicado.')}</p>
       </div>
       <div class="review-meta-chips">
-        <span class="chip">Dificuldade: ${escapeHTML(item.difficulty || 'não indicada')}</span>
+        <span class="chip">Cadeira: ${escapeHTML(courseSigla)}</span>
+        <span class="chip">Categoria: ${escapeHTML(item.category || 'n\u00e3o indicada')}</span>
+        <span class="chip">Dificuldade: ${escapeHTML(item.difficulty || 'n\u00e3o indicada')}</span>
         <span class="chip">Tempo usado: ${timeUsed}</span>
+        <span class="chip">Tempo por pergunta: ${escapeHTML(formatTimeLimit(game.timeLimitSeconds))}</span>
       </div>
       <div class="review-source">
-        <span class="tiny-bubble-label">Referência</span>
-        <p>${escapeHTML(item.source || 'Referência não indicada.')}</p>
+        <span class="tiny-bubble-label">Refer\u00eancia</span>
+        <p>${escapeHTML(item.source || 'Refer\u00eancia n\u00e3o indicada.')}</p>
       </div>
     `;
   }
 
-  function renderReviewList(items, targetId, idPrefix) {
+  function renderReviewList(items, targetId, idPrefix, game) {
     const list = $(targetId);
     list.innerHTML = '';
     if (!Array.isArray(items) || !items.length) {
-      list.innerHTML = '<div class="empty-state">Ainda não existem respostas para rever neste jogo.</div>';
+      list.innerHTML = '<div class="empty-state">Ainda n\u00e3o existem respostas para rever neste jogo.</div>';
       return;
     }
 
@@ -224,7 +301,7 @@
           <button class="review-toggle-btn" type="button" aria-expanded="false" aria-controls="${detailsId}">Ver mais</button>
         </div>
         <div id="${detailsId}" class="review-details" hidden>
-          ${reviewDetailsHTML(item, index, items.length)}
+          ${reviewDetailsHTML(item, index, items.length, game)}
         </div>
       `;
       const toggle = row.querySelector('.review-toggle-btn');
@@ -239,26 +316,41 @@
     });
   }
 
+  function updateHistoryFilterControls() {
+    const isCurrent = historyFilter === 'current';
+    $('currentCourseHistoryBtn').setAttribute('aria-pressed', String(isCurrent));
+    $('allCoursesHistoryBtn').setAttribute('aria-pressed', String(!isCurrent));
+    $('currentCourseHistoryBtn').classList.toggle('is-selected', isCurrent);
+    $('allCoursesHistoryBtn').classList.toggle('is-selected', !isCurrent);
+    $('historyTitle').textContent = isCurrent
+      ? `Hist\u00f3rico da cadeira ${selectedCourseSigla}`
+      : 'Hist\u00f3rico de todas as cadeiras';
+  }
+
   function renderHistory(message) {
     historyGames = HistoryStore.load();
+    displayedHistoryGames = historyFilter === 'current'
+      ? historyGames.filter((game) => game.courseSigla === selectedCourseSigla)
+      : historyGames;
+    updateHistoryFilterControls();
     const list = $('historyList');
     list.innerHTML = '';
     if (typeof message === 'string') $('historyMessage').textContent = message;
 
-    if (!historyGames.length) {
-      list.innerHTML = '<div class="empty-state">Ainda não há jogos guardados. Joga uma ronda para encher este mar de memórias.</div>';
+    if (!displayedHistoryGames.length) {
+      list.innerHTML = '<div class="empty-state">Ainda n\u00e3o h\u00e1 jogos guardados neste filtro. Joga uma ronda para encher este mar de mem\u00f3rias.</div>';
       return;
     }
 
-    historyGames.forEach((game, index) => {
+    displayedHistoryGames.forEach((game, index) => {
       const stats = getGameStats(game);
       const item = document.createElement('article');
       item.className = 'history-item';
       item.innerHTML = `
         <div>
+          <span class="history-course-badge">${escapeHTML(game.courseSigla)}</span>
           <div class="review-title">${escapeHTML(formatDate(game.date ?? game.dateISO))}</div>
-          <div class="review-meta pastel-caption">${escapeHTML(stats.correct)}/${escapeHTML(stats.total)} corretas · ${escapeHTML(stats.wrong)} erradas · ${escapeHTML(stats.percentage)}% de acerto</div>
-          <span class="review-mode-badge">Modo: ${escapeHTML(stats.mode)} opções</span>
+          <div class="review-meta pastel-caption">${escapeHTML(game.courseSigla)} &middot; ${escapeHTML(stats.correct)}/${escapeHTML(stats.total)} corretas &middot; Modo ${escapeHTML(stats.mode)} op\u00e7\u00f5es &middot; ${escapeHTML(stats.total)} perguntas &middot; ${escapeHTML(formatTimeLimit(game.timeLimitSeconds))}</div>
         </div>
         <button class="btn small pastel blue" type="button">Ver detalhes</button>
       `;
@@ -267,10 +359,18 @@
     });
   }
 
+  function openHistory(filter = 'current') {
+    historyFilter = filter;
+    updateCourseUI();
+    renderHistory('');
+    showView('historyView');
+  }
+
   function openHistoryGame(index) {
-    const historyGame = historyGames[index];
+    const historyGame = displayedHistoryGames[index];
+    if (!historyGame) return;
     renderSummary(historyGame, 'historyGameSummary');
-    renderReviewList(historyGame.answers, 'historyReviewList', `history-${index}`);
+    renderReviewList(historyGame.answers, 'historyReviewList', `history-${index}`, historyGame);
     showView('historyDetailView');
   }
 
@@ -281,7 +381,7 @@
     link.href = url;
     link.download = `historico-mar-de-perguntas-${new Date().toISOString().slice(0, 10)}.json`;
     document.body.appendChild(link);
-    $('historyMessage').textContent = 'Histórico exportado em JSON.';
+    $('historyMessage').textContent = 'Hist\u00f3rico exportado em JSON.';
     link.click();
     link.remove();
     window.setTimeout(() => URL.revokeObjectURL(url), 1000);
@@ -293,90 +393,130 @@
     reader.onload = () => {
       try {
         HistoryStore.importJSON(String(reader.result));
-        renderHistory('Histórico importado com sucesso.');
+        renderHistory('Hist\u00f3rico importado com sucesso.');
       } catch (error) {
-        $('historyMessage').textContent = error.message || 'Não foi possível importar o histórico.';
+        $('historyMessage').textContent = error.message || 'N\u00e3o foi poss\u00edvel importar o hist\u00f3rico.';
       }
     };
     reader.onerror = () => {
-      $('historyMessage').textContent = 'Não foi possível ler o ficheiro escolhido.';
+      $('historyMessage').textContent = 'N\u00e3o foi poss\u00edvel ler o ficheiro escolhido.';
     };
     reader.readAsText(file, 'utf-8');
   }
 
-  function clearHistory() {
-    const confirmed = window.confirm('Queres mesmo limpar todo o histórico guardado neste navegador?');
-    if (!confirmed) return;
+  function clearCourseHistory() {
+    const course = getCourse();
+    if (!course || !window.confirm(`Queres limpar o hist\u00f3rico guardado de ${course.sigla}?`)) return;
+    HistoryStore.clearCourse(course.sigla);
+    renderHistory(`Hist\u00f3rico de ${course.sigla} limpo.`);
+  }
+
+  function clearAllHistory() {
+    if (!window.confirm('Queres mesmo limpar todo o hist\u00f3rico guardado neste navegador?')) return;
     HistoryStore.clear();
-    renderHistory('Histórico limpo.');
+    renderHistory('Hist\u00f3rico completo limpo.');
   }
 
   function bindEvents() {
-    $('goSetupBtn').addEventListener('click', openSetup);
-    $('goHistoryBtn').addEventListener('click', () => { renderHistory(''); showView('historyView'); });
-    document.querySelectorAll('.back-home').forEach((btn) => btn.addEventListener('click', () => showView('homeView')));
+    document.querySelectorAll('.course-card').forEach((button) => {
+      button.addEventListener('click', () => selectCourse(button.dataset.course));
+    });
+    document.querySelectorAll('.back-courses').forEach((button) => {
+      button.addEventListener('click', () => {
+        GameEngine.stop();
+        showView('homeView');
+      });
+    });
+    document.querySelectorAll('.back-course-menu').forEach((button) => {
+      button.addEventListener('click', showCourseMenu);
+    });
 
-    document.querySelectorAll('.question-count').forEach((btn) => {
-      btn.addEventListener('click', () => {
-        selectedQuestionCount = Number(btn.dataset.count);
+    $('goSetupBtn').addEventListener('click', openSetup);
+    $('goHistoryBtn').addEventListener('click', () => openHistory('current'));
+
+    document.querySelectorAll('.question-count').forEach((button) => {
+      button.addEventListener('click', () => {
+        selectedQuestionCount = Number(button.dataset.count);
         setupStep = 'mode';
         updateSetupControls();
       });
     });
     $('backToCountBtn').addEventListener('click', () => {
       selectedMode = null;
+      selectedTimeLimit = undefined;
       setupStep = 'count';
       updateSetupControls();
     });
-    document.querySelectorAll('.mode-card').forEach((btn) => {
-      btn.addEventListener('click', () => {
-        selectedMode = btn.dataset.mode;
+    document.querySelectorAll('.mode-card').forEach((button) => {
+      button.addEventListener('click', () => {
+        selectedMode = button.dataset.mode;
+        selectedTimeLimit = undefined;
+        setupStep = 'time';
         updateSetupControls();
       });
     });
-    $('startGameBtn').addEventListener('click', () => {
-      if (!selectedQuestionCount || !selectedMode) return;
-      showView('gameView');
-      GameEngine.start(selectedQuestionCount, selectedMode);
+    $('backToModeBtn').addEventListener('click', () => {
+      selectedTimeLimit = undefined;
+      setupStep = 'mode';
+      updateSetupControls();
+    });
+    document.querySelectorAll('.time-limit').forEach((button) => {
+      button.addEventListener('click', () => {
+        selectedTimeLimit = button.dataset.timeLimit === 'none' ? null : Number(button.dataset.timeLimit);
+        updateSetupControls();
+      });
+    });
+    $('startGameBtn').addEventListener('click', async () => {
+      const course = getCourse();
+      if (!course || !selectedQuestionCount || !selectedMode || selectedTimeLimit === undefined) return;
+      $('startGameBtn').disabled = true;
+      try {
+        GameEngine.setCourse(course, await loadQuestions(course));
+        showView('gameView');
+        GameEngine.start(selectedQuestionCount, selectedMode, selectedTimeLimit);
+      } catch (error) {
+        window.alert('N\u00e3o foi poss\u00edvel carregar as perguntas desta cadeira. Verifica se os ficheiros do projeto est\u00e3o completos.');
+        console.error(error);
+      } finally {
+        updateSetupControls();
+      }
     });
 
-    $('resultsHomeBtn').addEventListener('click', () => showView('homeView'));
+    $('resultsCourseMenuBtn').addEventListener('click', showCourseMenu);
     $('playAgainBtn').addEventListener('click', openSetup);
-    $('resultsHistoryBtn').addEventListener('click', () => { renderHistory(''); showView('historyView'); });
+    $('resultsHistoryBtn').addEventListener('click', () => openHistory('current'));
 
+    $('currentCourseHistoryBtn').addEventListener('click', () => { historyFilter = 'current'; renderHistory(''); });
+    $('allCoursesHistoryBtn').addEventListener('click', () => { historyFilter = 'all'; renderHistory(''); });
     $('exportHistoryBtn').addEventListener('click', exportHistory);
     $('importHistoryBtn').addEventListener('click', () => {
       $('importHistoryInput').value = '';
       $('importHistoryInput').click();
     });
     $('importHistoryInput').addEventListener('change', (event) => importHistory(event.target.files[0]));
-    $('clearHistoryBtn').addEventListener('click', clearHistory);
+    $('clearCourseHistoryBtn').addEventListener('click', clearCourseHistory);
+    $('clearAllHistoryBtn').addEventListener('click', clearAllHistory);
     $('backToHistoryBtn').addEventListener('click', () => { renderHistory(); showView('historyView'); });
-    $('historyDetailHomeBtn').addEventListener('click', () => showView('homeView'));
+    $('historyDetailCourseMenuBtn').addEventListener('click', showCourseMenu);
 
     window.addEventListener('beforeunload', () => GameEngine.stop());
   }
 
-  async function init() {
+  function init() {
     createSeaBackground();
     bindEvents();
-    try {
-      questions = await loadQuestions();
-      GameEngine.init(questions, {
-        onFinish(game) {
-          const savedGame = HistoryStore.normaliseGame(game);
-          HistoryStore.add(savedGame);
-          renderResults(savedGame);
-        },
-        onQuit() {
-          showView('homeView');
-        }
-      });
-    } catch (error) {
-      document.querySelector('.hero-card .lead').textContent = 'Não foi possível carregar as perguntas. Verifica se os ficheiros do projecto estão completos.';
-      console.error(error);
-    }
+    GameEngine.init([], {
+      onFinish(game) {
+        const savedGame = HistoryStore.normaliseGame(game);
+        HistoryStore.add(savedGame);
+        renderResults(savedGame);
+      },
+      onQuit() {
+        showCourseMenu();
+      }
+    });
   }
 
+  window.COURSES = COURSES;
   document.addEventListener('DOMContentLoaded', init);
 })();
