@@ -1877,16 +1877,1153 @@
   {
     "id": 126,
     "course": "MADN",
-    "question": "Que software é descrito como gratuito, user-friendly e bom para principiantes, mas menos flexível para análises avançadas/customizadas?",
-    "correctCard": "JASP.",
+    "type": "exercício de exame",
+    "question": "Um estudo quer avaliar se uma escala de ansiedade de 7 pontos se associa ao desempenho num teste de atenção. As distribuições são suficientemente normais e o scatterplot sugere linearidade. Que análise é mais adequada?",
+    "correctCard": "Correlação de Pearson, porque as variáveis têm escala aceitável, distribuição suficientemente normal e relação linear.",
     "wrongCards": [
-      "R/metafor.",
-      "Comprehensive Meta-Analysis.",
-      "Stata."
+      "Correlação de Spearman, porque qualquer escala psicológica deve ser sempre não paramétrica.",
+      "Regressão logística binária, porque se pretende prever pertença a categorias.",
+      "MANOVA, porque existem duas variáveis psicológicas."
     ],
-    "explanation": "Os slides apresentam o JASP como gratuito e acessível para iniciantes, mas menos flexível em análises avançadas.",
-    "source": "10_MADN - Aula 10, slide 30; Resumo Aula 10, p. 8",
-    "category": "Software de meta-análise",
+    "explanation": "Pearson é indicado para variáveis intervalares/razão ou escalas válidas com pelo menos 5 pontos, quando os pressupostos principais são aceitáveis.",
+    "source": "MADN — Aula 7, Correlação e Regressão Linear Simples",
+    "category": "Correlação: escolha do teste",
+    "difficulty": "médio"
+  },
+  {
+    "id": 127,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Duas variáveis foram medidas em escalas de 4 pontos e a investigadora quer avaliar a associação entre ambas. Qual decisão está mais alinhada com a aula?",
+    "correctCard": "Usar Spearman, porque escalas com 4 pontos ou menos devem ser analisadas com alternativa não paramétrica.",
+    "wrongCards": [
+      "Usar Pearson, desde que o p-value seja menor que .05.",
+      "Usar regressão linear simples, porque Spearman não permite avaliar associações.",
+      "Usar ANCOVA, porque escalas curtas violam sempre a normalidade."
+    ],
+    "explanation": "O material recomenda Spearman quando uma escala tem 4 pontos ou menos.",
+    "source": "MADN — Aula 7, Correlação e Regressão Linear Simples",
+    "category": "Correlação: Pearson vs. Spearman",
+    "difficulty": "médio"
+  },
+  {
+    "id": 128,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Num relatório lê-se: r = -.42, p = .018 entre fadiga e memória de trabalho. Qual interpretação é mais correta?",
+    "correctCard": "Existe uma associação negativa estatisticamente significativa: maior fadiga tende a associar-se a menor memória de trabalho.",
+    "wrongCards": [
+      "A fadiga causa obrigatoriamente pior memória de trabalho.",
+      "A associação é positiva, porque o valor absoluto de r é .42.",
+      "O resultado não é significativo, porque r é negativo."
+    ],
+    "explanation": "O sinal de r indica direção; o p-value avalia significância. Correlação não permite concluir causalidade por si só.",
+    "source": "MADN — Aula 7, Correlação e Regressão Linear Simples",
+    "category": "Correlação: interpretação",
+    "difficulty": "médio"
+  },
+  {
+    "id": 129,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Uma correlação entre velocidade de processamento e fluência verbal é r = .50. Qual é o coeficiente de determinação e a interpretação mais adequada?",
+    "correctCard": "R² = .25; cerca de 25% da variância é partilhada/explicada no enquadramento da associação linear.",
+    "wrongCards": [
+      "R² = .50; 50% da variância fica automaticamente explicada.",
+      "R² = .05; apenas 5% da variância é explicada.",
+      "R² = 2.50; a correlação deve ser multiplicada por 5."
+    ],
+    "explanation": "O coeficiente de determinação calcula-se como r × r; .50 × .50 = .25.",
+    "source": "MADN — Aula 7, Correlação e Regressão Linear Simples",
+    "category": "Correlação: R²",
     "difficulty": "fácil"
+  },
+  {
+    "id": 130,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "O scatterplot entre idade e tempo de reação mostra uma relação em U. O tempo é maior nos participantes muito jovens e muito idosos, mas menor nos adultos. O que limita a correlação de Pearson?",
+    "correctCard": "Pearson quantifica apenas associações lineares, podendo subestimar ou perder uma relação curvilinear.",
+    "wrongCards": [
+      "Pearson só pode ser usado quando as variáveis são nominais.",
+      "Pearson transforma automaticamente uma relação curvilinear numa relação causal.",
+      "Pearson é indicado especificamente para relações em U."
+    ],
+    "explanation": "A linearidade deve ser examinada com scatterplots, porque Pearson apenas quantifica relações lineares.",
+    "source": "MADN — Aula 7, Correlação e Regressão Linear Simples",
+    "category": "Correlação: pressupostos",
+    "difficulty": "difícil"
+  },
+  {
+    "id": 131,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Duas escalas de sintomas apresentam r = .82. Antes de as usar como preditores no mesmo modelo, qual preocupação é mais pertinente?",
+    "correctCard": "Podem estar a medir essencialmente o mesmo construto ou gerar problemas de multicolinearidade.",
+    "wrongCards": [
+      "A correlação elevada prova que uma escala causa a outra.",
+      "O valor r = .82 é impossível em investigação psicológica.",
+      "A solução obrigatória é eliminar as duas variáveis."
+    ],
+    "explanation": "O material sugere cautela com correlações muito elevadas, por exemplo superiores a .75.",
+    "source": "MADN — Aula 7, Correlação e Regressão Linear Simples",
+    "category": "Correlação: magnitude e multicolinearidade",
+    "difficulty": "difícil"
+  },
+  {
+    "id": 132,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Uma investigadora encontra r = .28, p = .041 entre horas de sono e pontuação cognitiva. Qual frase evita o erro causal?",
+    "correctCard": "As horas de sono estão associadas à pontuação cognitiva, mas o desenho correlacional não permite concluir causalidade.",
+    "wrongCards": [
+      "As horas de sono causam melhoria cognitiva, porque p < .05.",
+      "A pontuação cognitiva causa mais horas de sono, porque a correlação é significativa.",
+      "Não existe associação, porque r é inferior a .50."
+    ],
+    "explanation": "A associação significativa não é, por si só, prova de causalidade.",
+    "source": "MADN — Aula 7, Correlação e Regressão Linear Simples",
+    "category": "Correlação: causalidade",
+    "difficulty": "fácil"
+  },
+  {
+    "id": 133,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Numa regressão linear simples, a equação é Ŷ = 12 + 2.5X. Para X = 4, qual é o valor previsto de Y?",
+    "correctCard": "22, porque 12 + 2.5 × 4 = 22.",
+    "wrongCards": [
+      "14.5, porque se soma apenas uma unidade de X.",
+      "10, porque o slope deve ser subtraído ao intercept.",
+      "30, porque 12 deve ser multiplicado por 2.5 e depois por 4."
+    ],
+    "explanation": "Na regressão linear simples, Ŷ = a + bX.",
+    "source": "MADN — Aula 7, Correlação e Regressão Linear Simples",
+    "category": "Regressão linear simples: equação",
+    "difficulty": "fácil"
+  },
+  {
+    "id": 134,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Na equação Ŷ = 8 + 1.7X, o que significa o valor 1.7?",
+    "correctCard": "Por cada aumento de 1 unidade em X, o valor previsto de Y aumenta 1.7 unidades.",
+    "wrongCards": [
+      "Quando X é zero, Y vale 1.7.",
+      "1.7 é a percentagem de variância explicada.",
+      "1.7 é o erro médio de previsão."
+    ],
+    "explanation": "O coeficiente b, ou slope, indica quanto o valor previsto de Y muda quando X aumenta uma unidade.",
+    "source": "MADN — Aula 7, Correlação e Regressão Linear Simples",
+    "category": "Regressão linear simples: slope",
+    "difficulty": "fácil"
+  },
+  {
+    "id": 135,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Num caso individual, o valor observado de Y é 30 e o valor previsto pelo modelo é 26. Qual é o resíduo se for calculado como observado menos previsto?",
+    "correctCard": "4, porque 30 - 26 = 4.",
+    "wrongCards": [
+      "-4, porque se deve subtrair observado ao previsto.",
+      "56, porque o resíduo soma observado e previsto.",
+      "0.87, porque o resíduo corresponde a previsto/observado."
+    ],
+    "explanation": "O resíduo representa a discrepância entre valor observado e valor previsto.",
+    "source": "MADN — Aula 7, Correlação e Regressão Linear Simples",
+    "category": "Regressão linear simples: resíduos",
+    "difficulty": "fácil"
+  },
+  {
+    "id": 136,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Numa regressão, um caso apresenta Cook's Distance = 1.35. Qual é a melhor interpretação prática?",
+    "correctCard": "Pode ser uma observação influente e deve ser examinada antes de interpretar o modelo sem reservas.",
+    "wrongCards": [
+      "O modelo está automaticamente correto porque Cook's Distance é superior a 1.",
+      "O caso deve ser eliminado sempre, sem análise adicional.",
+      "Cook's Distance avalia apenas a normalidade da variável dependente."
+    ],
+    "explanation": "Cook's Distance > 1 foi apresentado como sinal de observação potencialmente influente.",
+    "source": "MADN — Aula 7, Correlação e Regressão Linear Simples",
+    "category": "Regressão linear simples: diagnóstico",
+    "difficulty": "médio"
+  },
+  {
+    "id": 137,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Na avaliação de independência dos erros, o teste de Durbin-Watson apresenta p = .012. Como deve ser lido de acordo com a aula?",
+    "correctCard": "Há evidência de autocorrelação dos resíduos, logo a independência dos erros fica fragilizada.",
+    "wrongCards": [
+      "Não há autocorrelação, porque p < .05 confirma independência.",
+      "O resultado avalia homogeneidade de variâncias entre grupos.",
+      "O resultado mostra que a variável dependente é nominal."
+    ],
+    "explanation": "No material, p > .05 sugere ausência de autocorrelação e p < .05 sugere evidência de autocorrelação.",
+    "source": "MADN — Aula 7, Correlação e Regressão Linear Simples",
+    "category": "Regressão linear simples: independência dos erros",
+    "difficulty": "difícil"
+  },
+  {
+    "id": 138,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Num gráfico de resíduos brutos vs. valores previstos, os pontos formam um funil. Que pressuposto está em causa?",
+    "correctCard": "Homoscedasticidade, porque a magnitude dos resíduos não parece semelhante ao longo dos valores previstos.",
+    "wrongCards": [
+      "Amostragem aleatória, porque o gráfico mostra a origem dos participantes.",
+      "Linearidade perfeita, porque qualquer padrão em funil confirma relação linear.",
+      "Normalidade multivariada, porque existe mais do que uma variável dependente."
+    ],
+    "explanation": "A homoscedasticidade exige dispersão aproximadamente semelhante dos resíduos.",
+    "source": "MADN — Aula 7, Correlação e Regressão Linear Simples",
+    "category": "Regressão linear simples: homoscedasticidade",
+    "difficulty": "médio"
+  },
+  {
+    "id": 139,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Para Pearson, os dados têm skewness = 1.6, kurtosis = 7.8 e n = 42. Segundo os critérios da aula, como interpretar a robustez à normalidade?",
+    "correctCard": "Os critérios de robustez parecem aceitáveis, porque skewness < |2.0|, kurtosis < |9.0| e n > 10.",
+    "wrongCards": [
+      "Pearson está automaticamente proibido porque qualquer skewness diferente de zero invalida o teste.",
+      "Deve usar-se ANCOVA porque a curtose é superior a 5.",
+      "Só é aceitável se n for inferior a 10."
+    ],
+    "explanation": "Pearson é relativamente robusto se skewness < |2.0|, kurtosis < |9.0| e n > 10.",
+    "source": "MADN — Aula 7, Correlação e Regressão Linear Simples",
+    "category": "Correlação: normalidade",
+    "difficulty": "médio"
+  },
+  {
+    "id": 140,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Antes de construir uma regressão múltipla, uma estudante explora correlações entre os preditores. Qual é a utilidade desta etapa?",
+    "correctCard": "Ajudar a identificar associações e possíveis problemas de multicolinearidade antes de modelos mais complexos.",
+    "wrongCards": [
+      "Garantir que todos os preditores serão causalmente importantes.",
+      "Substituir a necessidade de verificar pressupostos da regressão.",
+      "Impedir que se usem variáveis contínuas no modelo."
+    ],
+    "explanation": "A correlação é útil para explorar relações e avaliar possíveis problemas de multicolinearidade.",
+    "source": "MADN — Aula 7, Correlação e Regressão Linear Simples",
+    "category": "Correlação: preparação de modelos",
+    "difficulty": "médio"
+  },
+  {
+    "id": 141,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "A pergunta é: “Até que ponto a reserva cognitiva permite prever a memória episódica?”. Há um preditor contínuo e uma VD contínua. Qual análise é mais adequada?",
+    "correctCard": "Regressão linear simples, porque o objetivo é prever uma variável dependente contínua a partir de um preditor.",
+    "wrongCards": [
+      "Correlação apenas, porque regressão não permite previsão.",
+      "Regressão logística binária, porque toda a previsão é logística.",
+      "MANOVA, porque existe uma variável independente e uma dependente."
+    ],
+    "explanation": "A regressão linear simples permite prever Y a partir de X através de uma equação linear.",
+    "source": "MADN — Aula 7, Correlação e Regressão Linear Simples",
+    "category": "Regressão linear simples: escolha do modelo",
+    "difficulty": "médio"
+  },
+  {
+    "id": 142,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Um investigador quer prever desempenho executivo contínuo a partir de idade, escolaridade e sintomas depressivos. Que modelo é mais adequado?",
+    "correctCard": "Regressão linear múltipla, porque há uma variável dependente contínua e dois ou mais preditores.",
+    "wrongCards": [
+      "Regressão logística binária, porque existem três preditores.",
+      "Correlação de Spearman, porque há mais do que uma variável.",
+      "One-way ANCOVA, porque todos os preditores devem ser fatores categóricos."
+    ],
+    "explanation": "A regressão linear múltipla prevê uma VD contínua a partir de vários preditores.",
+    "source": "MADN — Aula 8, Regressão Linear Múltipla e Regressão Logística",
+    "category": "Regressão múltipla: escolha do modelo",
+    "difficulty": "fácil"
+  },
+  {
+    "id": 143,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Num modelo de regressão múltipla, R² aumenta de .21 para .24 quando se adiciona um novo preditor, mas o Adjusted R² diminui. Qual interpretação é mais prudente?",
+    "correctCard": "O novo preditor pode não melhorar realmente o modelo; o Adjusted R² penaliza variáveis desnecessárias.",
+    "wrongCards": [
+      "O novo preditor é obrigatoriamente essencial, porque R² nunca deve diminuir.",
+      "O modelo deve ser convertido em correlação de Pearson.",
+      "O Adjusted R² deve ser ignorado em regressão múltipla."
+    ],
+    "explanation": "O R² tende a aumentar com novos preditores, enquanto o Adjusted R² corrige a inclusão de variáveis pouco úteis.",
+    "source": "MADN — Aula 8, Regressão Linear Múltipla e Regressão Logística",
+    "category": "Regressão múltipla: Adjusted R²",
+    "difficulty": "difícil"
+  },
+  {
+    "id": 144,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Porque é incorreto somar os R² de três regressões simples para estimar o R² de uma regressão múltipla?",
+    "correctCard": "Porque os preditores podem partilhar variância explicada; as suas contribuições podem sobrepor-se.",
+    "wrongCards": [
+      "Porque o R² só existe em regressão logística.",
+      "Porque regressões simples não produzem qualquer R².",
+      "Porque a soma dos R² deve ser sempre multiplicada pelo número de preditores."
+    ],
+    "explanation": "Na regressão múltipla, os preditores podem estar correlacionados e explicar variância sobreposta.",
+    "source": "MADN — Aula 8, Regressão Linear Múltipla e Regressão Logística",
+    "category": "Regressão múltipla: variância sobreposta",
+    "difficulty": "médio"
+  },
+  {
+    "id": 145,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Num modelo com preditores em escalas diferentes, que coeficiente é mais adequado para comparar a força relativa dos preditores?",
+    "correctCard": "β padronizado, porque expressa a variação esperada em Y em desvios-padrão.",
+    "wrongCards": [
+      "b não padronizado, porque ignora as escalas originais.",
+      "Cox & Snell R², porque compara slopes lineares.",
+      "Pillai's Trace, porque é o beta da regressão."
+    ],
+    "explanation": "Os β padronizados permitem comparar preditores medidos em escalas diferentes.",
+    "source": "MADN — Aula 8, Regressão Linear Múltipla e Regressão Logística",
+    "category": "Regressão múltipla: coeficientes",
+    "difficulty": "médio"
+  },
+  {
+    "id": 146,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Num modelo, b = -0.80 para sintomas depressivos a prever memória, mantendo os restantes preditores constantes. Qual interpretação está correta?",
+    "correctCard": "Por cada aumento de 1 unidade nos sintomas depressivos, o valor previsto de memória diminui 0.80 unidades, controlando os restantes preditores.",
+    "wrongCards": [
+      "A memória aumenta 0.80 desvios-padrão por cada aumento de sintomas.",
+      "Os sintomas explicam 80% da variância da memória.",
+      "O preditor não pode ser interpretado se o b for negativo."
+    ],
+    "explanation": "O b não padronizado indica a mudança prevista em Y por cada unidade de X na escala original.",
+    "source": "MADN — Aula 8, Regressão Linear Múltipla e Regressão Logística",
+    "category": "Regressão múltipla: b não padronizado",
+    "difficulty": "médio"
+  },
+  {
+    "id": 147,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Em regressão múltipla, uma estudante afirma que β = .30 equivale a R² = .09 para esse preditor. O que está errado?",
+    "correctCard": "Na regressão múltipla, o β padronizado representa um efeito único e não equivale diretamente à correlação de Pearson nem ao coeficiente de determinação.",
+    "wrongCards": [
+      "Nada está errado; todo β pode ser sempre elevado ao quadrado como se fosse r.",
+      "O erro é apenas usar ponto decimal em vez de vírgula.",
+      "O β só existe em regressão logística."
+    ],
+    "explanation": "O PPT salienta que β padronizado em regressão múltipla não deve ser convertido diretamente em R².",
+    "source": "MADN — Aula 8, Regressão Linear Múltipla e Regressão Logística",
+    "category": "Regressão múltipla: interpretação do β",
+    "difficulty": "difícil"
+  },
+  {
+    "id": 148,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Numa regressão múltipla com n = 150, um preditor apresenta VIF = 12 e Tolerance = .08. O que isto sugere?",
+    "correctCard": "Problema de multicolinearidade, porque para n ≥ 100 espera-se Tolerance ≥ .10 e VIF ≤ 10.",
+    "wrongCards": [
+      "Ausência total de multicolinearidade, porque VIF deve ser superior a 10.",
+      "Violação da normalidade multivariada, avaliada pelo M de Box.",
+      "Necessidade de usar Fisher LSD."
+    ],
+    "explanation": "Para n ≥ 100, os critérios indicados são Tolerance ≥ .10 e VIF ≤ 10.",
+    "source": "MADN — Aula 8, Regressão Linear Múltipla e Regressão Logística",
+    "category": "Regressão múltipla: pressupostos",
+    "difficulty": "difícil"
+  },
+  {
+    "id": 149,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Numa amostra com n = 80, um preditor apresenta Tolerance = .18 e VIF = 5.2. Qual avaliação segue os critérios da aula?",
+    "correctCard": "É problemático, porque para n < 100 são esperados Tolerance ≥ .25 ou VIF ≤ 4.",
+    "wrongCards": [
+      "É aceitável, porque os critérios de n ≥ 100 aplicam-se sempre.",
+      "É impossível avaliar multicolinearidade com Tolerance e VIF.",
+      "É uma violação exclusiva da ANCOVA."
+    ],
+    "explanation": "Para n < 100, o material indica Tolerance ≥ .25 ou VIF ≤ 4.",
+    "source": "MADN — Aula 8, Regressão Linear Múltipla e Regressão Logística",
+    "category": "Regressão múltipla: pressupostos",
+    "difficulty": "difícil"
+  },
+  {
+    "id": 150,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Segundo o critério de Green para estimar o R² múltiplo, qual seria o N mínimo aproximado para p = 5 preditores?",
+    "correctCard": "90, porque N = 50 + 8p = 50 + 40.",
+    "wrongCards": [
+      "110, porque N = 105 + p aplica-se ao R² múltiplo.",
+      "40, porque N = 8p.",
+      "5, porque basta um caso por preditor."
+    ],
+    "explanation": "O critério referido para estimar o R² múltiplo é N = 50 + 8p.",
+    "source": "MADN — Aula 8, Regressão Linear Múltipla e Regressão Logística",
+    "category": "Regressão múltipla: tamanho amostral",
+    "difficulty": "médio"
+  },
+  {
+    "id": 151,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Uma investigadora introduz escolaridade no Bloco 1 e sintomas depressivos no Bloco 2 para testar a mudança em R². Que método usa?",
+    "correctCard": "Método hierárquico, porque os preditores entram em blocos definidos teoricamente.",
+    "wrongCards": [
+      "Método Enter, porque todos os preditores entram obrigatoriamente ao mesmo tempo.",
+      "Método Stepwise, porque os blocos são sempre definidos pelo algoritmo.",
+      "Teste de Levene, porque há dois blocos."
+    ],
+    "explanation": "No método hierárquico, os preditores entram por blocos e avalia-se a mudança no R².",
+    "source": "MADN — Aula 8, Regressão Linear Múltipla e Regressão Logística",
+    "category": "Regressão múltipla: métodos",
+    "difficulty": "médio"
+  },
+  {
+    "id": 152,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Um modelo inclui todos os preditores simultaneamente, independentemente de serem significativos. Que método é este?",
+    "correctCard": "Enter.",
+    "wrongCards": [
+      "Hierárquico.",
+      "Stepwise.",
+      "Games-Howell."
+    ],
+    "explanation": "O método Enter introduz todos os preditores ao mesmo tempo.",
+    "source": "MADN — Aula 8, Regressão Linear Múltipla e Regressão Logística",
+    "category": "Regressão múltipla: métodos",
+    "difficulty": "fácil"
+  },
+  {
+    "id": 153,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Uma análise usa seleção algorítmica de preditores num contexto exploratório com muitos preditores. Que método corresponde melhor?",
+    "correctCard": "Stepwise.",
+    "wrongCards": [
+      "Enter.",
+      "Hierarchical.",
+      "Pillai's Trace."
+    ],
+    "explanation": "O Stepwise seleciona preditores de forma algorítmica e é mais adequado para análises exploratórias.",
+    "source": "MADN — Aula 8, Regressão Linear Múltipla e Regressão Logística",
+    "category": "Regressão múltipla: métodos",
+    "difficulty": "médio"
+  },
+  {
+    "id": 154,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Num preditor categórico com três categorias codificadas no JASP, qual é a categoria de referência segundo a aula?",
+    "correctCard": "A categoria de valor mais baixo.",
+    "wrongCards": [
+      "A categoria com maior média na variável dependente.",
+      "A categoria escolhida aleatoriamente pelo programa.",
+      "A categoria com maior desvio-padrão."
+    ],
+    "explanation": "O material refere que, no JASP, a categoria de referência é a de valor mais baixo.",
+    "source": "MADN — Aula 8, Regressão Linear Múltipla e Regressão Logística",
+    "category": "Regressão múltipla: preditores categóricos",
+    "difficulty": "médio"
+  },
+  {
+    "id": 155,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Um estudo pretende prever diagnóstico de dislexia: 0 = não, 1 = sim, a partir de lateralidade e idade. Que análise é mais adequada?",
+    "correctCard": "Regressão logística binária, porque a variável dependente tem duas categorias.",
+    "wrongCards": [
+      "Regressão linear simples, porque há um desfecho 0/1.",
+      "Correlação de Pearson, porque lateralidade é categórica.",
+      "MANOVA, porque se prevê um diagnóstico."
+    ],
+    "explanation": "A regressão logística binária é usada quando o outcome tem duas categorias.",
+    "source": "MADN — Aula 8, Regressão Linear Múltipla e Regressão Logística",
+    "category": "Regressão logística: escolha do modelo",
+    "difficulty": "fácil"
+  },
+  {
+    "id": 156,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Numa regressão logística, OR = 2.40 para histórico familiar. Como interpretar?",
+    "correctCard": "O preditor está associado a odds mais elevadas do evento; neste caso, cerca de 2.4 vezes maiores.",
+    "wrongCards": [
+      "O preditor reduz as odds do evento em 2.4 vezes.",
+      "Não há associação, porque OR só existe quando é igual a 1.",
+      "O preditor explica 240% da variância."
+    ],
+    "explanation": "OR > 1 indica aumento das odds do evento.",
+    "source": "MADN — Aula 8, Regressão Linear Múltipla e Regressão Logística",
+    "category": "Regressão logística: interpretação",
+    "difficulty": "médio"
+  },
+  {
+    "id": 157,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Numa regressão logística, OR = 0.60 para uma intervenção preventiva. Qual interpretação é mais adequada?",
+    "correctCard": "O preditor está associado a odds menores do evento.",
+    "wrongCards": [
+      "O preditor aumenta as odds do evento em 60 vezes.",
+      "Não há associação porque o OR é positivo.",
+      "O OR deve ser interpretado como R² linear."
+    ],
+    "explanation": "OR < 1 indica diminuição das odds do evento.",
+    "source": "MADN — Aula 8, Regressão Linear Múltipla e Regressão Logística",
+    "category": "Regressão logística: interpretação",
+    "difficulty": "médio"
+  },
+  {
+    "id": 158,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Uma estudante escreve: “Nagelkerke R² = .18, logo a regressão logística explicou 18% da variância exatamente como numa regressão linear”. Qual é o problema?",
+    "correctCard": "Os pseudo-R² dão uma ideia aproximada de ajustamento/capacidade preditiva, mas não são equivalentes ao R² da regressão linear.",
+    "wrongCards": [
+      "Nagelkerke R² só pode ser usado em MANOVA.",
+      "Na regressão logística existe sempre um R² verdadeiro igual ao linear.",
+      "O valor .18 é inválido porque pseudo-R² não pode ter casas decimais."
+    ],
+    "explanation": "Na regressão logística não existe um R² verdadeiro equivalente ao da regressão linear.",
+    "source": "MADN — Aula 8, Regressão Linear Múltipla e Regressão Logística",
+    "category": "Regressão logística: pseudo-R²",
+    "difficulty": "difícil"
+  },
+  {
+    "id": 159,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Qual frase de reporte é mais adequada para regressão logística?",
+    "correctCard": "O modelo logístico foi significativo, χ²(df) = valor, p = valor; reportaram-se pseudo-R² e OR dos preditores relevantes.",
+    "wrongCards": [
+      "A regressão logística foi reportada com Wilks Lambda e Box's M.",
+      "Basta dizer que o R² linear foi significativo.",
+      "Só se deve reportar o teste de Levene e ignorar odds ratios."
+    ],
+    "explanation": "O reporte deve indicar χ² do modelo, p, pseudo-R² e odds ratios.",
+    "source": "MADN — Aula 8, Regressão Linear Múltipla e Regressão Logística",
+    "category": "Regressão logística: reporte",
+    "difficulty": "médio"
+  },
+  {
+    "id": 160,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Um estudo compara memória de trabalho em adolescentes, jovens adultos e idosos, controlando velocidade de processamento. Qual é o objetivo estatístico da ANCOVA one-way?",
+    "correctCard": "Comparar médias ajustadas de memória de trabalho entre grupos, controlando a variância associada à velocidade de processamento.",
+    "wrongCards": [
+      "Testar simultaneamente três variáveis dependentes sem covariáveis.",
+      "Substituir a ANOVA sempre que a variável dependente é nominal.",
+      "Avaliar apenas se a covariável difere entre grupos."
+    ],
+    "explanation": "A ANCOVA compara grupos numa VD contínua, controlando uma covariável relevante.",
+    "source": "MADN — Aula 9, ANCOVA e MANOVA",
+    "category": "ANCOVA: objetivo",
+    "difficulty": "médio"
+  },
+  {
+    "id": 161,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Numa ANCOVA, a interação Grupo × Covariável apresenta p = .004. Qual é a principal implicação?",
+    "correctCard": "A homogeneidade dos declives de regressão foi violada, porque a relação covariável-VD difere entre grupos.",
+    "wrongCards": [
+      "A homogeneidade das variâncias foi confirmada.",
+      "A covariável é irrelevante para a VD.",
+      "A ANCOVA fica automaticamente mais robusta."
+    ],
+    "explanation": "A homogeneidade dos declives é verificada pela interação entre grupo e covariável.",
+    "source": "MADN — Aula 9, ANCOVA e MANOVA",
+    "category": "ANCOVA: pressupostos",
+    "difficulty": "difícil"
+  },
+  {
+    "id": 162,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "O teste de Levene é significativo numa ANCOVA com 4 grupos, n = 20 em cada grupo. Segundo as regras de robustez apresentadas, qual decisão é mais defensável?",
+    "correctCard": "Prosseguir com cautela, porque os grupos têm tamanhos iguais e pelo menos 7 participantes por grupo.",
+    "wrongCards": [
+      "Abandonar obrigatoriamente a ANCOVA, mesmo com grupos iguais.",
+      "Trocar automaticamente para MANOVA.",
+      "Ignorar a covariável e fazer correlações separadas."
+    ],
+    "explanation": "A ANCOVA pode ser robusta a heterogeneidade de variâncias se os grupos tiverem tamanhos iguais e n ≥ 7.",
+    "source": "MADN — Aula 9, ANCOVA e MANOVA",
+    "category": "ANCOVA: robustez",
+    "difficulty": "difícil"
+  },
+  {
+    "id": 163,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Uma variável dependente foi medida numa escala ordinal de 4 pontos. O que indicam as regras da aula para ANCOVA?",
+    "correctCard": "Com 4 pontos ou menos, a ANCOVA não é considerada adequada e não há alternativa não paramétrica adequada indicada no material.",
+    "wrongCards": [
+      "A ANCOVA é sempre adequada para qualquer escala ordinal.",
+      "A solução obrigatória é usar Tukey.",
+      "A escala deve ser tratada como covariável categórica."
+    ],
+    "explanation": "A ANCOVA pode ser aceitável com escalas ordinais de pelo menos 5 pontos; com 4 ou menos é problemática.",
+    "source": "MADN — Aula 9, ANCOVA e MANOVA",
+    "category": "ANCOVA: pressupostos",
+    "difficulty": "médio"
+  },
+  {
+    "id": 164,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Numa ANCOVA, os grupos têm skewness: A = +1.1, B = -0.6, C = +0.9; kurtosis aceitável e n ≥ 7. Qual é a preocupação principal?",
+    "correctCard": "A assimetria não tem a mesma direção em todos os grupos.",
+    "wrongCards": [
+      "A curtose é automaticamente inválida por estar abaixo de 9.",
+      "O n por grupo é demasiado elevado.",
+      "A covariável não pode ser contínua."
+    ],
+    "explanation": "A robustez à normalidade exige, entre outros critérios, skewness na mesma direção em cada grupo.",
+    "source": "MADN — Aula 9, ANCOVA e MANOVA",
+    "category": "ANCOVA: normalidade",
+    "difficulty": "difícil"
+  },
+  {
+    "id": 165,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Após controlar idade, o efeito de grupo em fluência verbal é F(2, 84) = 5.70, p = .005, partial η² = .120. Qual interpretação está mais correta?",
+    "correctCard": "O grupo explica uma proporção da variância da VD depois de controlar idade; .120 aproxima-se de um efeito grande segundo os pontos de corte dados.",
+    "wrongCards": [
+      "O grupo explica .120% da variância bruta antes de controlar idade.",
+      "O resultado prova que a idade não tem efeito.",
+      "O efeito não é significativo porque partial η² é inferior a .138."
+    ],
+    "explanation": "Partial η² representa variância atribuída ao fator após controlar a covariável; .059 é médio e .138 é grande.",
+    "source": "MADN — Aula 9, ANCOVA e MANOVA",
+    "category": "ANCOVA: tamanho do efeito",
+    "difficulty": "difícil"
+  },
+  {
+    "id": 166,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Há 3 grupos, ANCOVA global significativa e pretende-se um procedimento de duas etapas apontado como adequado neste contexto. Qual opção é mais plausível?",
+    "correctCard": "Fisher LSD.",
+    "wrongCards": [
+      "Box's M.",
+      "Pillai's Trace.",
+      "Shapiro-Wilk multivariado."
+    ],
+    "explanation": "Fisher LSD é referido como adequado sobretudo quando existem 3 grupos e depois de uma ANCOVA significativa.",
+    "source": "MADN — Aula 9, ANCOVA e MANOVA",
+    "category": "ANCOVA: pós-hoc",
+    "difficulty": "médio"
+  },
+  {
+    "id": 167,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Um post-hoc Games-Howell é escolhido após uma análise entre grupos. Em que situação é especialmente justificado?",
+    "correctCard": "Quando não há homogeneidade das variâncias.",
+    "wrongCards": [
+      "Quando existem duas ou mais variáveis dependentes sem fator.",
+      "Quando se quer testar normalidade multivariada.",
+      "Quando a covariável é significativa."
+    ],
+    "explanation": "Games-Howell é indicado quando há violação da homogeneidade das variâncias.",
+    "source": "MADN — Aula 9, ANCOVA e MANOVA",
+    "category": "ANCOVA: pós-hoc",
+    "difficulty": "médio"
+  },
+  {
+    "id": 168,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Um investigador usa como covariável uma variável medida depois da intervenção e que pode ter sido influenciada pelo grupo. Qual é a crítica metodológica?",
+    "correctCard": "Pode estar a controlar parte do próprio efeito da intervenção, distorcendo a interpretação.",
+    "wrongCards": [
+      "A covariável pós-intervenção aumenta sempre a validade causal.",
+      "ANCOVA exige que todas as covariáveis sejam nominais.",
+      "O problema resolve-se apenas com Tukey."
+    ],
+    "explanation": "Covariáveis que são consequência do fator podem tornar o ajuste substantivamente enganador.",
+    "source": "MADN — Aula 9, ANCOVA e MANOVA",
+    "category": "ANCOVA: escolha de covariáveis",
+    "difficulty": "difícil"
+  },
+  {
+    "id": 169,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Um grupo clínico tem idades entre 60-80 anos e o grupo controlo entre 20-35 anos. Quer-se controlar idade numa ANCOVA. Qual preocupação é mais sofisticada?",
+    "correctCard": "A falta de sobreposição na covariável pode levar a médias ajustadas dependentes de extrapolação do modelo.",
+    "wrongCards": [
+      "A ANCOVA corrige sempre perfeitamente qualquer desequilíbrio.",
+      "A idade deixa de ser uma variável contínua.",
+      "A solução é transformar a VD em nominal."
+    ],
+    "explanation": "Quando há pouca sobreposição na covariável entre grupos, o ajuste pode ficar pouco ancorado nos dados observados.",
+    "source": "MADN — Aula 9, ANCOVA e MANOVA",
+    "category": "ANCOVA: metodologia",
+    "difficulty": "difícil"
+  },
+  {
+    "id": 170,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Dois grupos foram avaliados antes e depois de uma intervenção, e o interesse principal é analisar a mudança ao longo do tempo dentro dos mesmos participantes. Qual análise é mais coerente?",
+    "correctCard": "Mixed ANOVA, porque o fator tempo é uma medida repetida e o interesse é a mudança intra-sujeito.",
+    "wrongCards": [
+      "ANCOVA obrigatória, usando sempre o pós-teste como covariável.",
+      "Correlação de Pearson, porque há duas medições.",
+      "Regressão logística, porque há dois momentos."
+    ],
+    "explanation": "Quando o foco é a mudança ao longo do tempo nos mesmos participantes, a mixed ANOVA pode ser mais coerente.",
+    "source": "MADN — Aula 9, ANCOVA e MANOVA",
+    "category": "Escolha do teste: ANCOVA vs. mixed ANOVA",
+    "difficulty": "difícil"
+  },
+  {
+    "id": 171,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Qual é a diferença de enquadramento entre ANCOVA e regressão hierárquica no contexto das aulas?",
+    "correctCard": "A ANCOVA centra-se em médias ajustadas entre grupos; a regressão hierárquica enfatiza blocos de preditores e mudança no R².",
+    "wrongCards": [
+      "A regressão hierárquica não permite controlar variáveis.",
+      "A ANCOVA só pode ser usada com variáveis dependentes nominais.",
+      "São análises sem qualquer relação conceptual."
+    ],
+    "explanation": "As duas lógicas podem controlar variáveis, mas com enquadramentos de reporte diferentes.",
+    "source": "MADN — Aula 9, ANCOVA e MANOVA",
+    "category": "Escolha do teste: ANCOVA vs. regressão hierárquica",
+    "difficulty": "médio"
+  },
+  {
+    "id": 172,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Um estudo quer testar se o sexo tem efeito conjunto em memória verbal, auditiva e visuoespacial. Não há covariáveis. Que análise é mais alinhada com a aula?",
+    "correctCard": "One-way MANOVA.",
+    "wrongCards": [
+      "One-way ANCOVA.",
+      "Regressão logística binária.",
+      "Correlação de Spearman para cada grupo."
+    ],
+    "explanation": "A MANOVA testa o efeito de uma VI categorial sobre duas ou mais VDs contínuas.",
+    "source": "MADN — Aula 9, ANCOVA e MANOVA",
+    "category": "MANOVA: escolha do teste",
+    "difficulty": "fácil"
+  },
+  {
+    "id": 173,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Numa MANOVA, o efeito multivariado global é significativo. Qual é o passo seguinte de leitura recomendado?",
+    "correctCard": "Examinar os efeitos univariados para perceber em que variáveis dependentes surgem diferenças.",
+    "wrongCards": [
+      "Concluir automaticamente que todas as VDs diferem.",
+      "Ignorar as VDs individuais, porque a MANOVA já responde a tudo.",
+      "Usar apenas o teste de Levene como resultado principal."
+    ],
+    "explanation": "Na MANOVA interpreta-se primeiro o efeito multivariado global e depois os efeitos univariados.",
+    "source": "MADN — Aula 9, ANCOVA e MANOVA",
+    "category": "MANOVA: interpretação",
+    "difficulty": "médio"
+  },
+  {
+    "id": 174,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Qual estatística global é apontada como mais robusta à violação de pressupostos na MANOVA?",
+    "correctCard": "Pillai's Trace.",
+    "wrongCards": [
+      "Fisher LSD.",
+      "Cox & Snell R².",
+      "Cook's Distance."
+    ],
+    "explanation": "O material refere Wilks Lambda e Pillai's Trace, indicando Pillai's Trace como mais robusta.",
+    "source": "MADN — Aula 9, ANCOVA e MANOVA",
+    "category": "MANOVA: estatística global",
+    "difficulty": "médio"
+  },
+  {
+    "id": 175,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "O teste M de Box é significativo numa MANOVA. O que isto sugere?",
+    "correctCard": "Violação da homogeneidade das matrizes variância-covariância.",
+    "wrongCards": [
+      "Confirmação de que todas as VDs são independentes.",
+      "Ausência de colinearidade entre VDs.",
+      "Necessidade de usar Cox & Snell R²."
+    ],
+    "explanation": "O M de Box avalia a homogeneidade das matrizes variância-covariância; significativo indica violação.",
+    "source": "MADN — Aula 9, ANCOVA e MANOVA",
+    "category": "MANOVA: pressupostos",
+    "difficulty": "difícil"
+  },
+  {
+    "id": 176,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Duas variáveis dependentes numa MANOVA correlacionam r = .92. Qual é a preocupação?",
+    "correctCard": "Colinearidade entre VDs, porque uma VD não deve correlacionar cerca de r = .90 ou mais com outra.",
+    "wrongCards": [
+      "A MANOVA exige que todas as VDs tenham correlações superiores a .90.",
+      "A correlação elevada prova causalidade entre as VDs.",
+      "O problema é exclusivamente a amostragem aleatória."
+    ],
+    "explanation": "O material indica ausência de colinearidade como pressuposto da MANOVA.",
+    "source": "MADN — Aula 9, ANCOVA e MANOVA",
+    "category": "MANOVA: colinearidade",
+    "difficulty": "difícil"
+  },
+  {
+    "id": 177,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Um desenho inclui um fator categorial, duas VDs contínuas e uma covariável contínua. Qual design analítico descreve melhor esta estrutura?",
+    "correctCard": "MANCOVA, porque combina várias VDs com controlo de covariável.",
+    "wrongCards": [
+      "ANCOVA simples, porque há duas VDs.",
+      "Correlação de Pearson, porque todas as variáveis são contínuas.",
+      "Regressão logística binária, porque há uma covariável."
+    ],
+    "explanation": "A MANCOVA combina a lógica multivariada com controlo de covariáveis.",
+    "source": "MADN — Aula 9, ANCOVA e MANOVA",
+    "category": "MANOVA/MANCOVA: escolha do teste",
+    "difficulty": "médio"
+  },
+  {
+    "id": 178,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Uma pergunta é: “Em adultos com depressão, a terapia cognitivo-comportamental reduz sintomas em comparação com medicação?”. No PICO, o que representa a medicação?",
+    "correctCard": "Comparação.",
+    "wrongCards": [
+      "População.",
+      "Intervenção.",
+      "Outcome."
+    ],
+    "explanation": "No PICO, C corresponde à comparação; no exemplo, a medicação é o comparador.",
+    "source": "MADN — Aula 10, Revisão Sistemática e Meta-análise",
+    "category": "Revisão sistemática: PICO",
+    "difficulty": "fácil"
+  },
+  {
+    "id": 179,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Antes de iniciar uma revisão sistemática, uma equipa define critérios de inclusão/exclusão, bases de dados, termos de pesquisa e registo. Que etapa está a desenvolver?",
+    "correctCard": "Protocolo.",
+    "wrongCards": [
+      "Forest plot.",
+      "Análise por subgrupos.",
+      "Teste M de Box."
+    ],
+    "explanation": "O protocolo define antecipadamente como a revisão será conduzida.",
+    "source": "MADN — Aula 10, Revisão Sistemática e Meta-análise",
+    "category": "Revisão sistemática: protocolo",
+    "difficulty": "fácil"
+  },
+  {
+    "id": 180,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Uma equipa quer registar uma scoping review. Segundo o resumo da aula, qual opção é mais adequada?",
+    "correctCard": "OSF, porque é uma plataforma flexível que inclui registos para scoping reviews.",
+    "wrongCards": [
+      "PROSPERO, porque aceita especificamente scoping reviews sem restrições.",
+      "Rayyan, porque substitui o registo do protocolo.",
+      "RevMan, porque é obrigatório para qualquer protocolo."
+    ],
+    "explanation": "O material refere que PROSPERO não aceita scoping reviews, enquanto OSF é flexível.",
+    "source": "MADN — Aula 10, Revisão Sistemática e Meta-análise",
+    "category": "Revisão sistemática: protocolo",
+    "difficulty": "médio"
+  },
+  {
+    "id": 181,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Durante o screening, qual procedimento melhora a transparência e reduz arbitrariedade?",
+    "correctCard": "Fazer screening de títulos/resumos e depois textos completos, com pelo menos dois revisores independentes e resolução sistemática de desacordos.",
+    "wrongCards": [
+      "Escolher apenas os estudos com resultados significativos.",
+      "Incluir todos os estudos sem ler os textos completos.",
+      "Permitir que apenas um revisor decida sem registo."
+    ],
+    "explanation": "O material recomenda screening por fases, dois revisores independentes e resolução sistemática de desacordos.",
+    "source": "MADN — Aula 10, Revisão Sistemática e Meta-análise",
+    "category": "Revisão sistemática: seleção de estudos",
+    "difficulty": "médio"
+  },
+  {
+    "id": 182,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Qual sequência corresponde ao fluxo de seleção referido para relatar o processo de revisão?",
+    "correctCard": "Identification → Screening → Eligibility → Inclusion.",
+    "wrongCards": [
+      "Inclusion → Eligibility → Identification → Screening.",
+      "Forest → Funnel → Egger → Rank-test.",
+      "Enter → Hierarchical → Stepwise → Logistic."
+    ],
+    "explanation": "O fluxo PRISMA segue a lógica Identification, Screening, Eligibility e Inclusion.",
+    "source": "MADN — Aula 10, Revisão Sistemática e Meta-análise",
+    "category": "Revisão sistemática: PRISMA",
+    "difficulty": "fácil"
+  },
+  {
+    "id": 183,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Uma revisão inclui ensaios aleatorizados e quer avaliar risco de enviesamento. Que ferramenta é referida no material?",
+    "correctCard": "Cochrane Risk of Bias Tool.",
+    "wrongCards": [
+      "Newcastle-Ottawa Scale, especificamente para RCTs.",
+      "Durbin-Watson.",
+      "Pillai's Trace."
+    ],
+    "explanation": "A Cochrane Risk of Bias Tool é referida para ensaios aleatorizados.",
+    "source": "MADN — Aula 10, Revisão Sistemática e Meta-análise",
+    "category": "Revisão sistemática: qualidade",
+    "difficulty": "médio"
+  },
+  {
+    "id": 184,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Uma revisão inclui estudos observacionais. Que ferramenta de qualidade/risco de enviesamento é mencionada?",
+    "correctCard": "Newcastle-Ottawa Scale.",
+    "wrongCards": [
+      "Cox & Snell R².",
+      "Fisher LSD.",
+      "Cook's Distance."
+    ],
+    "explanation": "A Newcastle-Ottawa Scale é referida para estudos observacionais.",
+    "source": "MADN — Aula 10, Revisão Sistemática e Meta-análise",
+    "category": "Revisão sistemática: qualidade",
+    "difficulty": "médio"
+  },
+  {
+    "id": 185,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Na extração de dados, qual conjunto é mais adequado segundo a aula?",
+    "correctCard": "n, média de idades, distribuição por sexo, diagnóstico, desenho do estudo, medidas, intervenções e outcomes.",
+    "wrongCards": [
+      "Apenas o nome do primeiro autor e o ano.",
+      "Apenas os estudos com p < .05.",
+      "Apenas a cor do gráfico de cada artigo."
+    ],
+    "explanation": "A extração deve recolher características da amostra, desenho, medidas, intervenções e outcomes.",
+    "source": "MADN — Aula 10, Revisão Sistemática e Meta-análise",
+    "category": "Revisão sistemática: extração",
+    "difficulty": "fácil"
+  },
+  {
+    "id": 186,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Uma equipa resume narrativamente que a maioria dos estudos encontrou redução dos sintomas, sem combinar estatisticamente tamanhos do efeito. Que tipo de síntese é esta?",
+    "correctCard": "Síntese qualitativa.",
+    "wrongCards": [
+      "Meta-análise obrigatória.",
+      "Meta-regressão.",
+      "Regressão logística multinomial."
+    ],
+    "explanation": "A síntese qualitativa é um resumo descritivo/narrativo dos resultados.",
+    "source": "MADN — Aula 10, Revisão Sistemática e Meta-análise",
+    "category": "Revisão sistemática: síntese",
+    "difficulty": "fácil"
+  },
+  {
+    "id": 187,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Numa meta-análise, três estudos têm g = 0.30, 0.55 e 0.48 e são combinados numa estimativa global. Qual é a ideia central?",
+    "correctCard": "Combinar estatisticamente tamanhos do efeito de vários estudos para obter uma estimativa global mais precisa.",
+    "wrongCards": [
+      "Escolher apenas o maior efeito e ignorar os restantes.",
+      "Transformar todos os estudos em estudos qualitativos.",
+      "Usar participantes individuais como se estivessem todos na mesma base de dados obrigatoriamente."
+    ],
+    "explanation": "A meta-análise integra resultados de múltiplos estudos e produz um efeito global combinado.",
+    "source": "MADN — Aula 10, Revisão Sistemática e Meta-análise",
+    "category": "Meta-análise: objetivo",
+    "difficulty": "médio"
+  },
+  {
+    "id": 188,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Um conjunto de estudos compara dois grupos e alguns têm amostras pequenas. Que tamanho do efeito é a versão corrigida do Cohen's d para amostras pequenas?",
+    "correctCard": "Hedges' g.",
+    "wrongCards": [
+      "Pearson's r.",
+      "Odds Ratio.",
+      "I²."
+    ],
+    "explanation": "Hedges' g é a versão corrigida do Cohen's d para amostras pequenas.",
+    "source": "MADN — Aula 10, Revisão Sistemática e Meta-análise",
+    "category": "Meta-análise: tamanho do efeito",
+    "difficulty": "fácil"
+  },
+  {
+    "id": 189,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Uma revisão quer combinar estudos de associação entre duas variáveis contínuas. Que tamanho do efeito é mais diretamente adequado?",
+    "correctCard": "Pearson's r.",
+    "wrongCards": [
+      "Hedges' g, sempre obrigatório para qualquer associação.",
+      "Odds Ratio, porque todos os efeitos são odds.",
+      "Box's M."
+    ],
+    "explanation": "Pearson's r representa a força da associação entre variáveis.",
+    "source": "MADN — Aula 10, Revisão Sistemática e Meta-análise",
+    "category": "Meta-análise: tamanho do efeito",
+    "difficulty": "médio"
+  },
+  {
+    "id": 190,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Qual exemplo corresponde a heterogeneidade clínica numa meta-análise?",
+    "correctCard": "Diferenças nos participantes, intervenções ou outcomes entre estudos.",
+    "wrongCards": [
+      "Erro de digitação nos nomes dos autores.",
+      "Usar apenas um revisor no screening.",
+      "Um VIF superior a 10 num modelo de regressão."
+    ],
+    "explanation": "A heterogeneidade clínica refere diferenças em participantes, intervenções ou outcomes.",
+    "source": "MADN — Aula 10, Revisão Sistemática e Meta-análise",
+    "category": "Meta-análise: heterogeneidade",
+    "difficulty": "fácil"
+  },
+  {
+    "id": 191,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "O Test for residual heterogeneity tem p < .05. Qual interpretação está mais alinhada com o material?",
+    "correctCard": "Há evidência contra a hipótese de que todos os tamanhos do efeito são iguais; existe heterogeneidade residual.",
+    "wrongCards": [
+      "Todos os tamanhos do efeito são obrigatoriamente zero.",
+      "A revisão deve passar a scoping review.",
+      "O teste avalia a normalidade dos resíduos de uma regressão linear simples."
+    ],
+    "explanation": "O teste de heterogeneidade residual testa a hipótese nula de que todos os tamanhos do efeito são iguais.",
+    "source": "MADN — Aula 10, Revisão Sistemática e Meta-análise",
+    "category": "Meta-análise: heterogeneidade",
+    "difficulty": "difícil"
+  },
+  {
+    "id": 192,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Uma meta-análise apresenta I² = 82%. Qual leitura é mais defensável segundo os intervalos da aula?",
+    "correctCard": "Heterogeneidade substancial a considerável, justificando explorar possíveis moderadores.",
+    "wrongCards": [
+      "Heterogeneidade inexistente.",
+      "Heterogeneidade trivial que nunca exige atenção.",
+      "Valor inválido, porque I² não pode passar de 50%."
+    ],
+    "explanation": "O material indica 50%-90% como heterogeneidade substancial e 75%-100% como considerável.",
+    "source": "MADN — Aula 10, Revisão Sistemática e Meta-análise",
+    "category": "Meta-análise: heterogeneidade",
+    "difficulty": "médio"
+  },
+  {
+    "id": 193,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "A heterogeneidade é elevada e a equipa quer testar se o tipo de intervenção, categórico, explica diferenças nos tamanhos do efeito. Que análise é adequada?",
+    "correctCard": "Análise por subgrupos.",
+    "wrongCards": [
+      "Meta-regressão, porque só aceita variáveis categóricas.",
+      "Correlação de Spearman.",
+      "Durbin-Watson."
+    ],
+    "explanation": "Moderadores categóricos são analisados através de análise por subgrupos.",
+    "source": "MADN — Aula 10, Revisão Sistemática e Meta-análise",
+    "category": "Meta-análise: subgrupos",
+    "difficulty": "médio"
+  },
+  {
+    "id": 194,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "A heterogeneidade é elevada e a equipa quer testar se a duração média da intervenção, em semanas, prediz o tamanho do efeito. Que análise é adequada?",
+    "correctCard": "Meta-regressão.",
+    "wrongCards": [
+      "Análise por subgrupos, porque semanas é uma categoria nominal.",
+      "Box's M.",
+      "Fisher LSD."
+    ],
+    "explanation": "Moderadores contínuos são analisados através de meta-regressão.",
+    "source": "MADN — Aula 10, Revisão Sistemática e Meta-análise",
+    "category": "Meta-análise: moderadores",
+    "difficulty": "médio"
+  },
+  {
+    "id": 195,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Quando é mais defensável usar um fixed effects model?",
+    "correctCard": "Quando os estudos são muito semelhantes e se assume que estimam o mesmo verdadeiro tamanho do efeito.",
+    "wrongCards": [
+      "Quando se espera que os efeitos verdadeiros variem muito entre estudos.",
+      "Quando todos os estudos têm alto risco de enviesamento.",
+      "Quando o objetivo é avaliar apenas publication bias."
+    ],
+    "explanation": "O modelo de efeitos fixos assume um único verdadeiro tamanho do efeito e diferenças sobretudo por erro amostral.",
+    "source": "MADN — Aula 10, Revisão Sistemática e Meta-análise",
+    "category": "Meta-análise: modelos",
+    "difficulty": "médio"
+  },
+  {
+    "id": 196,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Quando é mais coerente usar um random effects model?",
+    "correctCard": "Quando se espera que os verdadeiros tamanhos do efeito variem entre estudos devido a diferenças em populações, métodos ou intervenções.",
+    "wrongCards": [
+      "Quando todos os estudos são idênticos e sem heterogeneidade.",
+      "Quando se quer eliminar todos os estudos pequenos.",
+      "Quando a variável dependente é obrigatoriamente nominal."
+    ],
+    "explanation": "O modelo de efeitos aleatórios assume que os verdadeiros efeitos podem diferir entre estudos.",
+    "source": "MADN — Aula 10, Revisão Sistemática e Meta-análise",
+    "category": "Meta-análise: modelos",
+    "difficulty": "médio"
+  },
+  {
+    "id": 197,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Num funnel plot, os pontos distribuem-se de forma assimétrica. Qual preocupação é levantada no material?",
+    "correctCard": "Possível publication bias, que pode sobrestimar o verdadeiro tamanho do efeito.",
+    "wrongCards": [
+      "Ausência de heterogeneidade clínica.",
+      "Confirmação automática de que todos os estudos são de alta qualidade.",
+      "Prova de que o modelo deve ser regressão logística."
+    ],
+    "explanation": "O funnel plot ajuda a avaliar publication bias; assimetria pode sugerir enviesamento.",
+    "source": "MADN — Aula 10, Revisão Sistemática e Meta-análise",
+    "category": "Meta-análise: publication bias",
+    "difficulty": "difícil"
   }
 ]
