@@ -10,6 +10,7 @@
     currentCards: [],
     answers: [],
     mode: '2',
+    playMode: 'normal',
     course: null,
     timeLimitSeconds: DEFAULT_GAME_SECONDS,
     timerId: null,
@@ -44,6 +45,74 @@
 
   function sampleQuestions(allQuestions, count) {
     return shuffle(allQuestions).slice(0, Math.min(count, allQuestions.length));
+  }
+
+  function normalisePlayMode(playMode) {
+    return String(playMode) === 'reinforcement' ? 'reinforcement' : 'normal';
+  }
+
+  function questionIdValue(value) {
+    if (value === null || value === undefined) return '';
+    return String(value).trim();
+  }
+
+  function buildStatsMap(questionStats) {
+    const map = new Map();
+    if (!Array.isArray(questionStats)) return map;
+    questionStats.forEach((stat) => {
+      if (!stat || typeof stat !== 'object') return;
+      const id = questionIdValue(stat.questionId);
+      if (id) map.set(id, stat);
+    });
+    return map;
+  }
+
+  function statNumber(stat, key, fallback = 0) {
+    const value = Number(stat && stat[key]);
+    return Number.isFinite(value) ? value : fallback;
+  }
+
+  function sampleReinforcementQuestions(allQuestions, count, questionStats) {
+    const limit = Math.min(count, allQuestions.length);
+    const statsById = buildStatsMap(questionStats);
+    const ranked = allQuestions.map((question, index) => {
+      const stat = statsById.get(questionIdValue(question.id));
+      const wrong = statNumber(stat, 'wrong');
+      const correct = statNumber(stat, 'correct');
+      const seen = statNumber(stat, 'seen', wrong + correct);
+      const wrongRate = seen ? wrong / seen : 0;
+      const savedWeakness = Number(stat && stat.weaknessScore);
+      const weaknessScore = Number.isFinite(savedWeakness) ? savedWeakness : (wrong * 3) - correct;
+      const lastWrongAt = Date.parse(stat && stat.lastWrongAt ? stat.lastWrongAt : '');
+      return {
+        question,
+        index,
+        wrong,
+        correct,
+        wrongRate,
+        weaknessScore,
+        lastWrongAt: Number.isNaN(lastWrongAt) ? 0 : lastWrongAt
+      };
+    }).filter((item) => item.wrong > 0);
+
+    if (!ranked.length) return sampleQuestions(allQuestions, count);
+
+    ranked.sort((a, b) => (
+      b.weaknessScore - a.weaknessScore
+      || b.wrong - a.wrong
+      || b.wrongRate - a.wrongRate
+      || a.correct - b.correct
+      || b.lastWrongAt - a.lastWrongAt
+      || a.index - b.index
+    ));
+
+    const picked = ranked.slice(0, limit).map((item) => item.question);
+    const pickedIds = new Set(picked.map((question) => questionIdValue(question.id)));
+    const fillersNeeded = limit - picked.length;
+    const fillers = fillersNeeded > 0
+      ? shuffle(allQuestions.filter((question) => !pickedIds.has(questionIdValue(question.id)))).slice(0, fillersNeeded)
+      : [];
+    return shuffle([...picked, ...fillers]);
   }
 
   function normaliseQuestion(question) {
@@ -224,6 +293,7 @@
       timeUsed: Number(timeUsed.toFixed(1)),
       timeLimitSeconds: state.timeLimitSeconds,
       mode: state.mode,
+      playMode: state.playMode,
       timedOut: Boolean(timedOut),
     });
 
@@ -248,6 +318,7 @@
       totalQuestions: state.answers.length,
       score: correct,
       mode: state.mode,
+      playMode: state.playMode,
       timeLimitSeconds: state.timeLimitSeconds,
       courseSigla: state.course.sigla,
       courseName: state.course.name,
@@ -273,12 +344,15 @@
       state.questions = Array.isArray(questions) ? questions.map(normaliseQuestion) : [];
     },
 
-    start(count, mode, timeLimitSeconds = DEFAULT_GAME_SECONDS) {
+    start(count, mode, timeLimitSeconds = DEFAULT_GAME_SECONDS, config = {}) {
       if (!state.course || !state.questions.length) return;
-      state.session = sampleQuestions(state.questions, count);
       state.currentIndex = 0;
       state.answers = [];
       state.mode = String(mode) === '4' ? '4' : '2';
+      state.playMode = normalisePlayMode(config.playMode);
+      state.session = state.playMode === 'reinforcement'
+        ? sampleReinforcementQuestions(state.questions, count, config.questionStats)
+        : sampleQuestions(state.questions, count);
       state.timeLimitSeconds = timeLimitSeconds === null
         ? null
         : ([15, 30, 60].includes(Number(timeLimitSeconds)) ? Number(timeLimitSeconds) : DEFAULT_GAME_SECONDS);

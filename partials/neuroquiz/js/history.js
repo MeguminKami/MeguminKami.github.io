@@ -6,6 +6,10 @@
     LCNC: 'Laborat\u00f3rio de Compet\u00eancias em Neuropsicologia Cl\u00ednica',
     MADN: 'M\u00e9todos de An\u00e1lise de Dados em Neuropsicologia Cl\u00ednica'
   };
+  const PLAY_MODE_LABELS = {
+    normal: 'Jogo Normal',
+    reinforcement: 'Treino de Refor\u00e7o'
+  };
 
   function safeParse(value, fallback) {
     try {
@@ -17,6 +21,10 @@
 
   function normaliseMode(mode) {
     return String(mode) === '4' ? '4' : '2';
+  }
+
+  function normalisePlayMode(mode) {
+    return String(mode) === 'reinforcement' ? 'reinforcement' : 'normal';
   }
 
   function normaliseTimeLimit(value) {
@@ -45,7 +53,7 @@
     }).filter((option) => option.text);
   }
 
-  function normaliseAnswer(raw, gameMode, gameTimeLimit, gameCourseSigla, gameCourseName) {
+  function normaliseAnswer(raw, gameMode, gameTimeLimit, gameCourseSigla, gameCourseName, gamePlayMode) {
     const answer = raw && typeof raw === 'object' ? raw : {};
     const correctCard = String(answer.correctCard ?? '');
     const savedOptions = normaliseOptions(answer.optionsShown || answer.cardOrder, correctCard);
@@ -87,6 +95,7 @@
       timeUsed: answer.timeUsed ?? answer.timeUsedSeconds ?? null,
       timeLimitSeconds,
       mode: normaliseMode(answer.mode ?? gameMode),
+      playMode: normalisePlayMode(answer.playMode ?? gamePlayMode),
       timedOut,
       courseSigla,
       courseName
@@ -96,11 +105,12 @@
   function normaliseGame(raw) {
     const game = raw && typeof raw === 'object' ? raw : {};
     const mode = normaliseMode(game.mode);
+    const playMode = normalisePlayMode(game.playMode);
     const timeLimitSeconds = normaliseTimeLimit(game.timeLimitSeconds);
     const courseSigla = normaliseCourseSigla(game.courseSigla || game.course);
     const courseName = normaliseCourseName(game.courseName, courseSigla);
     const answers = Array.isArray(game.answers)
-      ? game.answers.map((answer) => normaliseAnswer(answer, mode, timeLimitSeconds, courseSigla, courseName))
+      ? game.answers.map((answer) => normaliseAnswer(answer, mode, timeLimitSeconds, courseSigla, courseName, playMode))
       : [];
     const totalQuestions = Number(game.totalQuestions ?? game.total ?? answers.length);
     const score = Number(game.score ?? game.correct ?? answers.filter((answer) => answer.isCorrect).length);
@@ -113,6 +123,7 @@
       totalQuestions: Number.isFinite(totalQuestions) ? totalQuestions : answers.length,
       score: Number.isFinite(score) ? score : answers.filter((answer) => answer.isCorrect).length,
       mode,
+      playMode,
       timeLimitSeconds,
       answers
     };
@@ -123,6 +134,96 @@
     return games.filter((game) => game && typeof game === 'object').map(normaliseGame);
   }
 
+  function questionIdValue(value) {
+    if (value === null || value === undefined) return '';
+    return String(value).trim();
+  }
+
+  function questionKey(courseSigla, questionId, question) {
+    const id = questionIdValue(questionId);
+    if (id) return `${courseSigla}:${id}`;
+    const text = String(question || '').trim().toLowerCase();
+    return text ? `${courseSigla}:texto:${text}` : '';
+  }
+
+  function newestDate(current, candidate) {
+    const currentTime = Date.parse(current || '');
+    const candidateTime = Date.parse(candidate || '');
+    if (Number.isNaN(candidateTime)) return current || '';
+    if (Number.isNaN(currentTime) || candidateTime > currentTime) return candidate;
+    return current || '';
+  }
+
+  function buildQuestionStats(games) {
+    const stats = new Map();
+    normaliseHistory(games).forEach((game) => {
+      const answers = Array.isArray(game.answers) ? game.answers : [];
+      answers.forEach((answer) => {
+        const courseSigla = normaliseCourseSigla(answer.courseSigla || game.courseSigla);
+        const courseName = normaliseCourseName(answer.courseName || game.courseName, courseSigla);
+        const key = questionKey(courseSigla, answer.questionId, answer.question);
+        if (!key) return;
+
+        if (!stats.has(key)) {
+          stats.set(key, {
+            questionKey: key,
+            courseSigla,
+            courseName,
+            questionId: answer.questionId ?? null,
+            question: String(answer.question || ''),
+            seen: 0,
+            correct: 0,
+            wrong: 0,
+            lastAnsweredAt: '',
+            lastCorrectAt: '',
+            lastWrongAt: ''
+          });
+        }
+
+        const record = stats.get(key);
+        record.questionId = record.questionId ?? answer.questionId ?? null;
+        if (!record.question && answer.question) record.question = String(answer.question);
+        record.seen += 1;
+        record.lastAnsweredAt = newestDate(record.lastAnsweredAt, game.date);
+        if (answer.isCorrect) {
+          record.correct += 1;
+          record.lastCorrectAt = newestDate(record.lastCorrectAt, game.date);
+        } else {
+          record.wrong += 1;
+          record.lastWrongAt = newestDate(record.lastWrongAt, game.date);
+        }
+      });
+    });
+
+    return Array.from(stats.values()).map((record) => {
+      const accuracy = record.seen ? Math.round((record.correct / record.seen) * 100) : 0;
+      const wrongRate = record.seen ? Number((record.wrong / record.seen).toFixed(3)) : 0;
+      return {
+        ...record,
+        accuracy,
+        wrongRate,
+        weaknessScore: (record.wrong * 3) - record.correct,
+        strengthScore: (record.correct * 3) - record.wrong
+      };
+    }).sort((a, b) => (
+      a.courseSigla.localeCompare(b.courseSigla)
+      || b.weaknessScore - a.weaknessScore
+      || b.wrong - a.wrong
+      || a.correct - b.correct
+      || String(a.questionId ?? '').localeCompare(String(b.questionId ?? ''), 'pt-PT', { numeric: true })
+    ));
+  }
+
+  function serialiseHistory(games) {
+    const normalisedGames = normaliseHistory(games);
+    return {
+      version: 5,
+      updatedAt: new Date().toISOString(),
+      games: normalisedGames,
+      questionStats: buildQuestionStats(normalisedGames)
+    };
+  }
+
   const HistoryStore = {
     load() {
       const saved = localStorage.getItem(KEY);
@@ -130,7 +231,7 @@
     },
 
     save(games) {
-      localStorage.setItem(KEY, JSON.stringify(normaliseHistory(games)));
+      localStorage.setItem(KEY, JSON.stringify(serialiseHistory(games)));
     },
 
     add(game) {
@@ -150,7 +251,9 @@
     },
 
     exportJSON() {
-      return JSON.stringify({ version: 4, exportedAt: new Date().toISOString(), games: this.load() }, null, 2);
+      const data = serialiseHistory(this.load());
+      data.exportedAt = new Date().toISOString();
+      return JSON.stringify(data, null, 2);
     },
 
     importJSON(text) {
@@ -164,7 +267,18 @@
       return games;
     },
 
-    normaliseGame
+    normaliseGame,
+
+    getQuestionStats(courseSigla) {
+      const selectedCourse = normaliseCourseSigla(courseSigla);
+      return buildQuestionStats(this.load()).filter((item) => item.courseSigla === selectedCourse);
+    },
+
+    getPlayModeLabel(mode) {
+      return PLAY_MODE_LABELS[normalisePlayMode(mode)];
+    },
+
+    normalisePlayMode
   };
 
   window.HistoryStore = HistoryStore;

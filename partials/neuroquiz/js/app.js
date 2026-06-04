@@ -14,6 +14,16 @@
       description: 'Correla\u00e7\u00e3o, regress\u00e3o, ANCOVA, MANOVA, revis\u00e3o sistem\u00e1tica e meta-an\u00e1lise.'
     }
   };
+  const PLAY_MODES = {
+    normal: {
+      label: 'Jogo Normal',
+      note: 'Perguntas aleat\u00f3rias da cadeira.'
+    },
+    reinforcement: {
+      label: 'Treino de Refor\u00e7o',
+      note: 'Prioriza as perguntas com mais erros guardados.'
+    }
+  };
 
   const views = ['homeView', 'courseMenuView', 'setupView', 'gameView', 'resultsView', 'historyView', 'historyDetailView'];
   const questionBanks = {};
@@ -22,6 +32,7 @@
   let selectedCourseSigla = null;
   let selectedQuestionCount = null;
   let selectedMode = null;
+  let selectedPlayMode = 'normal';
   let selectedTimeLimit = undefined;
   let setupStep = 'count';
   let historyFilter = 'current';
@@ -36,6 +47,25 @@
 
   function getCourse(courseSigla = selectedCourseSigla) {
     return COURSES[courseSigla] || null;
+  }
+
+  function normalisePlayMode(playMode) {
+    if (window.HistoryStore && typeof HistoryStore.normalisePlayMode === 'function') {
+      return HistoryStore.normalisePlayMode(playMode);
+    }
+    return String(playMode) === 'reinforcement' ? 'reinforcement' : 'normal';
+  }
+
+  function getPlayModeLabel(playMode) {
+    if (window.HistoryStore && typeof HistoryStore.getPlayModeLabel === 'function') {
+      return HistoryStore.getPlayModeLabel(playMode);
+    }
+    return PLAY_MODES[normalisePlayMode(playMode)].label;
+  }
+
+  function getWeakQuestionCount(courseSigla) {
+    if (!window.HistoryStore || typeof HistoryStore.getQuestionStats !== 'function') return 0;
+    return HistoryStore.getQuestionStats(courseSigla).filter((item) => Number(item.wrong) > 0).length;
   }
 
   function showView(id) {
@@ -65,15 +95,29 @@
     $('courseMenuBadge').textContent = course.sigla;
     $('courseMenuName').textContent = course.name;
     $('courseMenuDescription').textContent = course.description;
-    $('goSetupBtn').textContent = `Jogar ${course.sigla}`;
+    document.querySelectorAll('.play-mode-card').forEach((button) => {
+      const playMode = normalisePlayMode(button.dataset.playMode);
+      button.setAttribute('aria-label', `${getPlayModeLabel(playMode)} em ${course.sigla}`);
+    });
+    const reinforcementMeta = $('reinforcementModeMeta');
+    if (reinforcementMeta) {
+      const weakCount = getWeakQuestionCount(course.sigla);
+      reinforcementMeta.textContent = weakCount
+        ? `${weakCount} perguntas em refor\u00e7o`
+        : 'Sem erros registados';
+    }
     document.querySelectorAll('.current-course-pill').forEach((pill) => {
       pill.textContent = `Cadeira: ${course.sigla}`;
+    });
+    document.querySelectorAll('.current-play-mode-pill').forEach((pill) => {
+      pill.textContent = getPlayModeLabel(selectedPlayMode);
     });
   }
 
   function selectCourse(courseSigla) {
     if (!COURSES[courseSigla]) return;
     selectedCourseSigla = courseSigla;
+    selectedPlayMode = 'normal';
     updateCourseUI();
     showCourseMenu();
   }
@@ -82,12 +126,15 @@
     $('countSetupStep').hidden = setupStep !== 'count';
     $('modeSetupStep').hidden = setupStep !== 'mode';
     $('timeSetupStep').hidden = setupStep !== 'time';
+    document.querySelectorAll('.current-play-mode-pill').forEach((pill) => {
+      pill.textContent = getPlayModeLabel(selectedPlayMode);
+    });
     document.querySelectorAll('.question-count').forEach((button) => {
       const selected = Number(button.dataset.count) === selectedQuestionCount;
       button.classList.toggle('is-selected', selected);
       button.setAttribute('aria-pressed', String(selected));
     });
-    document.querySelectorAll('.mode-card').forEach((button) => {
+    document.querySelectorAll('.mode-card[data-mode]').forEach((button) => {
       const selected = button.dataset.mode === selectedMode;
       button.classList.toggle('is-selected', selected);
       button.setAttribute('aria-pressed', String(selected));
@@ -99,10 +146,22 @@
       button.setAttribute('aria-pressed', String(selected));
     });
     $('startGameBtn').disabled = !(selectedQuestionCount && selectedMode && selectedTimeLimit !== undefined);
+    const setupModeNote = $('setupModeNote');
+    if (setupModeNote) {
+      const weakCount = getWeakQuestionCount(selectedCourseSigla);
+      if (selectedPlayMode === 'reinforcement') {
+        setupModeNote.textContent = weakCount
+          ? `${getPlayModeLabel(selectedPlayMode)} vai buscar primeiro as perguntas mais erradas desta cadeira.`
+          : `${getPlayModeLabel(selectedPlayMode)} ainda n\u00e3o tem erros guardados nesta cadeira; esta ronda come\u00e7a aleat\u00f3ria.`;
+      } else {
+        setupModeNote.textContent = PLAY_MODES.normal.note;
+      }
+    }
   }
 
-  function openSetup() {
+  function openSetup(playMode = selectedPlayMode) {
     if (!getCourse()) return showView('homeView');
+    selectedPlayMode = normalisePlayMode(playMode);
     selectedQuestionCount = null;
     selectedMode = null;
     selectedTimeLimit = undefined;
@@ -179,7 +238,8 @@
       correct: Number.isFinite(correct) ? correct : 0,
       wrong: Number.isFinite(wrong) ? wrong : 0,
       percentage: Number.isFinite(percentage) ? percentage : 0,
-      mode: String(game.mode) === '4' ? '4' : '2'
+      mode: String(game.mode) === '4' ? '4' : '2',
+      playMode: normalisePlayMode(game.playMode)
     };
   }
 
@@ -192,11 +252,12 @@
     const stats = getGameStats(game);
     const cards = [
       ['Cadeira', game.courseSigla || 'LCNC'],
+      ['Jogo', getPlayModeLabel(stats.playMode)],
       ['Total', stats.total],
       ['Corretas', stats.correct],
       ['Erradas', stats.wrong],
       ['Acerto', `${stats.percentage}%`],
-      ['Modo', `${stats.mode} op\u00e7\u00f5es`],
+      ['Desafio', `${stats.mode} op\u00e7\u00f5es`],
       ['Tempo', formatTimeLimit(game.timeLimitSeconds)]
     ];
     target.innerHTML = '';
@@ -350,7 +411,7 @@
         <div>
           <span class="history-course-badge">${escapeHTML(game.courseSigla)}</span>
           <div class="review-title">${escapeHTML(formatDate(game.date ?? game.dateISO))}</div>
-          <div class="review-meta pastel-caption">${escapeHTML(game.courseSigla)} &middot; ${escapeHTML(stats.correct)}/${escapeHTML(stats.total)} corretas &middot; Modo ${escapeHTML(stats.mode)} op\u00e7\u00f5es &middot; ${escapeHTML(stats.total)} perguntas &middot; ${escapeHTML(formatTimeLimit(game.timeLimitSeconds))}</div>
+          <div class="review-meta pastel-caption">${escapeHTML(game.courseSigla)} &middot; ${escapeHTML(getPlayModeLabel(stats.playMode))} &middot; ${escapeHTML(stats.correct)}/${escapeHTML(stats.total)} corretas &middot; ${escapeHTML(stats.mode)} op\u00e7\u00f5es &middot; ${escapeHTML(stats.total)} perguntas &middot; ${escapeHTML(formatTimeLimit(game.timeLimitSeconds))}</div>
         </div>
         <button class="btn small pastel blue" type="button">Ver detalhes</button>
       `;
@@ -431,7 +492,9 @@
       button.addEventListener('click', showCourseMenu);
     });
 
-    $('goSetupBtn').addEventListener('click', openSetup);
+    document.querySelectorAll('.play-mode-card').forEach((button) => {
+      button.addEventListener('click', () => openSetup(button.dataset.playMode));
+    });
     $('goHistoryBtn').addEventListener('click', () => openHistory('current'));
 
     document.querySelectorAll('.question-count').forEach((button) => {
@@ -447,7 +510,7 @@
       setupStep = 'count';
       updateSetupControls();
     });
-    document.querySelectorAll('.mode-card').forEach((button) => {
+    document.querySelectorAll('.mode-card[data-mode]').forEach((button) => {
       button.addEventListener('click', () => {
         selectedMode = button.dataset.mode;
         selectedTimeLimit = undefined;
@@ -473,7 +536,13 @@
       try {
         GameEngine.setCourse(course, await loadQuestions(course));
         showView('gameView');
-        GameEngine.start(selectedQuestionCount, selectedMode, selectedTimeLimit);
+        const questionStats = selectedPlayMode === 'reinforcement'
+          ? HistoryStore.getQuestionStats(course.sigla)
+          : [];
+        GameEngine.start(selectedQuestionCount, selectedMode, selectedTimeLimit, {
+          playMode: selectedPlayMode,
+          questionStats
+        });
       } catch (error) {
         window.alert('N\u00e3o foi poss\u00edvel carregar as perguntas desta cadeira. Verifica se os ficheiros do projeto est\u00e3o completos.');
         console.error(error);
@@ -483,7 +552,7 @@
     });
 
     $('resultsCourseMenuBtn').addEventListener('click', showCourseMenu);
-    $('playAgainBtn').addEventListener('click', openSetup);
+    $('playAgainBtn').addEventListener('click', () => openSetup(selectedPlayMode));
     $('resultsHistoryBtn').addEventListener('click', () => openHistory('current'));
 
     $('currentCourseHistoryBtn').addEventListener('click', () => { historyFilter = 'current'; renderHistory(''); });

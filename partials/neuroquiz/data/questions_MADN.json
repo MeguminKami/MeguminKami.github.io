@@ -3025,5 +3025,965 @@
     "source": "MADN — Aula 10, Revisão Sistemática e Meta-análise",
     "category": "Meta-análise: publication bias",
     "difficulty": "difícil"
+  },
+  {
+    "id": 198,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Um investigador quer prever a pontuação de memória episódica a partir da idade. A variável dependente é contínua e há apenas um preditor contínuo. Qual análise é mais adequada?",
+    "correctCard": "Regressão linear simples, porque há uma VD contínua e um único preditor.",
+    "wrongCards": [
+      "Regressão linear múltipla, porque qualquer previsão exige vários preditores.",
+      "Regressão logística binária, porque idade é uma variável contínua.",
+      "MANOVA, porque existe uma variável dependente contínua."
+    ],
+    "explanation": "A regressão linear simples permite prever uma variável dependente contínua a partir de uma variável independente.",
+    "source": "MADN — Aula 7, Correlação e Regressão Linear Simples",
+    "category": "Regressão linear simples: escolha do modelo",
+    "difficulty": "fácil"
+  },
+  {
+    "id": 199,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Numa regressão linear simples, a equação é Ŷ = 18 - 0.60X. Se X = 10, qual é o valor previsto de Y?",
+    "correctCard": "12, porque 18 - 0.60 × 10 = 12.",
+    "wrongCards": [
+      "24, porque se deve somar 0.60 × 10 ao intercept.",
+      "-6, porque o slope é negativo.",
+      "18, porque o valor de X não altera a previsão."
+    ],
+    "explanation": "Substitui-se X na equação de regressão para obter o valor previsto de Y.",
+    "source": "MADN — Aula 7, Correlação e Regressão Linear Simples",
+    "category": "Regressão linear simples: cálculo da previsão",
+    "difficulty": "fácil"
+  },
+  {
+    "id": 200,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Num modelo Ŷ = 7 + 2X, um participante tem X = 5 e valor observado de Y = 20. Qual é o resíduo, calculado como observado menos previsto?",
+    "correctCard": "3, porque o valor previsto é 17 e 20 - 17 = 3.",
+    "wrongCards": [
+      "-3, porque o resíduo é sempre previsto menos observado.",
+      "27, porque se soma o observado ao previsto.",
+      "10, porque o resíduo é igual ao slope multiplicado por X."
+    ],
+    "explanation": "O resíduo é a diferença entre o valor observado e o valor previsto pelo modelo.",
+    "source": "MADN — Aula 7, Correlação e Regressão Linear Simples",
+    "category": "Regressão linear simples: resíduos",
+    "difficulty": "médio"
+  },
+  {
+    "id": 201,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Uma regressão linear simples tem R² = .09. Qual interpretação é mais correta?",
+    "correctCard": "O modelo explica 9% da variância da variável dependente.",
+    "wrongCards": [
+      "O modelo explica 91% da variância da variável dependente.",
+      "O slope é necessariamente igual a .09.",
+      "A regressão prova que X causa Y."
+    ],
+    "explanation": "O R² indica a proporção de variância explicada pelo modelo.",
+    "source": "MADN — Aula 7, Correlação e Regressão Linear Simples",
+    "category": "Regressão linear simples: R²",
+    "difficulty": "fácil"
+  },
+  {
+    "id": 202,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "A associação entre reserva cognitiva e desempenho tem r = -.40. Qual é o R² e como se interpreta?",
+    "correctCard": "R² = .16; cerca de 16% da variância é explicada, apesar da direção da associação ser negativa.",
+    "wrongCards": [
+      "R² = -.16; a variância explicada fica negativa.",
+      "R² = .40; 40% da variância é explicada.",
+      "R² = -.40; o R² mantém sempre o sinal de r."
+    ],
+    "explanation": "O coeficiente de determinação é r × r, pelo que o sinal negativo desaparece no R².",
+    "source": "MADN — Aula 7, Correlação e Regressão Linear Simples",
+    "category": "Regressão linear simples: coeficiente de determinação",
+    "difficulty": "médio"
+  },
+  {
+    "id": 203,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Um modelo de regressão simples apresenta F(1, 58) = 9.20, p = .004, R² = .137. Qual frase de resultados é mais adequada?",
+    "correctCard": "A equação de regressão foi significativa e explicou cerca de 13,7% da variância da VD.",
+    "wrongCards": [
+      "O modelo não foi significativo, porque F tem apenas 1 grau de liberdade no numerador.",
+      "O R² indica que 86,3% da variância foi explicada pelo modelo.",
+      "O resultado prova causalidade entre o preditor e a VD."
+    ],
+    "explanation": "Na regressão linear simples, deve reportar-se a significância do modelo, o F, o p e a variância explicada.",
+    "source": "MADN — Aula 7, Correlação e Regressão Linear Simples",
+    "category": "Regressão linear simples: reporte",
+    "difficulty": "médio"
+  },
+  {
+    "id": 204,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Numa regressão, o intervalo de confiança do slope inclui zero. Qual interpretação é mais prudente?",
+    "correctCard": "Não há evidência clara de que o slope seja diferente de zero.",
+    "wrongCards": [
+      "O slope é necessariamente muito forte.",
+      "O modelo passa automaticamente a ser regressão logística.",
+      "A variável dependente deixa de ser contínua."
+    ],
+    "explanation": "Se zero é compatível com o intervalo do coeficiente, a associação linear estimada pode não ser estatisticamente clara.",
+    "source": "MADN — Aula 7, Correlação e Regressão Linear Simples",
+    "category": "Regressão linear simples: interpretação do coeficiente",
+    "difficulty": "difícil"
+  },
+  {
+    "id": 205,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "O scatterplot entre stress e desempenho mostra uma curva acentuada, não uma nuvem aproximadamente linear. O que isto sugere para a regressão linear simples?",
+    "correctCard": "A regressão linear simples pode não representar adequadamente a associação, porque modela relações lineares.",
+    "wrongCards": [
+      "A regressão linear simples é ideal porque transforma qualquer curva numa reta perfeita.",
+      "A relação não linear prova causalidade.",
+      "Deve usar-se regressão logística mesmo que a VD seja contínua."
+    ],
+    "explanation": "A regressão linear simples examina uma associação linear entre X e Y, devendo a linearidade ser verificada.",
+    "source": "MADN — Aula 7, Correlação e Regressão Linear Simples",
+    "category": "Regressão linear simples: linearidade",
+    "difficulty": "médio"
+  },
+  {
+    "id": 206,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Num gráfico de resíduos vs. valores previstos, a dispersão dos resíduos parece semelhante ao longo de toda a previsão. Que pressuposto parece estar mais protegido?",
+    "correctCard": "Homoscedasticidade.",
+    "wrongCards": [
+      "Multicolinearidade perfeita.",
+      "Publication bias.",
+      "Homogeneidade dos declives de regressão."
+    ],
+    "explanation": "A homoscedasticidade implica magnitude semelhante dos resíduos ao longo dos valores previstos.",
+    "source": "MADN — Aula 7, Correlação e Regressão Linear Simples",
+    "category": "Regressão linear simples: homoscedasticidade",
+    "difficulty": "fácil"
+  },
+  {
+    "id": 207,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Num modelo de regressão, um caso apresenta resíduo padronizado = -4.6. O que deve ser feito?",
+    "correctCard": "Examinar o caso como potencial observação extrema antes de interpretar o modelo sem cautela.",
+    "wrongCards": [
+      "Concluir que o modelo é automaticamente perfeito.",
+      "Ignorar o caso porque resíduos negativos não têm interpretação.",
+      "Converter a VD em variável nominal."
+    ],
+    "explanation": "O material sugere verificar resíduos padronizados superiores a |4.0| como possíveis casos problemáticos.",
+    "source": "MADN — Aula 7, Correlação e Regressão Linear Simples",
+    "category": "Regressão linear simples: diagnóstico",
+    "difficulty": "médio"
+  },
+  {
+    "id": 208,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "O teste de Durbin-Watson apresenta p = .41 numa regressão linear simples. Como se interpreta segundo as aulas?",
+    "correctCard": "Não há evidência de autocorrelação dos resíduos.",
+    "wrongCards": [
+      "Há evidência forte de autocorrelação dos resíduos.",
+      "O modelo é automaticamente causal.",
+      "A regressão passa a ser logística ordinal."
+    ],
+    "explanation": "No material, p > .05 no Durbin-Watson sugere ausência de evidência de autocorrelação.",
+    "source": "MADN — Aula 7, Correlação e Regressão Linear Simples",
+    "category": "Regressão linear simples: independência dos erros",
+    "difficulty": "médio"
+  },
+  {
+    "id": 209,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Um estudo usa regressão linear simples para prever sintomas depressivos numa escala de 5 pontos, com respostas a cobrir os 5 níveis. Qual é a leitura mais alinhada com as aulas?",
+    "correctCard": "Pode ser aceitável tratar a VD como adequada, se a escala de 5 pontos cobrir bem os níveis.",
+    "wrongCards": [
+      "É impossível usar regressão linear com qualquer escala de 5 pontos.",
+      "Deve usar-se sempre regressão logística binária.",
+      "A variável dependente não precisa de escala nenhuma."
+    ],
+    "explanation": "Os slides admitem escalas com pelo menos 5 pontos quando as respostas cobrem efectivamente esses níveis.",
+    "source": "MADN — Aula 7, Correlação e Regressão Linear Simples",
+    "category": "Regressão linear simples: escala da VD",
+    "difficulty": "médio"
+  },
+  {
+    "id": 210,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Uma investigadora escreve: “A regressão linear simples mostrou que ansiedade causa pior desempenho”. Qual é a crítica principal?",
+    "correctCard": "A regressão simples permite previsão e associação linear, mas não prova causalidade por si só.",
+    "wrongCards": [
+      "A regressão simples nunca calcula uma equação.",
+      "A regressão simples só pode ser usada com variáveis nominais.",
+      "A frase está correcta porque qualquer slope prova causalidade."
+    ],
+    "explanation": "Tal como a correlação, a regressão simples não permite concluir causalidade sem desenho ou teoria apropriados.",
+    "source": "MADN — Aula 7, Correlação e Regressão Linear Simples",
+    "category": "Regressão linear simples: causalidade",
+    "difficulty": "médio"
+  },
+  {
+    "id": 211,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Numa equação Ŷ = 25 + 3X, o que representa o valor 25?",
+    "correctCard": "O intercept: valor previsto de Y quando X = 0.",
+    "wrongCards": [
+      "O slope: aumento de Y por cada unidade de X.",
+      "O valor do R².",
+      "A percentagem de erro de previsão."
+    ],
+    "explanation": "O intercept é o valor previsto da variável dependente quando o preditor é zero.",
+    "source": "MADN — Aula 7, Correlação e Regressão Linear Simples",
+    "category": "Regressão linear simples: intercept",
+    "difficulty": "fácil"
+  },
+  {
+    "id": 212,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "O intercept de uma regressão representa X = 0, mas a amostra só inclui idades entre 65 e 85 anos. Qual cautela é mais adequada?",
+    "correctCard": "O intercept pode ter pouca interpretação substantiva, porque X = 0 está fora da faixa observada.",
+    "wrongCards": [
+      "O intercept deve ser sempre interpretado como média da amostra.",
+      "A regressão fica automaticamente inválida.",
+      "O slope deixa de poder ser interpretado."
+    ],
+    "explanation": "Embora o intercept faça parte da equação, a sua interpretação pode ser limitada quando X = 0 não é plausível no contexto.",
+    "source": "MADN — Aula 7, Correlação e Regressão Linear Simples",
+    "category": "Regressão linear simples: interpretação contextual",
+    "difficulty": "difícil"
+  },
+  {
+    "id": 213,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Se o slope de idade a prever tempo de reacção é b = 4.5, como se interpreta?",
+    "correctCard": "Por cada unidade adicional de idade, o tempo de reacção previsto aumenta 4.5 unidades, na escala da VD.",
+    "wrongCards": [
+      "A idade explica necessariamente 45% da variância.",
+      "O intercept é igual a 4.5.",
+      "O valor de Y diminui sempre 4.5 unidades."
+    ],
+    "explanation": "O slope indica quanto a VD prevista muda por cada aumento de uma unidade no preditor.",
+    "source": "MADN — Aula 7, Correlação e Regressão Linear Simples",
+    "category": "Regressão linear simples: slope",
+    "difficulty": "fácil"
+  },
+  {
+    "id": 214,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Uma regressão simples é significativa, mas R² = .025. Qual interpretação é mais equilibrada?",
+    "correctCard": "Há evidência estatística de associação, mas a capacidade explicativa do modelo é pequena.",
+    "wrongCards": [
+      "O modelo explica praticamente toda a variância.",
+      "O resultado significativo torna R² irrelevante.",
+      "A regressão deve ser sempre substituída por MANOVA."
+    ],
+    "explanation": "A significância estatística e a magnitude da variância explicada devem ser interpretadas em conjunto.",
+    "source": "MADN — Aula 7, Correlação e Regressão Linear Simples",
+    "category": "Regressão linear simples: significância e magnitude",
+    "difficulty": "médio"
+  },
+  {
+    "id": 215,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Um relatório de regressão simples diz apenas “p < .05”. Que informação importante falta para resumir a qualidade preditiva?",
+    "correctCard": "O R², porque indica a proporção de variância explicada pelo modelo.",
+    "wrongCards": [
+      "O Box's M, porque é obrigatório em regressão simples.",
+      "O I², porque mede a variância explicada na amostra.",
+      "O número de estudos excluídos no PRISMA."
+    ],
+    "explanation": "Para reportar regressão linear simples, deve indicar-se a significância e também R².",
+    "source": "MADN — Aula 7, Correlação e Regressão Linear Simples",
+    "category": "Regressão linear simples: reporte",
+    "difficulty": "médio"
+  },
+  {
+    "id": 216,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Numa regressão linear múltipla, a VD é desempenho executivo contínuo e os preditores são idade, escolaridade e fadiga. O que o modelo permite estimar?",
+    "correctCard": "A contribuição única de cada preditor, controlando os restantes.",
+    "wrongCards": [
+      "Apenas a correlação bruta de cada preditor com a VD, sem controlo.",
+      "A pertença a categorias nominais através de odds ratios.",
+      "A síntese quantitativa de estudos publicados."
+    ],
+    "explanation": "A regressão múltipla estima efeitos únicos dos preditores enquanto considera os restantes no modelo.",
+    "source": "MADN — Aula 8, Regressão Linear Múltipla e Regressão Logística",
+    "category": "Regressão múltipla: efeitos únicos",
+    "difficulty": "médio"
+  },
+  {
+    "id": 217,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Num modelo múltiplo, b = 1.8 para escolaridade, controlando idade e sintomas depressivos. Qual interpretação é correta?",
+    "correctCard": "Mantendo idade e sintomas depressivos constantes, cada unidade adicional de escolaridade aumenta a VD prevista em 1.8 unidades.",
+    "wrongCards": [
+      "Escolaridade tem correlação de Pearson igual a 1.8.",
+      "A escolaridade explica 18% da variância total sem controlo.",
+      "O outcome tem de ser dicotómico."
+    ],
+    "explanation": "O b não padronizado é interpretado na escala original da VD, controlando os restantes preditores no modelo.",
+    "source": "MADN — Aula 8, Regressão Linear Múltipla e Regressão Logística",
+    "category": "Regressão múltipla: b não padronizado",
+    "difficulty": "médio"
+  },
+  {
+    "id": 218,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Num modelo múltiplo, β = -.42 para sintomas depressivos e β = .18 para escolaridade. Qual leitura é mais adequada?",
+    "correctCard": "Os sintomas depressivos têm associação única mais forte em valor absoluto, e em direção negativa.",
+    "wrongCards": [
+      "A escolaridade tem sempre associação mais forte porque o sinal é positivo.",
+      "β = -.42 significa que o modelo explicou -42% da variância.",
+      "Os β não podem ser comparados quando os preditores estão em escalas diferentes."
+    ],
+    "explanation": "Os β padronizados permitem comparar a força relativa dos preditores; o sinal indica direção.",
+    "source": "MADN — Aula 8, Regressão Linear Múltipla e Regressão Logística",
+    "category": "Regressão múltipla: β padronizado",
+    "difficulty": "médio"
+  },
+  {
+    "id": 219,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Um modelo com 4 preditores apresenta R² = .36 e Adjusted R² = .31. Qual valor é preferível para resumir a qualidade global segundo a aula?",
+    "correctCard": "Adjusted R², porque penaliza a inclusão de preditores desnecessários.",
+    "wrongCards": [
+      "R² bruto sempre, porque nunca é enviesado por número de preditores.",
+      "O maior dos dois valores, sem qualquer critério.",
+      "O odds ratio, porque a VD é contínua."
+    ],
+    "explanation": "Na regressão múltipla, o material recomenda dar preferência ao Adjusted R².",
+    "source": "MADN — Aula 8, Regressão Linear Múltipla e Regressão Logística",
+    "category": "Regressão múltipla: Adjusted R²",
+    "difficulty": "fácil"
+  },
+  {
+    "id": 220,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Ao adicionar dois preditores pouco relevantes, R² aumenta ligeiramente, mas Adjusted R² quase não muda. Qual conclusão é mais prudente?",
+    "correctCard": "A melhoria pode ser pouco útil, porque o Adjusted R² corrige a inflação causada por adicionar preditores.",
+    "wrongCards": [
+      "Os novos preditores são obrigatoriamente essenciais.",
+      "O modelo deixou de ser regressão múltipla.",
+      "O Adjusted R² deve ser ignorado se R² aumenta."
+    ],
+    "explanation": "O R² tende a aumentar com novos preditores; o Adjusted R² ajuda a avaliar se a melhoria é realmente útil.",
+    "source": "MADN — Aula 8, Regressão Linear Múltipla e Regressão Logística",
+    "category": "Regressão múltipla: avaliação do modelo",
+    "difficulty": "médio"
+  },
+  {
+    "id": 221,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Dois preditores de uma regressão múltipla correlacionam r = .96. Qual problema está mais diretamente em causa?",
+    "correctCard": "Colinearidade, porque um preditor correlaciona-se muito fortemente com outro.",
+    "wrongCards": [
+      "Autocorrelação temporal dos resíduos.",
+      "Publication bias.",
+      "Homogeneidade dos declives de regressão."
+    ],
+    "explanation": "O material define colinearidade como correlação muito forte entre preditores, aproximadamente r = .95 ou superior.",
+    "source": "MADN — Aula 8, Regressão Linear Múltipla e Regressão Logística",
+    "category": "Regressão múltipla: colinearidade",
+    "difficulty": "médio"
+  },
+  {
+    "id": 222,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Numa regressão múltipla com n = 130, um preditor tem Tolerance = .14 e VIF = 7.5. Como avaliar pelos critérios da aula?",
+    "correctCard": "Está dentro dos critérios para n ≥ 100, pois Tolerance ≥ .10 e VIF ≤ 10.",
+    "wrongCards": [
+      "Está problemático, porque para n ≥ 100 o VIF deve ser menor que 1.",
+      "Está problemático, porque Tolerance deve ser maior que .25 em todas as amostras.",
+      "Não se pode avaliar colinearidade em regressão múltipla."
+    ],
+    "explanation": "Para n ≥ 100, os critérios indicados são Tolerance ≥ .10 e VIF ≤ 10.",
+    "source": "MADN — Aula 8, Regressão Linear Múltipla e Regressão Logística",
+    "category": "Regressão múltipla: VIF e Tolerance",
+    "difficulty": "difícil"
+  },
+  {
+    "id": 223,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Numa regressão múltipla com n = 75, um preditor tem Tolerance = .22 e VIF = 4.8. Qual leitura segue os critérios da aula?",
+    "correctCard": "Há preocupação de multicolinearidade, porque para n < 100 se espera Tolerance ≥ .25 ou VIF ≤ 4.",
+    "wrongCards": [
+      "Está tudo adequado, porque VIF inferior a 10 serve para qualquer n.",
+      "Não existe critério de multicolinearidade para n < 100.",
+      "O problema é apenas normalidade multivariada."
+    ],
+    "explanation": "Para n < 100, o material usa critérios mais exigentes: Tolerance ≥ .25 ou VIF ≤ 4.",
+    "source": "MADN — Aula 8, Regressão Linear Múltipla e Regressão Logística",
+    "category": "Regressão múltipla: multicolinearidade",
+    "difficulty": "difícil"
+  },
+  {
+    "id": 224,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Segundo Green, se queres estimar o R² múltiplo com p = 8 preditores, qual N mínimo aproximado é indicado?",
+    "correctCard": "114, porque N = 50 + 8p = 50 + 64.",
+    "wrongCards": [
+      "113, porque N = 105 + p é o critério para R² múltiplo.",
+      "64, porque se usa apenas 8p.",
+      "8, porque basta um participante por preditor."
+    ],
+    "explanation": "Para estimar o R² múltiplo, o critério referido é N = 50 + 8p.",
+    "source": "MADN — Aula 8, Regressão Linear Múltipla e Regressão Logística",
+    "category": "Regressão múltipla: tamanho amostral",
+    "difficulty": "médio"
+  },
+  {
+    "id": 225,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Segundo Green, se o objetivo é testar a significância dos preditores com p = 8, qual N mínimo aproximado é indicado?",
+    "correctCard": "113, porque N = 105 + p.",
+    "wrongCards": [
+      "114, porque N = 50 + 8p é sempre o único critério.",
+      "64, porque N = 8p.",
+      "50, porque o número de preditores não entra no cálculo."
+    ],
+    "explanation": "O material distingue N = 50 + 8p para R² múltiplo e N = 105 + p para testar preditores.",
+    "source": "MADN — Aula 8, Regressão Linear Múltipla e Regressão Logística",
+    "category": "Regressão múltipla: tamanho amostral",
+    "difficulty": "médio"
+  },
+  {
+    "id": 226,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Uma equipa coloca idade e escolaridade no Bloco 1 e adiciona velocidade de processamento no Bloco 2. O interesse é saber se o Bloco 2 melhora R². Que abordagem é esta?",
+    "correctCard": "Regressão hierárquica.",
+    "wrongCards": [
+      "Método Enter, porque todos os preditores entram ao mesmo tempo.",
+      "Stepwise, porque os blocos são definidos pelo algoritmo.",
+      "Regressão logística ordinal."
+    ],
+    "explanation": "Na regressão hierárquica, os preditores são introduzidos em blocos definidos teoricamente e avalia-se a mudança no R².",
+    "source": "MADN — Aula 8, Regressão Linear Múltipla e Regressão Logística",
+    "category": "Regressão múltipla: método hierárquico",
+    "difficulty": "médio"
+  },
+  {
+    "id": 227,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Um estudo inclui idade, sexo, escolaridade e fadiga no modelo ao mesmo tempo, porque todos foram definidos previamente. Que método de regressão múltipla é mais compatível?",
+    "correctCard": "Enter.",
+    "wrongCards": [
+      "Stepwise, porque todos entram por decisão do algoritmo.",
+      "Hierarchical, porque há vários blocos sucessivos.",
+      "Fisher's LSD."
+    ],
+    "explanation": "No método Enter, todos os preditores entram simultaneamente no modelo.",
+    "source": "MADN — Aula 8, Regressão Linear Múltipla e Regressão Logística",
+    "category": "Regressão múltipla: método Enter",
+    "difficulty": "fácil"
+  },
+  {
+    "id": 228,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Num estudo exploratório com muitos preditores e pouca teoria prévia, a equipa deixa o algoritmo selecionar variáveis. Que método está a usar?",
+    "correctCard": "Stepwise.",
+    "wrongCards": [
+      "Enter teórico.",
+      "Hierárquico por blocos definidos pelo investigador.",
+      "ANCOVA one-way."
+    ],
+    "explanation": "O Stepwise é uma seleção algorítmica de preditores, mais adequada a análises exploratórias.",
+    "source": "MADN — Aula 8, Regressão Linear Múltipla e Regressão Logística",
+    "category": "Regressão múltipla: método Stepwise",
+    "difficulty": "fácil"
+  },
+  {
+    "id": 229,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Um preditor categórico tem os valores 1 = controlo, 2 = défice ligeiro, 3 = défice severo. Segundo o comportamento referido para o JASP, qual será a categoria de referência?",
+    "correctCard": "Controlo, porque é a categoria com valor mais baixo.",
+    "wrongCards": [
+      "Défice severo, porque é clinicamente mais importante.",
+      "Défice ligeiro, porque está no meio da escala.",
+      "Uma categoria escolhida aleatoriamente."
+    ],
+    "explanation": "O material refere que, no JASP, a categoria de referência é a de valor mais baixo.",
+    "source": "MADN — Aula 8, Regressão Linear Múltipla e Regressão Logística",
+    "category": "Regressão múltipla: preditores categóricos",
+    "difficulty": "médio"
+  },
+  {
+    "id": 230,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Um relatório de regressão múltipla apresenta só os p-values dos preditores. O que falta segundo o formato de reporte da aula?",
+    "correctCard": "F do modelo, graus de liberdade, p, Adjusted R² e, para preditores significativos, β e direção da associação.",
+    "wrongCards": [
+      "Apenas o funnel plot e o I².",
+      "Box's M e Pillai's Trace obrigatoriamente.",
+      "Somente o teste de Levene."
+    ],
+    "explanation": "O reporte de regressão múltipla deve incluir avaliação global do modelo e informação dos preditores relevantes.",
+    "source": "MADN — Aula 8, Regressão Linear Múltipla e Regressão Logística",
+    "category": "Regressão múltipla: reporte",
+    "difficulty": "difícil"
+  },
+  {
+    "id": 231,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Numa regressão múltipla, a variável dependente deve ser:",
+    "correctCard": "Contínua ou medida em escala de intervalo/razão, com escalas de pelo menos 5 pontos potencialmente aceitáveis.",
+    "wrongCards": [
+      "Sempre dicotómica 0/1.",
+      "Sempre nominal com mais de duas categorias.",
+      "Sempre uma variável de agrupamento com três níveis."
+    ],
+    "explanation": "A regressão linear múltipla prevê uma VD contínua; os preditores podem ser contínuos e, em alguns casos, categóricos.",
+    "source": "MADN — Aula 8, Regressão Linear Múltipla e Regressão Logística",
+    "category": "Regressão múltipla: pressupostos",
+    "difficulty": "médio"
+  },
+  {
+    "id": 232,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Numa regressão múltipla, a distribuição bruta de um preditor é assimétrica. Qual é a leitura mais alinhada com o material?",
+    "correctCard": "O foco da normalidade está nos resíduos, não necessariamente na distribuição bruta das variáveis.",
+    "wrongCards": [
+      "A regressão múltipla fica automaticamente proibida.",
+      "O preditor deve ser transformado em outcome dicotómico.",
+      "A normalidade é avaliada com Box's M."
+    ],
+    "explanation": "Nos pressupostos de regressão linear, a normalidade relevante é a dos resíduos.",
+    "source": "MADN — Aula 8, Regressão Linear Múltipla e Regressão Logística",
+    "category": "Regressão múltipla: normalidade dos resíduos",
+    "difficulty": "médio"
+  },
+  {
+    "id": 233,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Um gráfico de resíduos brutos vs. valores previstos em regressão múltipla mostra dispersão cada vez maior. Qual pressuposto fica fragilizado?",
+    "correctCard": "Homoscedasticidade.",
+    "wrongCards": [
+      "Normalidade multivariada da MANOVA.",
+      "Registo do protocolo PROSPERO.",
+      "Categoria de referência do JASP."
+    ],
+    "explanation": "A homoscedasticidade exige que a magnitude dos resíduos seja aproximadamente semelhante ao longo dos valores previstos.",
+    "source": "MADN — Aula 8, Regressão Linear Múltipla e Regressão Logística",
+    "category": "Regressão múltipla: homoscedasticidade",
+    "difficulty": "médio"
+  },
+  {
+    "id": 234,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Num modelo múltiplo, Cook's Distance = 1.22 para uma observação. Qual ação é mais defensável?",
+    "correctCard": "Examinar a observação como potencialmente influente antes de decidir se deve ser mantida, removida ou analisada com cautela.",
+    "wrongCards": [
+      "Eliminar automaticamente a observação sem justificação.",
+      "Ignorar a observação porque Cook's Distance só se aplica à meta-análise.",
+      "Concluir que todos os preditores são significativos."
+    ],
+    "explanation": "Cook's Distance > 1 sugere observações influentes que devem ser verificadas.",
+    "source": "MADN — Aula 8, Regressão Linear Múltipla e Regressão Logística",
+    "category": "Regressão múltipla: observações influentes",
+    "difficulty": "médio"
+  },
+  {
+    "id": 235,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Um preditor deixa de ser significativo quando outro preditor correlacionado entra no modelo. Qual explicação é mais plausível?",
+    "correctCard": "Parte da variância explicada pelos preditores pode estar sobreposta, reduzindo a contribuição única de um deles.",
+    "wrongCards": [
+      "A regressão múltipla não permite preditores correlacionados em nenhum caso.",
+      "O resultado prova que o primeiro preditor era falso.",
+      "O modelo deve ser sempre transformado em revisão sistemática."
+    ],
+    "explanation": "Preditores correlacionados podem partilhar variância explicativa, pelo que os efeitos únicos podem diminuir.",
+    "source": "MADN — Aula 8, Regressão Linear Múltipla e Regressão Logística",
+    "category": "Regressão múltipla: variância sobreposta",
+    "difficulty": "difícil"
+  },
+  {
+    "id": 236,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Um modelo pretende prever se o participante pertence ao grupo “declínio cognitivo: sim/não”. Que tipo de regressão é mais adequado?",
+    "correctCard": "Regressão logística binária.",
+    "wrongCards": [
+      "Regressão linear simples, porque qualquer outcome pode ser contínuo.",
+      "Regressão logística ordinal, porque sim/não tem várias ordens.",
+      "MANOVA, porque há um único outcome."
+    ],
+    "explanation": "A regressão logística binária é indicada quando a variável dependente tem duas categorias.",
+    "source": "MADN — Aula 8, Regressão Linear Múltipla e Regressão Logística",
+    "category": "Regressão logística: binária",
+    "difficulty": "fácil"
+  },
+  {
+    "id": 237,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "O outcome tem três categorias nominais sem ordem: Alzheimer, Parkinson e AVC. Qual modelo logístico é mais adequado?",
+    "correctCard": "Regressão logística multinomial.",
+    "wrongCards": [
+      "Regressão logística ordinal, porque todas as variáveis com três categorias são ordenadas.",
+      "Regressão linear simples.",
+      "Correlação de Pearson."
+    ],
+    "explanation": "A regressão logística multinomial é usada para outcomes nominais com mais de duas categorias.",
+    "source": "MADN — Aula 8, Regressão Linear Múltipla e Regressão Logística",
+    "category": "Regressão logística: multinomial",
+    "difficulty": "médio"
+  },
+  {
+    "id": 238,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "O outcome é severidade clínica com categorias ordenadas: ligeira, moderada e severa. Qual modelo é mais alinhado com a aula?",
+    "correctCard": "Regressão logística ordinal.",
+    "wrongCards": [
+      "Regressão logística multinomial, porque a ordem deve ser sempre ignorada.",
+      "Regressão linear múltipla obrigatoriamente.",
+      "ANCOVA one-way."
+    ],
+    "explanation": "A regressão logística ordinal é indicada para outcomes com categorias ordenadas.",
+    "source": "MADN — Aula 8, Regressão Linear Múltipla e Regressão Logística",
+    "category": "Regressão logística: ordinal",
+    "difficulty": "médio"
+  },
+  {
+    "id": 239,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Na regressão logística, o modelo é ajustado por maximum likelihood estimation. O que isto significa em termos de enquadramento?",
+    "correctCard": "Distingue-se da regressão linear, e a interpretação centra-se frequentemente em odds e odds ratios.",
+    "wrongCards": [
+      "É idêntico ao cálculo de R² da regressão linear.",
+      "Implica que a VD tem de ser contínua e normal.",
+      "Serve apenas para calcular correlações de Spearman."
+    ],
+    "explanation": "O material refere que a logística usa maximum likelihood e é interpretada em odds/odds ratios.",
+    "source": "MADN — Aula 8, Regressão Linear Múltipla e Regressão Logística",
+    "category": "Regressão logística: especificidades",
+    "difficulty": "difícil"
+  },
+  {
+    "id": 240,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Numa regressão logística, OR = 1.00 para idade. Como interpretar?",
+    "correctCard": "Não há associação entre idade e as odds do evento, segundo esse coeficiente.",
+    "wrongCards": [
+      "A idade duplica as odds do evento.",
+      "A idade reduz as odds para metade.",
+      "O modelo é necessariamente inválido."
+    ],
+    "explanation": "OR = 1.0 indica ausência de associação.",
+    "source": "MADN — Aula 8, Regressão Linear Múltipla e Regressão Logística",
+    "category": "Regressão logística: odds ratio",
+    "difficulty": "fácil"
+  },
+  {
+    "id": 241,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Numa regressão logística, OR = 3.20 para histórico familiar. Qual interpretação é mais adequada?",
+    "correctCard": "O histórico familiar está associado a odds mais elevadas do evento.",
+    "wrongCards": [
+      "O histórico familiar reduz as odds do evento.",
+      "Não existe associação, porque OR só é interpretável abaixo de 1.",
+      "O valor indica que 3,20% da variância foi explicada como num R² linear."
+    ],
+    "explanation": "OR > 1 indica aumento das odds/probabilidade do evento associado ao preditor.",
+    "source": "MADN — Aula 8, Regressão Linear Múltipla e Regressão Logística",
+    "category": "Regressão logística: odds ratio",
+    "difficulty": "fácil"
+  },
+  {
+    "id": 242,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Numa regressão logística, OR = 0.45 para uma intervenção preventiva. Qual interpretação é mais correta?",
+    "correctCard": "A intervenção está associada a odds mais baixas do evento.",
+    "wrongCards": [
+      "A intervenção aumenta as odds do evento.",
+      "OR = 0.45 significa ausência de associação.",
+      "A intervenção explica exatamente 45% da variância."
+    ],
+    "explanation": "OR < 1 indica diminuição das odds/probabilidade do evento.",
+    "source": "MADN — Aula 8, Regressão Linear Múltipla e Regressão Logística",
+    "category": "Regressão logística: odds ratio",
+    "difficulty": "médio"
+  },
+  {
+    "id": 243,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "No exemplo da aula, OR = 13.12 para lateralidade a prever dislexia. Qual leitura é mais alinhada com o resumo?",
+    "correctCard": "Na amostra, indivíduos canhotos foram cerca de 13 vezes mais prováveis de ter diagnóstico de dislexia.",
+    "wrongCards": [
+      "A lateralidade explicou exatamente 13,12% da variância, como R² linear.",
+      "OR acima de 1 significa ausência de associação.",
+      "A análise deve ser uma regressão linear simples."
+    ],
+    "explanation": "O exemplo refere que OR = 13.12 indica odds/probabilidade muito mais elevadas no grupo considerado.",
+    "source": "MADN — Aula 8, Regressão Linear Múltipla e Regressão Logística",
+    "category": "Regressão logística: exemplo aplicado",
+    "difficulty": "médio"
+  },
+  {
+    "id": 244,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Uma estudante interpreta Nagelkerke R² = .18 como “18% da variância explicada, exatamente igual ao R² linear”. Qual é o problema?",
+    "correctCard": "Na regressão logística, pseudo-R² não é um verdadeiro índice de variância explicada como na regressão linear.",
+    "wrongCards": [
+      "Nagelkerke R² só existe na regressão linear simples.",
+      "Pseudo-R² nunca pode ser reportado.",
+      "A interpretação está perfeita e não exige cautela."
+    ],
+    "explanation": "As medidas de pseudo-R² dão uma ideia aproximada de ajustamento/capacidade preditiva, mas não equivalem ao R² linear.",
+    "source": "MADN — Aula 8, Regressão Linear Múltipla e Regressão Logística",
+    "category": "Regressão logística: pseudo-R²",
+    "difficulty": "médio"
+  },
+  {
+    "id": 245,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Qual medida é descrita como versão ajustada do Cox & Snell R² e geralmente maior?",
+    "correctCard": "Nagelkerke R².",
+    "wrongCards": [
+      "Tjur's R².",
+      "Cook's Distance.",
+      "Durbin-Watson."
+    ],
+    "explanation": "O resumo apresenta Nagelkerke R² como versão ajustada do Cox & Snell.",
+    "source": "MADN — Aula 8, Regressão Linear Múltipla e Regressão Logística",
+    "category": "Regressão logística: pseudo-R²",
+    "difficulty": "médio"
+  },
+  {
+    "id": 246,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Qual pseudo-R² é descrito como mais intuitivo e baseado em probabilidades previstas?",
+    "correctCard": "Tjur's R², ou Coefficient of Discrimination.",
+    "wrongCards": [
+      "Box's M.",
+      "Fisher's LSD.",
+      "Eta parcial ao quadrado."
+    ],
+    "explanation": "Tjur's R² é apresentado como uma medida intuitiva de discriminação baseada em probabilidades previstas.",
+    "source": "MADN — Aula 8, Regressão Linear Múltipla e Regressão Logística",
+    "category": "Regressão logística: Tjur's R²",
+    "difficulty": "difícil"
+  },
+  {
+    "id": 247,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "No exemplo do Titanic, o teste de razão de verosimilhança mostrou que adicionar idade e classe melhorou o modelo face a quê?",
+    "correctCard": "Face ao modelo nulo.",
+    "wrongCards": [
+      "Face ao funnel plot.",
+      "Face ao teste de Levene.",
+      "Face à matriz PRISMA."
+    ],
+    "explanation": "O resumo indica que o teste de razão de verosimilhança comparou o modelo ajustado com o modelo nulo.",
+    "source": "MADN — Aula 8, Regressão Linear Múltipla e Regressão Logística",
+    "category": "Regressão logística: comparação de modelos",
+    "difficulty": "difícil"
+  },
+  {
+    "id": 248,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Os pseudo-R² no exemplo do Titanic situaram-se aproximadamente entre .11 e .19. Qual interpretação é mais adequada?",
+    "correctCard": "Sugerem capacidade explicativa modesta.",
+    "wrongCards": [
+      "Provam uma capacidade explicativa perfeita.",
+      "Indicam que o modelo é inválido por definição.",
+      "Mostram que a VD era contínua."
+    ],
+    "explanation": "O resumo interpreta estes valores como indicativos de capacidade explicativa modesta.",
+    "source": "MADN — Aula 8, Regressão Linear Múltipla e Regressão Logística",
+    "category": "Regressão logística: interpretação do modelo",
+    "difficulty": "médio"
+  },
+  {
+    "id": 249,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Na regressão logística, que escala deve ter a variável dependente?",
+    "correctCard": "Nominal ou ordinal.",
+    "wrongCards": [
+      "Sempre intervalar/razão.",
+      "Sempre uma escala visual analógica contínua.",
+      "Sempre uma covariável."
+    ],
+    "explanation": "A regressão logística é usada quando a variável dependente é nominal ou ordinal.",
+    "source": "MADN — Aula 8, Regressão Linear Múltipla e Regressão Logística",
+    "category": "Regressão logística: pressupostos",
+    "difficulty": "fácil"
+  },
+  {
+    "id": 250,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Numa regressão logística, os preditores podem ser:",
+    "correctCard": "Contínuos, ordinais ou nominais.",
+    "wrongCards": [
+      "Apenas contínuos normalmente distribuídos.",
+      "Apenas nominais dicotómicos.",
+      "Apenas variáveis dependentes."
+    ],
+    "explanation": "O resumo refere que os preditores da regressão logística podem ser contínuos, ordinais ou nominais.",
+    "source": "MADN — Aula 8, Regressão Linear Múltipla e Regressão Logística",
+    "category": "Regressão logística: preditores",
+    "difficulty": "fácil"
+  },
+  {
+    "id": 251,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Qual afirmação sobre normalidade na regressão logística está correta?",
+    "correctCard": "A regressão logística não exige preditores nem variável dependente normalmente distribuídos.",
+    "wrongCards": [
+      "A regressão logística exige normalidade multivariada.",
+      "A regressão logística só é válida se skewness < |2.0| e kurtosis < |9.0|.",
+      "A regressão logística exige que a VD seja contínua e normal."
+    ],
+    "explanation": "O material é explícito: a regressão logística não assume normalidade.",
+    "source": "MADN — Aula 8, Regressão Linear Múltipla e Regressão Logística",
+    "category": "Regressão logística: normalidade",
+    "difficulty": "médio"
+  },
+  {
+    "id": 252,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Numa regressão logística múltipla, dois preditores estão fortemente correlacionados. Qual é a preocupação principal?",
+    "correctCard": "A multicolinearidade pode dificultar a interpretação das odds ratios.",
+    "wrongCards": [
+      "A multicolinearidade melhora sempre a interpretação das odds ratios.",
+      "O outcome deixa de ser nominal ou ordinal.",
+      "O modelo passa a ser automaticamente uma MANOVA."
+    ],
+    "explanation": "Na regressão logística múltipla, a multicolinearidade é problemática porque afeta a interpretação das OR.",
+    "source": "MADN — Aula 8, Regressão Linear Múltipla e Regressão Logística",
+    "category": "Regressão logística: multicolinearidade",
+    "difficulty": "médio"
+  },
+  {
+    "id": 253,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Uma equipa quer testar efeitos únicos dos preditores numa regressão logística. O que deve considerar sobre tamanho amostral?",
+    "correctCard": "Serão necessárias amostras maiores do que se o objetivo fosse apenas previsão global.",
+    "wrongCards": [
+      "O tamanho amostral não importa em regressão logística.",
+      "Basta sempre N = 10, independentemente do número de preditores.",
+      "Deve usar os critérios PICO em vez de poder estatístico."
+    ],
+    "explanation": "O resumo refere que, para testar efeitos únicos dos preditores, são necessárias amostras maiores.",
+    "source": "MADN — Aula 8, Regressão Linear Múltipla e Regressão Logística",
+    "category": "Regressão logística: tamanho amostral",
+    "difficulty": "difícil"
+  },
+  {
+    "id": 254,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Qual frase de reporte é mais adequada para uma regressão logística?",
+    "correctCard": "O modelo logístico foi significativo, χ²(df) = valor, p = valor; reportou-se pseudo-R² e OR dos preditores relevantes.",
+    "wrongCards": [
+      "Foi reportado apenas R² linear verdadeiro e slope b, sem OR.",
+      "Foi reportado Box's M como teste principal do modelo.",
+      "Foi reportado I² como medida de classificação individual."
+    ],
+    "explanation": "O reporte de regressão logística deve incluir χ² do modelo, graus de liberdade, p, pseudo-R² e odds ratios.",
+    "source": "MADN — Aula 8, Regressão Linear Múltipla e Regressão Logística",
+    "category": "Regressão logística: reporte",
+    "difficulty": "médio"
+  },
+  {
+    "id": 255,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Num relatório de regressão logística, OR = 0.72, p = .030 para escolaridade. Qual interpretação textual é mais adequada?",
+    "correctCard": "A escolaridade está associada a diminuição das odds do evento, e esse preditor é estatisticamente significativo.",
+    "wrongCards": [
+      "A escolaridade aumenta as odds do evento, porque OR é positivo.",
+      "Não há associação, porque qualquer OR abaixo de 1 é inválido.",
+      "A escolaridade explica exatamente 72% da variância da VD."
+    ],
+    "explanation": "OR < 1 indica diminuição das odds; p = .030 sugere significância estatística para esse preditor.",
+    "source": "MADN — Aula 8, Regressão Linear Múltipla e Regressão Logística",
+    "category": "Regressão logística: interpretação e reporte",
+    "difficulty": "médio"
+  },
+  {
+    "id": 256,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Um investigador quer prever recuperação clínica codificada como 0 = não recuperou e 1 = recuperou, usando idade, grupo terapêutico e pontuação inicial. Qual modelo é mais adequado?",
+    "correctCard": "Regressão logística binária com vários preditores.",
+    "wrongCards": [
+      "Regressão linear múltipla, porque existem vários preditores.",
+      "Correlação de Pearson, porque o outcome é 0/1.",
+      "One-way ANOVA, porque há covariáveis."
+    ],
+    "explanation": "Quando o outcome é dicotómico, a regressão logística binária é adequada, podendo incluir vários preditores.",
+    "source": "MADN — Aula 8, Regressão Linear Múltipla e Regressão Logística",
+    "category": "Regressão logística: caso aplicado",
+    "difficulty": "médio"
+  },
+  {
+    "id": 257,
+    "course": "MADN",
+    "type": "exercício de exame",
+    "question": "Num estudo com outcome nominal, a equipa interpreta OR = 1.80 como “aumento da variância explicada”. Qual correção é mais adequada?",
+    "correctCard": "OR refere-se às odds do evento/categoria, não à variância explicada como no R² linear.",
+    "wrongCards": [
+      "OR e R² são sinónimos em regressão logística.",
+      "OR só se usa em regressão linear simples.",
+      "OR não pode ser maior do que 1."
+    ],
+    "explanation": "Na regressão logística, a interpretação centra-se em odds e odds ratios, não em variância explicada no sentido linear.",
+    "source": "MADN — Aula 8, Regressão Linear Múltipla e Regressão Logística",
+    "category": "Regressão logística: interpretação conceptual",
+    "difficulty": "médio"
   }
 ]

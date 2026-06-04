@@ -1,5 +1,6 @@
 {
-  "version": 1,
-  "description": "Estrutura inicial/exemplo. O histórico real é guardado no localStorage do navegador.",
-  "games": []
+  "version": 5,
+  "description": "Estrutura inicial/exemplo. O hist\u00f3rico real \u00e9 guardado no localStorage do navegador.",
+  "games": [],
+  "questionStats": []
 }

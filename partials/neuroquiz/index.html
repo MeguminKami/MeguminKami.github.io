@@ -50,8 +50,18 @@
         <h2 id="courseMenuTitle">A tua cadeira</h2>
         <p id="courseMenuName" class="course-menu-name"></p>
         <p id="courseMenuDescription" class="cute-helper-text"></p>
+        <h3 class="course-mode-title">Modo de jogo</h3>
+        <div class="mode-selector play-mode-selector" role="group" aria-label="Modo de jogo">
+          <button class="mode-card play-mode-card" type="button" data-play-mode="normal">
+            <strong>Jogo Normal</strong>
+            <span>Perguntas aleat&oacute;rias</span>
+          </button>
+          <button class="mode-card play-mode-card" type="button" data-play-mode="reinforcement">
+            <strong>Treino de Refor&ccedil;o</strong>
+            <span id="reinforcementModeMeta">Foco nos erros</span>
+          </button>
+        </div>
         <div class="course-menu-actions">
-          <button id="goSetupBtn" class="btn btn-primary big" type="button">Jogar</button>
           <button id="goHistoryBtn" class="btn btn-secondary big" type="button">Ver hist&oacute;rico da cadeira</button>
         </div>
       </div>
@@ -61,6 +71,7 @@
       <div class="panel doodle-card narrow">
         <button class="btn ghost back-course-menu" type="button">&larr; Menu da cadeira</button>
         <span class="current-course-pill">LCNC</span>
+        <span class="current-play-mode-pill">Jogo Normal</span>
         <h2 id="setupTitle">Prepara a tua mar&eacute;</h2>
         <div id="countSetupStep" class="setup-section">
           <h3>Quantas perguntas queres jogar?</h3>
@@ -97,7 +108,7 @@
             <button class="btn pastel green time-limit" type="button" data-time-limit="none" aria-pressed="false">Sem limite</button>
           </div>
           <button id="startGameBtn" class="btn btn-primary big start-game-btn" type="button" disabled>Come&ccedil;ar jogo</button>
-          <div class="soft-note">Cada jogo escolhe perguntas aleat&oacute;rias e baralha a posi&ccedil;&atilde;o dos cart&otilde;es.</div>
+          <div id="setupModeNote" class="soft-note">Perguntas aleat&oacute;rias da cadeira.</div>
         </div>
       </div>
     </section>
