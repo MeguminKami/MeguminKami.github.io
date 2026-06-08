@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="description"
+        content="Batalha Naval RPG - Qt/C++ tactical Battleship RPG with character skills, action points, CPU play, and TCP online multiplayer."
+    >
+    <title>Batalha Naval RPG - Project</title>
+    <link rel="icon" type="image/png" href="/assets/projects/batalha-naval-rpg/logo.png">
+    <link rel="stylesheet" href="/styles/main.css">
+</head>
+<body>
+<div class="bgGlow"></div>
+
+<div class="wrap">
+    <div id="siteHeader" class="siteHeader"></div>
+
+    <a href="/index.html#projects" class="backLink">
+        &larr; Back to Projects
+    </a>
+
+    <article class="projectArticle projectArticle--wide projectArticle--metrics-spaced bnrpgProject">
+        <header class="projectHeader">
+            <div class="projectHero">
+                <div class="projectHeroMedia">
+                    <img
+                        src="/assets/projects/batalha-naval-rpg/logo.png"
+                        alt=""
+                        class="projectTitleIcon"
+                        aria-hidden="true"
+                        loading="eager"
+                    >
+                </div>
+                <div class="projectHeroBody">
+                    <div class="projectHeroIntro">
+                        <h1 class="projectTitle">Batalha Naval RPG</h1>
+                        <p class="lead">
+                            A desktop <code>Qt/C++</code> game that turns classic Battleship into a tactical RPG.
+                            It combines ship placement and hit detection with character classes, skills, action
+                            points, cooldowns, audio, a CPU opponent, and lightweight TCP online play.
+                        </p>
+                    </div>
+
+                    <div class="quickFacts">
+                        <div class="factItem">
+                            <span class="factLabel">Latest Update</span>
+                            <span class="factValue" data-project-latest-update>Sep 17, 2020</span>
+                        </div>
+                        <div class="factItem">
+                            <span class="factLabel">Type</span>
+                            <span class="factValue">Desktop Game</span>
+                        </div>
+                        <div class="factItem">
+                            <span class="factLabel">Category</span>
+                            <span class="factValue">C++ / Qt Widgets</span>
+                        </div>
+                        <div class="factItem">
+                            <span class="factLabel">Status</span>
+                            <span class="factValue grad">Complete</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="projectContent">
+            <div class="projectMain">
+                <section class="contentSection sectionCard">
+                    <h2>Overview</h2>
+                    <p class="muted">
+                        Batalha Naval RPG is built as a Qt Widgets desktop application. The game keeps the familiar
+                        12 x 12 naval grid, then adds RPG-style commanders, skill areas, cooldowns, passives,
+                        action-point decisions, themed resources, and two match paths: offline play against a CPU
+                        and online host/join play through a simple relay server.
+                    </p>
+
+                    <div class="metricsGrid">
+                        <div class="metricCard">
+                            <div class="metricValue grad">12 x 12</div>
+                            <div class="metricLabel">Board Grid</div>
+                            <p class="smallText muted">Each square maps to a 40 px Qt scene cell.</p>
+                        </div>
+                        <div class="metricCard">
+                            <div class="metricValue grad2">6</div>
+                            <div class="metricLabel">Ships</div>
+                            <p class="smallText muted">Draggable, rotatable, snap-to-grid placement objects.</p>
+                        </div>
+                        <div class="metricCard">
+                            <div class="metricValue grad">3</div>
+                            <div class="metricLabel">Characters</div>
+                            <p class="smallText muted">Captain, Pirate, and Space Commander skill sets.</p>
+                        </div>
+                        <div class="metricCard">
+                            <div class="metricValue grad2">2</div>
+                            <div class="metricLabel">Game Modes</div>
+                            <p class="smallText muted">Offline CPU matches and online host/join multiplayer.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="contentSection sectionCard">
+                    <h2>Technical Stack</h2>
+                    <div class="techList">
+                        <span class="techItem">C++17</span>
+                        <span class="techItem">Qt 6 Widgets</span>
+                        <span class="techItem">Qt Multimedia</span>
+                        <span class="techItem">Qt Network</span>
+                        <span class="techItem">CMake</span>
+                        <span class="techItem">Ninja</span>
+                        <span class="techItem">PowerShell</span>
+                        <span class="techItem">Qt Resource System</span>
+                    </div>
+                </section>
+
+                <section class="contentSection sectionCard storySection">
+                    <div class="storyIntro">
+                        <h2>Project Story</h2>
+                        <p class="muted">
+                            The project focuses on keeping Battleship readable while adding enough RPG systems to make
+                            every turn more tactical than a single coordinate guess.
+                        </p>
+                    </div>
+
+                    <div class="storyFlow">
+                        <div class="storyCard storyProblem">
+                            <div class="storyCardHeader">
+                                <span class="storyTag">Problem</span>
+                            </div>
+                            <p class="muted">
+                                Classic Battleship is easy to understand, but its turn structure can become repetitive.
+                                A richer version needs more decisions without losing the certainty of grid-based hits,
+                                misses, ship destruction, and victory checks.
+                            </p>
+                        </div>
+
+                        <div class="storyCard storyIdea">
+                            <div class="storyCardHeader">
+                                <span class="storyTag">Design Goal</span>
+                            </div>
+                            <p class="muted">
+                                Keep the board deterministic and readable, then layer character identity over it:
+                                different skills, passives, action costs, cooldown pressure, area previews, and audio
+                                feedback tied to each mode and commander.
+                            </p>
+                        </div>
+
+                        <div class="storyCard storySolution">
+                            <div class="storyCardHeader">
+                                <span class="storyTag">Solution</span>
+                            </div>
+                            <p class="muted">
+                                A central <code>MainWindow</code> coordinates stacked pages, placement, turns, audio,
+                                CPU signals, and network packets while the game domain owns boards, players, ships,
+                                characters, skills, previews, and hit-response logic.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="system-widget" class="contentSection sectionCard">
+                    <h2>Tactical Systems Widget</h2>
+                    <p class="muted">
+                        Static, deterministic preview of the core runtime states. The paired boards keep the same
+                        12 x 12 proportions in every mode so placement, attacks, and relay state are easy to compare.
+                    </p>
+
+                    <div class="bnrpgWidget" data-bnrpg-widget>
+                        <aside class="bnrpgWidgetSidebar">
+                            <h3>Runtime Views</h3>
+                            <p class="muted smallText">
+                                Switch between the main systems without changing board scale.
+                            </p>
+
+                            <div class="bnrpgModeList" role="tablist" aria-label="Batalha Naval RPG system views">
+                                <button type="button" class="bnrpgModeBtn active" data-bnrpg-mode="placement">
+                                    <span>Placement</span>
+                                    <small>ships, rotation, validation</small>
+                                </button>
+                                <button type="button" class="bnrpgModeBtn" data-bnrpg-mode="turn">
+                                    <span>Skill Turn</span>
+                                    <small>AP, AOE, hit feedback</small>
+                                </button>
+                                <button type="button" class="bnrpgModeBtn" data-bnrpg-mode="online">
+                                    <span>Online Relay</span>
+                                    <small>host, join, packet flow</small>
+                                </button>
+                            </div>
+                        </aside>
+
+                        <section class="bnrpgWidgetPanel" aria-live="polite">
+                            <div class="bnrpgWidgetTopbar">
+                                <div class="bnrpgWidgetDots" aria-hidden="true">
+                                    <span></span><span></span><span></span>
+                                </div>
+                                <div class="bnrpgWidgetTitleBar">qt / batalha-naval-rpg</div>
+                            </div>
+
+                            <div class="bnrpgWidgetBody">
+                                <div class="bnrpgWidgetHeader">
+                                    <div>
+                                        <span class="bnrpgModeBadge" data-bnrpg-badge>Placement</span>
+                                        <h3 data-bnrpg-title>Placement Board</h3>
+                                        <p class="muted smallText" data-bnrpg-description></p>
+                                    </div>
+                                    <span class="bnrpgWidgetMeta" data-bnrpg-meta>QGraphicsScene</span>
+                                </div>
+
+                                <div class="bnrpgStatGrid" data-bnrpg-stats></div>
+
+                                <div class="bnrpgBoardPair">
+                                    <div class="bnrpgBoardCard">
+                                        <h3 data-bnrpg-player-label>Player Board</h3>
+                                        <div
+                                            class="bnrpgBoard"
+                                            data-bnrpg-player-board
+                                            role="img"
+                                            aria-label="Player tactical board preview"
+                                        ></div>
+                                    </div>
+
+                                    <div class="bnrpgBoardCard">
+                                        <h3 data-bnrpg-enemy-label>Enemy Board</h3>
+                                        <div
+                                            class="bnrpgBoard"
+                                            data-bnrpg-enemy-board
+                                            role="img"
+                                            aria-label="Enemy tactical board preview"
+                                        ></div>
+                                    </div>
+                                </div>
+
+                                <div class="bnrpgSkillStrip" data-bnrpg-skills></div>
+                            </div>
+                        </section>
+                    </div>
+                </section>
+
+                <section id="game-demo" class="contentSection sectionCard">
+                    <h2>Interactive Game Demo</h2>
+                    <p class="muted">
+                        Embedded PDF export of the original game flow presentation. The frame keeps one slide visible
+                        at a time while preserving the clickable navigation buttons inside the PDF.
+                    </p>
+
+                    <div
+                        class="bnrpgPdfDemo"
+                        data-bnrpg-pdf-demo
+                        data-bnrpg-pdf-src="/assets/projects/batalha-naval-rpg/game-demo.pdf"
+                        data-bnrpg-pdf-pages="12"
+                    >
+                        <div class="bnrpgPdfControls">
+                            <button type="button" class="bnrpgPdfBtn" data-bnrpg-pdf-reset aria-label="Reset demo to first page">
+                                Reset
+                            </button>
+                            <div class="bnrpgPdfNav" role="group" aria-label="PDF page navigation">
+                                <button type="button" class="bnrpgPdfIconBtn" data-bnrpg-pdf-prev aria-label="Previous PDF page">
+                                    &larr;
+                                </button>
+                                <span class="bnrpgPdfPageCounter" data-bnrpg-pdf-counter>1 / 12</span>
+                                <button type="button" class="bnrpgPdfIconBtn" data-bnrpg-pdf-next aria-label="Next PDF page">
+                                    &rarr;
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="bnrpgPdfStage">
+                            <iframe
+                                class="bnrpgPdfFrame"
+                                data-bnrpg-pdf-frame
+                                title="Batalha Naval RPG interactive game demo"
+                                loading="lazy"
+                                scrolling="no"
+                            ></iframe>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="contentSection sectionCard">
+                    <h2>Source Architecture</h2>
+                    <p class="muted">
+                        The implementation is organized around four practical layers. UI state lives in
+                        <code>MainWindow</code>, game rules live under <code>src/game</code>, audio and networking
+                        are service wrappers, and all visual, font, and sound assets are embedded through Qt resources.
+                    </p>
+
+                    <div class="architectureGrid architectureGrid--threeColumn">
+                        <div class="architectureCard">
+                            <div class="architectureIcon">UI</div>
+                            <h3>Presentation</h3>
+                            <p class="smallText muted">
+                                <code>MainWindow</code>, stacked widgets, character selection, placement screens,
+                                turn screens, options, victory, and defeat flow.
+                            </p>
+                        </div>
+                        <div class="architectureCard">
+                            <div class="architectureIcon">GM</div>
+                            <h3>Game Domain</h3>
+                            <p class="smallText muted">
+                                <code>board</code>, <code>objects</code>, <code>player</code>, <code>cpu</code>,
+                                <code>character</code>, <code>skill</code>, and <code>preview</code>.
+                            </p>
+                        </div>
+                        <div class="architectureCard">
+                            <div class="architectureIcon">SV</div>
+                            <h3>Services</h3>
+                            <p class="smallText muted">
+                                <code>Sounds</code> wraps Qt Multimedia. <code>Client</code> and <code>Server</code>
+                                wrap Qt TCP sockets and relay packets.
+                            </p>
+                        </div>
+                        <div class="architectureCard">
+                            <div class="architectureIcon">QRC</div>
+                            <h3>Resources</h3>
+                            <p class="smallText muted">
+                                Images, fonts, and sounds stay behind stable runtime paths such as
+                                <code>:/resources</code>, <code>:/fonts</code>, and <code>qrc:/sounds</code>.
+                            </p>
+                        </div>
+                        <div class="architectureCard">
+                            <div class="architectureIcon">CM</div>
+                            <h3>Build System</h3>
+                            <p class="smallText muted">
+                                CMake enables <code>AUTOUIC</code>, <code>AUTOMOC</code>, and
+                                <code>AUTORCC</code>, then links Widgets, Multimedia, and Network.
+                            </p>
+                        </div>
+                        <div class="architectureCard">
+                            <div class="architectureIcon">PS</div>
+                            <h3>Windows Helpers</h3>
+                            <p class="smallText muted">
+                                PowerShell scripts provide the preferred build, run, and packaged-run commands for the
+                                Windows Qt MinGW setup.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="contentSection sectionCard">
+                    <h2>Character and Skill Model</h2>
+                    <p class="muted">
+                        Each character has one normal skill, three stronger skills, and one passive. Skills carry
+                        names, descriptions, action costs, cooldowns, AOE dimensions, placement state, and destroy
+                        behavior flags.
+                    </p>
+
+                    <div class="tableWrapper">
+                        <table class="comparisonTable">
+                            <thead>
+                            <tr>
+                                <th>Character</th>
+                                <th>Normal</th>
+                                <th>Primary</th>
+                                <th>Secondary</th>
+                                <th>Ultimate</th>
+                                <th>Passive</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td class="highlight">Captain</td>
+                                <td>Radar</td>
+                                <td>Air Strike</td>
+                                <td>Torpedo</td>
+                                <td>Nuclear</td>
+                                <td>Radar-focused normal skill</td>
+                            </tr>
+                            <tr>
+                                <td class="highlight">Pirate</td>
+                                <td>Cannon Ball</td>
+                                <td>Cannon Barrage</td>
+                                <td>Explosive Barel</td>
+                                <td>Humungous!</td>
+                                <td>Looting action-point bonus</td>
+                            </tr>
+                            <tr>
+                                <td class="highlight">Space Commander</td>
+                                <td>Phaser Weapon</td>
+                                <td>Ion Blaster</td>
+                                <td>Double Beam</td>
+                                <td>Superlaser</td>
+                                <td>Phaser can shoot again on hit</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section class="contentSection sectionCard">
+                    <h2>Gameplay Flow</h2>
+                    <p class="muted">
+                        Offline mode connects <code>player</code> and <code>cpu</code> with Qt signals. Online mode
+                        uses the same turn concepts, but sends compact packet codes through a relay server instead of
+                        direct local calls.
+                    </p>
+
+                    <div class="processSteps bnrpgProcessSteps">
+                        <div class="processStep">
+                            <div class="stepNumber">1</div>
+                            <h4>Choose Mode</h4>
+                            <p class="smallText muted">Create, join, or start offline against the CPU.</p>
+                        </div>
+                        <div class="processStep">
+                            <div class="stepNumber">2</div>
+                            <h4>Select Character</h4>
+                            <p class="smallText muted">Load commander skills, passive, preview image, and theme.</p>
+                        </div>
+                        <div class="processStep">
+                            <div class="stepNumber">3</div>
+                            <h4>Place Ships</h4>
+                            <p class="smallText muted">Drag, rotate, snap, validate, then mark placement ready.</p>
+                        </div>
+                        <div class="processStep">
+                            <div class="stepNumber">4</div>
+                            <h4>Resolve Turns</h4>
+                            <p class="smallText muted">Select a skill, preview its AOE, spend AP, and process hits.</p>
+                        </div>
+                        <div class="processStep">
+                            <div class="stepNumber">5</div>
+                            <h4>Check Outcome</h4>
+                            <p class="smallText muted">Ask destroy and victory responses until one player loses.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="contentSection sectionCard">
+                    <h2>Online Multiplayer Protocol</h2>
+                    <p class="muted">
+                        The server is intentionally small: it accepts two sockets and relays bytes. It does not own game
+                        rules, validate attacks, or act as an authoritative match server. The clients and UI interpret
+                        packet codes and payloads.
+                    </p>
+
+                    <div class="detailGrid detailGrid--threeColumn">
+                        <div class="detailCard">
+                            <div class="detailHeader">
+                                <div class="detailIcon">H</div>
+                                <h3>Host Flow</h3>
+                            </div>
+                            <p class="smallText muted">
+                                Host starts the relay server, receives a share code, connects as client 1, and waits for
+                                the second socket.
+                            </p>
+                        </div>
+                        <div class="detailCard">
+                            <div class="detailHeader">
+                                <div class="detailIcon">J</div>
+                                <h3>Join Flow</h3>
+                            </div>
+                            <p class="smallText muted">
+                                Joiner decodes the share code, connects as client 2, then exchanges player info and
+                                ready states.
+                            </p>
+                        </div>
+                        <div class="detailCard">
+                            <div class="detailHeader">
+                                <div class="detailIcon">P</div>
+                                <h3>Packets</h3>
+                            </div>
+                            <p class="smallText muted">
+                                Single-character packet prefixes cover player info, placement readiness, hits, destroys,
+                                victory checks, turn passing, and radar.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="tableWrapper">
+                        <table class="comparisonTable">
+                            <thead>
+                            <tr>
+                                <th>Packet Group</th>
+                                <th>Codes</th>
+                                <th>Purpose</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td class="highlight">Setup</td>
+                                <td><code>INFO_P</code>, <code>R_P</code>, <code>PLACE_R</code></td>
+                                <td>Exchange player info, move into placement, and signal ready state.</td>
+                            </tr>
+                            <tr>
+                                <td class="highlight">Combat</td>
+                                <td><code>AHIT_P</code>, <code>RHIT_P</code>, <code>ADESTROY_P</code>, <code>RDESTROY_P</code></td>
+                                <td>Ask hit and destruction questions, then relay deterministic responses.</td>
+                            </tr>
+                            <tr>
+                                <td class="highlight">Turn State</td>
+                                <td><code>AVIC_P</code>, <code>RVIC_P</code>, <code>TURN_P</code></td>
+                                <td>Check victory or loss state and hand control to the opponent.</td>
+                            </tr>
+                            <tr>
+                                <td class="highlight">Radar</td>
+                                <td><code>ARADAR_P</code>, <code>RRADAR_P</code></td>
+                                <td>Ask and answer radar information for targeted board positions.</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section class="contentSection sectionCard">
+                    <h2>Build and Smoke Test</h2>
+                    <p class="muted">
+                        The preferred setup is Windows with Qt 6 MinGW 64-bit. The helper scripts keep the Qt path
+                        explicit so configure, build, run, and packaged-run behavior remains repeatable.
+                    </p>
+
+                    <pre class="bnrpgCodeBlock"><code>$env:QT_DIR = "C:\Qt\6.6.1\mingw_64"
+.\scripts\build.ps1 -QtDir $env:QT_DIR
+.\scripts\run.ps1 -QtDir $env:QT_DIR
+.\scripts\run-packaged.ps1</code></pre>
+
+                    <div class="tipsGrid">
+                        <div class="tipsCard">
+                            <div class="tipsIcon">1</div>
+                            <div>
+                                <h4>Offline certainty</h4>
+                                <p class="smallText muted">
+                                    Launch, choose a character, place all ships, start a CPU match, use skills, and
+                                    verify hits, misses, turns, victory, and defeat screens.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="tipsCard">
+                            <div class="tipsIcon">2</div>
+                            <div>
+                                <h4>Online certainty</h4>
+                                <p class="smallText muted">
+                                    Run two instances, host with a share code, join from the second client, place ships,
+                                    pass turns, and verify hit, destroy, radar, and victory packets.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="tipsCard">
+                            <div class="tipsIcon">3</div>
+                            <div>
+                                <h4>Resource certainty</h4>
+                                <p class="smallText muted">
+                                    Confirm the icon, character art, ships, backgrounds, fonts, button sounds, themes,
+                                    hit effects, victory music, and defeat music load from Qt resources.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="contentSection sectionCard">
+                    <h2>Known Constraints</h2>
+                    <div class="calloutBox calloutInfo">
+                        <div class="calloutIcon">i</div>
+                        <div>
+                            <h4>Project Boundaries</h4>
+                            <p class="smallText">
+                                The project is designed around Qt Widgets rather than QML. Most UI state is coordinated
+                                by one large <code>MainWindow</code>, and online play uses a lightweight relay server
+                                rather than a secure authoritative backend.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="contentSection sectionCard ctaSection">
+                    <h2>Project Links</h2>
+                    <p class="muted smallText">
+                        Inspect the systems widget or return to the full portfolio project list.
+                    </p>
+                    <div class="projectLinks">
+                        <a href="#system-widget" class="btn primary">Inspect Widget</a>
+                        <a href="#game-demo" class="btn quaternary">Open Demo</a>
+                        <a href="/index.html#projects" class="btn secondary">&larr; Back to Projects</a>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </article>
+
+    <div id="siteFooter" class="siteFooter"></div>
+</div>
+
+<script type="module" src="/scripts/main.js"></script>
+</body>
+</html>

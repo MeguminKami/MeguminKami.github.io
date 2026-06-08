@@ -1,0 +1,540 @@
+.bnrpgProject {
+    --bnrpg-blue: var(--accent-blue);
+    --bnrpg-cyan: var(--accent-cyan);
+    --bnrpg-gold: var(--accent-amber);
+    --bnrpg-rose: var(--accent-rose);
+    --bnrpg-emerald: var(--accent-emerald);
+    --bnrpg-navy: #0d1729;
+}
+
+.bnrpgProject .projectTitleIcon {
+    object-fit: contain;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+    padding: 0;
+}
+
+.bnrpgWidget {
+    display: grid;
+    grid-template-columns: minmax(240px, 300px) minmax(0, 1fr);
+    gap: 1rem;
+    margin-top: 1.25rem;
+}
+
+.bnrpgWidgetSidebar,
+.bnrpgWidgetPanel {
+    background: linear-gradient(180deg, var(--surface), var(--surface-2));
+    border: 1px solid var(--border);
+    border-radius: calc(var(--radius) + 2px);
+    box-shadow: var(--shadow-sm);
+}
+
+.bnrpgWidgetSidebar {
+    align-self: start;
+    position: sticky;
+    top: 1rem;
+    padding: 1rem;
+}
+
+.bnrpgWidgetSidebar h3 {
+    margin: 0 0 0.65rem;
+    color: var(--bnrpg-gold);
+}
+
+.bnrpgWidgetSidebar .smallText {
+    margin: 0 0 0.85rem;
+}
+
+.bnrpgModeList {
+    display: grid;
+    gap: 0.55rem;
+}
+
+.bnrpgModeBtn {
+    width: 100%;
+    display: grid;
+    gap: 0.2rem;
+    text-align: left;
+    border: 1px solid var(--border);
+    background: rgba(255, 255, 255, 0.02);
+    color: var(--text);
+    border-radius: 0.75rem;
+    padding: 0.72rem 0.78rem;
+    cursor: pointer;
+    transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    font: inherit;
+}
+
+.bnrpgModeBtn small {
+    color: var(--text-muted);
+    font-size: 0.78rem;
+}
+
+.bnrpgModeBtn:hover,
+.bnrpgModeBtn.active {
+    border-color: var(--bnrpg-gold);
+    background: var(--accent-amber-soft);
+    transform: translateY(-1px);
+}
+
+.bnrpgModeBtn:focus-visible {
+    outline: 2px solid var(--bnrpg-gold);
+    outline-offset: 2px;
+}
+
+.bnrpgWidgetPanel {
+    overflow: hidden;
+}
+
+.bnrpgWidgetTopbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.85rem 1rem;
+    border-bottom: 1px solid var(--border);
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.bnrpgWidgetDots {
+    display: inline-flex;
+    gap: 0.4rem;
+}
+
+.bnrpgWidgetDots span {
+    width: 0.6rem;
+    height: 0.6rem;
+    display: block;
+    border-radius: 50%;
+}
+
+.bnrpgWidgetDots span:nth-child(1) {
+    background: #fb7185;
+}
+
+.bnrpgWidgetDots span:nth-child(2) {
+    background: #facc15;
+}
+
+.bnrpgWidgetDots span:nth-child(3) {
+    background: #4ade80;
+}
+
+.bnrpgWidgetTitleBar {
+    color: var(--text-muted);
+    font-size: 0.84rem;
+}
+
+.bnrpgWidgetBody {
+    display: grid;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.bnrpgWidgetHeader {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 1rem;
+    align-items: start;
+}
+
+.bnrpgWidgetHeader h3 {
+    margin: 0.45rem 0 0.35rem;
+}
+
+.bnrpgModeBadge,
+.bnrpgWidgetMeta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 2rem;
+    border-radius: 999px;
+    padding: 0.35rem 0.72rem;
+    border: 1px solid rgba(251, 191, 36, 0.25);
+    background: var(--accent-amber-soft);
+    color: var(--bnrpg-gold);
+    font-size: 0.78rem;
+    font-weight: 700;
+}
+
+.bnrpgWidgetMeta {
+    justify-self: end;
+    border-color: rgba(45, 212, 255, 0.22);
+    background: var(--accent-blue-soft);
+    color: var(--bnrpg-blue);
+    white-space: nowrap;
+}
+
+.bnrpgStatGrid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.75rem;
+}
+
+.bnrpgStatCard {
+    min-height: 5.75rem;
+    display: grid;
+    align-content: center;
+    gap: 0.35rem;
+    padding: 0.9rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--surface-2);
+}
+
+.bnrpgStatValue {
+    color: var(--bnrpg-gold);
+    font-size: 1.15rem;
+    font-weight: 800;
+    line-height: 1.1;
+}
+
+.bnrpgStatLabel {
+    color: var(--text-muted);
+    font-size: 0.82rem;
+}
+
+.bnrpgBoardPair {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+    align-items: start;
+}
+
+.bnrpgBoardCard {
+    display: grid;
+    gap: 0.75rem;
+    min-width: 0;
+    padding: 0.9rem;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+}
+
+.bnrpgBoardCard h3 {
+    margin: 0;
+    color: var(--text);
+    font-size: 0.95rem;
+}
+
+.bnrpgBoard {
+    width: 100%;
+    aspect-ratio: 1;
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    grid-template-rows: repeat(12, minmax(0, 1fr));
+    gap: 2px;
+    padding: 0.45rem;
+    background:
+        linear-gradient(180deg, rgba(13, 23, 41, 0.98), rgba(8, 13, 24, 0.98));
+    border: 1px solid rgba(45, 212, 255, 0.2);
+    border-radius: var(--radius-sm);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.02);
+}
+
+.bnrpgCell {
+    min-width: 0;
+    min-height: 0;
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(45, 212, 255, 0.16);
+    background: rgba(45, 212, 255, 0.06);
+    color: #e8eefc;
+    font-family: "SF Mono", "Monaco", "Cascadia Code", Consolas, monospace;
+    font-size: 0.7rem;
+    line-height: 1;
+}
+
+.bnrpgCell.ship {
+    background: linear-gradient(135deg, rgba(251, 191, 36, 0.82), rgba(251, 146, 60, 0.86));
+    border-color: rgba(251, 191, 36, 0.9);
+    color: #111827;
+    font-weight: 800;
+}
+
+.bnrpgCell.preview {
+    background: rgba(167, 139, 250, 0.32);
+    border-color: rgba(167, 139, 250, 0.72);
+}
+
+.bnrpgCell.hit {
+    background: rgba(251, 113, 133, 0.9);
+    border-color: rgba(251, 113, 133, 1);
+    color: #ffffff;
+    font-weight: 900;
+}
+
+.bnrpgCell.miss {
+    background: rgba(148, 163, 184, 0.28);
+    border-color: rgba(148, 163, 184, 0.7);
+    color: #e2e8f0;
+    font-weight: 800;
+}
+
+.bnrpgCell.aoe {
+    background: rgba(45, 212, 255, 0.28);
+    border-color: rgba(45, 212, 255, 0.82);
+}
+
+.bnrpgCell.radar {
+    background: rgba(52, 211, 153, 0.28);
+    border-color: rgba(52, 211, 153, 0.82);
+    color: #d1fae5;
+    font-weight: 800;
+}
+
+.bnrpgCell.packet {
+    background: rgba(251, 191, 36, 0.22);
+    border-color: rgba(251, 191, 36, 0.82);
+    color: #fde68a;
+    font-weight: 800;
+}
+
+.bnrpgSkillStrip {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.75rem;
+}
+
+.bnrpgSkillPill {
+    min-height: 5.4rem;
+    display: grid;
+    align-content: start;
+    gap: 0.35rem;
+    padding: 0.85rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--surface-2);
+}
+
+.bnrpgSkillPill strong {
+    color: var(--text);
+    font-size: 0.92rem;
+}
+
+.bnrpgSkillPill span {
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    line-height: 1.45;
+}
+
+.bnrpgPdfDemo {
+    display: grid;
+    gap: 1rem;
+    margin-top: 1.25rem;
+    padding: 1rem;
+    border: 1px solid var(--border);
+    border-radius: calc(var(--radius) + 2px);
+    background:
+        radial-gradient(circle at top left, rgba(251, 191, 36, 0.12), transparent 28rem),
+        linear-gradient(180deg, var(--surface), var(--surface-2));
+    box-shadow: var(--shadow-sm);
+}
+
+.bnrpgPdfControls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.bnrpgPdfNav {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+}
+
+.bnrpgPdfBtn,
+.bnrpgPdfIconBtn,
+.bnrpgPdfPageCounter {
+    min-height: 2.4rem;
+    border: 1px solid rgba(251, 191, 36, 0.28);
+    border-radius: 0.75rem;
+    background: rgba(255, 255, 255, 0.04);
+    color: var(--text);
+    font: inherit;
+    font-weight: 700;
+}
+
+.bnrpgPdfBtn,
+.bnrpgPdfIconBtn {
+    cursor: pointer;
+    transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.bnrpgPdfBtn {
+    padding: 0 0.9rem;
+}
+
+.bnrpgPdfIconBtn {
+    width: 2.4rem;
+}
+
+.bnrpgPdfBtn:hover:not(:disabled),
+.bnrpgPdfIconBtn:hover:not(:disabled),
+.bnrpgPdfBtn:focus-visible:not(:disabled),
+.bnrpgPdfIconBtn:focus-visible:not(:disabled) {
+    border-color: var(--bnrpg-gold);
+    background: var(--accent-amber-soft);
+    transform: translateY(-1px);
+}
+
+.bnrpgPdfBtn:focus-visible,
+.bnrpgPdfIconBtn:focus-visible {
+    outline: 2px solid var(--bnrpg-gold);
+    outline-offset: 2px;
+}
+
+.bnrpgPdfBtn:disabled,
+.bnrpgPdfIconBtn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.bnrpgPdfPageCounter {
+    min-width: 5rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 0.8rem;
+    background: var(--accent-blue-soft);
+    border-color: rgba(45, 212, 255, 0.24);
+    color: var(--bnrpg-blue);
+}
+
+.bnrpgPdfStage {
+    overflow: hidden;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    background: #0f172a;
+    border: 1px solid rgba(45, 212, 255, 0.18);
+    border-radius: var(--radius-sm);
+    box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.03),
+        var(--shadow-sm);
+}
+
+.bnrpgPdfFrame {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    overflow: hidden;
+    background: #0f172a;
+}
+
+.bnrpgCodeBlock {
+    margin: 1.25rem 0;
+    white-space: pre-wrap;
+    background: linear-gradient(180deg, rgba(8, 13, 24, 0.96), rgba(6, 10, 19, 0.99));
+    border: 1px solid rgba(43, 61, 93, 0.72);
+    border-radius: var(--radius);
+    padding: 1rem;
+    color: #e8eefc;
+    font-family: "SF Mono", "Monaco", "Cascadia Code", Consolas, monospace;
+    font-size: 0.88rem;
+    line-height: 1.55;
+    overflow-x: auto;
+}
+
+.bnrpgProcessSteps {
+    margin-top: 1.25rem;
+}
+
+body.light .bnrpgProject .projectTitleIcon {
+    background: transparent;
+    box-shadow: none;
+}
+
+body.light .bnrpgWidgetSidebar,
+body.light .bnrpgWidgetPanel {
+    background: linear-gradient(180deg, #ffffff, #f6f8fc);
+}
+
+body.light .bnrpgPdfDemo {
+    background:
+        radial-gradient(circle at top left, rgba(180, 83, 9, 0.1), transparent 28rem),
+        linear-gradient(180deg, #ffffff, #f6f8fc);
+}
+
+body.light .bnrpgBoard {
+    background: linear-gradient(180deg, #0f172a, #111827);
+    border-color: rgba(2, 132, 199, 0.36);
+}
+
+body.light .bnrpgCodeBlock {
+    background: linear-gradient(180deg, #0f172a, #111827);
+    border-color: rgba(30, 41, 59, 0.85);
+    color: #f8fafc;
+}
+
+@media (max-width: 980px) {
+    .bnrpgWidget {
+        grid-template-columns: 1fr;
+    }
+
+    .bnrpgWidgetSidebar {
+        position: static;
+    }
+}
+
+@media (max-width: 760px) {
+    .bnrpgWidgetHeader {
+        grid-template-columns: 1fr;
+    }
+
+    .bnrpgWidgetMeta {
+        justify-self: start;
+    }
+
+    .bnrpgStatGrid,
+    .bnrpgBoardPair {
+        grid-template-columns: 1fr;
+    }
+
+    .bnrpgSkillStrip {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+}
+
+@media (max-width: 520px) {
+    .bnrpgWidgetBody {
+        padding: 0.85rem;
+    }
+
+    .bnrpgBoardCard {
+        padding: 0.75rem;
+    }
+
+    .bnrpgBoard {
+        gap: 1px;
+        padding: 0.3rem;
+    }
+
+    .bnrpgCell {
+        font-size: 0.58rem;
+    }
+
+    .bnrpgSkillStrip {
+        grid-template-columns: 1fr;
+    }
+
+    .bnrpgPdfControls {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .bnrpgPdfNav {
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    .bnrpgPdfBtn {
+        width: 100%;
+    }
+
+}

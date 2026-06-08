@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="description"
+        content="Terminal Games - C and C++ learning projects with browser-playable terminal-style game ports."
+    >
+    <title>Terminal Games - Project</title>
+    <link rel="icon" type="image/png" href="/assets/projects/terminal-games/logo.png">
+    <link rel="stylesheet" href="/styles/main.css">
+</head>
+<body>
+<div class="bgGlow"></div>
+
+<div class="wrap">
+    <div id="siteHeader" class="siteHeader"></div>
+
+    <a href="/index.html#projects" class="backLink">
+        &larr; Back to Projects
+    </a>
+
+    <article class="projectArticle projectArticle--wide projectArticle--metrics-spaced terminalGamesProject">
+        <header class="projectHeader">
+            <div class="projectHero">
+                <div class="projectHeroMedia">
+                    <img
+                        src="/assets/projects/terminal-games/logo.png"
+                        alt=""
+                        class="projectTitleIcon"
+                        aria-hidden="true"
+                        loading="eager"
+                    >
+                </div>
+                <div class="projectHeroBody">
+                    <div class="projectHeroIntro">
+                        <h1 class="projectTitle">Terminal Games</h1>
+                        <p class="lead">
+                            A collection of early terminal games made while I was learning <code>C</code> and
+                            <code>C++</code>. These projects show the progression from basic programming logic and
+                            functions into classes, entity state, keyboard input, terminal rendering, and small game
+                            loops.
+                        </p>
+                    </div>
+
+                    <div class="quickFacts">
+                        <div class="factItem">
+                            <span class="factLabel">Latest Update</span>
+                            <span class="factValue" data-project-latest-update>June 5, 2026</span>
+                        </div>
+                        <div class="factItem">
+                            <span class="factLabel">Type</span>
+                            <span class="factValue">Learning Projects</span>
+                        </div>
+                        <div class="factItem">
+                            <span class="factLabel">Category</span>
+                            <span class="factValue">C / C++ Terminal Games</span>
+                        </div>
+                        <div class="factItem">
+                            <span class="factLabel">Status</span>
+                            <span class="factValue grad">Playable Showcase</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="projectContent">
+            <div class="projectMain">
+                <section id="overview" class="contentSection sectionCard">
+                    <h2>Overview</h2>
+                    <p class="muted">
+                        These games were created as early programming exercises. They are small, direct, and intentionally
+                        terminal-focused: maps are represented with characters, the player moves one turn at a time, game
+                        state is recalculated after each input, and the screen is cleared and redrawn to create the feeling
+                        of a live console game.
+                    </p>
+
+                    <div class="metricsGrid">
+                        <div class="metricCard">
+                            <div class="metricValue grad">4</div>
+                            <div class="metricLabel">Source Projects</div>
+                            <p class="smallText muted">Three complete games plus one work-in-progress shell.</p>
+                        </div>
+                        <div class="metricCard">
+                            <div class="metricValue grad2">3</div>
+                            <div class="metricLabel">Playable Ports</div>
+                            <p class="smallText muted">Faithful browser versions using terminal-style rendering.</p>
+                        </div>
+                        <div class="metricCard">
+                            <div class="metricValue grad">30 x 30</div>
+                            <div class="metricLabel">Largest Map</div>
+                            <p class="smallText muted">Torment expands the maze into a generated labyrinth.</p>
+                        </div>
+                        <div class="metricCard">
+                            <div class="metricValue grad2">40</div>
+                            <div class="metricLabel">Max Dragons</div>
+                            <p class="smallText muted">The largest version supports many moving enemies.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="contentSection sectionCard">
+                    <h2>Technical Stack</h2>
+                    <div class="techList">
+                        <span class="techItem">C</span>
+                        <span class="techItem">C++</span>
+                    </div>
+                </section>
+
+                <section class="contentSection sectionCard storySection">
+                    <div class="storyIntro">
+                        <h2>Learning C and C++ Through Games</h2>
+                        <p class="muted">
+                            These games were my way of making basic C and C++ programming concepts easier to understand.
+                            Instead of only writing isolated exercises, I used small terminal games to practice variables,
+                            arrays, loops, conditions, functions, structs, classes, headers, and source files in a context
+                            where every line of code changed something visible on screen.
+                        </p>
+                    </div>
+
+                    <div class="storyFlow">
+                        <div class="storyCard storyProblem">
+                            <div class="storyCardHeader">
+                                <span class="storyTag">Why Games</span>
+                            </div>
+                            <p class="muted">
+                                A terminal game gives immediate feedback. A wrong condition, coordinate, or loop does not
+                                stay abstract: the hero moves incorrectly, a wall can be crossed, or the win condition
+                                never triggers.
+                            </p>
+                        </div>
+                        <div class="storyCard storyIdea">
+                            <div class="storyCardHeader">
+                                <span class="storyTag">C++ Basics Practiced</span>
+                            </div>
+                            <p class="muted">
+                                The code practices basic C++ structure: separating logic into functions, grouping data
+                                into structs and classes, passing objects into methods, and using arrays or vectors to
+                                represent a game world.
+                            </p>
+                        </div>
+                        <div class="storyCard storySolution">
+                            <div class="storyCardHeader">
+                                <span class="storyTag">Progression</span>
+                            </div>
+                            <p class="muted">
+                                The first versions are closer to procedural C-style code. Later versions introduce
+                                headers, namespaces, classes, entity objects, inventory flags, enemy movement, and a
+                                cleaner split between terminal rendering and game logic.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="contentSection sectionCard">
+                    <h2>Source Code Architecture</h2>
+                    <p class="muted">
+                        The original projects are built like small console applications. There is no graphics engine:
+                        the code owns the map, reads keyboard input, updates the game state, clears the terminal, and
+                        prints the next frame as text.
+                    </p>
+
+                    <div class="terminalFlowDiagram" aria-label="Terminal game architecture flow">
+                        <div class="terminalFlowStep">
+                            <span class="terminalStepNumber">1</span>
+                            <h3>Input</h3>
+                            <p class="smallText muted"><code>readKeyNonBlocking()</code> reads WASD, arrows, Enter, F, and ESC.</p>
+                        </div>
+                        <div class="terminalFlowStep">
+                            <span class="terminalStepNumber">2</span>
+                            <h3>Direction</h3>
+                            <p class="smallText muted"><code>keyToDir()</code> converts a key into <code>di</code> and <code>dj</code>.</p>
+                        </div>
+                        <div class="terminalFlowStep">
+                            <span class="terminalStepNumber">3</span>
+                            <h3>Update</h3>
+                            <p class="smallText muted">The hero moves, items are collected, and dragons take their turn.</p>
+                        </div>
+                        <div class="terminalFlowStep">
+                            <span class="terminalStepNumber">4</span>
+                            <h3>Rules</h3>
+                            <p class="smallText muted">Collision, inventory, dragon distance, victory, and defeat are checked.</p>
+                        </div>
+                        <div class="terminalFlowStep">
+                            <span class="terminalStepNumber">5</span>
+                            <h3>Render</h3>
+                            <p class="smallText muted">The screen is cleared and the character grid is printed again.</p>
+                        </div>
+                    </div>
+
+                    <pre class="terminalMiniCode"><code>while game is running:
+    print map
+    read keyboard input
+    move hero if the next cell is valid
+    collect key or sword when positions match
+    move each living dragon
+    update victory or defeat state
+    clear terminal and redraw</code></pre>
+                </section>
+
+                <section class="contentSection sectionCard">
+                    <h2>Implementation Methods</h2>
+                    <p class="muted">
+                        The code is small, but it uses several real programming-project ideas: a shared input layer,
+                        separated header/source files, named game objects, validation methods, randomized placement, and
+                        a repeatable update loop.
+                    </p>
+
+                    <div class="terminalMethodGrid">
+                        <div class="terminalMethodCard">
+                            <h3>Map Representation</h3>
+                            <p class="muted smallText">
+                                Each game stores the world as a two-dimensional <code>char</code> array. Walls are
+                                <code>X</code>, the hero is <code>H</code>, dragons are <code>D</code>, the key is
+                                <code>K</code>, the sword is <code>S</code>, and the exit is <code>E</code>.
+                            </p>
+                            <p class="terminalCodePath">Example: <code>char map[10][10]</code></p>
+                        </div>
+                        <div class="terminalMethodCard">
+                            <h3>Coordinates</h3>
+                            <p class="muted smallText">
+                                Positions are stored with a small coordinate structure containing row and column values.
+                                Movement is handled by adding direction offsets to the current position.
+                            </p>
+                            <p class="terminalCodePath">Example: <code>coordenadas { int i; int j; }</code></p>
+                        </div>
+                        <div class="terminalMethodCard">
+                            <h3>Movement Validation</h3>
+                            <p class="muted smallText">
+                                Before a move is accepted, the code checks map bounds, walls, locked exits, and whether
+                                the next cell contains an item or enemy.
+                            </p>
+                            <p class="terminalCodePath">Methods: <code>moveHeroDir()</code>, <code>can_exit()</code></p>
+                        </div>
+                        <div class="terminalMethodCard">
+                            <h3>Game-State Rules</h3>
+                            <p class="muted smallText">
+                                Rule functions compare positions and distances. They decide if the hero collected an item,
+                                got too close to a dragon, killed a dragon with the sword, or reached the exit.
+                            </p>
+                            <p class="terminalCodePath">Methods: <code>updateGame()</code>, <code>game_state_update()</code></p>
+                        </div>
+                        <div class="terminalMethodCard">
+                            <h3>Enemy Turns</h3>
+                            <p class="muted smallText">
+                                In the later games, each dragon calculates valid neighboring cells and picks a random
+                                move. This creates a simple turn-based enemy system without needing pathfinding.
+                            </p>
+                            <p class="terminalCodePath">Methods: <code>checkValidMoves()</code>, <code>moveDragon()</code></p>
+                        </div>
+                        <div class="terminalMethodCard">
+                            <h3>Terminal Runtime</h3>
+                            <p class="muted smallText">
+                                The shared terminal header hides the platform differences between Windows and POSIX
+                                terminals, including key reads, screen clearing, cursor hiding, and short sleeps.
+                            </p>
+                            <p class="terminalCodePath">File: <code>shared/terminal_input.hpp</code></p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="contentSection sectionCard">
+                    <h2>Source File Breakdown</h2>
+                    <p class="muted">
+                        The source files linked inside each playable game card show the original implementation. This
+                        breakdown explains what each file contributes to the collection.
+                    </p>
+
+                    <div class="terminalSourceBreakdown">
+                        <div class="terminalSourceCard">
+                            <h3>Here Be Dragons</h3>
+                            <p class="terminalCodePath"><code>herebedragons.cpp</code></p>
+                            <p class="muted smallText">
+                                The most procedural version. It uses a fixed maze, a coordinate struct, helper functions
+                                for distance and exit placement, one stationary dragon, one key, and one locked exit.
+                            </p>
+                        </div>
+                        <div class="terminalSourceCard">
+                            <h3>Dragon's Bane</h3>
+                            <p class="terminalCodePath"><code>dragonsbane.hpp</code> + <code>dragonsbane.cpp</code></p>
+                            <p class="muted smallText">
+                                Introduces a clearer split between declarations and implementation. The header defines
+                                the game objects, while the source file implements setup, rendering, movement, inventory,
+                                dragon placement, dragon movement, and win/loss rules.
+                            </p>
+                        </div>
+                        <div class="terminalSourceCard">
+                            <h3>Torment</h3>
+                            <p class="terminalCodePath"><code>ToD.hpp</code> + <code>ToD.cpp</code></p>
+                            <p class="muted smallText">
+                                Expands the same idea into a larger generated map. It adds constants for map size and
+                                dragon limits, wall generation, inventory display, many enemies, and a larger terminal
+                                rendering problem.
+                            </p>
+                        </div>
+                        <div class="terminalSourceCard">
+                            <h3>Shared Input Layer</h3>
+                            <p class="terminalCodePath"><code>terminal_input.hpp</code></p>
+                            <p class="muted smallText">
+                                Abstracts platform-specific terminal work. On Windows it uses console and keyboard APIs;
+                                on POSIX systems it uses terminal flags, non-blocking reads, ANSI escape sequences, and
+                                sleep helpers.
+                            </p>
+                        </div>
+                        <div class="terminalSourceCard terminalSourceCard--wide">
+                            <h3>Worlds Colide</h3>
+                            <p class="terminalCodePath"><code>wc.cpp</code> + <code>wc.hpp</code></p>
+                            <p class="muted smallText">
+                                Currently a prototype shell with start and end screens. It is shown as source-only because
+                                it demonstrates terminal screen flow, but does not yet contain enough gameplay logic to
+                                port as a full browser-playable game.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="games" class="contentSection sectionCard">
+                    <h2>Playable Terminal Showcase</h2>
+                    <p class="muted">
+                        These browser versions keep the original rules and terminal-style presentation while adding focus
+                        handling, restart controls, and touch-friendly movement buttons for GitHub Pages.
+                    </p>
+
+                    <div class="terminalGameShowcase" data-terminal-games>
+                        <aside class="terminalGameSidebar">
+                            <h3>Games</h3>
+                            <p class="muted smallText">
+                                Select a game, adjust its setup if available, then focus the terminal and play.
+                            </p>
+                            <div class="terminalGameList" data-terminal-game-list></div>
+                        </aside>
+
+                        <section class="terminalGamePanel" aria-live="polite">
+                            <div class="terminalGameTopbar">
+                                <div class="terminalGameDots" aria-hidden="true">
+                                    <span></span><span></span><span></span>
+                                </div>
+                                <div class="terminalGameTitleBar">terminal / games-showcase</div>
+                            </div>
+
+                            <div class="terminalGameContent">
+                                <h3 data-terminal-game-title>Terminal Game</h3>
+                                <div class="terminalGameMetaRow">
+                                    <span class="badge" data-terminal-game-badge>Game</span>
+                                    <span class="chip" data-terminal-game-status>Playable</span>
+                                </div>
+                                <p class="muted smallText" data-terminal-game-description></p>
+                                <p class="muted smallText" data-terminal-game-implementation></p>
+
+                                <div class="terminalGameSetup" data-terminal-game-setup></div>
+
+                                <div class="terminalGameActions">
+                                    <button type="button" class="btn primary small" data-terminal-game-start>
+                                        Start Game
+                                    </button>
+                                    <button type="button" class="btn small" data-terminal-game-restart>
+                                        Restart
+                                    </button>
+                                    <button type="button" class="btn small" data-terminal-game-focus>
+                                        Focus Terminal
+                                    </button>
+                                </div>
+
+                                <div
+                                    class="terminalGameScreen"
+                                    data-terminal-game-screen
+                                    tabindex="0"
+                                    role="application"
+                                    aria-label="Playable terminal game"
+                                ></div>
+
+                                <div class="terminalGameControls" aria-label="Directional controls">
+                                    <button type="button" class="terminalGameMoveBtn" data-terminal-game-move="-1,0" aria-label="Move up">W</button>
+                                    <button type="button" class="terminalGameMoveBtn" data-terminal-game-move="0,-1" aria-label="Move left">A</button>
+                                    <button type="button" class="terminalGameMoveBtn" data-terminal-game-move="1,0" aria-label="Move down">S</button>
+                                    <button type="button" class="terminalGameMoveBtn" data-terminal-game-move="0,1" aria-label="Move right">D</button>
+                                </div>
+
+                                <h3>Source Files</h3>
+                                <div class="terminalGameSources" data-terminal-game-sources></div>
+                            </div>
+                        </section>
+                    </div>
+                </section>
+
+                <section class="contentSection sectionCard ctaSection">
+                    <h2>Project Links</h2>
+                    <p class="muted smallText">
+                        Play the browser ports above, inspect the per-game source links, or return to the full portfolio.
+                    </p>
+                    <div class="projectLinks">
+                        <a href="#games" class="btn primary">Play Games</a>
+                        <a href="/index.html#projects" class="btn secondary">&larr; Back to Projects</a>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </article>
+
+    <div id="siteFooter" class="siteFooter"></div>
+</div>
+
+<script type="module" src="/scripts/main.js"></script>
+</body>
+</html>

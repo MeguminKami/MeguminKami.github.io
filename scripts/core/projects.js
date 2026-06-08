@@ -31,14 +31,17 @@ function parseIsoDateToUtcTimestamp(value) {
 }
 
 function normalizePathForMatch(path) {
-    return String(path || "")
+    const normalized = String(path || "")
         .split("#")[0]
         .split("?")[0]
         .replace(/\\/g, "/")
-        .split("/")
-        .pop()
         .toLowerCase()
-        .trim();
+        .trim()
+        .replace(/^\/+/, "")
+        .replace(/\/index\.html$/, "")
+        .replace(/\/+$/, "");
+
+    return normalized === "index.html" ? "" : normalized;
 }
 
 export function getProjectLatestUpdate(project) {
@@ -98,7 +101,7 @@ export function findProjectForCurrentPage(projects) {
 
 export async function loadProjectsData() {
     if (!projectsDataPromise) {
-        projectsDataPromise = fetch("projects.json", { cache: "no-store" })
+        projectsDataPromise = fetch("/projects.json", { cache: "no-store" })
             .then((response) => {
                 if (!response.ok) {
                     throw new Error(`Failed to load projects.json (${response.status})`);

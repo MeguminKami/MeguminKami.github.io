@@ -14,16 +14,16 @@
         "Clear architecture + documented setup"
       ],
       "tags": ["Python", "API Integration", "Web UI"],
-      "viewHref": "project-flight-search.html",
+      "viewHref": "/projects/flight-search/",
       "cover": {
         "ariaLabel": "Flight Search Tool cover",
-        "image": "assets/img/flightdealfinder/cover.png"
+        "image": "/assets/projects/flight-search/cover.png"
       },
       "modal": {
         "title": "Flight Search Tool",
         "sub": "Python Website",
         "desc": "A flight search tool focused on fast filtering, clean UI, and reproducible results. Built for single traveler, return flights, and Euro pricing.",
-        "img": "assets/img/flightdealfinder/cover.png"
+        "img": "/assets/projects/flight-search/cover.png"
       }
     },
     {
@@ -39,16 +39,16 @@
       ],
       "tags": ["Python", "CustomTkinter", "yt-dlp"],
       "tagsData": ["python"],
-      "viewHref": "project-youtube-downloader.html",
+      "viewHref": "/projects/youtube-downloader/",
       "cover": {
         "ariaLabel": "YTGrab desktop application cover",
-        "image": "assets/img/ytdownloader/cover.png"
+        "image": "/assets/projects/youtube-downloader/cover.png"
       },
       "modal": {
         "title": "YTGrab",
         "sub": "Python Desktop Application",
         "desc": "A modern desktop YouTube downloader built around format selection, queue-based batch downloads, playlist control, thumbnail previews, live progress, saved history, and optional cookies.txt support for stricter verification cases.",
-        "img": "assets/img/ytdownloader/cover.png"
+        "img": "/assets/projects/youtube-downloader/cover.png"
       }
     },
     {
@@ -64,16 +64,16 @@
       ],
       "tags": ["Python", "System Modeling", "Simulation"],
       "tagsData": ["python"],
-      "viewHref": "project-simulation-framework.html",
+      "viewHref": "/projects/simulation-framework/",
       "cover": {
         "ariaLabel": "Simulation Framework cover",
-        "image": "assets/img/tese/thumbnail.png"
+        "image": "/assets/projects/simulation-framework/thumbnail.png"
       },
       "modal": {
         "title": "Simulation Framework",
         "sub": "Master Thesis Python Project",
         "desc": "Work developed as part of my Master's thesis, focusing on building a discrete event simulation framework that integrates real data for testing various scenarios.",
-        "img": "assets/img/tese/thumbnail.png"
+        "img": "/assets/projects/simulation-framework/thumbnail.png"
       }
     },
 
@@ -90,7 +90,7 @@
       ],
       "tags": ["Python", "Scheduling Algorithms", "Optimization"],
       "tagsData": ["python"],
-      "viewHref": "project-production-planner.html",
+      "viewHref": "",
       "cover": {
         "ariaLabel": "Simulation Framework cover",
         "image": ""
@@ -117,16 +117,16 @@
       ],
       "tags": ["C++", "Arduino", "JavaScript", "Web UI"],
       "tagsData": ["c-cpp","js","arduino"],
-      "viewHref": "project-led-controller.html",
+      "viewHref": "/projects/led-controller/",
       "cover": {
         "ariaLabel": "ESP32 LED Controller UI screenshot",
-        "image": "assets/img/espledcontroller/banner.png"
+        "image": "/assets/projects/led-controller/banner.png"
       },
       "modal": {
         "title": "ESP32 LED Controller",
         "sub": "Personal Led Strip Controller",
         "desc": "WiFi-enabled ESP32 LED strip controller firmware with a responsive web UI.",
-        "img": "assets/img/espledcontroller/banner.png"
+        "img": "/assets/projects/led-controller/banner.png"
       }
     },
     {
@@ -142,16 +142,16 @@
       ],
       "tags": ["Python", "LaTeX", "Puzzle Generation", "Print Design"],
       "tagsData": ["python"],
-      "viewHref": "project-sopa-de-letras.html",
+      "viewHref": "/projects/sopa-de-letras/",
       "cover": {
         "ariaLabel": "Gerador de Sopas de Letras booklet cover illustration",
-        "image": "assets/img/sopadeletras/cover.png"
+        "image": "/assets/projects/sopa-de-letras/cover.png"
       },
       "modal": {
         "title": "Gerador de Sopas de Letras",
         "sub": "Printable word-search book generator",
         "desc": "A local Python generator for printable word-search books and puzzle pages. It supports battle layouts and single-puzzle formats, builds grids from curated JSON word pools, adjusts filler complexity by difficulty, and exports numbered LaTeX pages plus a ready-to-compile main.tex.",
-        "img": "assets/img/sopadeletras/cover.png"
+        "img": "/assets/projects/sopa-de-letras/cover.png"
       }
     },
     {
@@ -167,16 +167,16 @@
       ],
       "tags": ["C++", "Qt", "OOP","Multiplayer"],
       "tagsData": ["c-cpp"],
-      "viewHref": "main.cpp",
+      "viewHref": "/projects/batalha-naval-rpg/",
       "cover": {
-        "ariaLabel": "Main menu / game board UI screenshot",
-        "image": ""
+        "ariaLabel": "Batalha Naval RPG tactical board cover art",
+        "image": "/assets/projects/batalha-naval-rpg/cover.png"
       },
       "modal": {
         "title": "Batalha Naval RPG",
         "sub": "Custom Battleship RPG developed for a Master's course",
         "desc": "A Qt/C++ implementation of a Battleship-inspired tactical game with character-specific skills, AI and online play. Includes client/server networking, board/object management, and a polished UI.",
-        "img": ""
+        "img": "/assets/projects/batalha-naval-rpg/cover.png"
       }
     },
     {
@@ -192,41 +192,41 @@
       ],
       "tags": ["PHP", "JavaScript", "HTML/CSS", "Web App"],
       "tagsData": ["php","js"],
-      "viewHref": "project-dbs-item-shop.html",
+      "viewHref": "/projects/dbs-item-shop/",
       "cover": {
         "ariaLabel": "DBS Item Shop landing page preview",
-        "image": "assets/img/dbs/thumbnail.png"
+        "image": "/assets/projects/dbs-item-shop/thumbnail.png"
       },
       "modal": {
         "title": "DBS Item Shop",
         "sub": "Concecao de SIE PHP online store project",
         "desc": "A course web application created for the Djabusabi group and implemented as an online store. The report covers its data model, documented use cases, customer shopping flow, order handling, administrator product and user management, shared templates, and phased development plan.",
-        "img": "partials/djabuloja/assets/images/mainpage-image1.jpg"
+        "img": "/demos/dbs-item-shop/assets/images/mainpage-image1.jpg"
       }
     },
     {
       "title": "Terminal Games Collection",
       "badge": "C++ Projects",
       "status": "complete",
-      "latestUpdate": "2022-07-01",
-      "description": "A collection of terminal-based C++ games developed during a Bachelor's Programming course. Includes maze and dungeon-style games that exercise game loops, movement logic, randomization and simple AI.",
+      "latestUpdate": "2026-06-05",
+      "description": "A collection of terminal-based C and C++ learning games with browser-playable terminal-style ports. Includes maze and dungeon games that exercise game loops, movement logic, randomization, classes and simple enemy behavior.",
       "bullets": [
-        "Several small CLI games showcasing map/maze logic, entity movement and collision checks",
-        "Modular C++ code with headers and source files for game state, coordinates utilities and input handling",
-        "Educational course projects focused on algorithms, randomization, and basic AI behaviors"
+        "Playable browser ports of Here Be Dragons, Dragon's Bane and Torment",
+        "Copied C/C++ source archive preserved under demos for reference",
+        "Educational projects focused on functions, classes, terminal input, screen clearing and game-loop structure"
       ],
-      "tags": ["C++", "Terminal Games", "Educational"],
+      "tags": ["C", "C++", "Terminal Games", "Educational"],
       "tagsData": ["c-cpp"],
-      "viewHref": "",
+      "viewHref": "/projects/terminal-games/",
       "cover": {
         "ariaLabel": "Terminal gameplay example",
-        "image": ""
+        "image": "/assets/projects/terminal-games/thumbnail.png"
       },
       "modal": {
         "title": "Terminal Games Collection",
         "sub": "BSc Programming course projects",
-        "desc": "A set of terminal/console games written in C++ during my bachelor's Programming course. These projects were designed to practice algorithmic thinking, game loop structure, randomized placement, collision detection and simple AI for enemy movement.",
-        "img": ""
+        "desc": "A set of terminal/console games written while learning C and C++. The new portfolio page explains the original implementation and includes playable browser ports with terminal-style rendering.",
+        "img": "/assets/projects/terminal-games/thumbnail.png"
       }
     },
     {

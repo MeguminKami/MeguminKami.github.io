@@ -17,17 +17,15 @@ async function loadPartial(targetId, url) {
 }
 
 function updateNavLinksForPage() {
-    const path = window.location.pathname.toLowerCase();
-    const isHome = path.endsWith("/")
-        || path.endsWith("/index.html")
-        || path.endsWith("index.html");
+    const path = window.location.pathname.toLowerCase().replace(/\/+$/, "");
+    const isHome = path === "" || path === "/index.html";
 
     const projectsLink = document.querySelector('[data-nav="projects"]');
     const aboutLink = document.querySelector('[data-nav="about"]');
     const contactLink = document.querySelector('[data-nav="contact"]');
 
-    if (projectsLink) projectsLink.href = isHome ? "#projects" : "index.html#projects";
-    if (aboutLink) aboutLink.href = isHome ? "#about" : "index.html#about";
+    if (projectsLink) projectsLink.href = isHome ? "#projects" : "/index.html#projects";
+    if (aboutLink) aboutLink.href = isHome ? "#about" : "/index.html#about";
     if (contactLink) contactLink.href = "#contact";
 }
 
@@ -77,8 +75,8 @@ export function initSmoothScroll() {
 
 export async function initSharedLayout() {
     await Promise.all([
-        loadPartial("siteHeader", "partials/header.partial"),
-        loadPartial("siteFooter", "partials/footer.partial"),
+        loadPartial("siteHeader", "/partials/header.partial"),
+        loadPartial("siteFooter", "/partials/footer.partial"),
     ]);
 
     updateNavLinksForPage();

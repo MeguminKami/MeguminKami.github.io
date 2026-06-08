@@ -33,7 +33,7 @@
     height: 44px;
     border-radius: var(--radius-sm);
     background-color: var(--surface-2);
-    background-image: url("../../assets/img/me/me.png");
+    background-image: url("/assets/site/me/me.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

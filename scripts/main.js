@@ -9,6 +9,8 @@ import { initQuickPreviewModal, initContactModal } from "./components/modals.js"
 import { initProjectsGrid } from "./components/project-cards.js";
 import { initBookletWidgets } from "./widgets/booklet-library.js";
 import { initSopaCliWidgets } from "./widgets/sopa-cli-widget.js";
+import { initTerminalGameShowcases } from "./widgets/terminal-games.js";
+import { initBatalhaNavalRpgWidgets } from "./widgets/batalha-naval-rpg.js";
 
 initTheme();
 
@@ -21,6 +23,8 @@ async function initApp() {
     initImageSliders();
     initBookletWidgets();
     initSopaCliWidgets();
+    initTerminalGameShowcases();
+    initBatalhaNavalRpgWidgets();
 
     const sharedLayoutPromise = initSharedLayout();
     const projectsPromise = initProjectsGrid();

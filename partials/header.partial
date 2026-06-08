@@ -7,8 +7,8 @@
         </div>
     </div>
     <div class="navLinks">
-        <a href="index.html#projects" class="navLink" data-nav="projects">Projects</a>
-        <a href="index.html#about" class="navLink" data-nav="about">About</a>
+        <a href="/index.html#projects" class="navLink" data-nav="projects">Projects</a>
+        <a href="/index.html#about" class="navLink" data-nav="about">About</a>
         <a href="#contact" class="navLink" data-nav="contact">Contact</a>
     </div>
     <button

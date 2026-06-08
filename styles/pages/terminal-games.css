@@ -1,0 +1,517 @@
+.terminalGamesProject {
+    --terminal-green: var(--accent-emerald);
+    --terminal-cyan: var(--accent-cyan);
+    --terminal-amber: var(--accent-amber);
+    --terminal-red: var(--accent-rose);
+    --terminal-purple: var(--accent-violet);
+}
+
+.terminalGamesProject .projectTitleIcon {
+    border-radius: calc(var(--radius) + 10px);
+    border: 1px solid rgba(52, 211, 153, 0.28);
+    box-shadow: 0 18px 45px rgba(52, 211, 153, 0.16);
+}
+
+.terminalGameShowcase {
+    display: grid;
+    grid-template-columns: minmax(240px, 310px) minmax(0, 1fr);
+    gap: 1rem;
+    margin-top: 1.25rem;
+}
+
+.terminalFlowDiagram {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 0.85rem;
+    margin: 1.25rem 0;
+}
+
+.terminalFlowStep,
+.terminalMethodCard,
+.terminalSourceCard {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1rem;
+    box-shadow: var(--shadow-sm);
+}
+
+.terminalFlowStep {
+    position: relative;
+    overflow: hidden;
+}
+
+.terminalFlowStep::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    border: 1px solid rgba(52, 211, 153, 0.08);
+    pointer-events: none;
+}
+
+.terminalStepNumber {
+    width: 2rem;
+    height: 2rem;
+    display: grid;
+    place-items: center;
+    border-radius: 0.65rem;
+    background: var(--accent-emerald-soft);
+    color: var(--terminal-green);
+    border: 1px solid rgba(52, 211, 153, 0.22);
+    font-weight: 800;
+    margin-bottom: 0.65rem;
+}
+
+.terminalFlowStep h3,
+.terminalMethodCard h3,
+.terminalSourceCard h3 {
+    margin: 0 0 0.5rem;
+}
+
+.terminalMiniCode {
+    margin: 1.25rem 0 0;
+    white-space: pre-wrap;
+    background: linear-gradient(180deg, rgba(8, 13, 24, 0.94), rgba(8, 13, 24, 0.98));
+    border: 1px solid rgba(43, 61, 93, 0.72);
+    border-radius: var(--radius);
+    padding: 1rem;
+    color: #e8eefc;
+    font-family: "SF Mono", "Monaco", "Cascadia Code", Consolas, monospace;
+    font-size: 0.88rem;
+    line-height: 1.5;
+    overflow-x: auto;
+}
+
+.terminalMethodGrid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+    margin-top: 1.25rem;
+}
+
+.terminalSourceBreakdown {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
+    margin-top: 1.25rem;
+}
+
+.terminalMethodCard,
+.terminalSourceCard {
+    border-left: 4px solid var(--terminal-green);
+}
+
+.terminalSourceCard {
+    border-left-color: var(--terminal-cyan);
+}
+
+.terminalSourceCard--wide {
+    grid-column: 1 / -1;
+}
+
+.terminalCodePath {
+    margin: 0.65rem 0 0;
+    color: var(--terminal-cyan);
+    font-size: 0.85rem;
+}
+
+.terminalGameSidebar,
+.terminalGamePanel {
+    background: linear-gradient(180deg, var(--surface), var(--surface-2));
+    border: 1px solid var(--border);
+    border-radius: calc(var(--radius) + 2px);
+    box-shadow: var(--shadow-sm);
+}
+
+.terminalGameSidebar {
+    padding: 1rem;
+    position: sticky;
+    top: 1rem;
+    align-self: start;
+}
+
+.terminalGameSidebar h3,
+.terminalGamePanel h3 {
+    margin-top: 0;
+}
+
+.terminalGameList {
+    display: grid;
+    gap: 0.55rem;
+    margin-top: 0.85rem;
+}
+
+.terminalGameSelectBtn {
+    width: 100%;
+    display: grid;
+    gap: 0.2rem;
+    text-align: left;
+    border: 1px solid var(--border);
+    background: rgba(255, 255, 255, 0.02);
+    color: var(--text);
+    border-radius: 0.75rem;
+    padding: 0.72rem 0.78rem;
+    cursor: pointer;
+    transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    font: inherit;
+}
+
+.terminalGameSelectBtn small {
+    color: var(--text-muted);
+    font-size: 0.78rem;
+}
+
+.terminalGameSelectBtn:hover,
+.terminalGameSelectBtn.active {
+    border-color: var(--terminal-green);
+    background: var(--accent-emerald-soft);
+    transform: translateY(-1px);
+}
+
+.terminalGameSelectBtn:focus-visible {
+    outline: 2px solid var(--terminal-green);
+    outline-offset: 2px;
+}
+
+.terminalGamePanel {
+    overflow: hidden;
+}
+
+.terminalGameTopbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.85rem 1rem;
+    border-bottom: 1px solid var(--border);
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.terminalGameDots {
+    display: inline-flex;
+    gap: 0.4rem;
+}
+
+.terminalGameDots span {
+    width: 0.6rem;
+    height: 0.6rem;
+    display: block;
+    border-radius: 50%;
+}
+
+.terminalGameDots span:nth-child(1) {
+    background: #fb7185;
+}
+
+.terminalGameDots span:nth-child(2) {
+    background: #facc15;
+}
+
+.terminalGameDots span:nth-child(3) {
+    background: #4ade80;
+}
+
+.terminalGameTitleBar {
+    color: var(--text-muted);
+    font-size: 0.84rem;
+}
+
+.terminalGameContent {
+    padding: 1rem;
+}
+
+.terminalGameMetaRow {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin: 0.75rem 0 1rem;
+}
+
+.terminalGameMetaRow .chip {
+    margin: 0;
+}
+
+.terminalGameSetup {
+    margin: 1rem 0;
+    padding: 0.9rem;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+}
+
+.terminalGameField {
+    display: grid;
+    gap: 0.4rem;
+    color: var(--text);
+    font-size: 0.92rem;
+}
+
+.terminalGameField input {
+    width: min(100%, 160px);
+    border: 1px solid var(--border);
+    border-radius: 0.7rem;
+    padding: 0.55rem 0.7rem;
+    background: var(--bg-alt);
+    color: var(--text);
+    font: inherit;
+}
+
+.terminalGameActions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+    margin: 1rem 0;
+}
+
+.terminalGameActions .btn:disabled,
+.terminalGameMoveBtn:disabled {
+    opacity: 0.48;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.terminalGameScreen {
+    min-height: 520px;
+    max-height: 620px;
+    overflow: auto;
+    border: 1px solid rgba(43, 61, 93, 0.72);
+    border-radius: var(--radius);
+    background:
+        radial-gradient(circle at top left, rgba(52, 211, 153, 0.12), transparent 28rem),
+        linear-gradient(180deg, rgba(8, 13, 24, 0.96), rgba(6, 10, 19, 0.99));
+    color: #e8eefc;
+    padding: 1rem;
+    font-family: "SF Mono", "Monaco", "Cascadia Code", Consolas, monospace;
+    font-size: 0.88rem;
+    line-height: 1.45;
+    outline: none;
+    white-space: pre;
+}
+
+.terminalGameScreen:focus-visible {
+    box-shadow: 0 0 0 2px var(--terminal-green);
+}
+
+.terminalGameIntroScreen {
+    display: block;
+    white-space: pre-wrap;
+}
+
+.terminalGameRuntimeHeader,
+.terminalGameRuntimeFooter {
+    display: grid;
+    gap: 0.2rem;
+    white-space: pre-wrap;
+}
+
+.terminalGameRuntimeHeader {
+    margin-bottom: 0.8rem;
+}
+
+.terminalGameRuntimeFooter {
+    margin-top: 0.8rem;
+}
+
+.terminalGameAscii {
+    display: inline-block;
+    min-width: calc(var(--terminal-game-cols) * 2.65ch);
+    letter-spacing: 0;
+}
+
+.terminalGameLine {
+    display: block;
+    min-height: 1.35em;
+}
+
+.terminalGameCell {
+    display: inline-block;
+    width: 2.35ch;
+    margin-right: 0.3ch;
+    text-align: center;
+}
+
+.terminalGameFloor {
+    color: rgba(148, 163, 184, 0.32);
+}
+
+.terminalGameWall {
+    color: var(--terminal-green);
+    text-shadow: 0 0 8px rgba(52, 211, 153, 0.28);
+}
+
+.terminalGameHero {
+    color: var(--terminal-cyan);
+    font-weight: 700;
+}
+
+.terminalGameHeroArmed {
+    color: var(--accent-blue);
+    font-weight: 800;
+    text-shadow: 0 0 10px rgba(45, 212, 255, 0.32);
+}
+
+.terminalGameDragon {
+    color: var(--accent-orange);
+    font-weight: 800;
+    text-shadow: 0 0 10px rgba(251, 146, 60, 0.35);
+}
+
+.terminalGameKey {
+    color: var(--terminal-amber);
+    font-weight: 800;
+}
+
+.terminalGameSword {
+    color: var(--terminal-cyan);
+    font-weight: 800;
+}
+
+.terminalGameExit {
+    color: var(--terminal-green);
+    font-weight: 800;
+}
+
+.terminalGameCyan {
+    color: var(--terminal-cyan);
+}
+
+.terminalGameGreen {
+    color: var(--terminal-green);
+}
+
+.terminalGameAmber {
+    color: var(--terminal-amber);
+}
+
+.terminalGameMuted {
+    color: #9fb0ce;
+}
+
+.terminalGameMessage {
+    color: var(--terminal-amber);
+}
+
+.terminalGameControls {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(46px, 58px));
+    justify-content: center;
+    gap: 0.45rem;
+    margin: 1rem auto 0;
+}
+
+.terminalGameMoveBtn {
+    border: 1px solid var(--border);
+    border-radius: 0.8rem;
+    background: var(--surface-2);
+    color: var(--text);
+    min-height: 44px;
+    font: inherit;
+    cursor: pointer;
+    transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.terminalGameMoveBtn:hover:not(:disabled),
+.terminalGameMoveBtn:focus-visible:not(:disabled) {
+    border-color: var(--terminal-green);
+    background: var(--accent-emerald-soft);
+    transform: translateY(-1px);
+}
+
+.terminalGameMoveBtn:nth-child(1) {
+    grid-column: 2;
+}
+
+.terminalGameMoveBtn:nth-child(2) {
+    grid-column: 1;
+}
+
+.terminalGameMoveBtn:nth-child(3) {
+    grid-column: 2;
+}
+
+.terminalGameMoveBtn:nth-child(4) {
+    grid-column: 3;
+}
+
+.terminalGameSources {
+    display: grid;
+    gap: 0.65rem;
+    margin-top: 0.9rem;
+}
+
+.terminalGameSourceLink {
+    display: grid;
+    gap: 0.2rem;
+    padding: 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
+    background: var(--surface-2);
+    color: var(--text);
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.terminalGameSourceLink:hover {
+    border-color: var(--terminal-cyan);
+    transform: translateX(3px);
+}
+
+.terminalGameSourceLink small {
+    color: var(--text-muted);
+    word-break: break-word;
+}
+
+body.light .terminalGameScreen {
+    background:
+        radial-gradient(circle at top left, rgba(5, 150, 105, 0.14), transparent 28rem),
+        linear-gradient(180deg, #0f172a, #111827);
+    border-color: rgba(30, 41, 59, 0.85);
+    color: #f8fafc;
+}
+
+body.light .terminalMiniCode {
+    background: linear-gradient(180deg, #0f172a, #111827);
+    border-color: rgba(30, 41, 59, 0.85);
+    color: #f8fafc;
+}
+
+body.light .terminalGameSidebar,
+body.light .terminalGamePanel {
+    background: linear-gradient(180deg, #ffffff, #f6f8fc);
+}
+
+@media (max-width: 980px) {
+    .terminalGameShowcase {
+        grid-template-columns: 1fr;
+    }
+
+    .terminalGameSidebar {
+        position: static;
+    }
+
+    .terminalMethodGrid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 620px) {
+    .terminalMethodGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .terminalGameScreen {
+        min-height: 460px;
+        max-height: 560px;
+        font-size: 0.78rem;
+        line-height: 1.35;
+    }
+
+    .terminalGameContent {
+        padding: 0.85rem;
+    }
+
+    .terminalGameTopbar {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
