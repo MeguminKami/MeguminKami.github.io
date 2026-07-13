@@ -13,6 +13,7 @@ export class CalendarView {
     this.tooltip = document.querySelector("#tooltip");
     this.onSlot = onSlot; this.onEvent = onEvent; this.canModify = canModify;
     this.state = null;
+    this.activeDay = -1;
     this.renderGutter();
     this.grid.addEventListener("click", (event) => {
       const slot = event.target.closest(".slot-button");
@@ -25,6 +26,10 @@ export class CalendarView {
     this.grid.addEventListener("pointerout", (event) => { if (event.target.closest(".event-card")) this.hideTooltip(); });
     this.grid.addEventListener("focusin", (event) => this.showTooltipFor(event.target.closest(".event-card")));
     this.grid.addEventListener("focusout", () => this.hideTooltip());
+    this.scroller.addEventListener("scroll", () => {
+      if (this.scrollFrame) return;
+      this.scrollFrame = requestAnimationFrame(() => { this.scrollFrame = null; this.syncActiveDay(); });
+    }, { passive: true });
     this.nowTimer = window.setInterval(() => this.renderNowLine(), 30_000);
   }
 
@@ -37,6 +42,8 @@ export class CalendarView {
   }
 
   render(state) {
+    const windowChanged = this.renderedWindowStart !== state.windowStart;
+    this.renderedWindowStart = state.windowStart;
     this.state = state;
     this.eventMap = new Map();
     const occurrences = expandAndSegment(state.activities, state.overrides, state.windowStart, 7);
@@ -68,6 +75,8 @@ export class CalendarView {
     }
     const line = document.createElement("div"); line.id = "now-line"; line.className = "now-line"; line.hidden = true; this.grid.append(line);
     this.renderNowLine();
+    if (windowChanged) this.scroller.scrollLeft = 0;
+    this.syncActiveDay();
   }
 
   renderHeaders() {
@@ -147,5 +156,27 @@ export class CalendarView {
   scrollToDay(index) {
     const header = this.header.children[index + 1];
     if (header) this.scroller.scrollTo({ left: Math.max(0, header.offsetLeft - parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--time-width"))), behavior: "smooth" });
+  }
+
+  syncActiveDay() {
+    if (!this.header.children.length || !this.strip.children.length) return;
+    const timeWidth = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--time-width")) || 0;
+    let closest = 0; let distance = Infinity;
+    for (let index = 0; index < 7; index += 1) {
+      const header = this.header.children[index + 1];
+      if (!header) continue;
+      const target = Math.max(0, header.offsetLeft - timeWidth);
+      const current = Math.abs(this.scroller.scrollLeft - target);
+      if (current < distance) { closest = index; distance = current; }
+    }
+    const activeChip = this.strip.children[closest];
+    if (closest === this.activeDay && activeChip?.classList.contains("active")) return;
+    this.activeDay = closest;
+    [...this.strip.children].forEach((chip, index) => {
+      chip.classList.toggle("active", index === closest);
+      if (index === closest) chip.setAttribute("aria-current", "date"); else chip.removeAttribute("aria-current");
+    });
+    const chip = this.strip.children[closest];
+    if (chip) this.strip.scrollTo({ left: Math.max(0, chip.offsetLeft - (this.strip.clientWidth - chip.offsetWidth) / 2), behavior: "smooth" });
   }
 }

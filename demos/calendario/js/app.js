@@ -15,8 +15,11 @@ import { CalendarView } from "./ui/calendar-view.js";
 import { DragResizeController } from "./ui/drag-resize.js";
 import { EmojiController } from "./ui/emoji-picker.js";
 import { ModalManager } from "./ui/modal-manager.js";
+import { MobilePreview } from "./ui/mobile-preview.js";
 import { createNotifier } from "./ui/notifications.js";
 import { SettingsPanel } from "./ui/settings.js";
+
+if (new URLSearchParams(location.search).has("mobile-preview")) document.documentElement.classList.add("mobile-preview-embedded");
 
 const state = {
   currentUser: getSelectedUser(),
@@ -35,6 +38,7 @@ const userView = document.querySelector("#user-view");
 const appView = document.querySelector("#app-view");
 const notify = createNotifier(document.querySelector("#toast-region"));
 const modal = new ModalManager();
+const mobilePreview = new MobilePreview();
 const sounds = new SoundPlayer(getSoundsEnabled());
 const activityDialog = new ActivityDialog();
 const emoji = new EmojiController();
@@ -70,6 +74,7 @@ const settings = new SettingsPanel({
   onSwitchUser: showUserSelection,
   onExport: downloadExport,
   onPrint: () => window.print(),
+  onMobilePreview: () => mobilePreview.open(),
   onLock: lockApp
 });
 settings.setSounds(getSoundsEnabled());

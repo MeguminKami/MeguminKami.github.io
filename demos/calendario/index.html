@@ -172,8 +172,24 @@
       <div class="settings-item"><span class="settings-item-copy"><strong>Trocar de utilizador</strong><small>Apenas neste dispositivo</small></span><button id="switch-user" class="button"><svg class="icon"><use href="./assets/icons.svg#i-user"></use></svg>Trocar</button></div>
       <div class="settings-item"><span class="settings-item-copy"><strong>Exportar</strong><small>Uma cópia dos dados atuais</small></span><span class="actions"><button class="button" data-export="json">JSON</button><button class="button" data-export="csv">CSV</button><button class="button" data-export="ics">ICS</button></span></div>
       <div class="settings-item"><span class="settings-item-copy"><strong>Imprimir / PDF</strong><small>Usa a impressão do navegador</small></span><button id="print-calendar" class="button"><svg class="icon"><use href="./assets/icons.svg#i-print"></use></svg>Imprimir</button></div>
+      <div class="settings-item mobile-preview-setting"><span class="settings-item-copy"><strong>Pré-visualização móvel</strong><small>Vê e testa o site com a largura de um telemóvel</small></span><button id="mobile-preview-open" class="button"><svg class="icon"><use href="./assets/icons.svg#i-smartphone"></use></svg>Pré-visualizar</button></div>
       <div class="settings-item"><span class="settings-item-copy"><strong>Voltar a bloquear</strong><small>O código é apenas uma barreira informal</small></span><button id="lock-app" class="button button-danger"><svg class="icon"><use href="./assets/icons.svg#i-lock"></use></svg>Bloquear</button></div>
       <p class="lede"><small>Fuso horário: Europe/Lisbon · Dados sincronizados por Firebase quando configurado.</small></p>
+    </div>
+  </dialog>
+
+  <dialog id="mobile-preview-dialog" class="mobile-preview-dialog" aria-labelledby="mobile-preview-title">
+    <div class="dialog-header"><div><h2 id="mobile-preview-title">Pré-visualização de telemóvel</h2><small id="mobile-preview-dimensions" class="lede">390 × 844 px</small></div><button class="button button-icon button-ghost" data-dialog-close aria-label="Fechar"><svg class="icon"><use href="./assets/icons.svg#i-x-circle"></use></svg></button></div>
+    <div class="dialog-body mobile-preview-body">
+      <div class="mobile-preview-controls" aria-label="Tamanho da pré-visualização">
+        <div class="segmented-preview"><button class="button" type="button" data-preview-width="320" aria-pressed="false">320 px</button><button class="button" type="button" data-preview-width="390" aria-pressed="true">390 px</button><button class="button" type="button" data-preview-width="430" aria-pressed="false">430 px</button></div>
+        <button id="mobile-preview-rotate" class="button" type="button" aria-pressed="false"><svg class="icon"><use href="./assets/icons.svg#i-smartphone"></use></svg>Rodar</button>
+        <button id="mobile-preview-reload" class="button" type="button"><svg class="icon"><use href="./assets/icons.svg#i-redo"></use></svg>Recarregar</button>
+      </div>
+      <p class="mobile-preview-help">A moldura é interativa e usa os mesmos dados. Se guardares uma alteração dentro dela, a alteração é real.</p>
+      <div id="mobile-preview-stage" class="mobile-preview-stage">
+        <div id="mobile-preview-device" class="mobile-preview-device"><span class="mobile-preview-speaker" aria-hidden="true"></span><iframe id="mobile-preview-frame" title="Site visto num telemóvel" src="about:blank"></iframe></div>
+      </div>
     </div>
   </dialog>
 

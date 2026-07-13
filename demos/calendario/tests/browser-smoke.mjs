@@ -94,11 +94,25 @@ try {
   }
   const capture = await send("Page.captureScreenshot", { format: "png", captureBeyondViewport: false });
   const screenshot = join(tmpdir(), "oqvf-calendar-smoke.png"); await writeFile(screenshot, Buffer.from(capture.result.data, "base64"));
+  await send("Runtime.evaluate", { expression: `(()=>{document.querySelector('#settings-open').click();document.querySelector('#mobile-preview-open').click();return true})()`, returnByValue: true });
+  await delay(1400);
+  const previewResult = await send("Runtime.evaluate", { expression: `(()=>{const dialog=document.querySelector('#mobile-preview-dialog');const frame=document.querySelector('#mobile-preview-frame');const doc=frame.contentDocument;return JSON.stringify({open:dialog.open,width:frame.contentWindow?.innerWidth,height:frame.contentWindow?.innerHeight,embedded:doc?.documentElement.classList.contains('mobile-preview-embedded'),days:doc?.querySelectorAll('.day-column').length,fab:doc?getComputedStyle(doc.querySelector('#add-activity-mobile')).display:null})})()`, returnByValue: true });
+  const preview = JSON.parse(previewResult.result.result.value);
+  assert.deepEqual(preview, { open: true, width: 390, height: 844, embedded: true, days: 7, fab: "flex" });
+  const previewCapture = await send("Page.captureScreenshot", { format: "png", captureBeyondViewport: false });
+  await writeFile(join(tmpdir(), "oqvf-mobile-preview-smoke.png"), Buffer.from(previewCapture.result.data, "base64"));
+  await send("Runtime.evaluate", { expression: `document.querySelector('#mobile-preview-dialog').close()` });
   await send("Emulation.setDeviceMetricsOverride", { width: 320, height: 800, deviceScaleFactor: 1, mobile: true }); await delay(400);
-  const mobileResult = await send("Runtime.evaluate", { expression: `(()=>{const button=document.querySelector("#add-activity-mobile");const add=button.getBoundingClientRect();return JSON.stringify({viewport:document.documentElement.clientWidth,viewportHeight:innerHeight,calendarScrollable:document.querySelector(".calendar-inner").scrollWidth>document.querySelector("#calendar-scroller").clientWidth,dayWidth:Math.round(document.querySelector(".day-column").getBoundingClientRect().width),addTop:Math.round(add.top),addBottom:Math.round(add.bottom),addPosition:getComputedStyle(button).position})})()`, returnByValue: true });
+  const mobileResult = await send("Runtime.evaluate", { expression: `(()=>{const button=document.querySelector("#add-activity-mobile");const add=button.getBoundingClientRect();const scroller=document.querySelector("#calendar-scroller");const timeWidth=document.querySelector("#time-gutter").getBoundingClientRect().width;const dayWidth=document.querySelector(".day-column").getBoundingClientRect().width;return JSON.stringify({viewport:document.documentElement.clientWidth,viewportHeight:innerHeight,calendarScrollable:document.querySelector(".calendar-inner").scrollWidth>scroller.clientWidth,scrollerWidth:Math.round(scroller.clientWidth),timeWidth:Math.round(timeWidth),dayWidth:Math.round(dayWidth),scrollbarWidth:getComputedStyle(scroller).scrollbarWidth,snapType:getComputedStyle(scroller).scrollSnapType,activeDay:[...document.querySelectorAll(".date-chip")].findIndex(chip=>chip.getAttribute("aria-current")==="date"),addTop:Math.round(add.top),addBottom:Math.round(add.bottom),addPosition:getComputedStyle(button).position})})()`, returnByValue: true });
   const mobile = JSON.parse(mobileResult.result.result.value);
-  assert.equal(mobile.viewport, 320); assert.equal(mobile.calendarScrollable, true); assert.ok(mobile.dayWidth >= 220);
+  assert.equal(mobile.viewport, 320); assert.equal(mobile.calendarScrollable, true); assert.ok(Math.abs(mobile.dayWidth - (mobile.scrollerWidth - mobile.timeWidth)) <= 2);
+  assert.equal(mobile.scrollbarWidth, "none"); assert.equal(mobile.snapType, "x mandatory"); assert.equal(mobile.activeDay, 0);
   assert.equal(mobile.addPosition, "fixed"); assert.ok(mobile.addBottom <= mobile.viewportHeight - 10 && mobile.addBottom >= mobile.viewportHeight - 30);
+  await send("Runtime.evaluate", { expression: `(()=>{const scroller=document.querySelector('#calendar-scroller');const header=document.querySelectorAll('.day-header')[1];const timeWidth=parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--time-width'))||0;scroller.scrollTo({left:Math.max(0,header.offsetLeft-timeWidth),behavior:'auto'});return true})()` });
+  await delay(250);
+  const swipedResult = await send("Runtime.evaluate", { expression: `(()=>{const chips=[...document.querySelectorAll('.date-chip')];return JSON.stringify({activeDay:chips.findIndex(chip=>chip.getAttribute('aria-current')==='date'),activeCount:chips.filter(chip=>chip.classList.contains('active')).length,scrollLeft:Math.round(document.querySelector('#calendar-scroller').scrollLeft),dayWidth:Math.round(document.querySelector('.day-column').getBoundingClientRect().width)})})()`, returnByValue: true });
+  const swiped = JSON.parse(swipedResult.result.result.value);
+  assert.equal(swiped.activeDay, 1); assert.equal(swiped.activeCount, 1); assert.ok(Math.abs(swiped.scrollLeft - swiped.dayWidth) <= 2);
   const mobileCapture = await send("Page.captureScreenshot", { format: "png", captureBeyondViewport: false });
   await writeFile(join(tmpdir(), "oqvf-calendar-mobile-smoke.png"), Buffer.from(mobileCapture.result.data, "base64"));
   assert.deepEqual(errors, []);

@@ -6,6 +6,7 @@ Um calendário partilhado, romântico e responsivo para João e Sofia organizare
 
 - janela móvel de sete dias, das 07:00 às 24:00, em intervalos de uma hora;
 - navegação por dia, semana, mês e regresso imediato a Hoje;
+- no telemóvel, um dia por ecrã com passagem por gesto lateral, encaixe automático e sem barra de deslocamento visível;
 - atividades de João, Sofia e casal, com as de casal fundidas sobre as duas faixas;
 - criação pela grelha ou pelo botão principal e menu por clique esquerdo para editar, cancelar ou remover;
 - drag, drop e redimensionamento com rato ou toque e snap de uma hora;
@@ -17,6 +18,7 @@ Um calendário partilhado, romântico e responsivo para João e Sofia organizare
 - exportação JSON, CSV e ICS e vista de impressão/PDF;
 - sons discretos desligáveis, fundo animado leve e suporte para movimento reduzido;
 - navegação por teclado, foco visível, diálogos e mensagens acessíveis;
+- pré-visualização interativa de 320, 390 e 430 px para testar o telemóvel a partir do PC;
 - estados de carregamento, sincronização, offline, conflito e erro de configuração.
 
 ## Estrutura
@@ -159,6 +161,16 @@ Os caminhos da aplicação são relativos, portanto continuam válidos nessa sub
 4. Cria uma atividade, comenta, move-a e altera um avatar.
 5. Confirma que cada alteração aparece no outro dispositivo sem recarregar.
 6. Desliga temporariamente a rede e confirma o estado “Sem ligação” e a reversão de uma alteração não guardada.
+
+## Ver o telemóvel no PC
+
+Abre **Definições → Pré-visualização móvel**. A moldura permite:
+
+- alternar entre 320, 390 e 430 px;
+- rodar entre retrato e paisagem;
+- recarregar e utilizar a aplicação dentro do ecrã simulado.
+
+A pré-visualização usa um `iframe` com a largura real indicada, por isso ativa as mesmas regras responsivas de um telemóvel. É interativa e usa os mesmos dados Firebase: qualquer alteração que guardes dentro da moldura é real.
 
 ## Exportação
 
