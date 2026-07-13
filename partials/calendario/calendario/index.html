@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#fff8fa">
+  <meta name="description" content="Calendário partilhado de João e Sofia.">
+  <title>O que vais fazer?</title>
+  <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./css/base.css">
+  <link rel="stylesheet" href="./css/components.css">
+  <link rel="stylesheet" href="./css/calendar.css">
+  <link rel="stylesheet" href="./css/responsive.css">
+  <link rel="stylesheet" href="./css/print.css">
+</head>
+<body>
+  <div id="background-art" class="background-art" aria-hidden="true"></div>
+
+  <main id="access-view" class="view screen">
+    <section class="screen-card" aria-labelledby="access-title">
+      <div class="screen-mark"><svg class="icon"><use href="./assets/icons.svg#i-heart"></use></svg></div>
+      <h1 id="access-title">O que vais fazer?</h1>
+      <p class="lede">Um cantinho só vosso para combinar os próximos momentos.</p>
+      <form id="access-form" novalidate>
+        <label class="field">
+          <span>Código de entrada</span>
+          <input id="access-code" type="password" inputmode="numeric" autocomplete="one-time-code" maxlength="12" required aria-describedby="access-error">
+        </label>
+        <p id="access-error" class="error-text" role="alert"></p>
+        <button class="button button-primary" type="submit">Entrar</button>
+      </form>
+    </section>
+  </main>
+
+  <main id="user-view" class="view screen" hidden>
+    <section class="screen-card" aria-labelledby="user-title">
+      <div class="screen-mark"><svg class="icon"><use href="./assets/icons.svg#i-user"></use></svg></div>
+      <h1 id="user-title">Quem está aí?</h1>
+      <p class="lede">Escolhe a tua identidade neste dispositivo.</p>
+      <div class="user-options">
+        <button class="user-card" data-user="joao" type="button">
+          <span class="avatar" data-avatar="joao"><span class="avatar-initial">J</span></span>
+          <strong>João</strong>
+        </button>
+        <button class="user-card" data-user="sofia" type="button">
+          <span class="avatar" data-avatar="sofia"><span class="avatar-initial">S</span></span>
+          <strong>Sofia</strong>
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <main id="app-view" class="view app-view" hidden>
+    <header class="app-header">
+      <div class="header-main">
+        <div class="brand" aria-label="O que vais fazer?">
+          <span class="brand-mark"><svg class="icon"><use href="./assets/icons.svg#i-heart"></use></svg></span>
+          <span class="brand-copy"><strong>O que vais fazer?</strong><small>João &amp; Sofia</small></span>
+        </div>
+        <div class="connection" id="connection" data-state="loading" role="status">
+          <span class="connection-dot"></span><span id="connection-label">A ligar…</span>
+        </div>
+        <span class="header-spacer"></span>
+        <button id="current-user" class="current-user" type="button" aria-label="Trocar de utilizador">
+          <span class="avatar" data-current-avatar><span class="avatar-initial">?</span></span>
+          <span class="current-user-copy"><small>A usar como</small><strong id="current-user-name">—</strong></span>
+        </button>
+        <button id="settings-open" class="button button-icon button-ghost" type="button" aria-label="Abrir definições" title="Definições"><svg class="icon"><use href="./assets/icons.svg#i-settings"></use></svg></button>
+      </div>
+      <nav class="calendar-toolbar" aria-label="Navegação do calendário">
+        <strong id="range-title" class="range-title"></strong>
+        <div class="toolbar-group">
+          <button class="button button-icon button-month" data-nav="month-prev" aria-label="Recuar um mês" title="Mês anterior"><svg class="icon"><use href="./assets/icons.svg#i-chevrons-left"></use></svg></button>
+          <button class="button button-icon button-week" data-nav="week-prev" aria-label="Recuar uma semana" title="Semana anterior"><svg class="icon"><use href="./assets/icons.svg#i-chevron-left"></use></svg></button>
+          <button class="button button-icon button-day" data-nav="day-prev" aria-label="Recuar um dia" title="Dia anterior"><svg class="icon"><use href="./assets/icons.svg#i-chevron-left"></use></svg></button>
+        </div>
+        <button class="button button-today" data-nav="today">Hoje</button>
+        <div class="toolbar-group">
+          <button class="button button-icon button-day" data-nav="day-next" aria-label="Avançar um dia" title="Dia seguinte"><svg class="icon"><use href="./assets/icons.svg#i-chevron-right"></use></svg></button>
+          <button class="button button-icon button-week" data-nav="week-next" aria-label="Avançar uma semana" title="Semana seguinte"><svg class="icon"><use href="./assets/icons.svg#i-chevron-right"></use></svg></button>
+          <button class="button button-icon button-month" data-nav="month-next" aria-label="Avançar um mês" title="Mês seguinte"><svg class="icon"><use href="./assets/icons.svg#i-chevrons-right"></use></svg></button>
+        </div>
+        <button id="add-activity" class="button button-primary toolbar-add add-activity-trigger" type="button" aria-label="Adicionar atividade"><svg class="icon"><use href="./assets/icons.svg#i-plus"></use></svg><span>Atividade</span></button>
+      </nav>
+    </header>
+
+    <button id="add-activity-mobile" class="button button-primary mobile-fab add-activity-trigger" type="button" aria-label="Adicionar atividade"><svg class="icon"><use href="./assets/icons.svg#i-plus"></use></svg></button>
+
+    <div id="date-strip" class="date-strip" aria-label="Datas visíveis"></div>
+    <div id="config-banner" class="status-banner" hidden>
+      <svg class="icon"><use href="./assets/icons.svg#i-settings"></use></svg>
+      <span><strong>Falta configurar o Firebase.</strong> Preenche <code>js/config.js</code> para ativar sincronização e edição.</span>
+    </div>
+    <section class="calendar-container" aria-label="Calendário de sete dias">
+      <div id="calendar-scroller" class="calendar-scroller">
+        <div class="calendar-inner">
+          <div id="calendar-days-header" class="calendar-days-header"></div>
+          <div class="calendar-body">
+            <div id="time-gutter" class="time-gutter" aria-hidden="true"></div>
+            <div id="days-grid" class="days-grid" role="grid" aria-label="Intervalos do calendário"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="activity-dialog" aria-labelledby="activity-dialog-title">
+    <form id="activity-form" method="dialog" novalidate>
+      <div class="dialog-header">
+        <h2 id="activity-dialog-title">Nova atividade</h2>
+        <button class="button button-icon button-ghost" value="close" formnovalidate aria-label="Fechar"><svg class="icon"><use href="./assets/icons.svg#i-x-circle"></use></svg></button>
+      </div>
+      <div class="dialog-body form-grid">
+        <label class="field span-2"><span>Título</span><span class="input-with-button"><input id="activity-title" name="title" maxlength="160" required autocomplete="off"><button class="button emoji-open" type="button" data-emoji-target="activity-title" aria-label="Escolher emoji para o título"><svg class="icon"><use href="./assets/icons.svg#i-smile"></use></svg><span>Emoji</span></button></span></label>
+        <label class="field span-2"><span>Descrição</span><span class="input-with-button"><textarea id="activity-description" name="description" maxlength="4000"></textarea><button class="button emoji-open" type="button" data-emoji-target="activity-description" aria-label="Escolher emoji para a descrição"><svg class="icon"><use href="./assets/icons.svg#i-smile"></use></svg><span>Emoji</span></button></span></label>
+        <div id="emoji-picker-popover" class="emoji-picker-popover span-2" role="region" aria-label="Escolher emoji" hidden></div>
+        <label class="field"><span>Data de início</span><input id="activity-start-date" name="startDate" type="date" required></label>
+        <label class="field"><span>Hora de início</span><select id="activity-start-time" name="startMinute" required></select></label>
+        <label class="field"><span>Data de fim</span><input id="activity-end-date" name="endDate" type="date" required></label>
+        <label class="field"><span>Hora de fim</span><select id="activity-end-time" name="endMinute" required></select></label>
+        <fieldset class="span-2" style="border:0;padding:0;margin:0"><legend class="fieldset-label">Tipo da atividade</legend>
+          <div class="segmented">
+            <input id="type-joao" name="type" type="radio" value="joao"><label class="type-joao" for="type-joao">João</label>
+            <input id="type-sofia" name="type" type="radio" value="sofia"><label class="type-sofia" for="type-sofia">Sofia</label>
+            <input id="type-casal" name="type" type="radio" value="casal"><label class="type-casal" for="type-casal">Casal</label>
+          </div>
+        </fieldset>
+        <details class="optional">
+          <summary>Opcionais</summary>
+          <div class="optional-content">
+            <label class="field"><span>Localização</span><input id="activity-location" name="location" maxlength="240"></label>
+            <label class="field"><span>Link</span><input id="activity-url" name="url" type="url" maxlength="2048" placeholder="https://…"></label>
+            <label class="field"><span>Repetição</span><select id="recurrence-mode" name="recurrenceMode"><option value="">Não repetir</option><option value="daily">Todos os dias</option><option value="weekly">Todas as semanas</option><option value="weekdays">Dias úteis</option><option value="custom">Dias específicos</option><option value="monthly">Todos os meses</option></select></label>
+            <label class="field"><span>Termina</span><select id="recurrence-end-mode" name="recurrenceEndMode"><option value="never">Nunca</option><option value="until">Numa data</option><option value="count">Após ocorrências</option></select></label>
+            <div id="recurrence-weekdays-field" class="field span-2" hidden><span>Dias da semana</span><div class="weekday-picker">
+              <label><input type="checkbox" name="weekday" value="1"><span>Seg</span></label><label><input type="checkbox" name="weekday" value="2"><span>Ter</span></label><label><input type="checkbox" name="weekday" value="3"><span>Qua</span></label><label><input type="checkbox" name="weekday" value="4"><span>Qui</span></label><label><input type="checkbox" name="weekday" value="5"><span>Sex</span></label><label><input type="checkbox" name="weekday" value="6"><span>Sáb</span></label><label><input type="checkbox" name="weekday" value="7"><span>Dom</span></label>
+            </div></div>
+            <label id="recurrence-until-field" class="field" hidden><span>Data final</span><input id="recurrence-until" name="recurrenceUntil" type="date"></label>
+            <label id="recurrence-count-field" class="field" hidden><span>Número de ocorrências</span><input id="recurrence-count" name="recurrenceCount" type="number" min="1" max="10000" value="10"></label>
+          </div>
+        </details>
+        <p id="activity-form-error" class="error-text span-2" role="alert"></p>
+      </div>
+      <div class="dialog-footer"><button class="button" value="close" formnovalidate>Fechar</button><button id="activity-save" class="button button-primary" value="save">Guardar</button></div>
+    </form>
+    <div id="emoji-suggestions" class="emoji-suggestions" role="listbox" popover="manual" hidden></div>
+  </dialog>
+
+  <dialog id="details-dialog" aria-labelledby="details-title">
+    <div class="dialog-header"><h2 id="details-title">Detalhes</h2><button class="button button-icon button-ghost" data-dialog-close aria-label="Fechar"><svg class="icon"><use href="./assets/icons.svg#i-x-circle"></use></svg></button></div>
+    <div id="details-body" class="dialog-body"></div>
+    <div id="details-actions" class="dialog-footer"></div>
+  </dialog>
+
+  <dialog id="choice-dialog" aria-labelledby="choice-title">
+    <div class="dialog-header"><h2 id="choice-title">Atividade recorrente</h2><button class="button button-icon button-ghost" data-dialog-close aria-label="Fechar"><svg class="icon"><use href="./assets/icons.svg#i-x-circle"></use></svg></button></div>
+    <div class="dialog-body"><p id="choice-message">Onde queres aplicar esta alteração?</p></div>
+    <div class="dialog-footer"><button class="button" data-choice="occurrence">Apenas esta ocorrência</button><button class="button button-primary" data-choice="series">Toda a série</button></div>
+  </dialog>
+
+  <dialog id="confirm-dialog" aria-labelledby="confirm-title">
+    <div class="dialog-header"><h2 id="confirm-title">Confirmar</h2><button class="button button-icon button-ghost" data-dialog-close aria-label="Fechar"><svg class="icon"><use href="./assets/icons.svg#i-x-circle"></use></svg></button></div>
+    <div class="dialog-body"><p id="confirm-message"></p></div>
+    <div class="dialog-footer"><button class="button" data-confirm="false">Voltar</button><button id="confirm-yes" class="button button-danger" data-confirm="true">Confirmar</button></div>
+  </dialog>
+
+  <dialog id="settings-dialog" aria-labelledby="settings-title">
+    <div class="dialog-header"><h2 id="settings-title">Definições</h2><button class="button button-icon button-ghost" data-dialog-close aria-label="Fechar"><svg class="icon"><use href="./assets/icons.svg#i-x-circle"></use></svg></button></div>
+    <div class="dialog-body settings-list">
+      <div class="settings-item"><span class="settings-item-copy"><strong>Sons discretos</strong><small>Guardar, cancelar e remover</small></span><label class="switch"><input id="sounds-toggle" type="checkbox"><span></span></label></div>
+      <div class="settings-item"><span class="settings-item-copy"><strong>Avatar desenhado</strong><small>Sincroniza entre dispositivos</small></span><button id="avatar-open" class="button"><svg class="icon"><use href="./assets/icons.svg#i-image"></use></svg>Desenhar</button></div>
+      <div class="settings-item"><span class="settings-item-copy"><strong>Trocar de utilizador</strong><small>Apenas neste dispositivo</small></span><button id="switch-user" class="button"><svg class="icon"><use href="./assets/icons.svg#i-user"></use></svg>Trocar</button></div>
+      <div class="settings-item"><span class="settings-item-copy"><strong>Exportar</strong><small>Uma cópia dos dados atuais</small></span><span class="actions"><button class="button" data-export="json">JSON</button><button class="button" data-export="csv">CSV</button><button class="button" data-export="ics">ICS</button></span></div>
+      <div class="settings-item"><span class="settings-item-copy"><strong>Imprimir / PDF</strong><small>Usa a impressão do navegador</small></span><button id="print-calendar" class="button"><svg class="icon"><use href="./assets/icons.svg#i-print"></use></svg>Imprimir</button></div>
+      <div class="settings-item"><span class="settings-item-copy"><strong>Voltar a bloquear</strong><small>O código é apenas uma barreira informal</small></span><button id="lock-app" class="button button-danger"><svg class="icon"><use href="./assets/icons.svg#i-lock"></use></svg>Bloquear</button></div>
+      <p class="lede"><small>Fuso horário: Europe/Lisbon · Dados sincronizados por Firebase quando configurado.</small></p>
+    </div>
+  </dialog>
+
+  <dialog id="avatar-dialog" aria-labelledby="avatar-title">
+    <div class="dialog-header"><h2 id="avatar-title">Desenhar avatar</h2><button class="button button-icon button-ghost" data-dialog-close aria-label="Fechar"><svg class="icon"><use href="./assets/icons.svg#i-x-circle"></use></svg></button></div>
+    <div class="dialog-body">
+      <div class="avatar-editor-grid"><div><div class="drawing-wrap"><canvas id="avatar-canvas" width="512" height="512" aria-label="Área de desenho do avatar"></canvas></div></div><div><p class="fieldset-label">Pré-visualização</p><div class="avatar-preview"><canvas id="avatar-preview" width="256" height="256"></canvas></div></div></div>
+      <div class="drawing-tools">
+        <label class="field"><span>Cor</span><input id="drawing-color" type="color" value="#6f58ae"></label>
+        <label class="field"><span>Espessura</span><input id="drawing-width" type="range" min="2" max="30" value="8"></label>
+        <button id="drawing-pen" class="button button-week" type="button">Lápis</button>
+        <button id="drawing-eraser" class="button" type="button"><svg class="icon"><use href="./assets/icons.svg#i-eraser"></use></svg>Borracha</button>
+        <button id="drawing-undo" class="button button-icon" type="button" aria-label="Desfazer"><svg class="icon"><use href="./assets/icons.svg#i-undo"></use></svg></button>
+        <button id="drawing-redo" class="button button-icon" type="button" aria-label="Refazer"><svg class="icon"><use href="./assets/icons.svg#i-redo"></use></svg></button>
+        <button id="drawing-clear" class="button button-danger" type="button">Limpar</button>
+      </div>
+      <p id="avatar-error" class="error-text" role="alert"></p>
+    </div>
+    <div class="dialog-footer"><button class="button" data-dialog-close>Fechar</button><button id="avatar-save" class="button button-primary">Guardar avatar</button></div>
+  </dialog>
+
+  <div id="activity-action-menu" class="event-action-menu" role="menu" aria-label="Ações da atividade" hidden></div>
+  <div id="tooltip" class="tooltip" role="tooltip" hidden></div>
+  <div id="toast-region" class="toast-region" aria-live="polite"></div>
+  <div id="live-region" class="sr-only" aria-live="assertive"></div>
+
+  <script type="module" src="./js/app.js"></script>
+</body>
+</html>

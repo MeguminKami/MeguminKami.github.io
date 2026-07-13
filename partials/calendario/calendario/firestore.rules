@@ -1,0 +1,151 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() { return request.auth != null; }
+    function validUser(value) { return value == 'joao' || value == 'sofia'; }
+    function validType(value) { return value == 'joao' || value == 'sofia' || value == 'casal'; }
+    function validDate(value) { return value is string && value.matches('^[0-9]{4}-[0-9]{2}-[0-9]{2}$'); }
+    function validPoint(value) {
+      return value is map
+        && value.keys().hasOnly(['date', 'minute'])
+        && validDate(value.date)
+        && value.minute is int
+        && value.minute % 60 == 0
+        && value.minute >= 420
+        && value.minute <= 1440;
+    }
+    function validStartPoint(value) { return validPoint(value) && value.minute <= 1380; }
+    function validEndPoint(value) { return validPoint(value); }
+    function validRecurrence(value) {
+      return value == null || (
+        value is map
+        && value.keys().hasOnly(['mode', 'weekdays', 'endMode', 'untilDate', 'count'])
+        && (value.mode == 'daily' || value.mode == 'weekly' || value.mode == 'weekdays' || value.mode == 'custom' || value.mode == 'monthly')
+        && value.weekdays is list && value.weekdays.size() <= 7
+        && (value.endMode == 'never' || value.endMode == 'until' || value.endMode == 'count')
+        && value.untilDate is string && value.untilDate.size() <= 10
+        && value.count is int && value.count >= 0 && value.count <= 10000
+      );
+    }
+    function validComment(value, creator) {
+      return value == null || (
+        value is map
+        && value.keys().hasOnly(['author', 'text'])
+        && validUser(value.author) && value.author != creator
+        && value.text is string && value.text.size() > 0 && value.text.size() <= 1000
+      );
+    }
+    function validActivity(data) {
+      return data.keys().hasOnly([
+        'schemaVersion', 'creator', 'type', 'title', 'description', 'location', 'url',
+        'start', 'end', 'recurrence', 'status', 'comment', 'version',
+        'createdAt', 'updatedAt', 'lastEditedBy'
+      ])
+      && data.schemaVersion == 1
+      && validUser(data.creator) && validUser(data.lastEditedBy) && validType(data.type)
+      && data.title is string && data.title.size() > 0 && data.title.size() <= 160
+      && data.description is string && data.description.size() <= 4000
+      && data.location is string && data.location.size() <= 240
+      && data.url is string && data.url.size() <= 2048
+      && (data.url == '' || data.url.matches('^https?://.*$'))
+      && validStartPoint(data.start) && validEndPoint(data.end)
+      && (data.end.date != data.start.date || data.end.minute > data.start.minute)
+      && validRecurrence(data.recurrence)
+      && (data.status == 'active' || data.status == 'cancelled')
+      && validComment(data.comment, data.creator)
+      && data.version is int && data.version >= 1;
+    }
+    function validReplacement(data) {
+      return data is map
+        && data.keys().hasOnly(['title', 'description', 'location', 'url', 'type', 'start', 'end', 'status'])
+        && data.title is string && data.title.size() > 0 && data.title.size() <= 160
+        && data.description is string && data.description.size() <= 4000
+        && data.location is string && data.location.size() <= 240
+        && data.url is string && data.url.size() <= 2048
+        && validType(data.type)
+        && validStartPoint(data.start) && validEndPoint(data.end)
+        && (data.end.date != data.start.date || data.end.minute > data.start.minute)
+        && (data.status == 'active' || data.status == 'cancelled');
+    }
+
+    match /spaces/joao-sofia/settings/{settingId} {
+      allow read: if signedIn();
+      allow create, update: if signedIn()
+        && settingId == 'general'
+        && request.resource.data.keys().hasOnly(['schemaVersion', 'name', 'timezone', 'updatedAt'])
+        && request.resource.data.schemaVersion == 1
+        && request.resource.data.name is string && request.resource.data.name.size() <= 80
+        && request.resource.data.timezone == 'Europe/Lisbon';
+      allow delete: if false;
+    }
+
+    match /spaces/joao-sofia/profiles/{profileId} {
+      allow read: if signedIn();
+      allow create: if signedIn()
+        && (profileId == 'joao' || profileId == 'sofia')
+        && request.resource.data.keys().hasOnly(['schemaVersion', 'id', 'displayName', 'palette', 'avatar', 'version', 'updatedAt'])
+        && request.resource.data.schemaVersion == 1 && request.resource.data.id == profileId
+        && request.resource.data.displayName is string && request.resource.data.displayName.size() <= 40
+        && request.resource.data.palette == profileId
+        && request.resource.data.version is int && request.resource.data.version >= 1
+        && (request.resource.data.avatar == null || (
+          request.resource.data.avatar is map
+          && request.resource.data.avatar.keys().hasOnly(['formatVersion', 'width', 'height', 'strokesJson'])
+          && request.resource.data.avatar.formatVersion == 1
+          && request.resource.data.avatar.width == 256 && request.resource.data.avatar.height == 256
+          && request.resource.data.avatar.strokesJson is string
+          && request.resource.data.avatar.strokesJson.size() <= 180000
+        ));
+      allow update: if signedIn()
+        && (profileId == 'joao' || profileId == 'sofia')
+        && request.resource.data.keys().hasOnly(['schemaVersion', 'id', 'displayName', 'palette', 'avatar', 'version', 'updatedAt'])
+        && request.resource.data.schemaVersion == 1 && request.resource.data.id == profileId
+        && request.resource.data.displayName is string && request.resource.data.displayName.size() <= 40
+        && request.resource.data.palette == profileId
+        && request.resource.data.version == resource.data.version + 1
+        && (request.resource.data.avatar == null || (
+          request.resource.data.avatar is map
+          && request.resource.data.avatar.keys().hasOnly(['formatVersion', 'width', 'height', 'strokesJson'])
+          && request.resource.data.avatar.formatVersion == 1
+          && request.resource.data.avatar.width == 256 && request.resource.data.avatar.height == 256
+          && request.resource.data.avatar.strokesJson is string
+          && request.resource.data.avatar.strokesJson.size() <= 180000
+        ));
+      allow delete: if false;
+    }
+
+    match /spaces/joao-sofia/activities/{activityId} {
+      allow read: if signedIn();
+      allow create: if signedIn() && validActivity(request.resource.data) && request.resource.data.version == 1;
+      allow update: if signedIn() && validActivity(request.resource.data)
+        && request.resource.data.creator == resource.data.creator
+        && request.resource.data.createdAt == resource.data.createdAt
+        && request.resource.data.version == resource.data.version + 1;
+      allow delete: if signedIn();
+    }
+
+    match /spaces/joao-sofia/occurrenceOverrides/{overrideId} {
+      allow read: if signedIn();
+      allow create: if signedIn()
+        && request.resource.data.keys().hasOnly(['schemaVersion', 'seriesId', 'occurrenceDate', 'replacement', 'version', 'lastEditedBy', 'createdAt', 'updatedAt'])
+        && request.resource.data.schemaVersion == 1
+        && request.resource.data.seriesId is string && request.resource.data.seriesId.size() > 0
+        && validDate(request.resource.data.occurrenceDate)
+        && validReplacement(request.resource.data.replacement)
+        && validUser(request.resource.data.lastEditedBy)
+        && request.resource.data.version == 1;
+      allow update: if signedIn()
+        && request.resource.data.keys().hasOnly(['schemaVersion', 'seriesId', 'occurrenceDate', 'replacement', 'version', 'lastEditedBy', 'createdAt', 'updatedAt'])
+        && request.resource.data.schemaVersion == 1
+        && request.resource.data.seriesId == resource.data.seriesId
+        && request.resource.data.occurrenceDate == resource.data.occurrenceDate
+        && request.resource.data.createdAt == resource.data.createdAt
+        && validReplacement(request.resource.data.replacement)
+        && validUser(request.resource.data.lastEditedBy)
+        && request.resource.data.version == resource.data.version + 1;
+      allow delete: if signedIn();
+    }
+
+    match /{document=**} { allow read, write: if false; }
+  }
+}

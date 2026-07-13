@@ -1,0 +1,10 @@
+@media (min-width: 761px) and (max-width: 1050px) { :root { --day-min: calc((100vw - var(--time-width) - 28px) / 2); } }
+@media (max-width: 1050px) { .date-strip { display:flex; }.brand-copy small { display:none; } }
+@media (max-width: 760px) {
+  :root { --slot-height: 34px; --time-width:64px; --day-min:calc(100vw - var(--time-width) - 22px); }
+  .app-header { padding:9px 10px; }.brand-copy { display:none; }.connection span:last-child { display:none; }.current-user-copy { display:none; }.header-main { gap:7px; }.calendar-toolbar { justify-content:center; gap:3px; }.calendar-toolbar .button { padding:8px 9px; }.range-title { order:-1; width:100%; min-width:0; }.toolbar-group { flex:0 0 auto; gap:1px; }.toolbar-group .button-icon { width:40px; min-height:44px; padding:0; }.button-today { width:48px; padding:0!important; font-size:.8rem; }.toolbar-add { display:none; }.mobile-fab { position:fixed; z-index:45; right:16px; bottom:16px; display:inline-flex; width:54px; height:54px; padding:0; border-radius:18px; }.calendar-container { margin-top:10px; border-radius:15px; }.day-header { padding-inline:5px; }
+  .form-grid,.optional-content { grid-template-columns:1fr; }.form-grid .span-2 { grid-column:auto; }dialog { border-radius:20px; }.dialog-header { padding-inline:16px; }.dialog-body { padding-inline:16px; }.dialog-footer { padding-inline:16px; }
+  .avatar-editor-grid { grid-template-columns:1fr; }.avatar-preview { margin:auto; }.drawing-tools { justify-content:center; }
+  .resize-handle { height:18px; }
+}
+@media (max-width: 390px) { .user-options { grid-template-columns:1fr 1fr; }.screen-card { padding:24px 18px; }.segmented label { font-size:.8rem; }.event-title { font-size:.68rem; } }

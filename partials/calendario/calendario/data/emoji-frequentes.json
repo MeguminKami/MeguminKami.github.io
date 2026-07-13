@@ -1,0 +1,9 @@
+[
+  { "emoji": "❤️", "name": "coração vermelho", "aliases": ["heart", "amor", "coracao"] },
+  { "emoji": "🥰", "name": "cara sorridente com corações", "aliases": ["smiling_hearts", "apaixonado"] },
+  { "emoji": "😊", "name": "cara sorridente", "aliases": ["smile", "sorriso"] },
+  { "emoji": "✨", "name": "faíscas", "aliases": ["sparkles", "brilho"] },
+  { "emoji": "🌷", "name": "tulipa", "aliases": ["tulip", "flor"] },
+  { "emoji": "☕", "name": "café", "aliases": ["coffee", "cafe"] },
+  { "emoji": "🎁", "name": "presente", "aliases": ["gift", "prenda"] }
+]
