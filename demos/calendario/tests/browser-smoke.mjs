@@ -21,31 +21,49 @@ await new Promise((resolve) => server.listen(0, "127.0.0.1", resolve));
 const webPort = server.address().port;
 const edge = process.platform === "win32" ? "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe" : "microsoft-edge";
 const debugPort = 9333 + Math.floor(Math.random() * 300);
-const browser = spawn(edge, ["--headless=new", "--disable-gpu", "--no-first-run", "--window-size=1280,900", `--remote-debugging-port=${debugPort}`, `--user-data-dir=${join(tmpdir(), `oqvf-smoke-${process.pid}`)}`, `http://127.0.0.1:${webPort}/index.html`], { stdio: "ignore" });
+const browserProfile = join(tmpdir(), `oqvf-smoke-${process.pid}-${Date.now()}-${Math.floor(Math.random() * 100000)}`);
+const browser = spawn(edge, ["--headless=new", "--no-sandbox", "--disable-gpu", "--disable-gpu-sandbox", "--disable-software-rasterizer", "--disable-features=SkiaGraphite", "--no-first-run", "--remote-allow-origins=*", "--window-size=1280,900", `--remote-debugging-port=${debugPort}`, `--user-data-dir=${browserProfile}`, `http://127.0.0.1:${webPort}/index.html`], { stdio: ["ignore", "ignore", "pipe"] });
+let browserStderr = "";
+browser.stderr.on("data", (chunk) => { browserStderr += chunk.toString(); });
 
 const delay = (milliseconds) => new Promise((resolve) => setTimeout(resolve, milliseconds));
 let socket;
 try {
   let target;
-  for (let attempt = 0; attempt < 40; attempt += 1) {
+  for (let attempt = 0; attempt < 80; attempt += 1) {
     try { target = (await (await fetch(`http://127.0.0.1:${debugPort}/json`)).json()).find((item) => item.type === "page" && item.url.includes(`127.0.0.1:${webPort}`)); } catch { /* Browser ainda a arrancar. */ }
     if (target) break;
     await delay(150);
   }
-  assert.ok(target, "O browser headless não abriu a página.");
+  assert.ok(target, `O browser headless não abriu a página. Código: ${browser.exitCode ?? "em execução"}. ${browserStderr.slice(-800)}`);
   await delay(700);
   socket = new WebSocket(target.webSocketDebuggerUrl);
-  await new Promise((resolve, reject) => { socket.addEventListener("open", resolve, { once: true }); socket.addEventListener("error", reject, { once: true }); });
+  await new Promise((resolve, reject) => {
+    socket.addEventListener("open", resolve, { once: true });
+    socket.addEventListener("error", () => reject(new Error(`Não foi possível ligar ao DevTools em ${target.webSocketDebuggerUrl}. Código: ${browser.exitCode ?? "em execução"}. ${browserStderr.slice(-800)}`)), { once: true });
+  });
   let id = 0;
   const pending = new Map();
   const errors = [];
   socket.addEventListener("message", (event) => {
     const message = JSON.parse(event.data);
-    if (message.id && pending.has(message.id)) { pending.get(message.id)(message); pending.delete(message.id); }
+    if (message.id && pending.has(message.id)) { pending.get(message.id).resolve(message); pending.delete(message.id); }
     if (message.method === "Runtime.exceptionThrown") errors.push(message.params.exceptionDetails.text);
     if (message.method === "Log.entryAdded" && message.params.entry.level === "error") errors.push(message.params.entry.text);
   });
-  const send = (method, params = {}) => new Promise((resolve) => { const messageId = ++id; pending.set(messageId, resolve); socket.send(JSON.stringify({ id: messageId, method, params })); });
+  socket.addEventListener("close", () => {
+    const error = new Error(`O Edge encerrou a ligação DevTools. Código: ${browser.exitCode ?? "em execução"}. ${browserStderr.slice(-800)}`);
+    pending.forEach(({ reject }) => reject(error)); pending.clear();
+  });
+  const send = (method, params = {}) => new Promise((resolve, reject) => {
+    const messageId = ++id;
+    const timeout = setTimeout(() => { pending.delete(messageId); reject(new Error(`O Edge não respondeu a ${method} em 10 segundos.`)); }, 10000);
+    pending.set(messageId, {
+      resolve: (message) => { clearTimeout(timeout); resolve(message); },
+      reject: (error) => { clearTimeout(timeout); reject(error); }
+    });
+    socket.send(JSON.stringify({ id: messageId, method, params }));
+  });
   await send("Runtime.enable"); await send("Log.enable"); await send("Page.enable");
   const storageResult = await send("Runtime.evaluate", { expression: `localStorage.setItem("oqvf.access.v1","granted");localStorage.setItem("oqvf.user.v1","joao");location.origin`, returnByValue: true });
   assert.match(storageResult.result.result.value, /^http:\/\/127\.0\.0\.1:/);
@@ -53,12 +71,14 @@ try {
   const desktopResult = await send("Runtime.evaluate", { expression: `JSON.stringify({appVisible:!document.querySelector("#app-view").hidden,days:document.querySelectorAll(".day-column").length,headers:document.querySelectorAll(".day-header").length,slots:document.querySelectorAll(".slot-button").length,title:document.title})`, returnByValue: true });
   const desktop = JSON.parse(desktopResult.result.result.value);
   assert.deepEqual(desktop, { appVisible: true, days: 7, headers: 7, slots: 119, title: "O que vais fazer?" });
-  const visualResult = await send("Runtime.evaluate", { expression: `(()=>{const today=document.querySelector('.day-header.today');const labels=[...document.querySelectorAll('.time-label')];return JSON.stringify({motifs:document.querySelectorAll('.floating-motif').length,backgroundAnimations:document.querySelector('#background-art').getAnimations({subtree:true}).length,todayColumns:document.querySelectorAll('.day-column.today').length,todayBorder:getComputedStyle(today).borderTopWidth,timeLabels:labels.length,timeRowHeights:[...new Set(labels.map(label=>Math.round(label.getBoundingClientRect().height)))]})})()`, returnByValue: true });
+  const visualResult = await send("Runtime.evaluate", { expression: `(()=>{const today=document.querySelector('.day-header.today');const todayColumn=document.querySelector('.day-column.today');const labels=[...document.querySelectorAll('.time-label')];const body=document.querySelector('.calendar-body');const sample=document.createElement('button');sample.className='event-card joao compact';sample.style.cssText='top:0;left:0;width:40%;height:calc(2.9411764706% - 2px)';todayColumn.append(sample);const halfHourHeight=Math.round(sample.getBoundingClientRect().height);sample.remove();return JSON.stringify({motifs:document.querySelectorAll('.floating-motif').length,backgroundAnimations:document.querySelector('#background-art').getAnimations({subtree:true}).length,todayColumns:document.querySelectorAll('.day-column.today').length,todayBorder:getComputedStyle(today).borderTopWidth,todayColumnBackground:getComputedStyle(todayColumn).backgroundColor,todayColumnShadow:getComputedStyle(todayColumn).boxShadow,timeLabels:labels.length,timeRowHeights:[...new Set(labels.map(label=>Math.round(label.getBoundingClientRect().height)))],halfHourHeight,calendarGap:getComputedStyle(body).marginTop})})()`, returnByValue: true });
   const visual = JSON.parse(visualResult.result.result.value);
-  assert.equal(visual.motifs, 18); assert.ok(visual.backgroundAnimations > 0); assert.equal(visual.todayColumns, 1); assert.equal(visual.todayBorder, "4px"); assert.equal(visual.timeLabels, 17); assert.deepEqual(visual.timeRowHeights, [34]);
+  assert.equal(visual.motifs, 18); assert.ok(visual.backgroundAnimations > 0); assert.equal(visual.todayColumns, 1); assert.equal(visual.todayBorder, "4px"); assert.equal(visual.todayColumnBackground, "rgba(0, 0, 0, 0)"); assert.equal(visual.todayColumnShadow, "none"); assert.equal(visual.timeLabels, 17); assert.deepEqual(visual.timeRowHeights, [34]); assert.ok(visual.halfHourHeight >= 14 && visual.halfHourHeight <= 16); assert.equal(visual.calendarGap, "4px");
   const clickedResult = await send("Runtime.evaluate", { expression: `(()=>{const slot=document.querySelector('.slot-button[data-minute="600"]');slot.click();return JSON.stringify({date:slot.dataset.date,open:document.querySelector('#activity-dialog').open,startDate:document.querySelector('#activity-start-date').value,startMinute:document.querySelector('#activity-start-time').value,endDate:document.querySelector('#activity-end-date').value,endMinute:document.querySelector('#activity-end-time').value})})()`, returnByValue: true });
   const clicked = JSON.parse(clickedResult.result.result.value);
-  assert.deepEqual(clicked, { date: clicked.date, open: true, startDate: clicked.date, startMinute: "600", endDate: clicked.date, endMinute: "660" });
+  assert.deepEqual(clicked, { date: clicked.date, open: true, startDate: clicked.date, startMinute: "600", endDate: clicked.date, endMinute: "630" });
+  const timeOptionsResult = await send("Runtime.evaluate", { expression: `JSON.stringify({start:[...document.querySelector('#activity-start-time').options].map(option=>option.value),end:[...document.querySelector('#activity-end-time').options].map(option=>option.value)})`, returnByValue: true });
+  const timeOptions = JSON.parse(timeOptionsResult.result.result.value); assert.ok(timeOptions.start.includes("450")); assert.ok(timeOptions.end.includes("510")); assert.equal(timeOptions.start.at(-1), "1410"); assert.equal(timeOptions.end.at(-1), "1440");
   await send("Runtime.evaluate", { expression: `(()=>{const input=document.querySelector('#activity-title');input.value='Encontro :';input.setSelectionRange(input.value.length,input.value.length);input.dispatchEvent(new Event('input',{bubbles:true}));return true})()`, returnByValue: true });
   await delay(80);
   const emojiResult = await send("Runtime.evaluate", { expression: `(()=>{const suggestions=document.querySelector('#emoji-suggestions');const options=[...suggestions.querySelectorAll('.emoji-option')];const popoverOpen=suggestions.matches(':popover-open');options[0]?.click();return JSON.stringify({options:options.length,popoverOpen,value:document.querySelector('#activity-title').value,suggestionsHidden:suggestions.hidden})})()`, returnByValue: true });
@@ -71,10 +91,49 @@ try {
   assert.equal(picker.visible, true); assert.equal(picker.inline, true); assert.ok(picker.initial >= 60); assert.equal(picker.results, 1); assert.equal(picker.first, "🍕");
   const pickerCapture = await send("Page.captureScreenshot", { format: "png", captureBeyondViewport: false });
   await writeFile(join(tmpdir(), "oqvf-emoji-menu-smoke.png"), Buffer.from(pickerCapture.result.data, "base64"));
-  const insertedResult = await send("Runtime.evaluate", { expression: `(()=>{const picker=document.querySelector('#emoji-picker-popover');picker.querySelector('.emoji-fallback-button')?.click();return JSON.stringify({value:document.querySelector('#activity-title').value,closed:picker.hidden,expanded:document.querySelector('.emoji-open[data-emoji-target="activity-title"]').getAttribute('aria-expanded')})})()`, returnByValue: true });
+  const insertedResult = await send("Runtime.evaluate", { expression: `(()=>{const box=document.querySelector('#emoji-picker-popover');const fallback=box.querySelector('.emoji-fallback-button');const native=box.querySelector('emoji-picker.emoji-native-picker');if(fallback)fallback.click();else native?.dispatchEvent(new CustomEvent('emoji-click',{detail:{unicode:'🍕'}}));return JSON.stringify({value:document.querySelector('#activity-title').value,closed:box.hidden,expanded:document.querySelector('.emoji-open[data-emoji-target="activity-title"]').getAttribute('aria-expanded')})})()`, returnByValue: true });
   const inserted = JSON.parse(insertedResult.result.result.value);
   assert.match(inserted.value, /🍕/u); assert.equal(inserted.closed, true); assert.equal(inserted.expanded, "false");
+  await send("Runtime.evaluate", { expression: `document.querySelector('.emoji-open[data-emoji-target="activity-title"]').click()` });
+  let completePicker;
+  for (let attempt = 0; attempt < 50; attempt += 1) {
+    const completeResult = await send("Runtime.evaluate", { expression: `(()=>{const picker=document.querySelector('emoji-picker.emoji-native-picker');return picker?JSON.stringify({catalogSize:Number(picker.dataset.catalogSize),connected:picker.isConnected,hasSearch:Boolean(picker.shadowRoot?.querySelector('input[type="search"]')),hasCategories:Boolean(picker.shadowRoot?.querySelector('[role="tablist"],nav'))}):''})()`, returnByValue: true });
+    if (completeResult.result.result.value) { completePicker = JSON.parse(completeResult.result.result.value); break; }
+    await delay(100);
+  }
+  assert.ok(completePicker?.connected, "O seletor completo de emojis não abriu.");
+  assert.ok(completePicker.catalogSize >= 1000, `O catálogo completo só contém ${completePicker.catalogSize} emojis base.`);
+  assert.equal(completePicker.hasSearch, true); assert.equal(completePicker.hasCategories, true);
+  let renderedEmojiCount = 0;
+  for (let attempt = 0; attempt < 60; attempt += 1) {
+    const renderedResult = await send("Runtime.evaluate", { expression: `document.querySelector('emoji-picker.emoji-native-picker')?.shadowRoot?.querySelectorAll('.emoji').length||0`, returnByValue: true });
+    renderedEmojiCount = renderedResult.result.result.value;
+    if (renderedEmojiCount >= 20) break;
+    await delay(100);
+  }
+  assert.ok(renderedEmojiCount >= 20, `A grelha completa só desenhou ${renderedEmojiCount} emojis.`);
+  const completePickerCapture = await send("Page.captureScreenshot", { format: "png", captureBeyondViewport: false });
+  await writeFile(join(tmpdir(), "oqvf-emoji-complete-smoke.png"), Buffer.from(completePickerCapture.result.data, "base64"));
+  await send("Runtime.evaluate", { expression: `(()=>{const picker=document.querySelector('emoji-picker.emoji-native-picker');const search=picker.shadowRoot.querySelector('input[type="search"]');search.value='pizza';search.dispatchEvent(new Event('input',{bubbles:true}));return true})()` });
+  await delay(250);
+  const nativeClickResult = await send("Runtime.evaluate", { expression: `(()=>{const picker=document.querySelector('emoji-picker.emoji-native-picker');const buttons=[...picker.shadowRoot.querySelectorAll('.emoji')];const button=buttons.find(item=>item.textContent.includes('🍕')||item.getAttribute('aria-label')?.toLocaleLowerCase('pt-PT').includes('pizza'));button?.click();return JSON.stringify({found:Boolean(button),results:buttons.length})})()`, returnByValue: true });
+  const nativeClick = JSON.parse(nativeClickResult.result.result.value); assert.equal(nativeClick.found, true); assert.ok(nativeClick.results >= 1);
+  await delay(100);
+  const nativeInsertResult = await send("Runtime.evaluate", { expression: `(()=>{const input=document.querySelector('#activity-title');return JSON.stringify({inserted:(input.value.match(/🍕/gu)||[]).length>=2,closed:document.querySelector('#emoji-picker-popover').hidden,expanded:document.querySelector('.emoji-open[data-emoji-target="activity-title"]').getAttribute('aria-expanded')})})()`, returnByValue: true });
+  assert.deepEqual(JSON.parse(nativeInsertResult.result.result.value), { inserted: true, closed: true, expanded: "false" });
   await send("Runtime.evaluate", { expression: `document.querySelector('#activity-dialog').close()` });
+  const resizeResult = await send("Runtime.evaluate", { expression: `(async()=>{const {DragResizeController}=await import('./js/ui/drag-resize.js');const host=document.createElement('div');host.style.cssText='position:fixed;left:24px;top:130px;width:180px;height:578px;z-index:9999';const column=document.createElement('div');column.className='day-column';column.dataset.dayIndex='0';column.style.cssText='position:relative;width:180px;height:578px';const grid=document.createElement('div');grid.append(column);host.append(grid);document.body.append(host);const card=document.createElement('button');card.className='event-card joao resizable';card.dataset.movable='true';card.dataset.renderId='resize-smoke';card.style.cssText='top:5.882352941%;left:0;width:100%;height:calc(5.882352941% - 2px)';for(const edge of ['start','end']){const handle=document.createElement('span');handle.className='resize-handle '+edge;handle.dataset.resize=edge;const icon=document.createElementNS('http://www.w3.org/2000/svg','svg');icon.setAttribute('class','icon resize-icon');const use=document.createElementNS('http://www.w3.org/2000/svg','use');use.setAttribute('href','./assets/icons.svg#i-resize-vertical');icon.append(use);handle.append(icon);card.append(handle)}column.append(card);Object.defineProperty(card,'setPointerCapture',{value:()=>{}});const activity={schemaVersion:1,id:'resize-smoke',creator:'joao',type:'joao',title:'Teste',description:'',location:'',url:'',start:{date:'2026-07-14',minute:480},end:{date:'2026-07-14',minute:540},recurrence:null,status:'active',comment:null,version:1,lastEditedBy:'joao'};let committed=null;let announcement='';const calendar={grid,scroller:{scrollLeft:0},suppressClick:false,hideTooltip(){}};new DragResizeController(calendar,{getState:()=>({windowStart:'2026-07-14'}),getActivity:()=>activity,onCommit:(source,interval,mode)=>{committed={interval,mode}},announce:value=>{announcement=value}});const endHandle=card.querySelector('.resize-handle.end');const rect=card.getBoundingClientRect();const x=rect.left+rect.width/2;const y=rect.bottom;endHandle.dispatchEvent(new PointerEvent('pointerdown',{bubbles:true,cancelable:true,pointerId:91,pointerType:'mouse',button:0,buttons:1,clientX:x,clientY:y}));await new Promise(resolve=>setTimeout(resolve,170));const opacityDuring=getComputedStyle(endHandle).opacity;const cursorDuring=getComputedStyle(endHandle).cursor;document.dispatchEvent(new PointerEvent('pointermove',{bubbles:true,cancelable:true,pointerId:91,pointerType:'mouse',button:0,buttons:1,clientX:x,clientY:y+17}));const previewHeight=Math.round(card.getBoundingClientRect().height);document.dispatchEvent(new PointerEvent('pointerup',{bubbles:true,cancelable:true,pointerId:91,pointerType:'mouse',button:0,buttons:0,clientX:x,clientY:y+17}));const result={handles:card.querySelectorAll('.resize-handle').length,icons:card.querySelectorAll('.resize-icon').length,cursor:cursorDuring,opacityDuring,previewHeight,endDate:committed?.interval.end.date,endMinute:committed?.interval.end.minute,mode:committed?.mode,pending:card.classList.contains('resize-pending'),announcement};host.remove();return JSON.stringify(result)})()`, awaitPromise: true, returnByValue: true });
+  const resize = JSON.parse(resizeResult.result.result.value);
+  assert.equal(resize.handles, 2); assert.equal(resize.icons, 2); assert.equal(resize.cursor, "ns-resize"); assert.ok(Number(resize.opacityDuring) >= .95); assert.ok(resize.previewHeight >= 48 && resize.previewHeight <= 51); assert.equal(resize.endDate, "2026-07-14"); assert.equal(resize.endMinute, 570); assert.equal(resize.mode, "end"); assert.equal(resize.pending, true); assert.equal(resize.announcement, "A guardar o novo horário.");
+  const handleStyleResult = await send("Runtime.evaluate", { expression: `(()=>{const card=document.createElement('button');card.className='event-card joao resizable';card.style.cssText='position:fixed;left:20px;top:100px;width:160px;height:40px';for(const edge of ['start','end']){const handle=document.createElement('span');handle.className='resize-handle '+edge;card.append(handle)}document.body.append(card);const start=getComputedStyle(card.querySelector('.start'));const end=getComputedStyle(card.querySelector('.end'));const result={startOpacity:Number(start.opacity),endOpacity:Number(end.opacity),startZ:Number(start.zIndex),endZ:Number(end.zIndex)};card.remove();return JSON.stringify(result)})()`, returnByValue: true });
+  const handleStyle = JSON.parse(handleStyleResult.result.result.value); assert.equal(handleStyle.startOpacity, 0); assert.equal(handleStyle.endOpacity, 0); assert.ok(handleStyle.startZ > handleStyle.endZ);
+  const yearOpenResult = await send("Runtime.evaluate", { expression: `(()=>{document.querySelector('#year-view-open').click();const dialog=document.querySelector('#year-view-dialog');return JSON.stringify({open:dialog.open,months:dialog.querySelectorAll('.year-month').length,inMonth:dialog.querySelectorAll('.year-day.in-month').length,outside:dialog.querySelectorAll('.year-day.outside').length,today:dialog.querySelectorAll('.year-day.today').length,year:document.querySelector('#year-view-year').textContent})})()`, returnByValue: true });
+  const yearOpen = JSON.parse(yearOpenResult.result.result.value); assert.equal(yearOpen.open, true); assert.equal(yearOpen.months, 12); assert.ok([365, 366].includes(yearOpen.inMonth)); assert.ok(yearOpen.outside > 0); assert.equal(yearOpen.today, 1);
+  const yearCapture = await send("Page.captureScreenshot", { format: "png", captureBeyondViewport: false });
+  await writeFile(join(tmpdir(), "oqvf-year-view-smoke.png"), Buffer.from(yearCapture.result.data, "base64"));
+  const yearSelectResult = await send("Runtime.evaluate", { expression: `(()=>{const dialog=document.querySelector('#year-view-dialog');const target=[...dialog.querySelectorAll('.year-day.in-month')].find(button=>button.dataset.date.endsWith('-08-15'))||dialog.querySelector('.year-day.in-month');const expected=target.dataset.date;target.click();return JSON.stringify({expected,firstDay:document.querySelector('.day-column').dataset.date,closed:!dialog.open})})()`, returnByValue: true });
+  const yearSelect = JSON.parse(yearSelectResult.result.result.value); assert.deepEqual(yearSelect, { expected: yearSelect.expected, firstDay: yearSelect.expected, closed: true });
+  await send("Runtime.evaluate", { expression: `document.querySelector('[data-nav="today"]').click()` });
   const menuResult = await send("Runtime.evaluate", { expression: `(async()=>{const original=document.querySelector('#activity-action-menu');original.id='activity-action-menu-app';const root=document.createElement('div');root.id='activity-action-menu';root.className='event-action-menu';root.hidden=true;document.body.append(root);const anchor=document.createElement('button');anchor.className='event-card joao';anchor.style.cssText='position:fixed;left:60px;top:250px;width:150px;height:40px';document.body.append(anchor);let action='';const {ActivityMenu}=await import('./js/ui/activity-menu.js');const menu=new ActivityMenu({details:()=>action='details',edit:()=>action='edit',cancel:()=>action='cancel',remove:()=>action='remove'});menu.open({title:'Teste',type:'joao',creator:'joao',status:'active',date:'2026-07-13',startMinute:600,endMinute:660},anchor,'joao');const actions=[...root.querySelectorAll('[data-action]')].map(button=>button.textContent.trim());const rect=root.getBoundingClientRect();root.querySelector('[data-action="cancel"]').click();await Promise.resolve();anchor.classList.add('cancelled');const cancelled=getComputedStyle(anchor);const result={actions,action,hidden:root.hidden,left:Math.round(rect.left),top:Math.round(rect.top),borderStyle:cancelled.borderStyle,filter:cancelled.filter};root.remove();anchor.remove();original.id='activity-action-menu';return JSON.stringify(result)})()`, awaitPromise: true, returnByValue: true });
   const menu = JSON.parse(menuResult.result.result.value);
   assert.deepEqual(menu.actions, ["Detalhes e comentário", "Editar", "Cancelar", "Apagar"]); assert.equal(menu.action, "cancel"); assert.equal(menu.hidden, true); assert.ok(menu.left >= 10 && menu.top >= 10); assert.equal(menu.borderStyle, "dashed"); assert.notEqual(menu.filter, "none");
@@ -117,7 +176,7 @@ try {
   await writeFile(join(tmpdir(), "oqvf-calendar-mobile-smoke.png"), Buffer.from(mobileCapture.result.data, "base64"));
   assert.deepEqual(errors, []);
   console.log(`Smoke test OK (desktop e 320 px). Captura: ${screenshot}`);
-  await send("Browser.close");
+  await send("Browser.close").catch(() => {});
 } finally {
   socket?.close(); browser.kill(); server.close();
 }

@@ -1,8 +1,37 @@
 import { DEFAULT_EMOJIS, EMOJI_CATALOG, findShortcodeContext, replaceShortcode, searchEmoji } from "../core/emoji-shortcodes.js";
 
 const DATABASE_URL = "https://cdn.jsdelivr.net/npm/emoji-picker-element@1.29.1/database.js";
-const PT_DATA = "https://cdn.jsdelivr.net/npm/emoji-picker-element-data@1.8.0/pt/emojibase/data.json";
-const EN_DATA = "https://cdn.jsdelivr.net/npm/emoji-picker-element-data@1.8.0/en/emojibase/data.json";
+const PICKER_URL = "https://cdn.jsdelivr.net/npm/emoji-picker-element@1.29.1/index.js";
+const PT_DATA = "https://cdn.jsdelivr.net/npm/emoji-picker-element-data@1.8.0/pt/cldr/data.json";
+const EN_DATA = "https://cdn.jsdelivr.net/npm/emoji-picker-element-data@1.8.0/en/cldr/data.json";
+
+const PICKER_I18N = {
+  categories: {
+    custom: "Personalizados",
+    "smileys-emotion": "Sorrisos e emoções",
+    "people-body": "Pessoas e corpo",
+    "animals-nature": "Animais e natureza",
+    "food-drink": "Comida e bebida",
+    "travel-places": "Viagens e lugares",
+    activities: "Atividades",
+    objects: "Objetos",
+    symbols: "Símbolos",
+    flags: "Bandeiras"
+  },
+  categoriesLabel: "Categorias",
+  emojiUnsupportedMessage: "Este dispositivo pode não conseguir desenhar este emoji.",
+  favoritesLabel: "Mais usados",
+  loadingMessage: "A carregar todos os emojis…",
+  networkErrorMessage: "Não foi possível carregar o catálogo completo de emojis.",
+  regionLabel: "Seletor de emojis",
+  searchDescription: "Quando existirem resultados, usa as setas e Enter para escolher.",
+  searchLabel: "Pesquisar",
+  searchResultsLabel: "Resultados da pesquisa",
+  skinToneDescription: "Usa as setas e Enter para escolher um tom de pele.",
+  skinToneLabel: "Escolher tom de pele; atualmente {skinTone}",
+  skinTones: ["Padrão", "Claro", "Médio-claro", "Médio", "Médio-escuro", "Escuro"],
+  skinTonesLabel: "Tons de pele"
+};
 
 function popoverOpen(element) {
   return element.hasAttribute("popover") && typeof element.showPopover === "function" && element.matches(":popover-open");
@@ -27,6 +56,8 @@ export class EmojiController {
     this.suggestions = [];
     this.selected = 0;
     this.databasesPromise = null;
+    this.fullPickerPromise = null;
+    this.pickerRenderToken = null;
     [document.querySelector("#activity-title"), document.querySelector("#activity-description")].forEach((input) => this.attach(input));
     document.querySelectorAll(".emoji-open").forEach((button) => {
       button.setAttribute("aria-haspopup", "dialog");
@@ -42,6 +73,7 @@ export class EmojiController {
       if (event.newState === "closed") {
         this.pickerAnchor?.setAttribute("aria-expanded", "false");
         this.pickerAnchor = null;
+        this.pickerRenderToken = null;
         this.pickerBox.hidden = true;
       }
     });
@@ -160,20 +192,92 @@ export class EmojiController {
     input.focus();
   }
 
-  renderPicker() {
-    const wrapper = document.createElement("div");
-    wrapper.className = "emoji-fallback";
+  pickerHeader(titleText, subtitleText = "") {
     const header = document.createElement("div");
     header.className = "emoji-picker-header";
+    const copy = document.createElement("span");
+    copy.className = "emoji-picker-heading";
     const label = document.createElement("strong");
-    label.textContent = "Escolher emoji";
+    label.textContent = titleText;
+    copy.append(label);
+    if (subtitleText) {
+      const subtitle = document.createElement("small");
+      subtitle.textContent = subtitleText;
+      copy.append(subtitle);
+    }
     const close = document.createElement("button");
     close.type = "button";
     close.className = "emoji-picker-close";
     close.setAttribute("aria-label", "Fechar emojis");
     close.textContent = "×";
     close.addEventListener("click", () => { this.closePicker(); this.activeInput?.focus(); });
-    header.append(label, close);
+    header.append(copy, close);
+    return header;
+  }
+
+  fullPicker() {
+    if (!this.fullPickerPromise) {
+      const catalog = fetch(PT_DATA, { cache: "force-cache" }).then(async (response) => {
+        if (!response.ok) throw new Error(`Catálogo de emojis indisponível (${response.status}).`);
+        const data = await response.json();
+        if (!Array.isArray(data) || data.length < 1000) throw new Error("Catálogo de emojis incompleto.");
+        return data;
+      });
+      this.fullPickerPromise = Promise.all([import(PICKER_URL), catalog]).then(([module, data]) => {
+        if (typeof module.Picker !== "function") throw new Error("Seletor completo de emojis indisponível.");
+        const emojiVersion = Math.max(...data.map((entry) => Number(entry.version) || 0));
+        const picker = new module.Picker({
+          dataSource: PT_DATA,
+          emojiVersion,
+          i18n: PICKER_I18N,
+          locale: "pt"
+        });
+        picker.className = "emoji-native-picker light";
+        picker.dataset.catalogSize = String(data.length);
+        picker.addEventListener("emoji-click", (event) => {
+          const unicode = event.detail?.unicode;
+          if (!unicode || !this.activeInput) return;
+          this.insertAtCursor(this.activeInput, unicode);
+          this.closePicker();
+        });
+        return picker;
+      }).catch((error) => {
+        this.fullPickerPromise = null;
+        throw error;
+      });
+    }
+    return this.fullPickerPromise;
+  }
+
+  async upgradeToFullPicker(token) {
+    try {
+      const picker = await this.fullPicker();
+      if (this.pickerRenderToken !== token || !this.pickerAnchor) return;
+      const query = this.pickerBox.querySelector(".emoji-picker-search")?.value || "";
+      const wrapper = document.createElement("div");
+      wrapper.className = "emoji-native-wrapper";
+      wrapper.append(this.pickerHeader("Todos os emojis", `${picker.dataset.catalogSize} emojis base, categorias e variantes`), picker);
+      this.pickerBox.replaceChildren(wrapper);
+      requestAnimationFrame(() => {
+        const search = picker.shadowRoot?.querySelector('input[type="search"]');
+        if (!search) return;
+        if (query) {
+          search.value = query;
+          search.dispatchEvent(new Event("input", { bubbles: true, composed: true }));
+        }
+        search.focus({ preventScroll: true });
+      });
+    } catch {
+      if (this.pickerRenderToken === token && this.fallbackStatus?.isConnected) {
+        this.fallbackStatus.textContent = `${EMOJI_CATALOG.length} emojis disponíveis. Liga-te à internet para carregar e guardar o catálogo completo.`;
+      }
+    }
+  }
+
+  renderPicker() {
+    const wrapper = document.createElement("div");
+    wrapper.className = "emoji-fallback";
+    const header = this.pickerHeader("Escolher emoji", "A carregar o catálogo completo…");
     const search = document.createElement("input");
     search.type = "search";
     search.className = "emoji-picker-search";
@@ -209,7 +313,7 @@ export class EmojiController {
         grid.append(button);
       });
       empty.hidden = entries.length > 0;
-      status.textContent = query ? `${entries.length} resultado${entries.length === 1 ? "" : "s"} para “${query}”` : `${entries.length} emojis disponíveis sem ligação à internet`;
+      status.textContent = query ? `${entries.length} resultado${entries.length === 1 ? "" : "s"} para “${query}”` : `${entries.length} emojis iniciais enquanto os restantes carregam`;
     };
     search.addEventListener("input", render);
     search.addEventListener("keydown", (event) => {
@@ -226,6 +330,7 @@ export class EmojiController {
     });
     wrapper.append(header, search, grid, empty, status);
     this.pickerBox.replaceChildren(wrapper);
+    this.fallbackStatus = status;
     render();
     return search;
   }
@@ -239,15 +344,19 @@ export class EmojiController {
     this.pickerAnchor = anchor;
     anchor.setAttribute("aria-expanded", "true");
     const search = this.renderPicker();
+    const token = {};
+    this.pickerRenderToken = token;
     showFloating(this.pickerBox);
     this.pickerBox.style.left = "";
     this.pickerBox.style.top = "";
     requestAnimationFrame(() => search.focus({ preventScroll: true }));
+    this.upgradeToFullPicker(token);
   }
 
   closePicker() {
     this.pickerAnchor?.setAttribute("aria-expanded", "false");
     this.pickerAnchor = null;
+    this.pickerRenderToken = null;
     hideFloating(this.pickerBox);
   }
 }

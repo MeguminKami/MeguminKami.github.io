@@ -16,8 +16,8 @@ export function sanitizeUrl(value) {
 
 export function validatePoint(point, kind) {
   if (!point || !parseISODate(point.date) || !Number.isInteger(point.minute)) return `${kind} inválido.`;
-  if (point.minute % SLOT_MINUTES !== 0) return `${kind} tem de usar intervalos de uma hora.`;
-  if (kind === "Início" && (point.minute < START_MINUTE || point.minute >= END_MINUTE)) return "O início deve ficar entre as 07:00 e as 23:00.";
+  if (point.minute % SLOT_MINUTES !== 0) return `${kind} tem de usar intervalos de 30 minutos.`;
+  if (kind === "Início" && (point.minute < START_MINUTE || point.minute >= END_MINUTE)) return "O início deve ficar entre as 07:00 e as 23:30.";
   if (kind === "Fim" && (point.minute < START_MINUTE || point.minute > END_MINUTE)) return "O fim deve ficar entre as 07:00 e as 24:00.";
   return "";
 }

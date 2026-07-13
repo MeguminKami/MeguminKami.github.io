@@ -10,11 +10,11 @@ service cloud.firestore {
         && value.keys().hasOnly(['date', 'minute'])
         && validDate(value.date)
         && value.minute is int
-        && value.minute % 60 == 0
+        && value.minute % 30 == 0
         && value.minute >= 420
         && value.minute <= 1440;
     }
-    function validStartPoint(value) { return validPoint(value) && value.minute <= 1380; }
+    function validStartPoint(value) { return validPoint(value) && value.minute <= 1410; }
     function validEndPoint(value) { return validPoint(value); }
     function validRecurrence(value) {
       return value == null || (

@@ -16,9 +16,9 @@ test("converte pontos para o eixo visível e ignora a madrugada", () => {
   assert.deepEqual(visibleCoordinateToPoint(1020, "2026-07-13", "end"), { date: "2026-07-13", minute: 1440 });
 });
 
-test("faz snap em intervalos de uma hora", () => {
-  assert.equal(snapMinute(451), 480);
-  assert.equal(snapMinute(449), 420);
+test("faz snap em intervalos de meia hora", () => {
+  assert.equal(snapMinute(451), 450);
+  assert.equal(snapMinute(466), 480);
 });
 
 test("posiciona a linha atual no minuto de Lisboa e só na janela", () => {

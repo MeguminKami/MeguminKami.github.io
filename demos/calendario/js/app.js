@@ -18,6 +18,7 @@ import { ModalManager } from "./ui/modal-manager.js";
 import { MobilePreview } from "./ui/mobile-preview.js";
 import { createNotifier } from "./ui/notifications.js";
 import { SettingsPanel } from "./ui/settings.js";
+import { YearView } from "./ui/year-view.js";
 
 if (new URLSearchParams(location.search).has("mobile-preview")) document.documentElement.classList.add("mobile-preview-embedded");
 
@@ -51,6 +52,11 @@ const calendar = new CalendarView({
   onEvent: (activity, card) => activity && activityMenu.open(activity, card, state.currentUser),
   canModify: (activity) => canModify(activity, state.currentUser) && Boolean(repository) && navigator.onLine
 });
+
+const yearView = new YearView({
+  onSelect: (date) => { state.windowStart = date; renderCalendar(); }
+});
+document.querySelector("#year-view-open").addEventListener("click", () => yearView.open(state.windowStart));
 
 const details = new ActivityDetails({
   edit: editActivity,

@@ -4,16 +4,16 @@ Um calendário partilhado, romântico e responsivo para João e Sofia organizare
 
 ## Funcionalidades
 
-- janela móvel de sete dias, das 07:00 às 24:00, em intervalos de uma hora;
-- navegação por dia, semana, mês e regresso imediato a Hoje;
+- janela móvel de sete dias, das 07:00 às 24:00, com linhas visuais de uma hora e atividades precisas à meia hora;
+- navegação por dia, semana, mês, calendário anual clicável e regresso imediato a Hoje;
 - no telemóvel, um dia por ecrã com passagem por gesto lateral, encaixe automático e sem barra de deslocamento visível;
 - atividades de João, Sofia e casal, com as de casal fundidas sobre as duas faixas;
 - criação pela grelha ou pelo botão principal e menu por clique esquerdo para editar, cancelar ou remover;
-- drag, drop e redimensionamento com rato ou toque e snap de uma hora;
+- drag, drop e redimensionamento com pegas que aparecem ao aproximar o rato do topo/fundo, pré-visualização ao vivo e snap de 30 minutos;
 - recorrência diária, semanal, dias úteis, dias escolhidos e mensal, com data final ou número de ocorrências;
 - edição de uma ocorrência ou da série completa sem criar documentos futuros;
 - comentário único do outro utilizador;
-- emojis no título/descrição, shortcodes `:` e menu local pesquisável em português e inglês;
+- catálogo completo de emojis no título/descrição, com categorias, tons de pele, pesquisa e shortcodes `:` em português e inglês;
 - avatares desenhados, vetoriais e sincronizados;
 - exportação JSON, CSV e ICS e vista de impressão/PDF;
 - sons discretos desligáveis, fundo animado leve e suporte para movimento reduzido;
@@ -40,7 +40,7 @@ calendario/
 Não existe processo de compilação nem dependência de Node.js em produção. O projeto usa:
 
 - Firebase JavaScript SDK 12.15.0, carregado do CDN oficial da Google;
-- catálogo pesquisável local de emojis; a base bilingue 1.8.0 é consultada progressivamente para shortcodes menos comuns;
+- `emoji-picker-element` 1.29.1 e catálogo de dados 1.8.0, carregados apenas ao abrir o seletor completo e guardados em cache pelo browser;
 - formas de ícones Lucide, sob licença ISC, reunidas num sprite SVG local.
 
 ## Execução local
@@ -233,8 +233,8 @@ Confirma Authentication anónima, publicação de `firestore.rules`, projeto cor
 **O site fica sem estilos ou módulos no GitHub Pages**  
 Abre o endereço com `/calendario/` no final e confirma que a pasta foi enviada completa, incluindo `.nojekyll`.
 
-**O catálogo externo de emojis não carrega**  
-O menu com pesquisa e os emojis frequentes funcionam localmente, sem rede. Apenas a procura progressiva de shortcodes menos comuns depende do acesso ao jsDelivr.
+**O catálogo completo de emojis não carrega**  
+Na primeira abertura, o seletor transfere do jsDelivr o componente e a base completa em português; depois, o componente reutiliza a cópia guardada em cache/IndexedDB. Se essa primeira transferência falhar, continuam disponíveis o menu pesquisável inicial e os shortcodes frequentes. Confirma a ligação, extensões de bloqueio e acesso a `cdn.jsdelivr.net`, fecha o menu e volta a abri-lo.
 
 **Uma edição foi revertida**  
 O dispositivo ficou offline, as regras recusaram a escrita ou outro dispositivo alterou a mesma versão. O aviso apresentado distingue estes casos.

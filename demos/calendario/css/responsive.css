@@ -19,7 +19,12 @@
   .time-label { padding-right:7px; font-size:.66rem; }.mobile-fab { right:max(14px,env(safe-area-inset-right)); bottom:max(14px,env(safe-area-inset-bottom)); }
   dialog:not(.mobile-preview-dialog) { width:calc(100% - 12px); max-height:calc(100dvh - 12px); border-radius:18px; }.dialog-header { padding:15px 14px 10px; }.dialog-body { padding:7px 14px 18px; }.dialog-footer { gap:7px; padding:12px 14px max(14px,env(safe-area-inset-bottom)); }
   #activity-dialog .dialog-footer .button { flex:1; }.settings-item { align-items:flex-start; flex-wrap:wrap; }.settings-item>.button,.settings-item>.actions { margin-left:auto; }.settings-item>.actions { width:100%; }.settings-item>.actions .button { flex:1; }.mobile-preview-setting { display:none; }
+  .emoji-native-picker { --num-columns:6; --emoji-size:1.25rem; --emoji-padding:.42rem; --category-emoji-size:1.1rem; }
+  .event-card.compact .resize-handle { height:22px; }.resize-handle { height:22px; }.resize-handle.start { top:-11px; }.resize-handle.end { bottom:-11px; }.resize-icon { width:32px; height:20px; }
+  .year-calendar-grid { grid-template-columns:1fr; gap:24px; }.year-view-controls { top:68px; justify-content:center; }.year-month h3 { font-size:1.05rem; }.year-day { min-height:34px; font-size:.78rem; }
 }
+@media (min-width:761px) and (max-width:900px) { .year-calendar-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+@media (pointer:coarse) { .event-card.resizable { overflow:visible; }.event-card.resizable .resize-handle { opacity:.78; } }
 @media (max-width: 360px) {
   .calendar-toolbar { column-gap:2px; }.toolbar-group .button-icon { width:36px; }.button-today { width:44px; }.date-chip { min-width:80px; }.dialog-header h2 { font-size:1.18rem; }
 }

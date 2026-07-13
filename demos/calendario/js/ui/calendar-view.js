@@ -1,4 +1,4 @@
-import { END_MINUTE, SLOT_COUNT, SLOT_MINUTES, START_MINUTE, USERS, VISIBLE_MINUTES } from "../core/constants.js";
+import { END_MINUTE, GRID_SLOT_MINUTES, SLOT_COUNT, SLOT_MINUTES, START_MINUTE, USERS, VISIBLE_MINUTES } from "../core/constants.js";
 import { addDays, formatDateLong, formatDateRange, formatMinute, getLisbonParts, nowLinePosition } from "../core/date-time.js";
 import { layoutDaySegments } from "../core/layout.js";
 import { expandAndSegment } from "../core/recurrence.js";
@@ -22,7 +22,10 @@ export class CalendarView {
       if (card && !this.suppressClick) { this.hideTooltip(); this.onEvent(this.eventMap.get(card.dataset.renderId), card); }
     });
     this.grid.addEventListener("keydown", (event) => this.onGridKeydown(event));
-    this.grid.addEventListener("pointerover", (event) => this.showTooltipFor(event.target.closest(".event-card")));
+    this.grid.addEventListener("pointerover", (event) => {
+      if (event.target.closest(".resize-handle")) this.hideTooltip();
+      else this.showTooltipFor(event.target.closest(".event-card"));
+    });
     this.grid.addEventListener("pointerout", (event) => { if (event.target.closest(".event-card")) this.hideTooltip(); });
     this.grid.addEventListener("focusin", (event) => this.showTooltipFor(event.target.closest(".event-card")));
     this.grid.addEventListener("focusout", () => this.hideTooltip());
@@ -35,7 +38,7 @@ export class CalendarView {
 
   renderGutter() {
     this.gutter.replaceChildren();
-    for (let minute = START_MINUTE; minute < END_MINUTE; minute += SLOT_MINUTES) {
+    for (let minute = START_MINUTE; minute < END_MINUTE; minute += GRID_SLOT_MINUTES) {
       const label = document.createElement("span"); label.className = "time-label"; label.textContent = formatMinute(minute);
       this.gutter.append(label);
     }
@@ -57,7 +60,7 @@ export class CalendarView {
       column.className = `day-column${date === today ? " today" : ""}`;
       column.dataset.dayIndex = String(dayIndex); column.dataset.date = date; column.setAttribute("role", "row");
       for (let slotIndex = 0; slotIndex < SLOT_COUNT; slotIndex += 1) {
-        const minute = START_MINUTE + slotIndex * SLOT_MINUTES;
+        const minute = START_MINUTE + slotIndex * GRID_SLOT_MINUTES;
         const button = document.createElement("button");
         button.type = "button"; button.className = "slot-button"; button.dataset.date = date; button.dataset.minute = String(minute); button.dataset.slotIndex = String(dayIndex * SLOT_COUNT + slotIndex);
         button.style.top = `calc(${slotIndex} * var(--slot-height))`;
@@ -104,7 +107,8 @@ export class CalendarView {
   eventCard(fragment) {
     this.eventMap.set(fragment.renderId, fragment);
     const card = document.createElement("button");
-    card.type = "button"; card.className = `event-card ${fragment.type} lane-${fragment.lane}${fragment.fused ? " fused" : ""}${fragment.status === "cancelled" ? " cancelled" : ""}`;
+    const compact = fragment.endMinute - fragment.startMinute <= SLOT_MINUTES;
+    card.type = "button"; card.className = `event-card ${fragment.type} lane-${fragment.lane}${fragment.fused ? " fused" : ""}${compact ? " compact" : ""}${fragment.status === "cancelled" ? " cancelled" : ""}`;
     card.dataset.renderId = fragment.renderId; card.dataset.segmentId = fragment.segmentId; card.dataset.lane = fragment.lane;
     card.style.top = `${((fragment.startMinute - START_MINUTE) / VISIBLE_MINUTES) * 100}%`;
     card.style.height = `calc(${((fragment.endMinute - fragment.startMinute) / VISIBLE_MINUTES) * 100}% - 2px)`;
@@ -117,11 +121,16 @@ export class CalendarView {
     const time = document.createElement("span"); time.className = "event-time"; time.textContent = `${formatMinute(fragment.startMinute)}–${formatMinute(fragment.endMinute)}`;
     card.append(title, time);
     if (fragment.status === "cancelled") { const label = document.createElement("span"); label.className = "event-cancelled-label"; label.textContent = "Cancelada"; card.append(label); }
-    if (this.canModify(fragment) && fragment.status !== "cancelled") {
-      const edges = [];
-      if (fragment.date === fragment.start.date) edges.push("start");
-      if (fragment.date === fragment.end.date) edges.push("end");
-      for (const edge of edges) { const handle = document.createElement("span"); handle.className = `resize-handle ${edge}`; handle.dataset.resize = edge; handle.setAttribute("aria-hidden", "true"); card.append(handle); }
+    if (this.canModify(fragment)) {
+      card.classList.add("resizable");
+      const edges = ["start", "end"];
+      for (const edge of edges) {
+        const handle = document.createElement("span");
+        handle.className = `resize-handle ${edge}`; handle.dataset.resize = edge; handle.setAttribute("aria-hidden", "true");
+        handle.title = edge === "start" ? "Arrastar para alterar o início" : "Arrastar para alterar o fim";
+        const icon = document.createElementNS("http://www.w3.org/2000/svg", "svg"); icon.setAttribute("class", "icon resize-icon");
+        const use = document.createElementNS("http://www.w3.org/2000/svg", "use"); use.setAttribute("href", "./assets/icons.svg#i-resize-vertical"); icon.append(use); handle.append(icon); card.append(handle);
+      }
       card.dataset.movable = "true";
     }
     return card;
