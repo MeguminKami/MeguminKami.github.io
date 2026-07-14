@@ -197,7 +197,7 @@ No Windows com uma política PowerShell restritiva, usa:
 npm.cmd test
 ```
 
-Os testes cobrem datas, eixo visível, snap, validação de limites, atividades de vários dias, recorrências, exceções, sobreposições, faixas, permissões, comentários, shortcodes e exportações.
+Os testes cobrem datas, eixo visível, snap, cálculo de dias inteiros, validação de limites, atividades de vários dias, recorrências, exceções, sobreposições, faixas, permissões, comentários, shortcodes e exportações.
 
 Existe ainda um smoke test opcional que serve a aplicação localmente, abre o Microsoft Edge em modo headless e confirma a grelha no desktop e a 320 px:
 
@@ -207,11 +207,17 @@ npm run smoke
 
 No Windows com a mesma restrição PowerShell, usa `npm.cmd run smoke`. A captura de diagnóstico é guardada apenas na pasta temporária do sistema.
 
+O teste visual responsivo é independente do catálogo externo de emojis e valida sete tamanhos de janela, tooltip, impressão, toque, ícones das fases do dia e scrollbars invisíveis:
+
+```powershell
+npm run smoke:calendar
+```
+
 ## Checklist manual
 
 - desktop largo: sete dias lado a lado e coluna horária fixa;
-- tablet: duas datas visíveis e scroll horizontal com snap;
-- 320 px: uma data utilizável, botões e texto sem ficarem demasiado pequenos;
+- tablet: apenas dias inteiros visíveis, calculados dinamicamente, e scroll horizontal com snap;
+- 320 px: um dia utilizável; 390/430 px: dois dias quando a largura mínima é respeitada;
 - rato: criação, hover, drag e as duas pegas de resize;
 - toque: toque para detalhes, pressão curta para mover e pegas de resize;
 - teclado: navegação da grelha, Enter/Espaço, diálogos, foco, emoji com Tab/setas/Escape;

@@ -1,17 +1,45 @@
 import { END_MINUTE, GRID_SLOT_MINUTES, SLOT_COUNT, SLOT_MINUTES, START_MINUTE, USERS, VISIBLE_MINUTES } from "../core/constants.js";
 import { addDays, formatDateLong, formatDateRange, formatMinute, getLisbonParts, nowLinePosition } from "../core/date-time.js";
-import { layoutDaySegments } from "../core/layout.js";
+import { calculateVisibleDayLayout, layoutDaySegments } from "../core/layout.js";
 import { expandAndSegment } from "../core/recurrence.js";
 
+const DAY_PHASES = Object.freeze([
+  { name: "amanhecer", icon: "i-sunrise", minute: 450 },
+  { name: "manhã", icon: "i-sun", minute: 660 },
+  { name: "meio-dia", icon: "i-cloud-sun", minute: 840 },
+  { name: "entardecer", icon: "i-sunset", minute: 1110 },
+  { name: "noite", icon: "i-moon-star", minute: 1320 }
+]);
+
+function svgIcon(symbol, className = "icon") {
+  const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  svg.setAttribute("class", className);
+  const use = document.createElementNS("http://www.w3.org/2000/svg", "use");
+  use.setAttribute("href", `./assets/icons.svg#${symbol}`);
+  svg.append(use);
+  return svg;
+}
+
+function previewSection(labelText, text, className = "") {
+  const section = document.createElement("section");
+  section.className = `tooltip-section ${className}`.trim();
+  const label = document.createElement("span"); label.className = "tooltip-label"; label.textContent = labelText;
+  const copy = document.createElement("p"); copy.textContent = text;
+  section.append(label, copy);
+  return section;
+}
+
 export class CalendarView {
-  constructor({ onSlot, onEvent, canModify }) {
+  constructor({ onSlot, onEvent, canModify, nowLineScope = "week" }) {
     this.header = document.querySelector("#calendar-days-header");
     this.gutter = document.querySelector("#time-gutter");
     this.grid = document.querySelector("#days-grid");
     this.strip = document.querySelector("#date-strip");
     this.scroller = document.querySelector("#calendar-scroller");
+    this.container = this.scroller.closest(".calendar-container");
     this.tooltip = document.querySelector("#tooltip");
     this.onSlot = onSlot; this.onEvent = onEvent; this.canModify = canModify;
+    this.nowLineScope = nowLineScope === "today" ? "today" : "week";
     this.state = null;
     this.activeDay = -1;
     this.renderGutter();
@@ -23,16 +51,35 @@ export class CalendarView {
     });
     this.grid.addEventListener("keydown", (event) => this.onGridKeydown(event));
     this.grid.addEventListener("pointerover", (event) => {
+      const card = event.target.closest(".event-card");
+      const related = event.relatedTarget;
+      if (!card || (related instanceof Node && card.contains(related))) return;
       if (event.target.closest(".resize-handle")) this.hideTooltip();
-      else this.showTooltipFor(event.target.closest(".event-card"));
+      else this.showTooltipFor(card);
     });
-    this.grid.addEventListener("pointerout", (event) => { if (event.target.closest(".event-card")) this.hideTooltip(); });
-    this.grid.addEventListener("focusin", (event) => this.showTooltipFor(event.target.closest(".event-card")));
-    this.grid.addEventListener("focusout", () => this.hideTooltip());
+    this.grid.addEventListener("pointerout", (event) => {
+      const card = event.target.closest(".event-card");
+      const related = event.relatedTarget;
+      if (card && !(related instanceof Node && card.contains(related))) this.queueTooltipHide();
+    });
+    this.grid.addEventListener("focusin", (event) => this.showTooltipFor(event.target.closest(".event-card"), true));
+    this.grid.addEventListener("focusout", () => this.queueTooltipHide());
     this.scroller.addEventListener("scroll", () => {
+      this.hideTooltip();
       if (this.scrollFrame) return;
       this.scrollFrame = requestAnimationFrame(() => { this.scrollFrame = null; this.syncActiveDay(); });
     }, { passive: true });
+    this.scroller.addEventListener("wheel", (event) => {
+      if (!event.shiftKey && Math.abs(event.deltaX) <= Math.abs(event.deltaY)) return;
+      const delta = event.shiftKey ? event.deltaY : event.deltaX;
+      if (!delta) return;
+      event.preventDefault();
+      this.scroller.scrollLeft += delta;
+    }, { passive: false });
+    this.onResize = () => { this.hideTooltip(); this.scheduleResponsiveLayout(); };
+    window.addEventListener("resize", this.onResize, { passive: true });
+    this.resizeObserver = new ResizeObserver(() => this.scheduleResponsiveLayout());
+    this.resizeObserver.observe(this.scroller);
     this.nowTimer = window.setInterval(() => this.renderNowLine(), 30_000);
   }
 
@@ -41,6 +88,12 @@ export class CalendarView {
     for (let minute = START_MINUTE; minute < END_MINUTE; minute += GRID_SLOT_MINUTES) {
       const label = document.createElement("span"); label.className = "time-label"; label.textContent = formatMinute(minute);
       this.gutter.append(label);
+    }
+    for (const phase of DAY_PHASES) {
+      const marker = document.createElement("span");
+      marker.className = "day-phase-icon"; marker.dataset.phase = phase.name; marker.setAttribute("aria-hidden", "true");
+      marker.style.top = `${((phase.minute - START_MINUTE) / VISIBLE_MINUTES) * 100}%`;
+      marker.append(svgIcon(phase.icon)); this.gutter.append(marker);
     }
   }
 
@@ -79,6 +132,44 @@ export class CalendarView {
     const line = document.createElement("div"); line.id = "now-line"; line.className = "now-line"; line.hidden = true; this.grid.append(line);
     this.renderNowLine();
     if (windowChanged) this.scroller.scrollLeft = 0;
+    this.updateResponsiveLayout(windowChanged ? 0 : null);
+    this.syncActiveDay();
+  }
+
+  scheduleResponsiveLayout() {
+    if (this.layoutFrame) cancelAnimationFrame(this.layoutFrame);
+    this.layoutFrame = requestAnimationFrame(() => { this.layoutFrame = null; this.updateResponsiveLayout(); });
+  }
+
+  updateResponsiveLayout(forcedDay = null) {
+    const containerWidth = this.scroller.clientWidth;
+    if (!containerWidth) return;
+    const rootStyles = getComputedStyle(document.documentElement);
+    const timeWidth = parseFloat(rootStyles.getPropertyValue("--time-width")) || 72;
+    const previousDayWidth = this.dayWidth || 0;
+    const leadingDay = forcedDay ?? (previousDayWidth ? Math.round(this.scroller.scrollLeft / previousDayWidth) : Math.max(0, this.activeDay));
+    const layout = calculateVisibleDayLayout(containerWidth, timeWidth, 152, 7);
+    this.visibleDayCount = layout.visibleDayCount;
+    this.dayWidth = layout.dayWidth;
+    this.scroller.style.setProperty("--day-width", `${layout.dayWidth}px`);
+    this.scroller.style.setProperty("--calendar-inner-width", `${layout.innerWidth}px`);
+    this.scroller.dataset.visibleDays = String(layout.visibleDayCount);
+
+    this.strip.classList.toggle("overflowing", layout.visibleDayCount < 7);
+    this.strip.dataset.visibleDays = String(layout.visibleDayCount);
+    const stripStyles = getComputedStyle(this.strip);
+    const stripWidth = this.strip.clientWidth - parseFloat(stripStyles.paddingLeft || 0) - parseFloat(stripStyles.paddingRight || 0);
+    const stripGap = parseFloat(stripStyles.columnGap || stripStyles.gap || 0);
+    const chipWidth = (stripWidth - stripGap * (layout.visibleDayCount - 1)) / layout.visibleDayCount;
+    if (chipWidth > 0) this.strip.style.setProperty("--date-chip-width", `${chipWidth}px`);
+
+    const top = Math.max(0, this.container.getBoundingClientRect().top);
+    const availableHeight = Math.max(0, innerHeight - top - 12);
+    const slotHeight = Math.min(38, Math.max(28, availableHeight / SLOT_COUNT));
+    this.scroller.style.setProperty("--slot-height", `${slotHeight}px`);
+
+    const safeDay = Math.max(0, Math.min(6, leadingDay));
+    this.scroller.scrollLeft = safeDay * layout.dayWidth;
     this.syncActiveDay();
   }
 
@@ -140,17 +231,80 @@ export class CalendarView {
     if (!this.state) return;
     const line = document.querySelector("#now-line"); if (!line) return;
     const position = nowLinePosition(this.state.windowStart);
+    const todayOnly = this.nowLineScope === "today";
+    line.classList.toggle("today-only", todayOnly);
     line.hidden = !position;
-    if (position) line.style.top = `${position.ratio * 100}%`;
+    if (!position) return;
+    line.style.top = `${position.ratio * 100}%`;
+    line.style.left = todayOnly ? `${position.day * (100 / 7)}%` : "0";
+    line.style.right = todayOnly ? "auto" : "0";
+    line.style.width = todayOnly ? `${100 / 7}%` : "auto";
   }
 
-  showTooltipFor(card) {
-    if (!card) return;
-    const activity = this.eventMap.get(card.dataset.renderId); if (!activity) return;
-    this.tooltip.textContent = activity.description || `${activity.title} · ${formatMinute(activity.startMinute)}–${formatMinute(activity.endMinute)}`;
-    const rect = card.getBoundingClientRect(); this.tooltip.style.left = `${Math.min(rect.left, innerWidth - 310)}px`; this.tooltip.style.top = `${Math.min(rect.bottom + 5, innerHeight - 90)}px`; this.tooltip.hidden = false;
+  setNowLineScope(scope) {
+    this.nowLineScope = scope === "today" ? "today" : "week";
+    this.renderNowLine();
   }
-  hideTooltip() { this.tooltip.hidden = true; }
+
+  showTooltipFor(card, immediate = false) {
+    if (!card) return;
+    if (!immediate && matchMedia("(hover: none), (pointer: coarse)").matches) return;
+    const activity = this.eventMap.get(card.dataset.renderId); if (!activity) return;
+    clearTimeout(this.tooltipHideTimer); clearTimeout(this.tooltipShowTimer);
+    this.tooltipShowTimer = setTimeout(() => this.renderTooltip(activity, card), immediate ? 0 : 180);
+  }
+
+  renderTooltip(activity, card) {
+    if (!card.isConnected) return;
+    const header = document.createElement("header"); header.className = "tooltip-header";
+    const heading = document.createElement("div");
+    const title = document.createElement("strong"); title.textContent = activity.title;
+    const when = document.createElement("span");
+    when.textContent = `${formatDateLong(activity.date || activity.start?.date, true)} · ${formatMinute(activity.startMinute ?? activity.start?.minute)}–${formatMinute(activity.endMinute ?? activity.end?.minute)}`;
+    heading.append(title, when);
+    const type = document.createElement("span"); type.className = "tooltip-type"; type.textContent = activity.type === "casal" ? "Casal" : USERS[activity.type]?.name || "Atividade";
+    header.append(heading, type);
+
+    const content = document.createElement("div"); content.className = "tooltip-content";
+    if (activity.description) content.append(previewSection("Descrição", activity.description, "tooltip-description"));
+    if (activity.comment?.text) {
+      const author = USERS[activity.comment.author]?.name || "Comentário";
+      content.append(previewSection(`${author} comentou`, activity.comment.text, "tooltip-comment"));
+    }
+    if (!content.children.length) {
+      const empty = document.createElement("p"); empty.className = "tooltip-empty"; empty.textContent = "Sem descrição ou comentários."; content.append(empty);
+    }
+    const hint = document.createElement("small"); hint.className = "tooltip-hint"; hint.textContent = "Clica para ver detalhes e ações";
+    this.tooltip.replaceChildren(header, content, hint);
+    this.tooltip.dataset.type = activity.type;
+    this.tooltip.hidden = false;
+    this.tooltipAnchor?.removeAttribute("aria-describedby");
+    this.tooltipAnchor = card; card.setAttribute("aria-describedby", this.tooltip.id);
+
+    const anchorRect = card.getBoundingClientRect();
+    const tooltipRect = this.tooltip.getBoundingClientRect();
+    const margin = 12; const gap = 10;
+    const center = anchorRect.left + anchorRect.width / 2;
+    const left = Math.max(margin, Math.min(innerWidth - tooltipRect.width - margin, center - tooltipRect.width / 2));
+    const fitsBelow = anchorRect.bottom + gap + tooltipRect.height <= innerHeight - margin;
+    const canFitAbove = anchorRect.top - gap - tooltipRect.height >= margin;
+    const placement = fitsBelow || !canFitAbove ? "below" : "above";
+    const top = placement === "below" ? Math.min(innerHeight - tooltipRect.height - margin, anchorRect.bottom + gap) : Math.max(margin, anchorRect.top - tooltipRect.height - gap);
+    this.tooltip.dataset.placement = placement;
+    this.tooltip.style.left = `${left}px`; this.tooltip.style.top = `${top}px`;
+    this.tooltip.style.setProperty("--tooltip-arrow-x", `${Math.max(18, Math.min(tooltipRect.width - 18, center - left))}px`);
+  }
+
+  queueTooltipHide() {
+    clearTimeout(this.tooltipShowTimer); clearTimeout(this.tooltipHideTimer);
+    this.tooltipHideTimer = setTimeout(() => this.hideTooltip(), 90);
+  }
+
+  hideTooltip() {
+    clearTimeout(this.tooltipShowTimer); clearTimeout(this.tooltipHideTimer);
+    this.tooltip.hidden = true;
+    this.tooltipAnchor?.removeAttribute("aria-describedby"); this.tooltipAnchor = null;
+  }
 
   onGridKeydown(event) {
     const slot = event.target.closest(".slot-button"); if (!slot) return;
@@ -185,7 +339,12 @@ export class CalendarView {
       chip.classList.toggle("active", index === closest);
       if (index === closest) chip.setAttribute("aria-current", "date"); else chip.removeAttribute("aria-current");
     });
-    const chip = this.strip.children[closest];
-    if (chip) this.strip.scrollTo({ left: Math.max(0, chip.offsetLeft - (this.strip.clientWidth - chip.offsetWidth) / 2), behavior: "smooth" });
+    const visibleChips = this.visibleDayCount || 1;
+    const leadingChip = Math.max(0, Math.min(7 - visibleChips, closest - Math.floor((visibleChips - 1) / 2)));
+    const chip = this.strip.children[leadingChip];
+    if (chip) {
+      const paddingLeft = parseFloat(getComputedStyle(this.strip).paddingLeft) || 0;
+      this.strip.scrollTo({ left: Math.max(0, chip.offsetLeft - paddingLeft), behavior: "smooth" });
+    }
   }
 }

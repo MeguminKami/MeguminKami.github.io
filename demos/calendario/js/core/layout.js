@@ -2,6 +2,21 @@ function overlaps(a, b) {
   return a.startMinute < b.endMinute && b.startMinute < a.endMinute;
 }
 
+export function calculateVisibleDayLayout(containerWidth, timeWidth, minDayWidth = 152, totalDays = 7) {
+  const safeContainerWidth = Math.max(0, Number(containerWidth) || 0);
+  const safeTimeWidth = Math.max(0, Number(timeWidth) || 0);
+  const safeMinimum = Math.max(1, Number(minDayWidth) || 152);
+  const safeTotal = Math.max(1, Math.floor(Number(totalDays) || 7));
+  const availableDayWidth = Math.max(0, safeContainerWidth - safeTimeWidth);
+  const visibleDayCount = Math.min(safeTotal, Math.max(1, Math.floor(availableDayWidth / safeMinimum)));
+  const dayWidth = availableDayWidth / visibleDayCount;
+  return {
+    visibleDayCount,
+    dayWidth,
+    innerWidth: safeTimeWidth + dayWidth * safeTotal
+  };
+}
+
 export function overlapComponents(segments) {
   const sorted = [...segments].sort((a, b) => a.startMinute - b.startMinute || a.endMinute - b.endMinute || a.segmentId.localeCompare(b.segmentId));
   const components = [];

@@ -1,7 +1,8 @@
 const KEYS = Object.freeze({
   access: "oqvf.access.v1",
   user: "oqvf.user.v1",
-  sounds: "oqvf.sounds.v1"
+  sounds: "oqvf.sounds.v1",
+  nowLineScope: "oqvf.now-line-scope.v1"
 });
 
 const ACCESS_HASH = "7f861bcee185de001377d79e08af62e94b1e7718e2470e08520c917f8d953602";
@@ -31,3 +32,6 @@ export function setSelectedUser(value) {
 
 export function getSoundsEnabled() { return localStorage.getItem(KEYS.sounds) !== "off"; }
 export function setSoundsEnabled(enabled) { localStorage.setItem(KEYS.sounds, enabled ? "on" : "off"); }
+
+export function getNowLineScope() { return localStorage.getItem(KEYS.nowLineScope) === "today" ? "today" : "week"; }
+export function setNowLineScope(scope) { localStorage.setItem(KEYS.nowLineScope, scope === "today" ? "today" : "week"); }

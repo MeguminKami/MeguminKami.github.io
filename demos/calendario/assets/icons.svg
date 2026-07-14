@@ -26,4 +26,9 @@
   <symbol id="i-eraser" viewBox="0 0 24 24"><path d="m7 21-4-4L15 5a2.8 2.8 0 0 1 4 4L7 21Zm-2-6 6 6M14 21h7"/></symbol>
   <symbol id="i-smartphone" viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M10 5h4M11 19h2"/></symbol>
   <symbol id="i-resize-vertical" viewBox="0 0 24 24"><path d="m8 9 4-4 4 4M8 15l4 4 4-4"/></symbol>
+  <symbol id="i-sunrise" viewBox="0 0 24 24"><path d="M4 18h16M6 14a6 6 0 0 1 12 0M12 2v3M4.9 6.9 7 9M19.1 6.9 17 9M3 14h2M19 14h2"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41"/></symbol>
+  <symbol id="i-cloud-sun" viewBox="0 0 24 24"><path d="M12 3V1M5.64 5.64 4.22 4.22M18.36 5.64l1.42-1.42M19 10h2M8.8 8.1A5 5 0 0 1 18 11M17 21H6a4 4 0 0 1-.4-7.98A6 6 0 0 1 17 15a3 3 0 0 1 0 6Z"/></symbol>
+  <symbol id="i-sunset" viewBox="0 0 24 24"><path d="M4 18h16M6 14a6 6 0 0 1 12 0M12 9V3M9 6l3 3 3-3M4.9 8.9 7 11M19.1 8.9 17 11"/></symbol>
+  <symbol id="i-moon-star" viewBox="0 0 24 24"><path d="M12.4 3.1A8.5 8.5 0 1 0 20.9 14 7 7 0 0 1 12.4 3.1Z"/><path d="m18 3 .5 1.5L20 5l-1.5.5L18 7l-.5-1.5L16 5l1.5-.5Z"/></symbol>
 </svg>

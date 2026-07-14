@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "test": "node --test",
-    "smoke": "node tests/browser-smoke.mjs"
+    "smoke": "node tests/browser-smoke.mjs",
+    "smoke:calendar": "node tests/calendar-polish-smoke.mjs"
   }
 }

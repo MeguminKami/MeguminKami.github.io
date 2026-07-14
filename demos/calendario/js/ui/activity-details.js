@@ -16,6 +16,20 @@ function metaRow(icon, content) {
   const span = document.createElement("span"); span.textContent = content; row.append(svg, span); return row;
 }
 
+function detailSection(labelText, content, className = "") {
+  const section = document.createElement("section"); section.className = `detail-section ${className}`.trim();
+  const label = document.createElement("span"); label.className = "detail-section-label"; label.textContent = labelText;
+  section.append(label, content); return section;
+}
+
+function commentHeader(author, labelText) {
+  const header = document.createElement("div"); header.className = "comment-card-header";
+  const mark = document.createElement("span"); mark.className = "comment-author-mark";
+  mark.textContent = author === "joao" ? "J" : "S"; mark.setAttribute("aria-hidden", "true");
+  const label = document.createElement("strong"); label.textContent = labelText;
+  header.append(mark, label); return header;
+}
+
 export class ActivityDetails {
   constructor(handlers) {
     this.dialog = document.querySelector("#details-dialog");
@@ -26,10 +40,12 @@ export class ActivityDetails {
 
   open(activity, user) {
     this.activity = activity;
+    this.dialog.dataset.type = activity.type;
     document.querySelector("#details-title").textContent = activity.title;
     this.body.replaceChildren(); this.actions.replaceChildren();
     if (activity.status === "cancelled") { const note = document.createElement("span"); note.className = "cancelled-note"; note.textContent = "Cancelada"; this.body.append(note); }
-    const description = document.createElement("p"); description.className = "detail-description"; description.textContent = activity.description || "Sem descrição."; this.body.append(description);
+    const description = document.createElement("p"); description.className = `detail-description${activity.description ? "" : " empty"}`; description.textContent = activity.description || "Sem descrição.";
+    this.body.append(detailSection("Descrição", description));
     const meta = document.createElement("div"); meta.className = "detail-meta";
     const sameDay = activity.start.date === activity.end.date;
     const when = sameDay ? `${formatDateLong(activity.start.date)} · ${formatMinute(activity.start.minute)}–${formatMinute(activity.end.minute)}` : `${formatDateLong(activity.start.date)} ${formatMinute(activity.start.minute)} → ${formatDateLong(activity.end.date)} ${formatMinute(activity.end.minute)}`;
@@ -40,7 +56,7 @@ export class ActivityDetails {
       const link = document.createElement("a"); link.href = activity.url; link.target = "_blank"; link.rel = "noopener noreferrer"; link.textContent = activity.url; row.lastChild.replaceWith(link); meta.append(row);
     }
     if (activity.isRecurring) meta.append(metaRow("i-calendar", "Atividade recorrente"));
-    this.body.append(meta);
+    this.body.append(detailSection("Informações", meta, "detail-meta-section"));
     this.renderComment(activity, user);
     if (canModify(activity, user)) {
       this.actions.append(iconButton("Editar", "i-edit", "edit"));
@@ -61,24 +77,25 @@ export class ActivityDetails {
   renderComment(activity, user) {
     if (activity.comment) {
       const card = document.createElement("section"); card.className = `comment-card ${activity.comment.author}`;
-      const title = document.createElement("strong"); title.textContent = `${activity.comment.author === "joao" ? "João" : "Sofia"} comentou`;
-      const text = document.createElement("p"); text.textContent = activity.comment.text; card.append(title, text);
+      const authorName = activity.comment.author === "joao" ? "João" : "Sofia";
+      const text = document.createElement("p"); text.textContent = activity.comment.text; card.append(commentHeader(activity.comment.author, `${authorName} comentou`), text);
       if (canEditComment(activity, user)) {
         const edit = document.createElement("button"); edit.className = "button"; edit.type = "button"; edit.textContent = "Editar comentário";
         const remove = document.createElement("button"); remove.className = "button button-ghost"; remove.type = "button"; remove.textContent = "Apagar";
         edit.addEventListener("click", () => this.commentForm(activity, user, card, activity.comment.text));
-        remove.addEventListener("click", () => this.handlers.removeComment(activity)); card.append(edit, remove);
+        remove.addEventListener("click", () => this.handlers.removeComment(activity));
+        const actions = document.createElement("div"); actions.className = "comment-actions"; actions.append(edit, remove); card.append(actions);
       }
       this.body.append(card);
     } else if (canComment(activity, user)) {
       const area = document.createElement("section"); area.className = `comment-card ${user}`;
-      const title = document.createElement("strong"); title.textContent = "Deixar um comentário"; area.append(title);
+      area.append(commentHeader(user, "Deixar um comentário"));
       this.body.append(area); this.commentForm(activity, user, area, "");
     }
   }
 
   commentForm(activity, user, container, initial) {
-    [...container.querySelectorAll("textarea,.comment-save")].forEach((node) => node.remove());
+    [...container.querySelectorAll("textarea,.comment-save,.comment-actions")].forEach((node) => node.remove());
     const textarea = document.createElement("textarea"); textarea.maxLength = 1000; textarea.value = initial; textarea.placeholder = "Escreve uma mensagem curta…";
     const save = document.createElement("button"); save.type = "button"; save.className = "button button-primary comment-save"; save.textContent = "Guardar comentário";
     save.addEventListener("click", () => { const value = textarea.value.trim(); if (value) this.handlers.saveComment(activity, { author: user, text: value }); });

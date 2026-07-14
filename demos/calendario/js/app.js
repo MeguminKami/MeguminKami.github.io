@@ -4,7 +4,7 @@ import { exportCsv, exportIcs, exportJson } from "./core/exporters.js";
 import { canModify } from "./core/permissions.js";
 import { connectFirebase } from "./services/firebase-client.js";
 import { ConflictError, createRepository } from "./services/repository.js";
-import { getSelectedUser, getSoundsEnabled, grantAccess, hasAccess, revokeAccess, setSelectedUser, setSoundsEnabled, verifyAccessCode } from "./services/local-preferences.js";
+import { getNowLineScope, getSelectedUser, getSoundsEnabled, grantAccess, hasAccess, revokeAccess, setNowLineScope, setSelectedUser, setSoundsEnabled, verifyAccessCode } from "./services/local-preferences.js";
 import { ActivityDetails } from "./ui/activity-details.js";
 import { ActivityDialog } from "./ui/activity-dialog.js";
 import { ActivityMenu } from "./ui/activity-menu.js";
@@ -50,7 +50,8 @@ createBackground(document.querySelector("#background-art"));
 const calendar = new CalendarView({
   onSlot: (point) => createActivity(point),
   onEvent: (activity, card) => activity && activityMenu.open(activity, card, state.currentUser),
-  canModify: (activity) => canModify(activity, state.currentUser) && Boolean(repository) && navigator.onLine
+  canModify: (activity) => canModify(activity, state.currentUser) && Boolean(repository) && navigator.onLine,
+  nowLineScope: getNowLineScope()
 });
 
 const yearView = new YearView({
@@ -76,6 +77,7 @@ const activityMenu = new ActivityMenu({
 const avatarEditor = new AvatarEditor({ onSave: saveAvatar });
 const settings = new SettingsPanel({
   onSounds: (enabled) => { setSoundsEnabled(enabled); sounds.setEnabled(enabled); notify(enabled ? "Sons ligados." : "Sons desligados."); },
+  onNowLineScope: (scope) => { setNowLineScope(scope); calendar.setNowLineScope(scope); },
   onAvatar: () => avatarEditor.open(profileFor(state.currentUser)),
   onSwitchUser: showUserSelection,
   onExport: downloadExport,
@@ -84,6 +86,7 @@ const settings = new SettingsPanel({
   onLock: lockApp
 });
 settings.setSounds(getSoundsEnabled());
+settings.setNowLineScope(getNowLineScope());
 
 new DragResizeController(calendar, {
   getState: () => state,
