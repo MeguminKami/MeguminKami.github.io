@@ -64,12 +64,14 @@ try {
   await send("Page.reload", { ignoreCache: true }); await delay(1300);
 
   const viewports = [
+    { width: 1440, height: 1100, expected: 7 },
     { width: 1280, height: 900, expected: 7 },
     { width: 1050, height: 800, expected: 6 },
     { width: 900, height: 700, expected: 5 },
     { width: 760, height: 700, expected: 4 },
     { width: 430, height: 900, expected: 2 },
     { width: 390, height: 844, expected: 2 },
+    { width: 360, height: 760, expected: 1 },
     { width: 320, height: 700, expected: 1 }
   ];
 
@@ -82,8 +84,14 @@ try {
     assert.equal(layout.calendarWhole, true); assert.equal(layout.stripWhole, true);
     assert.equal(layout.stripVisible, viewport.expected < 7);
     assert.equal(layout.scrollbar, "none"); assert.equal(layout.rootScrollbar, "none"); assert.equal(layout.snap, "x mandatory");
-    assert.ok(layout.hourHeight >= 28 && layout.hourHeight <= 38);
+    assert.ok(layout.hourHeight >= 28);
     assert.equal(layout.phaseCount, 5); assert.equal(layout.timeColors.length, 1); assert.equal(layout.todayFrame, "3px");
+    const dimensions = JSON.parse(await evaluate(`(()=>{const container=document.querySelector('.calendar-container').getBoundingClientRect();const controls=[...document.querySelectorAll('.calendar-toolbar .button')].map(item=>item.getBoundingClientRect()).filter(item=>item.width>0&&item.height>0);const header=document.querySelector('.calendar-days-header').getBoundingClientRect();const body=document.querySelector('.calendar-body').getBoundingClientRect();const gutter=document.querySelector('#time-gutter').getBoundingClientRect();const grid=document.querySelector('#days-grid').getBoundingClientRect();return JSON.stringify({horizontalGap:innerWidth-container.width,bottomGap:innerHeight-container.bottom,controlMinHeight:Math.min(...controls.map(item=>item.height)),headerBottom:header.bottom,bodyTop:body.top,gutterTop:gutter.top,gridTop:grid.top,gutterBottom:gutter.bottom,gridBottom:grid.bottom})})()`));
+    assert.ok(dimensions.horizontalGap >= 7 && dimensions.horizontalGap <= 58);
+    assert.ok(dimensions.controlMinHeight >= 43);
+    assert.ok(Math.abs(dimensions.headerBottom - dimensions.bodyTop) <= 1);
+    assert.ok(Math.abs(dimensions.gutterTop - dimensions.gridTop) <= 1); assert.ok(Math.abs(dimensions.gutterBottom - dimensions.gridBottom) <= 1);
+    if (layout.hourHeight > 28.1) assert.ok(dimensions.bottomGap >= 10 && dimensions.bottomGap <= 14, `${viewport.width}x${viewport.height} deixou ${dimensions.bottomGap}px no fundo.`);
   }
 
   await send("Emulation.setDeviceMetricsOverride", { width: 900, height: 700, deviceScaleFactor: 1, mobile: false }); await delay(220);
@@ -114,7 +122,7 @@ try {
   await send("Emulation.setEmulatedMedia", { media: "print" }); await delay(120);
   const printLayout = JSON.parse(await evaluate(`(()=>{const scroller=document.querySelector('#calendar-scroller');const inner=document.querySelector('.calendar-inner');const headers=[...document.querySelectorAll('.day-header')];return JSON.stringify({fits:Math.abs(inner.getBoundingClientRect().width-scroller.clientWidth)<=2,headers:headers.length,equalWidths:new Set(headers.map(item=>Math.round(item.getBoundingClientRect().width))).size===1})})()`));
   assert.deepEqual(printLayout, { fits: true, headers: 7, equalWidths: true });
-  console.log(`Polimento responsivo OK em 7 viewports. Capturas: ${screenshotPath} e ${mobileScreenshotPath}`);
+  console.log(`Polimento responsivo OK em ${viewports.length} viewports. Capturas: ${screenshotPath} e ${mobileScreenshotPath}`);
   await send("Browser.close").catch(() => {});
 } finally {
   socket?.close(); browser.kill(); server.close();

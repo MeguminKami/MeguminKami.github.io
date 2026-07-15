@@ -169,8 +169,10 @@ export class CalendarView {
     const top = Math.max(0, this.container.getBoundingClientRect().top);
     const availableHeight = Math.max(0, innerHeight - top - 12);
     const edgeSpace = parseFloat(rootStyles.getPropertyValue("--calendar-edge-space")) || 0;
-    const availableGridHeight = Math.max(0, availableHeight - edgeSpace * 2);
-    const hourHeight = Math.min(38, Math.max(28, availableGridHeight / HOUR_COUNT));
+    const headerHeight = this.header.getBoundingClientRect().height;
+    const containerBorder = parseFloat(getComputedStyle(this.container).borderTopWidth || 0) + parseFloat(getComputedStyle(this.container).borderBottomWidth || 0);
+    const availableGridHeight = Math.max(0, availableHeight - headerHeight - edgeSpace * 2 - containerBorder);
+    const hourHeight = Math.max(28, availableGridHeight / HOUR_COUNT);
     this.scroller.style.setProperty("--hour-height", `${hourHeight}px`);
     this.scroller.style.setProperty("--slot-height", `${hourHeight / 2}px`);
     this.scroller.style.setProperty("--day-height", `${hourHeight * HOUR_COUNT}px`);
