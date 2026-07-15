@@ -60,8 +60,10 @@
   --control-height: 44px;
   --motion-fast: 150ms ease;
   --motion-base: 220ms cubic-bezier(.2,.8,.2,1);
-  --slot-height: 34px;
-  --day-height: calc(17 * var(--slot-height));
+  --hour-height: 34px;
+  --slot-height: calc(var(--hour-height) / 2);
+  --day-height: calc(17 * var(--hour-height));
+  --calendar-edge-space: 9px;
   --time-width: 72px;
   --day-width: 152px;
   --calendar-inner-width: calc(var(--time-width) + 7 * var(--day-width));

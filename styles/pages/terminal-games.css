@@ -434,33 +434,6 @@
     grid-column: 3;
 }
 
-.terminalGameSources {
-    display: grid;
-    gap: 0.65rem;
-    margin-top: 0.9rem;
-}
-
-.terminalGameSourceLink {
-    display: grid;
-    gap: 0.2rem;
-    padding: 0.75rem;
-    border: 1px solid var(--border);
-    border-radius: 0.75rem;
-    background: var(--surface-2);
-    color: var(--text);
-    transition: transform 0.2s ease, border-color 0.2s ease;
-}
-
-.terminalGameSourceLink:hover {
-    border-color: var(--terminal-cyan);
-    transform: translateX(3px);
-}
-
-.terminalGameSourceLink small {
-    color: var(--text-muted);
-    word-break: break-word;
-}
-
 body.light .terminalGameScreen {
     background:
         radial-gradient(circle at top left, rgba(5, 150, 105, 0.14), transparent 28rem),

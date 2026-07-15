@@ -1,4 +1,4 @@
-import { END_MINUTE, GRID_SLOT_MINUTES, SLOT_COUNT, SLOT_MINUTES, START_MINUTE, USERS, VISIBLE_MINUTES } from "../core/constants.js";
+import { END_MINUTE, GRID_SLOT_MINUTES, HOUR_COUNT, HOUR_MINUTES, SLOT_COUNT, SLOT_MINUTES, START_MINUTE, USERS, VISIBLE_MINUTES } from "../core/constants.js";
 import { addDays, formatDateLong, formatDateRange, formatMinute, getLisbonParts, nowLinePosition } from "../core/date-time.js";
 import { calculateVisibleDayLayout, layoutDaySegments } from "../core/layout.js";
 import { expandAndSegment } from "../core/recurrence.js";
@@ -85,8 +85,11 @@ export class CalendarView {
 
   renderGutter() {
     this.gutter.replaceChildren();
-    for (let minute = START_MINUTE; minute < END_MINUTE; minute += GRID_SLOT_MINUTES) {
+    for (let minute = START_MINUTE; minute <= END_MINUTE; minute += HOUR_MINUTES) {
       const label = document.createElement("span"); label.className = "time-label"; label.textContent = formatMinute(minute);
+      label.style.top = `${((minute - START_MINUTE) / VISIBLE_MINUTES) * 100}%`;
+      if (minute === START_MINUTE) label.classList.add("start");
+      if (minute === END_MINUTE) label.classList.add("end");
       this.gutter.append(label);
     }
     for (const phase of DAY_PHASES) {
@@ -165,8 +168,12 @@ export class CalendarView {
 
     const top = Math.max(0, this.container.getBoundingClientRect().top);
     const availableHeight = Math.max(0, innerHeight - top - 12);
-    const slotHeight = Math.min(38, Math.max(28, availableHeight / SLOT_COUNT));
-    this.scroller.style.setProperty("--slot-height", `${slotHeight}px`);
+    const edgeSpace = parseFloat(rootStyles.getPropertyValue("--calendar-edge-space")) || 0;
+    const availableGridHeight = Math.max(0, availableHeight - edgeSpace * 2);
+    const hourHeight = Math.min(38, Math.max(28, availableGridHeight / HOUR_COUNT));
+    this.scroller.style.setProperty("--hour-height", `${hourHeight}px`);
+    this.scroller.style.setProperty("--slot-height", `${hourHeight / 2}px`);
+    this.scroller.style.setProperty("--day-height", `${hourHeight * HOUR_COUNT}px`);
 
     const safeDay = Math.max(0, Math.min(6, leadingDay));
     this.scroller.scrollLeft = safeDay * layout.dayWidth;

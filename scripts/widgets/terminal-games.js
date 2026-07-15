@@ -30,8 +30,6 @@ const DIRECTIONS = {
     D: [0, 1],
 };
 
-const SOURCE_ROOT = "/demos/terminal-games/source";
-
 function cloneGrid(lines) {
     return lines.map((line) => [...line]);
 }
@@ -86,13 +84,6 @@ function posKey(pos) {
 
 function getDirectionFromEvent(event) {
     return DIRECTIONS[event.code] || DIRECTIONS[event.key] || null;
-}
-
-function buildSourceLinks(paths) {
-    return paths.map((path) => ({
-        label: path.split("/").pop(),
-        href: `${SOURCE_ROOT}/${path}`,
-    }));
 }
 
 class HereBeDragonsGame {
@@ -624,10 +615,6 @@ const GAME_REGISTRY = [
         description: "A compact maze with one stationary dragon, a key, and a locked side exit.",
         implementation: "Uses a coordinate struct, helper functions, a fixed 10 x 10 maze, non-blocking input, and screen clearing between turns.",
         setup: null,
-        sources: buildSourceLinks([
-            "herebedragons/herebedragons.cpp",
-            "shared/terminal_input.hpp",
-        ]),
         create: () => new HereBeDragonsGame(),
     },
     {
@@ -646,11 +633,6 @@ const GAME_REGISTRY = [
             max: 5,
             value: 3,
         },
-        sources: buildSourceLinks([
-            "dragonsbane/dragonsbane.cpp",
-            "dragonsbane/dragonsbane.hpp",
-            "shared/terminal_input.hpp",
-        ]),
         create: (settings) => new DragonBaneGame(settings),
     },
     {
@@ -669,27 +651,18 @@ const GAME_REGISTRY = [
             max: 40,
             value: 8,
         },
-        sources: buildSourceLinks([
-            "torment/ToD.cpp",
-            "torment/ToD.hpp",
-            "shared/terminal_input.hpp",
-        ]),
         create: (settings) => new TormentGame(settings),
     },
     {
         id: "worlds-colide",
         title: "Worlds Colide",
         badge: "Work in progress",
-        status: "Source only",
+        status: "Prototype",
         language: "C++",
         difficulty: "Prototype shell",
-        description: "A start/end-screen prototype kept as a source entry until it contains playable game logic.",
+        description: "A start/end-screen prototype kept as an archive entry until it contains playable game logic.",
         implementation: "Currently demonstrates the terminal screen structure and clear-screen flow, but not a full game loop yet.",
         setup: null,
-        sources: buildSourceLinks([
-            "worldscolide/wc.cpp",
-            "worldscolide/wc.hpp",
-        ]),
         create: null,
     },
 ];
@@ -756,7 +729,7 @@ function renderWip(entry) {
 
 ${escapeHtml(entry.description)}
 
-This entry is intentionally shown as source-only.
+This entry is intentionally shown as prototype-only.
 It will become playable when the original project contains game logic beyond
 the start and end terminal screens.
 </div>`;
@@ -790,7 +763,6 @@ class TerminalGameShowcase {
         this.description = root.querySelector("[data-terminal-game-description]");
         this.implementation = root.querySelector("[data-terminal-game-implementation]");
         this.setup = root.querySelector("[data-terminal-game-setup]");
-        this.sources = root.querySelector("[data-terminal-game-sources]");
         this.startButton = root.querySelector("[data-terminal-game-start]");
         this.restartButton = root.querySelector("[data-terminal-game-restart]");
         this.focusButton = root.querySelector("[data-terminal-game-focus]");
@@ -884,7 +856,6 @@ class TerminalGameShowcase {
         if (this.implementation) this.implementation.textContent = entry.implementation;
 
         this.renderSetup(entry);
-        this.renderSources(entry);
         this.renderScreen();
         this.updateButtons();
     }
@@ -914,16 +885,6 @@ class TerminalGameShowcase {
             this.currentGame = entry.create(this.readSettings(entry));
             this.renderScreen();
         });
-    }
-
-    renderSources(entry) {
-        if (!this.sources) return;
-
-        this.sources.innerHTML = entry.sources.map((source) => `
-<a class="terminalGameSourceLink" href="${escapeHtml(source.href)}">
-    <span>${escapeHtml(source.label)}</span>
-    <small>${escapeHtml(source.href)}</small>
-</a>`).join("");
     }
 
     startGame() {
