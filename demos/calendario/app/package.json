@@ -1,0 +1,45 @@
+{
+  "name": "o-que-vais-fazer-ios",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.0.0",
+    "npm": ">=10.0.0"
+  },
+  "scripts": {
+    "clean": "node scripts/clean.mjs",
+    "build": "node scripts/build.mjs",
+    "doctor": "node scripts/doctor.mjs",
+    "test": "node --test",
+    "test:root": "npm --prefix .. test",
+    "smoke": "node scripts/smoke.mjs",
+    "verify": "node scripts/verify.mjs",
+    "assets:ios": "node scripts/assets-ios.mjs",
+    "ios:create": "node scripts/ios-create.mjs",
+    "ios:configure": "node scripts/ios-configure.mjs",
+    "sync:ios": "node scripts/ios-sync.mjs",
+    "ios:open": "node scripts/ios-open.mjs",
+    "ios:run": "node scripts/ios-run.mjs"
+  },
+  "dependencies": {
+    "@capacitor/app": "8.1.0",
+    "@capacitor/browser": "8.0.3",
+    "@capacitor/core": "8.4.1",
+    "@capacitor/filesystem": "8.1.2",
+    "@capacitor/ios": "8.4.1",
+    "@capacitor/keyboard": "8.0.5",
+    "@capacitor/network": "8.0.1",
+    "@capacitor/share": "8.0.1",
+    "@capacitor/splash-screen": "8.0.1",
+    "@capacitor/status-bar": "8.0.2",
+    "emoji-picker-element": "1.29.1",
+    "emoji-picker-element-data": "1.8.0",
+    "firebase": "12.15.0"
+  },
+  "devDependencies": {
+    "@capacitor/assets": "3.0.5",
+    "@capacitor/cli": "8.4.1",
+    "esbuild": "0.25.8"
+  }
+}

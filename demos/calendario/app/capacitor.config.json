@@ -1,0 +1,23 @@
+{
+  "appId": "com.joaoc.oquevaisfazer",
+  "appName": "O Que Vais Fazer?",
+  "webDir": "www",
+  "server": {
+    "hostname": "localhost",
+    "iosScheme": "capacitor"
+  },
+  "plugins": {
+    "Keyboard": {
+      "resize": "native"
+    },
+    "SplashScreen": {
+      "launchAutoHide": true,
+      "showSpinner": false,
+      "backgroundColor": "#fff8fa"
+    },
+    "StatusBar": {
+      "overlaysWebView": false,
+      "style": "DARK"
+    }
+  }
+}

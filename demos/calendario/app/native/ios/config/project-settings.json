@@ -1,0 +1,13 @@
+{
+  "targetName": "App",
+  "deploymentTarget": "15.4",
+  "targetedDeviceFamily": "1,2",
+  "requiresFullScreen": false,
+  "supportsMacCatalyst": false,
+  "supportsPortrait": true,
+  "supportsPortraitUpsideDownOnIPhone": false,
+  "supportsPortraitUpsideDownOnIPad": true,
+  "supportsLandscapeLeft": true,
+  "supportsLandscapeRight": true,
+  "statusBarStyle": "UIStatusBarStyleDarkContent"
+}
