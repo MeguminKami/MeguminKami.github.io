@@ -1,0 +1,527 @@
+.mobile-admin {
+  display: none;
+}
+@media (max-width: 800px) {
+  .mobile-admin {
+    display: inline-flex;
+  }
+}
+@media (min-width: 1450px) {
+  main {
+    padding-top: 48px;
+  }
+}
+@media (max-width: 1100px) {
+  .navbar {
+    padding: 0 22px;
+    gap: 16px;
+  }
+  .nav-link {
+    padding: 10px 8px;
+  }
+  .nav-link > .ui-icon {
+    display: none;
+  }
+  .user-link span {
+    display: none;
+  }
+  .podium {
+    gap: 22px;
+  }
+  .podium-place .football-card {
+    --card-width: 210px;
+  }
+  .place-2 .football-card,
+  .place-3 .football-card {
+    --card-width: 180px;
+  }
+  .auth-layout {
+    gap: 40px;
+    grid-template-columns: 1fr 450px;
+  }
+  .lab-layout {
+    grid-template-columns: 1fr 360px;
+    gap: 24px;
+  }
+  .dashboard-columns {
+    grid-template-columns: 320px 1fr;
+  }
+  .team-builder {
+    gap: 10px;
+  }
+  .team-panel {
+    padding: 12px;
+  }
+  .chip-card {
+    display: none;
+  }
+  .player-hero {
+    gap: 28px;
+  }
+  .metrics b {
+    font-size: 1.2rem;
+  }
+}
+@media (max-width: 800px) {
+  .navbar {
+    min-height: 68px;
+  }
+  .desktop-nav {
+    display: none;
+  }
+  .club-label {
+    font-size: 0.5rem;
+  }
+  .header-actions {
+    margin-left: auto;
+  }
+  .bottom-nav {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    justify-content: space-around;
+    padding: 10px 8px max(12px, env(safe-area-inset-bottom));
+    background: var(--bg-surface);
+    border-top: 1px solid var(--border-strong);
+    z-index: 40;
+  }
+  .bottom-nav a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    position: relative;
+    color: var(--text-muted);
+    font-size: 0.6rem;
+    padding: 0 12px;
+  }
+  .bottom-nav a.active {
+    color: var(--accent);
+  }
+  .bottom-nav .ui-icon {
+    width: 21px;
+    height: 21px;
+  }
+  .nav-dot {
+    position: absolute;
+    right: 9px;
+    top: 0;
+    width: 5px;
+    height: 5px;
+    background: var(--accent);
+    border-radius: 50%;
+  }
+  main {
+    padding: 28px 20px 110px;
+  }
+  .dashboard-columns {
+    grid-template-columns: 1fr;
+  }
+  .my-card-panel {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .my-card-panel > .section-head {
+    grid-column: 1/-1;
+    margin: 0;
+  }
+  .my-card-panel > .football-card {
+    margin: auto;
+  }
+  .my-card-panel .metrics {
+    grid-template-columns: 1fr 1fr;
+    margin: 0;
+  }
+  .metrics {
+    gap: 10px;
+  }
+  .weekly-section {
+    padding: 22px;
+  }
+  .dashboard-greeting {
+    align-items: flex-start;
+  }
+  .auth-layout {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    max-width: 570px;
+    margin: auto;
+  }
+  .auth-story h1 {
+    font-size: 2.6rem;
+  }
+  .auth-story .auth-card,
+  .auth-signature {
+    display: none;
+  }
+  .auth-story > p:not(.eyebrow) {
+    max-width: 100%;
+  }
+  .auth-panel {
+    padding: 26px;
+  }
+  .team-builder {
+    grid-template-columns: 1fr 1fr;
+  }
+  .available {
+    grid-column: 1/-1;
+  }
+  .available .team-player-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .lab-layout {
+    grid-template-columns: 1fr;
+  }
+  .lab-preview {
+    position: static;
+    min-height: auto;
+  }
+  .player-hero {
+    grid-template-columns: 280px 1fr;
+  }
+  .player-hero .card-lg {
+    --card-width: 260px;
+  }
+  .player-facts {
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  .player-hero .metrics {
+    grid-template-columns: 1fr 1fr;
+  }
+  .player-hero .metrics > div {
+    padding: 12px;
+  }
+  .attribute-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .toast-region {
+    bottom: 90px;
+  }
+  .game-row {
+    gap: 12px;
+    padding: 16px;
+  }
+  .game-row > .pill {
+    display: none;
+  }
+  .game-row .game-symbol {
+    padding: 10px;
+  }
+  .section-head .btn {
+    font-size: 0.75rem;
+    padding: 8px;
+  }
+  .filters {
+    flex-wrap: wrap;
+  }
+  .filters label,
+  .filters .search-field {
+    flex: 1 1 40%;
+  }
+  .notification-dropdown {
+    right: 0;
+    width: min(370px, calc(100vw - 32px));
+  }
+  .page-head {
+    align-items: flex-start;
+  }
+  .ranking-row {
+    gap: 14px;
+  }
+  .ranking-row > img {
+    width: 42px;
+    height: 42px;
+  }
+  .ranking-number {
+    width: 22px;
+  }
+}
+@media (max-width: 540px) {
+  main {
+    padding: 24px 16px 106px;
+  }
+  .navbar {
+    padding: 0 16px;
+    gap: 12px;
+  }
+  .brand {
+    font-size: 0.78rem;
+  }
+  .brand img {
+    height: 31px;
+    width: 26px;
+  }
+  .header-actions {
+    gap: 2px;
+  }
+  .user-link img {
+    width: 28px;
+    height: 28px;
+  }
+  .dashboard-greeting {
+    display: block;
+  }
+  .dashboard-greeting > .btn {
+    margin-top: 16px;
+  }
+  .dashboard-greeting h1 {
+    font-size: 1.7rem;
+  }
+  .page-head {
+    display: block;
+    margin-bottom: 24px;
+  }
+  .page-head > .btn {
+    margin-top: 16px;
+  }
+  .section-head {
+    gap: 8px;
+  }
+  .section-head h2 {
+    font-size: 1.15rem;
+  }
+  .weekly-section {
+    padding: 20px 14px;
+  }
+  .weekly-section > .section-head {
+    align-items: flex-start;
+  }
+  .weekly-section .section-head > .btn .ui-icon {
+    display: none;
+  }
+  .weekly-section .section-head > .btn {
+    max-width: 112px;
+    font-size: 0.7rem;
+  }
+  .podium {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    align-items: center;
+  }
+  .podium-place,
+  .place-1 {
+    order: initial;
+    align-self: auto;
+    padding: 0;
+  }
+  .podium-place .football-card {
+    --card-width: 230px;
+  }
+  .place-2 .football-card,
+  .place-3 .football-card {
+    --card-width: 210px;
+  }
+  .podium-place p {
+    margin-top: 12px;
+  }
+  .my-card-panel {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+  }
+  .my-card-panel .metrics {
+    grid-template-columns: repeat(4, 1fr);
+    width: 100%;
+  }
+  .metrics {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .metrics > div {
+    padding: 16px;
+  }
+  .mission {
+    padding: 16px;
+    gap: 12px;
+  }
+  .mission-symbol {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+  }
+  .mission-arrow {
+    display: none;
+  }
+  .card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px 12px;
+  }
+  .card-grid .card-sm {
+    --card-width: min(220px, calc((100vw - 44px) / 2));
+  }
+  .grid-player .pill {
+    font-size: 0.6rem;
+  }
+  .player-hero {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: stretch;
+  }
+  .player-hero .card-lg {
+    --card-width: 280px;
+  }
+  .player-facts {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .player-hero .metrics {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .panel {
+    padding: 20px;
+  }
+  .attribute-grid {
+    gap: 20px;
+  }
+  .attribute-grid > div {
+    font-size: 0.74rem;
+  }
+  .form-strip {
+    flex-wrap: wrap;
+  }
+  .form-score {
+    min-width: 90px;
+  }
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+  .field-wide {
+    grid-column: auto;
+  }
+  .rating-row {
+    grid-template-columns: 1fr 58px;
+    gap: 12px;
+  }
+  .rating-row label {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  .rating-row input[type="range"] {
+    grid-column: 1;
+    grid-row: 2;
+  }
+  .rating-row input[type="number"] {
+    grid-column: 2;
+    grid-row: 1/3;
+  }
+  .rating-form > .section-head:last-child {
+    display: block;
+  }
+  .rating-form .actions {
+    margin-top: 14px;
+  }
+  .feedback-grid {
+    grid-template-columns: 1fr;
+  }
+  .score-panel {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+  }
+  .score-panel h2 {
+    font-size: 1.2rem;
+  }
+  .score {
+    max-width: 100%;
+  }
+  .score input {
+    font-size: 1.4rem;
+  }
+  .team-builder {
+    grid-template-columns: 1fr;
+  }
+  .available {
+    grid-column: auto;
+  }
+  .available .team-player-list {
+    grid-template-columns: 1fr 1fr;
+  }
+  .chip-card {
+    display: block;
+  }
+  .available .chip-card {
+    display: none;
+  }
+  .game-row {
+    gap: 10px;
+  }
+  .game-row .game-symbol {
+    display: none;
+  }
+  .game-row strong {
+    font-size: 1.05rem;
+  }
+  .game-row b {
+    font-size: 0.85rem;
+  }
+  .game-row > .ui-icon {
+    display: none;
+  }
+  .auth-panel {
+    padding: 20px;
+  }
+  .auth-layout {
+    gap: 14px;
+  }
+  .auth-story h1 {
+    font-size: 2.4rem;
+  }
+  .auth-panel .form-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .auth-panel .field-wide {
+    grid-column: 1/-1;
+  }
+  .auth-panel input,
+  .auth-panel select {
+    padding: 10px 8px;
+  }
+  .ranking-row {
+    padding: 16px;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .ranking-row > div:first-of-type {
+    min-width: 120px;
+  }
+  .ranking-row > .ui-icon {
+    display: none;
+  }
+  .ranking-row > div:not(:first-of-type) {
+    font-size: 0.8rem;
+  }
+  .ranking-number {
+    font-size: 1.2rem;
+  }
+  .assets-preview {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .notification-list {
+    padding: 16px;
+  }
+  .notification-dropdown {
+    position: fixed;
+    top: 74px;
+    right: 16px;
+  }
+  .lab-preview {
+    padding: 24px;
+  }
+  .stats-metrics {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *:before,
+  *:after {
+    animation: none;
+    transition: none;
+    scroll-behavior: auto;
+  }
+}

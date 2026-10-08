@@ -1,0 +1,7 @@
+node_modules/
+.firebase/
+*-debug.log
+test-results/
+playwright-report/
+.env*
+!.env.example
