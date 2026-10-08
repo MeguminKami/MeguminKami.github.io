@@ -5,13 +5,12 @@ import {
   flag,
   ATTRIBUTES,
   formatDate,
-  themeName,
   average,
   isoWeek,
 } from "./utils.js";
 import { ASSET_PATHS, safeImage } from "./assets.js";
-import { card } from "./cards.js";
-import { esc, empty, linkButton, pageHead, busy, toast } from "./ui.js";
+import { card, bindImages } from "./cards.js";
+import { esc, empty, linkButton, pageHead, busy, toast, modal } from "./ui.js";
 import { icon } from "./icons.js";
 import * as DB from "./db.js";
 export function profileFields(p = {}) {
@@ -191,7 +190,7 @@ export async function playerPage(ctx, uid) {
         "",
         "games",
       )
-    }</div></section><section><h2>Cartas especiais</h2>${p.specials.length ? `<div class="special-grid">${p.specials.map((sp) => `<div class="special-badge ${sp.id}">${icon("trophy")}<b>${esc(sp.name)}</b><small>${esc(sp.attribute || "Desbloqueada")}</small></div>`).join("")}</div>` : empty("Ainda sem cartas especiais", "Boas performances consecutivas desbloqueiam novas edições.", "", "trophy")}</section><section><h2>Evolução semanal</h2>${history.length ? `<div class="history-grid">${history.map((h) => `<div class="panel"><small>${esc(h.weekId)}</small><strong class="history-ovr">${h.ovr}<small> OVR</small></strong><span>${esc(themeName(h.baseCard))}</span></div>`).join("")}</div>` : empty("Ainda não existe histórico suficiente", "O histórico é reconstruído a partir das avaliações guardadas.", "", "games")}</section><section><h2>Últimos jogos</h2>${
+    }</div></section><section><h2>Cartas especiais</h2>${p.specials.length ? `<div class="special-grid">${p.specials.map((sp) => `<div class="special-badge ${sp.id}">${icon("trophy")}<b>${esc(sp.name)}</b><small>${esc(sp.attribute || "Desbloqueada")}</small></div>`).join("")}</div>` : empty("Ainda sem cartas especiais", "Boas performances consecutivas desbloqueiam novas edições.", "", "trophy")}</section><section><h2>Evolução semanal</h2>${historyStrip(p, history)}</section><section><h2>Últimos jogos</h2>${
       p.matches.length
         ? `<div class="game-list">${p.matches
             .slice(0, 5)
@@ -208,4 +207,39 @@ export async function playerPage(ctx, uid) {
           )
     }</section>`,
   );
+  document.querySelectorAll("[data-history-week]").forEach((button) => {
+    button.onclick = () => {
+      const snapshot = history.find(
+        (h) => h.weekId === button.dataset.historyWeek,
+      );
+      modal(
+        `Carta · ${snapshot.weekId}`,
+        `<div class="history-card-expanded">${card(historicalPlayer(p, snapshot), { size: "lg", preview: true })}</div>`,
+      );
+      bindImages(document.querySelector("#modal-root"));
+    };
+  });
+}
+function historyStrip(player, history) {
+  const slots = Array.from(
+    { length: Math.max(5, history.length) },
+    (_, index) => {
+      const snapshot = history[index];
+      if (!snapshot)
+        return `<div class="history-card-button history-placeholder panel"><span class="history-week">Semana por registar</span><div class="history-empty-card" aria-hidden="true">${icon("games")}</div><span class="history-card-hint">Ainda sem carta</span></div>`;
+      return `<button type="button" class="history-card-button panel" data-history-week="${esc(snapshot.weekId)}" aria-label="Ampliar carta da semana ${esc(snapshot.weekId)}"><span class="history-week">${esc(snapshot.weekId)}</span>${card(historicalPlayer(player, snapshot), { size: "sm", preview: true })}<span class="history-card-hint">Ver carta ampliada</span></button>`;
+    },
+  ).join("");
+  return `<p class="muted small">${history.length} ${history.length === 1 ? "semana guardada" : "semanas guardadas"}. Desliza horizontalmente para percorrer o histórico.</p><div class="history-grid" tabindex="0" role="region" aria-label="Histórico de cartas semanal, deslocação horizontal">${slots}</div>`;
+}
+function historicalPlayer(player, snapshot) {
+  return {
+    ...player,
+    stats: snapshot.stats || {},
+    ovr: snapshot.ovr,
+    cardType: snapshot.baseCard,
+    specials: snapshot.specials || [],
+    official: snapshot.official,
+    hasCard: true,
+  };
 }

@@ -137,6 +137,61 @@ try {
   await page
     .getByRole("heading", { name: "Pedro", exact: true, level: 1 })
     .waitFor();
+  await page.evaluate(() => {
+    window.__testState.history = [
+      {
+        weekId: "2026-W40",
+        ovr: 62,
+        baseCard: "silver-common",
+        stats: {
+          pace: 61,
+          shooting: 62,
+          passing: 63,
+          dribbling: 64,
+          defending: 65,
+          physical: 66,
+          goalkeeping: 67,
+          stamina: 68,
+        },
+        specials: [],
+      },
+    ];
+  });
+  await navigate("#/profile", "Pedro");
+  assert.equal(await page.locator(".history-grid > *").count(), 5);
+  assert.equal(await page.locator(".history-placeholder").count(), 4);
+  await page.locator("[data-history-week]").click();
+  await page.getByRole("dialog").waitFor();
+  assert.equal(
+    await page
+      .locator(".history-card-expanded .card-rating strong")
+      .textContent(),
+    "62",
+  );
+  assert.equal(
+    await page
+      .locator(".history-card-expanded .card-stats b")
+      .first()
+      .textContent(),
+    "61",
+  );
+  await page.keyboard.press("Escape");
+  await page.evaluate(() => {
+    const snapshot = window.__testState.history[0];
+    window.__testState.history = Array.from({ length: 7 }, (_, i) => ({
+      ...snapshot,
+      weekId: `2026-W${40 - i}`,
+    }));
+  });
+  await navigate("#/players", "Jogadores");
+  await navigate("#/profile", "Pedro");
+  assert.equal(await page.locator(".history-grid > *").count(), 7);
+  assert.equal(
+    await page
+      .locator(".history-grid")
+      .evaluate((el) => el.scrollWidth > el.clientWidth),
+    true,
+  );
   await navigate("#/games", "Jogos");
   await page.getByText("Ainda não existem jogos").waitFor();
   await page.getByRole("link", { name: "Criar jogo" }).first().click();
