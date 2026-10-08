@@ -1,4 +1,5 @@
 import { configured } from "./firebase.js";
+import { ticketsPage } from "./tickets.js";
 import { bindThemePicker } from "./themes.js";
 import { startAuth, currentUser, loadProfile, logout } from "./auth.js";
 import { loadLeague } from "./data.js";
@@ -77,6 +78,7 @@ function header() {
     ["#/players", "players", "Jogadores"],
     ["#/games", "games", "Jogos"],
     ["#/missions", "missions", "Missões"],
+    ["#/tickets", "tickets", "Tickets"],
   ];
   document.querySelector("#header").innerHTML =
     `<nav class="navbar"><a class="brand" href="#/" aria-label="Peladinhas Cards — início"><img src="${ASSET_PATHS.logo}" alt=""><span>PELADINHAS<small>CARDS</small></span></a>${p ? `<div class="desktop-nav">${links.map(([h, i, n]) => `<a href="${h}" class="nav-link ${hash === h || (h !== "#/" && hash.startsWith(h)) ? "active" : ""}">${icon(i)}${n}${i === "missions" && ctx.missions.length ? `<span class="badge">${ctx.missions.length}</span>` : ""}</a>`).join("")}${p.role === "admin" ? `<a class="nav-link ${hash.startsWith("#/admin") ? "active" : ""}" href="#/admin">${icon("shield")}Admin</a>` : ""}</div><div class="header-actions">${p.role === "admin" ? `<a class="btn btn-icon btn-ghost mobile-admin" href="#/admin" aria-label="Administração">${icon("shield")}</a>` : ""}<button id="bell" class="btn btn-icon btn-ghost" aria-label="Notificações${unread ? `, ${unread} por ler` : ""}">${icon("bell")}${unread ? `<span class="badge notification-count">${unread}</span>` : ""}</button><a class="user-link" href="#/profile"><img src="${esc(safeImage(p.photoURL))}" alt="" data-fallback="${ASSET_PATHS.avatar}"><span>${esc(p.displayName || p.username)}</span></a><button id="logout" class="btn btn-icon btn-ghost" aria-label="Terminar sessão">${icon("logout")}</button></div>` : '<span class="club-label">A TUA LIGA. A TUA CARTA.</span>'}</nav>${p ? `<nav class="bottom-nav" aria-label="Navegação mobile">${[...links, ["#/profile", "profile", "Perfil"]].map(([h, i, n]) => `<a href="${h}" class="${hash === h || (h !== "#/" && hash.startsWith(h)) ? "active" : ""}">${icon(i)}<span>${n}</span>${i === "missions" && ctx.missions.length ? '<i class="nav-dot"></i>' : ""}</a>`).join("")}</nav>` : ""}`;
@@ -286,6 +288,7 @@ async function route() {
           `${pageHead("A tua evolução", "Missões", "Cada contribuição melhora a tua liga. O progresso fica guardado.")}${missionList(ctx.missions)}`,
         );
     } else if (parts[0] === "notifications") notificationsPage(ctx);
+    else if (parts[0] === "tickets") await ticketsPage(ctx, parts[1]);
     else if (parts[0] === "ranking") rankingPage();
     else if (parts[0] === "admin") {
       if (parts[1] === "cards") await cardLab(ctx, parts[2]);

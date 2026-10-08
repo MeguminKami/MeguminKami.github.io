@@ -38,6 +38,27 @@ export const read = async (path) => {
 };
 export const users = () => list("users");
 export const games = () => list("games");
+export const tickets = (user) =>
+  list(
+    "tickets",
+    ...(user.role === "admin" ? [] : [where("ownerId", "==", user.uid)]),
+  );
+export const watchTicket = (id, ticketCallback, messageCallback, error) => {
+  const a = onSnapshot(
+    doc(db, "tickets", id),
+    (s) => ticketCallback(s.exists() ? { ...s.data(), id: s.id } : null),
+    error,
+  );
+  const b = onSnapshot(
+    collection(db, `tickets/${id}/messages`),
+    (s) => messageCallback(rows(s)),
+    error,
+  );
+  return () => {
+    a();
+    b();
+  };
+};
 export const initials = () => list("initialRatings");
 export const communitySummaries = () => list("communitySummaries");
 export const gameSummaries = () => list("gameSummaries");
@@ -177,13 +198,11 @@ export async function uploadAvatar(uid, file) {
 export async function markRead(uid, items) {
   for (let i = 0; i < items.length; i += 400) {
     const batch = writeBatch(db);
-    items
-      .slice(i, i + 400)
-      .forEach((n) =>
-        batch.update(doc(db, `users/${uid}/notifications/${n.id}`), {
-          read: true,
-        }),
-      );
+    items.slice(i, i + 400).forEach((n) =>
+      batch.update(doc(db, `users/${uid}/notifications/${n.id}`), {
+        read: true,
+      }),
+    );
     await batch.commit();
   }
 }

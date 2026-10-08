@@ -154,6 +154,29 @@
 main:focus {
   outline: none;
 }
+.ticket-chat {
+  display: grid;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+.ticket-message {
+  padding: 16px;
+  background: var(--bg-app);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+.ticket-message.own-message {
+  border-color: var(--accent);
+}
+.ticket-message small {
+  display: block;
+  color: var(--text-secondary);
+  margin-top: 6px;
+}
+.ticket-message p {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
 .correction-fields {
   max-height: 50vh;
   overflow: auto;

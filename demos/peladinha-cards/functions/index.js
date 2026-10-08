@@ -21,6 +21,127 @@ import {
 initializeApp();
 setGlobalOptions({ region: "europe-west1", maxInstances: 3 });
 const db = getFirestore();
+export const ticketAction = onCall(async (request) => {
+  if (!request.auth) throw new HttpsError("unauthenticated", "Inicia sessão.");
+  const uid = request.auth.uid,
+    input = request.data || {};
+  const ticket =
+    input.action === "create"
+      ? db.collection("tickets").doc()
+      : typeof input.id === "string" && /^[A-Za-z0-9_-]{1,128}$/.test(input.id)
+        ? db.doc(`tickets/${input.id}`)
+        : null;
+  if (!ticket || !["create", "reply", "close"].includes(input.action))
+    throw new HttpsError("invalid-argument", "Pedido inválido.");
+  const body = typeof input.body === "string" ? input.body.trim() : "";
+  const title = typeof input.title === "string" ? input.title.trim() : "";
+  if (input.action !== "close" && (!body || body.length > 4000))
+    throw new HttpsError(
+      "invalid-argument",
+      "Escreve uma mensagem de até 4000 caracteres.",
+    );
+  if (input.action === "create" && (!title || title.length > 100))
+    throw new HttpsError(
+      "invalid-argument",
+      "O título é obrigatório (até 100 caracteres).",
+    );
+  const message = ticket.collection("messages").doc();
+  await db.runTransaction(async (tx) => {
+    const profile = (await tx.get(db.doc(`users/${uid}`))).data();
+    if (!profile || profile.disabled)
+      throw new HttpsError("permission-denied", "Conta indisponível.");
+    const stamp = FieldValue.serverTimestamp();
+    if (input.action === "create")
+      tx.set(ticket, {
+        title,
+        ownerId: uid,
+        status: "open",
+        createdAt: stamp,
+        updatedAt: stamp,
+      });
+    else {
+      const existing = (await tx.get(ticket)).data();
+      if (!existing)
+        throw new HttpsError("not-found", "Ticket não encontrado.");
+      if (existing.ownerId !== uid && profile.role !== "admin")
+        throw new HttpsError("permission-denied", "Sem acesso a este ticket.");
+      if (existing.status !== "open")
+        throw new HttpsError(
+          "failed-precondition",
+          "Este ticket está fechado definitivamente.",
+        );
+      tx.update(
+        ticket,
+        input.action === "close"
+          ? {
+              status: "closed",
+              closedAt: stamp,
+              closedBy: uid,
+              closedByName: profile.displayName || profile.username || uid,
+              updatedAt: stamp,
+            }
+          : { updatedAt: stamp },
+      );
+    }
+    if (input.action !== "close")
+      tx.set(message, {
+        body,
+        authorId: uid,
+        authorName: profile.displayName || profile.username || uid,
+        authorRole: profile.role,
+        createdAt: stamp,
+        initial: input.action === "create",
+      });
+  });
+  return { id: ticket.id };
+});
+async function ticketNotifications(ticketId, eventId, authorId, title, body) {
+  const ticket = (await db.doc(`tickets/${ticketId}`).get()).data();
+  if (!ticket) return;
+  const admins = (
+    await db.collection("users").where("role", "==", "admin").get()
+  ).docs
+    .filter((d) => !d.data().disabled)
+    .map((d) => d.id);
+  for (const uid of new Set([ticket.ownerId, ...admins])) {
+    if (uid === authorId) continue;
+    await notification(uid, `ticket-${eventId}`, {
+      type: "TICKET_UPDATE",
+      title,
+      body: `${ticket.title}: ${body}`,
+      href: `#/tickets/${ticketId}`,
+    });
+  }
+}
+export const onTicketMessage = onDocumentWritten(
+  "tickets/{tid}/messages/{mid}",
+  async (event) => {
+    if (event.data.before.exists || !event.data.after.exists) return;
+    const m = event.data.after.data();
+    await ticketNotifications(
+      event.params.tid,
+      event.params.mid,
+      m.authorId,
+      m.initial ? "Novo ticket" : "Nova resposta no ticket",
+      `${m.authorName}: ${m.body.slice(0, 160)}`,
+    );
+  },
+);
+export const onTicketClosed = onDocumentWritten(
+  "tickets/{tid}",
+  async (event) => {
+    const t = event.data.after.data();
+    if (t?.status !== "closed" || event.data.before.data()?.status === "closed")
+      return;
+    await ticketNotifications(
+      event.params.tid,
+      `${event.params.tid}-closed`,
+      t.closedBy,
+      "Ticket fechado",
+      `Fechado por ${t.closedByName}.`,
+    );
+  },
+);
 const data = (s) => s.docs.map((d) => ({ ...d.data(), id: d.id }));
 async function notification(uid, id, value) {
   await db.runTransaction(async (tx) => {

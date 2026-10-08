@@ -72,6 +72,46 @@ beforeEach(async () => {
     await setDoc(doc(c.firestore(), "games/open"), game("open"));
   });
 });
+test("tickets: leitura só do proprietário/admin e sem escrita directa", async () => {
+  await env.withSecurityRulesDisabled(async (c) => {
+    await setDoc(doc(c.firestore(), "tickets/support"), {
+      title: "Ajuda",
+      ownerId: "pedro",
+      status: "closed",
+    });
+    await setDoc(doc(c.firestore(), "tickets/support/messages/one"), {
+      authorId: "boss",
+      body: "Resposta",
+    });
+  });
+  for (const uid of ["pedro", "boss"]) {
+    await assertSucceeds(getDoc(doc(signed(uid), "tickets/support")));
+    await assertSucceeds(
+      getDocs(collection(signed(uid), "tickets/support/messages")),
+    );
+    await assertFails(
+      updateDoc(doc(signed(uid), "tickets/support"), { status: "open" }),
+    );
+    await assertFails(
+      setDoc(doc(signed(uid), "tickets/support/messages/new"), {
+        body: "Hack",
+      }),
+    );
+  }
+  await assertFails(getDoc(doc(signed("outsider"), "tickets/support")));
+  await assertFails(
+    getDocs(collection(signed("outsider"), "tickets/support/messages")),
+  );
+  await assertSucceeds(
+    getDocs(
+      query(
+        collection(signed("pedro"), "tickets"),
+        where("ownerId", "==", "pedro"),
+      ),
+    ),
+  );
+  await assertFails(getDocs(collection(signed("pedro"), "tickets")));
+});
 test("membro não promove role nem edita outro perfil", async () => {
   await assertFails(
     updateDoc(doc(signed("pedro"), "users/pedro"), {

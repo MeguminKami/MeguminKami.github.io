@@ -12,10 +12,86 @@ import {
   saveTheme,
   ensureHistory,
   correctRating,
+  ticketAction,
+  onTicketMessage,
+  onTicketClosed,
 } from "../functions/index.js";
 import { ATTRIBUTES, isoWeek } from "../js/utils.js";
 const db = getFirestore(),
   now = Timestamp.now();
+test("tickets: autoria, acesso, notificações e fecho irreversível", async () => {
+  for (const [uid, role] of [
+    ["ticket-member", "member"],
+    ["ticket-other", "member"],
+    ["ticket-admin1", "admin"],
+    ["ticket-admin2", "admin"],
+  ])
+    await db
+      .doc(`users/${uid}`)
+      .set({ uid, role, disabled: false, displayName: uid });
+  const call = (uid, data) => ticketAction.run({ auth: { uid }, data });
+  await assert.rejects(
+    call("ticket-member", { action: "create", title: " ", body: "Ajuda" }),
+  );
+  const { id } = await call("ticket-member", {
+    action: "create",
+    title: "Ajuda no perfil",
+    body: "Preciso de ajuda",
+  });
+  const ref = db.doc(`tickets/${id}`);
+  let messages = await ref.collection("messages").get();
+  const first = messages.docs[0];
+  await onTicketMessage.run({
+    params: { tid: id, mid: first.id },
+    data: { before: { exists: false }, after: first },
+  });
+  assert.ok(
+    (await db.doc(`users/ticket-admin1/notifications/ticket-${first.id}`).get())
+      .exists,
+  );
+  assert.ok(
+    (await db.doc(`users/ticket-admin2/notifications/ticket-${first.id}`).get())
+      .exists,
+  );
+  await assert.rejects(
+    call("ticket-other", { action: "reply", id, body: "Invasão" }),
+  );
+  await call("ticket-admin1", { action: "reply", id, body: "Resposta 1" });
+  await call("ticket-admin2", { action: "reply", id, body: "Resposta 2" });
+  messages = await ref.collection("messages").get();
+  assert.equal(messages.size, 3);
+  const response = messages.docs.find(
+    (m) => m.data().authorId === "ticket-admin2",
+  );
+  assert.equal(response.data().authorName, "ticket-admin2");
+  await onTicketMessage.run({
+    params: { tid: id, mid: response.id },
+    data: { before: { exists: false }, after: response },
+  });
+  assert.ok(
+    (
+      await db
+        .doc(`users/ticket-member/notifications/ticket-${response.id}`)
+        .get()
+    ).exists,
+  );
+  const before = await ref.get();
+  await call("ticket-member", { action: "close", id });
+  const after = await ref.get();
+  await onTicketClosed.run({ params: { tid: id }, data: { before, after } });
+  assert.equal(after.data().status, "closed");
+  for (const uid of ["ticket-member", "ticket-admin1", "ticket-admin2"])
+    await assert.rejects(
+      call(uid, { action: "reply", id, body: "Não permitido" }),
+    );
+  await assert.rejects(call("ticket-admin1", { action: "reopen", id }));
+  const second = await call("ticket-member", {
+    action: "create",
+    title: "Outro pedido",
+    body: "Mensagem",
+  });
+  await call("ticket-admin2", { action: "close", id: second.id });
+});
 const all = (v) => Object.fromEntries(ATTRIBUTES.map(([k]) => [k, v]));
 const event = (after, before) => ({
   params: { uid: "joao", gid: "match" },

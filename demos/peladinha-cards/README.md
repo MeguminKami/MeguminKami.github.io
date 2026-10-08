@@ -1,5 +1,11 @@
 # Peladinhas Cards
 
+## Tickets de apoio
+
+Na navegação, **Tickets** permite criar pedidos com título e mensagem obrigatórios, consultar o histórico e conversar em tempo real. Membros só acedem aos seus tickets; admins acedem a todos e podem responder em conjunto. Cada mensagem guarda a identidade e o papel do autor no momento do envio. Todos os admins activos e o membro recebem notificações de novidades (excepto o próprio autor). Membros e admins podem fechar definitivamente: não existe reabertura nem envio posterior, mesmo via chamadas directas. O histórico permanece disponível. Mensagens não são editáveis nem elimináveis pelo cliente.
+
+Os dados ficam em `tickets/{id}` e `tickets/{id}/messages/{id}`. Escritas passam pela callable `ticketAction`; os triggers `onTicketMessage` e `onTicketClosed` geram notificações persistentes. Para activar, publica frontend, regras e Functions: `npx.cmd firebase deploy --only "firestore:rules,functions"`.
+
 ## Temas de cores
 
 Cada Peladinha pode ter um vídeo do YouTube: adiciona o link no formulário do jogo para o visualizar dentro do site. Aceita watch, youtu.be, Shorts e live; guarda apenas `youtubeVideoId`. O criador edita enquanto o jogo não estiver encerrado; depois apenas o admin. Links vazios removem o vídeo. A reprodução depende das permissões de incorporação do autor; existe um link alternativo para o YouTube. Publica as novas `firestore.rules` para permitir este campo opcional (jogos antigos continuam compatíveis).
