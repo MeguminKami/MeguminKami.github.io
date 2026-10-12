@@ -10,9 +10,10 @@ export async function refreshNotifications(uid, missions) {
 export function notificationItems(items) {
   return (
     items
+      .filter((n) => !n.read)
       .map(
         (n) =>
-          `<div class="notification ${n.read ? "" : "unread"}"><div class="notification-dot"></div><a href="${esc(n.href || "#/notifications")}"><b>${esc(n.title)}</b><p>${esc(n.body)}</p><small>${formatDate(n.createdAt)}</small></a>${n.read ? "" : `<button class="btn btn-icon btn-ghost" data-read="${esc(n.id)}" aria-label="Marcar como lida">${icon("check")}</button>`}</div>`,
+          `<div class="notification ${n.read ? "" : "unread"}"><div class="notification-dot"></div><a data-open-notification="${esc(n.id)}" href="${esc(n.href || "#")}"><b>${esc(n.title)}</b><p>${esc(n.body)}</p><small>${formatDate(n.createdAt)}</small></a>${n.read ? "" : `<button class="btn btn-icon btn-ghost" data-read="${esc(n.id)}" aria-label="Marcar como lida">${icon("check")}</button>`}</div>`,
       )
       .join("") ||
     empty(
@@ -24,6 +25,39 @@ export function notificationItems(items) {
   );
 }
 export function bindNotifications(ctx, root = document) {
+  const dropdown = root.id === "notification-dropdown";
+  const refreshView = async () => {
+    const hash = location.hash;
+    await ctx.refreshNotifications();
+    if (location.hash !== hash) return;
+    if (location.hash === "#/notifications") notificationsPage(ctx);
+    if (dropdown && !document.querySelector("#notification-dropdown"))
+      toggleNotifications(ctx);
+  };
+  root.querySelectorAll("[data-open-notification]").forEach((link) => {
+    link.onclick = async (event) => {
+      if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey)
+        return;
+      event.preventDefault();
+      const notification = ctx.notifications.find(
+        (n) => n.id === link.dataset.openNotification,
+      );
+      if (!notification) return;
+      const hash = location.hash;
+      try {
+        await DB.markRead(ctx.user.uid, [{ id: notification.id }]);
+        await refreshView();
+        if (
+          location.hash === hash &&
+          notification.href?.startsWith("#/") &&
+          notification.href !== "#/notifications"
+        )
+          ctx.go(notification.href);
+      } catch (error) {
+        toast(error.message, "error");
+      }
+    };
+  });
   root.querySelectorAll("[data-read]").forEach(
     (b) =>
       (b.onclick = async () => {
@@ -31,8 +65,7 @@ export function bindNotifications(ctx, root = document) {
           await busy(b, () =>
             DB.markRead(ctx.user.uid, [{ id: b.dataset.read }]),
           );
-          await ctx.refreshNotifications();
-          ctx.go("#/notifications");
+          await refreshView();
         } catch {}
       }),
   );
@@ -47,8 +80,7 @@ export function bindNotifications(ctx, root = document) {
           ),
         );
         toast("Notificações marcadas como lidas.");
-        await ctx.refreshNotifications();
-        ctx.go("#/notifications");
+        await refreshView();
       } catch {}
     });
 }
@@ -67,7 +99,7 @@ export function toggleNotifications(ctx) {
   const anchor = document.querySelector(".header-actions");
   anchor.insertAdjacentHTML(
     "beforeend",
-    `<div id="notification-dropdown" class="notification-dropdown"><div class="section-head"><h3>Notificações</h3>${linkButton("#/notifications", "Ver todas", "ghost")}</div>${notificationItems(ctx.notifications.slice(0, 5))}${ctx.notifications.some((n) => !n.read) ? '<button class="btn btn-secondary" data-read-all>Marcar todas como lidas</button>' : ""}</div>`,
+    `<div id="notification-dropdown" class="notification-dropdown"><div class="section-head"><h3>Notificações</h3>${linkButton("#/notifications", "Ver todas", "ghost")}</div>${notificationItems(ctx.notifications.filter((n) => !n.read).slice(0, 5))}${ctx.notifications.some((n) => !n.read) ? '<button class="btn btn-secondary" data-read-all>Marcar todas como lidas</button>' : ""}</div>`,
   );
   bindNotifications(ctx, document.querySelector("#notification-dropdown"));
 }

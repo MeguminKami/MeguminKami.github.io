@@ -64,7 +64,7 @@ export async function ticketsPage(ctx, id) {
       ),
     );
   ctx.render(
-    `${pageHead("Apoio à liga", ticket.title, "Cada mensagem identifica quem a escreveu.", linkButton("#/tickets", "Histórico", "ghost"))}<div id="ticket-status"></div><div class="ticket-chat panel" id="ticket-messages" aria-live="polite"></div><div id="ticket-controls"><form id="ticket-reply" class="panel"><label>Resposta<textarea name="body" required maxlength="4000" rows="4"></textarea></label><div class="actions"><button class="btn btn-primary">Enviar resposta</button><button type="button" id="ticket-close" class="btn btn-danger">Fechar definitivamente</button></div></form></div>`,
+    `${pageHead("Apoio à liga", ticket.title, "Cada mensagem identifica quem a escreveu.", linkButton("#/tickets", "Histórico", "ghost"))}<div class="content-stack"><div id="ticket-status"></div><div class="ticket-chat panel" id="ticket-messages" aria-live="polite"></div><div id="ticket-controls"><form id="ticket-reply" class="panel"><label>Resposta<textarea name="body" required maxlength="4000" rows="4"></textarea></label><div class="actions"><button class="btn btn-primary">Enviar resposta</button><button type="button" id="ticket-close" class="btn btn-danger">Fechar definitivamente</button></div></form></div></div>`,
   );
   const update = (t) => {
     const closed = !t || t.status === "closed";

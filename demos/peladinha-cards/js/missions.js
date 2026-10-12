@@ -34,7 +34,9 @@ export async function refreshMissionsForCurrentUser(user, league) {
   for (const g of league.games.filter(
     (g) => g.status === "closed" && participants(g).includes(user.uid),
   )) {
-    const targets = participants(g).filter((uid) => uid !== user.uid),
+    const targets = [...new Set(participants(g))].filter(
+        (uid) => uid !== user.uid,
+      ),
       ratings = await DB.myFeedback(g.id, user.uid);
     const done = targets.filter((uid) =>
       ratings.some((r) => r.targetId === uid && r.submitted),
@@ -52,16 +54,15 @@ export async function refreshMissionsForCurrentUser(user, league) {
       });
   }
   const my = await DB.myCommunity(user.uid);
-  for (const target of league.players.filter(
-    (x) => x.uid !== user.uid && x.communityCount < 3,
-  )) {
+  for (const target of league.players.filter((x) => x.uid !== user.uid)) {
     const rating = my.find((r) => r.targetId === target.uid);
     if (rating?.submitted) continue;
     missions.push({
       id: `new-${target.uid}`,
       type: "RATE_NEW_PLAYER",
       title: `Avaliar ${target.displayName || target.username}`,
-      description: `Ajuda a criar a primeira carta oficial. ${target.communityCount} / 3 avaliações da comunidade.`,
+      description:
+        "Dá a tua avaliação deste colega e contribui para a sua carta.",
       done: ATTRIBUTES.filter(([k]) => Number.isFinite(rating?.ratings20?.[k]))
         .length,
       total: 12,

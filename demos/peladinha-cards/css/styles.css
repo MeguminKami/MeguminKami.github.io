@@ -559,8 +559,25 @@ main {
   padding: 38px 32px 80px;
   min-height: 75vh;
 }
-section + section {
+/* Vertical page sections must not offset sibling columns inside grids. */
+#main > section + section {
   margin-top: 36px;
+}
+/* Use an explicit stack for independently framed blocks, including wrappers. */
+.content-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  min-width: 0;
+}
+.content-stack > * {
+  margin-block: 0;
+}
+.content-stack > .btn {
+  align-self: flex-start;
+}
+#main > .panel + .content-stack {
+  margin-top: 24px;
 }
 .page-head {
   display: flex;
@@ -593,6 +610,36 @@ section + section {
 .section-head .eyebrow {
   margin-bottom: 5px;
 }
+.section-head > div > :is(h2, h3) + p {
+  margin-top: 8px;
+}
+.section-head > div > p:last-child {
+  margin-bottom: 0;
+}
+.section-head > .actions,
+.page-head > .actions {
+  margin-top: 0;
+}
+.panel > :is(h1, h2, h3, p):last-child {
+  margin-bottom: 0;
+}
+.table-wrap + :is(p, .warning),
+.panel > .football-card + p,
+.panel > details + p {
+  margin-top: 16px;
+}
+label > :is(input, select, textarea) + small {
+  display: block;
+  margin-top: 8px;
+}
+.metrics b + small {
+  margin-top: 6px;
+}
+.video-frame + p,
+.ticket-message > div + p {
+  margin-top: 12px;
+}
+
 .pill {
   display: inline-flex;
   align-items: center;
@@ -1768,5 +1815,525 @@ td small {
 @keyframes spin {
   to {
     transform: rotate(360deg);
+  }
+}
+
+.ovr-audit-layout {
+  grid-template-columns: minmax(0, 320px) minmax(0, 1fr);
+}
+.ovr-audit-layout > .panel,
+#ovr-calculation {
+  min-width: 0;
+}
+.ovr-formula {
+  overflow-wrap: anywhere;
+}
+@media (max-width: 800px) {
+  .ovr-audit-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.admin-area-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 12px;
+  margin-bottom: 28px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-surface);
+}
+.admin-area-nav a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+}
+.admin-area-nav a:hover,
+.admin-area-nav a.active {
+  background: var(--accent-tint);
+  color: var(--accent);
+}
+.admin-area-nav a.active {
+  font-weight: 700;
+}
+.admin-area-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 28px;
+}
+.admin-area-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin: 0;
+  min-width: 0;
+  transition:
+    border-color 0.2s,
+    transform 0.2s;
+}
+.admin-area-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+.admin-area-icon {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  background: var(--accent-tint);
+  color: var(--accent);
+}
+.admin-area-card h3 {
+  margin: 0 0 6px;
+}
+.admin-area-card p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+.admin-area-arrow {
+  margin-left: auto;
+  flex-shrink: 0;
+  color: var(--text-secondary);
+}
+@media (max-width: 600px) {
+  .admin-area-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .admin-area-nav {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4px;
+    padding: 8px;
+  }
+  .admin-area-nav a {
+    padding: 10px 8px;
+    font-size: 0.8rem;
+  }
+}
+
+.auto-player-options {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  padding: 16px 0;
+}
+.auto-player-options label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  padding: 12px;
+  background: var(--bg-surface);
+  border-radius: 10px;
+}
+.auto-player-options input {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  margin: 0;
+  accent-color: var(--accent);
+}
+.auto-player-options span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.auto-player-options small {
+  display: block;
+  color: var(--text-secondary);
+}
+.auto-teams summary {
+  cursor: pointer;
+}
+.team-balance-panel .metrics {
+  margin: 16px 0;
+}
+@media (max-width: 700px) {
+  .auto-player-options {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 420px) {
+  .auto-player-options {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.balance-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px 40px;
+}
+.balance-summary > div {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.ovr-difference {
+  font-size: 1.6rem;
+  font-variant-numeric: tabular-nums;
+}
+.ovr-difference.positive {
+  color: var(--success);
+}
+.ovr-difference.negative {
+  color: var(--danger);
+}
+.ovr-difference.neutral {
+  color: var(--text-muted);
+}
+.balance-audit > p {
+  margin-top: 16px;
+}
+
+.game-teams-frame {
+  border-color: var(--border-strong);
+}
+.game-teams-frame .auto-teams .section-head {
+  margin-bottom: 0;
+}
+.game-teams-frame .team-balance-panel {
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--bg-surface);
+}
+.game-teams-frame .team-balance-panel .section-head {
+  margin-bottom: 12px;
+}
+.game-teams-frame .balance-summary {
+  justify-content: space-between;
+}
+.balance-scale {
+  display: flex;
+  height: 8px;
+  border-radius: 8px;
+  overflow: hidden;
+  gap: 3px;
+  margin-top: 16px;
+}
+.balance-scale > span:first-child {
+  background: #60a5fa;
+}
+.balance-scale > span:last-child {
+  background: #c084fc;
+}
+.balance-averages {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 8px;
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+}
+.game-highlights {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 20px;
+}
+.game-highlight {
+  min-width: 0;
+}
+.game-highlight > small {
+  display: block;
+  color: var(--text-muted);
+  font-size: 0.7rem;
+  margin-bottom: 6px;
+}
+.game-highlight a {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.game-highlight b {
+  overflow-wrap: anywhere;
+  font-size: 0.85rem;
+}
+.game-highlight a > span {
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+}
+.game-highlights > .game-highlight {
+  padding: 12px;
+  background: var(--bg-panel);
+  border-radius: 10px;
+}
+.position-leaders {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px;
+  padding-top: 16px;
+  margin-top: 16px;
+  border-top: 1px solid var(--border);
+}
+.position-leaders > div {
+  min-width: 0;
+}
+.position-tag {
+  display: inline-block;
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+.position-leaders .game-highlight > small {
+  display: none;
+}
+.game-teams-frame .team-panel {
+  background: var(--bg-surface);
+  min-width: 0;
+}
+.game-teams-frame .team-chip {
+  background: var(--bg-panel);
+}
+.team-chip.is-captain {
+  border: 1px solid var(--accent);
+  background: var(--accent-tint);
+}
+.captain-badge {
+  display: inline-flex;
+  color: var(--accent);
+  font-size: 0.65rem;
+  font-weight: 800;
+  margin-left: 4px;
+}
+.auto-selection-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+#auto-selection .auto-player-options {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  max-height: min(45dvh, 350px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+#auto-selection .auto-player-options label > span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+@media (max-width: 800px) {
+  .position-leaders {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@media (max-width: 540px) {
+  .game-teams-frame {
+    padding: 16px;
+  }
+  .game-teams-frame .team-balance-panel {
+    padding: 14px;
+  }
+  .game-teams-frame .auto-teams .section-head {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+  }
+  .game-teams-frame .auto-teams .btn {
+    width: 100%;
+  }
+  .position-leaders {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  #auto-selection .auto-player-options {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.game-teams-frame .team-builder:not(.has-available) {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.game-teams-frame .team-builder:not(.has-available) > .available {
+  display: none;
+}
+@media (max-width: 540px) {
+  .game-teams-frame .team-builder:not(.has-available) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.profile-perspective-menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 0;
+}
+.role-perspective {
+  position: relative;
+  width: fit-content;
+  margin: 0 0 12px;
+}
+.role-perspective summary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  background: var(--bg-panel);
+  color: var(--accent);
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  list-style: none;
+}
+.role-perspective summary::-webkit-details-marker {
+  display: none;
+}
+.role-perspective summary:hover,
+.role-perspective[open] summary {
+  background: var(--accent-tint);
+  border-color: var(--accent);
+}
+.role-perspective summary:focus-visible,
+.perspective-options button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+.role-perspective summary > .ui-icon {
+  width: 16px;
+  height: 16px;
+}
+.perspective-chevron {
+  width: 14px;
+  height: 14px;
+}
+.role-perspective[open] .perspective-chevron {
+  transform: rotate(180deg);
+}
+.perspective-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  z-index: 100;
+  width: 268px;
+  max-width: calc(100vw - 32px);
+  padding: 12px;
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  box-shadow: 0 12px 32px #00000030;
+}
+.perspective-heading {
+  margin: 2px 8px 12px;
+  color: var(--text-muted);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.perspective-options {
+  display: grid;
+  gap: 6px;
+}
+.perspective-options button {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  min-height: 60px;
+  padding: 10px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-primary);
+  cursor: pointer;
+  text-align: left;
+}
+.perspective-options button:hover {
+  background: var(--bg-surface-hover);
+}
+.perspective-options button[aria-pressed="true"] {
+  background: var(--accent-tint);
+  border-color: var(--accent);
+}
+.perspective-symbol {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  border-radius: var(--radius-sm);
+  background: var(--bg-panel);
+  color: var(--accent);
+}
+.perspective-copy {
+  flex: 1;
+  min-width: 0;
+}
+.perspective-copy strong {
+  display: block;
+  font-size: 0.85rem;
+}
+.perspective-copy small {
+  display: block;
+  margin-top: 4px;
+  color: var(--text-secondary);
+  font-size: 0.72rem;
+}
+.perspective-check {
+  width: 18px;
+  color: var(--accent);
+}
+.perspective-check .ui-icon {
+  width: 18px;
+  height: 18px;
+}
+.role-perspective-compact {
+  margin: 0;
+}
+.role-perspective-compact summary {
+  min-height: 28px;
+  padding: 3px 8px;
+  font-size: 0.7rem;
+  border-color: transparent;
+  background: transparent;
+}
+.role-perspective-compact .perspective-dropdown {
+  left: auto;
+  right: 0;
+}
+@media (max-width: 1100px) {
+  .role-perspective-compact summary {
+    gap: 4px;
+    width: 44px;
+    padding-inline: 4px;
+    justify-content: center;
+  }
+  .role-perspective-compact summary > span {
+    display: none;
+  }
+}
+@media (max-width: 800px) {
+  .profile-perspective-menu .user-link {
+    min-height: 32px;
+  }
+  .role-perspective-compact summary {
+    min-height: 44px;
+  }
+  .role-perspective-compact .perspective-dropdown {
+    position: fixed;
+    top: 94px;
+    right: 16px;
+  }
+  .navbar:has([data-role-perspective]) {
+    min-height: 86px;
+  }
+}
+@media (max-width: 360px) {
+  .role-perspective-compact .perspective-dropdown {
+    top: 156px;
   }
 }

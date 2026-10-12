@@ -1,5 +1,14 @@
+import { cardWeek } from "./card-week.js";
+import { ADMIN_AREAS } from "./admin-menu.js";
 import * as DB from "./db.js";
-import { THEMES, ATTRIBUTES, FEEDBACK, themeName } from "./utils.js";
+import {
+  THEMES,
+  ATTRIBUTES,
+  FEEDBACK,
+  themeName,
+  validOvrWeights,
+  OVR_POSITIONS,
+} from "./utils.js";
 import {
   esc,
   pageHead,
@@ -13,41 +22,152 @@ import {
 import { icon } from "./icons.js";
 import { card, bindImages } from "./cards.js";
 import { editProfile } from "./profile.js";
-export async function adminPage(ctx) {
+export async function adminPage(ctx, section = "overview") {
   const players = ctx.league.players,
     games = ctx.league.games,
     newPlayers = players.filter((p) => p.communityCount < 3);
-  ctx.render(
-    `${pageHead("Administração", "A tua liga, organizada.", "Gere os jogadores e resultados sem perder o histórico.", `<div class="actions">${linkButton("#/admin/cards", "Card Lab", "primary", "lab")}<button id="rebuild-league" class="btn btn-secondary">Recalcular liga</button></div>`)}<div class="metrics">${[
-      ["Jogadores", players.length],
-      ["Jogos abertos", games.filter((g) => g.status !== "closed").length],
-      ["Jogos fechados", games.filter((g) => g.status === "closed").length],
-      ["Novos jogadores", newPlayers.length],
+  const pages = {
+    overview: `<section class="admin-overview"><div class="section-head"><h2>Estado da liga</h2><span class="pill success">Administração</span></div><div class="admin-health-grid">${[
+      [
+        "Plantel",
+        `${players.length} jogadores`,
+        `${players.filter((p) => p.official).length} cartas oficiais`,
+        "players",
+      ],
+      [
+        "Jogos",
+        `${games.filter((g) => g.status === "open").length} abertos`,
+        `${games.filter((g) => g.status === "draft").length} rascunhos · ${games.filter((g) => g.status === "closed").length} finalizados`,
+        "games",
+      ],
+      [
+        "Avaliações pendentes",
+        `${newPlayers.length} jogadores`,
+        "Ainda sem três votos externos",
+        "edit",
+      ],
+      [
+        "OVR médio",
+        players.length
+          ? (
+              players.reduce((sum, p) => sum + p.ovr, 0) / players.length
+            ).toFixed(1)
+          : "—",
+        "Média do plantel",
+        "lab",
+      ],
     ]
-      .map(([n, v]) => `<div><small>${n}</small><b>${v}</b></div>`)
+      .map(
+        ([name, value, note, symbol]) =>
+          `<article class="panel admin-health">${icon(symbol)}<small>${name}</small><strong>${value}</strong><p>${note}</p></article>`,
+      )
       .join(
         "",
-      )}</div><section><div class="section-head"><h2>Novos jogadores</h2><span class="muted">A caminho da carta oficial</span></div>${newPlayers.length ? `<div class="new-player-grid">${newPlayers.map((p) => `<a href="#/player/${p.uid}" class="panel"><b>${esc(p.displayName || p.username)}</b><p>${p.communityCount} / 3 avaliações da comunidade</p><div class="progress"><span style="--progress:${(p.communityCount / 3) * 100}%"></span></div></a>`).join("")}</div>` : empty("Plantel completo", "Todos têm avaliações suficientes.", "", "check")}</section><section><h2>Jogadores</h2><div class="table-wrap"><table><thead><tr><th>Jogador</th><th>Role</th><th>OVR</th><th>Acções</th></tr></thead><tbody>${players.map((p) => `<tr><td><a href="#/player/${p.uid}">${esc(p.displayName || p.username)}<small>@${esc(p.username)}</small></a></td><td>${p.role}</td><td>${p.ovr}</td><td><div class="actions compact">${linkButton(`#/admin/player/${p.uid}/edit`, "Editar", "ghost", "edit")}${linkButton(`#/admin/initial/${p.uid}`, "Avaliação inicial", "ghost", "edit")}${linkButton(`#/admin/cards/${p.uid}`, "Preview Card", "ghost", "lab")}<button data-role="${p.uid}" class="btn btn-secondary" ${p.uid === ctx.user.uid ? 'disabled title="O teu próprio acesso está protegido"' : ""}>${p.role === "admin" ? "Remover admin" : "Promover admin"}</button><button data-rebuild="${p.uid}" class="btn btn-ghost">Recalcular histórico</button>${linkButton(`#/admin/ratings/${p.uid}`, "Ratings raw", "ghost", "shield")}</div></td></tr>`).join("")}</tbody></table></div>${!players.length ? empty("Sem jogadores", "As contas criadas aparecem aqui.") : ""}</section><section><h2>Jogos</h2>${games.length ? `<div class="game-list">${games.map((g) => `<div class="game-row"><div><b>${esc(g.title)}</b><small>${g.status}</small></div>${linkButton(`#/game/${g.id}`, "Editar", "ghost", "edit")}<button data-delete="${g.id}" class="btn btn-danger">${icon("trash")}Eliminar</button></div>`).join("")}</div>` : empty("Sem jogos", "Cria a primeira Peladinha.", linkButton("#/game/new", "Criar jogo"), "games")}</section><section class="panel"><h2>Mensagem à liga</h2><p class="muted">Uma notificação interna para todos os jogadores activos.</p><form id="admin-message"><label>Título<input name="title" maxlength="80" required></label><label>Mensagem<textarea name="body" maxlength="500" required></textarea></label><button class="btn btn-primary">Enviar mensagem</button></form></section>`,
+      )}</div><div class="admin-overview-columns"><section class="panel"><h3>Últimos jogos</h3>${
+      games
+        .slice(0, 4)
+        .map(
+          (g) =>
+            `<a class="overview-line" href="#/game/${esc(g.id)}"><b>${esc(g.title)}</b><span class="pill ${g.status === "open" ? "success" : ""}">${{ open: "Aberto", draft: "Rascunho", closed: "Finalizado" }[g.status]}</span></a>`,
+        )
+        .join("") || '<p class="muted">Ainda sem jogos.</p>'
+    }</section><section class="panel"><h3>Acompanhamento</h3><a class="overview-line" href="#/admin/support">${icon("tickets")}<b>Tickets abertos</b><span id="admin-open-tickets">…</span></a><a class="overview-line" href="#/admin/ratings">${icon("edit")}<b>Consultar avaliações</b>${icon("arrow")}</a><a class="overview-line" href="#/admin/weights">${icon("lab")}<b>Pesos por posição</b><span class="pill">100%</span></a><div id="admin-week-status"></div></section></div></section>`,
+    weights: `<section class="panel"><h2>Pesos do OVR</h2><p>Define os pesos para cada posição. Cada posição deve somar 100%. A carta usa a posição principal do jogador. Guardar atualiza as cartas em evolução. Cartas de semanas fechadas mantêm os valores e pesos originais.</p><form id="ovr-settings"><label>Posição<select id="ovr-position">${OVR_POSITIONS.map((p) => `<option ${p === "ALA" ? "selected" : ""}>${p}</option>`).join("")}</select></label><div class="form-grid">${ATTRIBUTES.map(([key, name]) => `<label>${esc(name)} (%)<input name="${key}" type="number" min="0" max="100" step="0.01" required value="${ctx.league.ovrWeights.positions.ALA[key]}"></label>`).join("")}</div><p id="ovr-total" aria-live="polite">Total: 100%</p><button class="btn btn-primary">Guardar pesos e recalcular</button></form></section>`,
+    players: `<section><h2>Jogadores</h2><div class="table-wrap"><table><thead><tr><th>Jogador</th><th>Role</th><th>OVR</th><th>Acções</th></tr></thead><tbody>${players.map((p) => `<tr><td><a href="#/player/${p.uid}">${esc(p.displayName || p.username)}<small>@${esc(p.username)}</small></a></td><td>${p.role === "dbs" ? "DBS" : p.role}</td><td>${p.ovr}</td><td><div class="actions compact admin-player-actions">${linkButton(`#/admin/player/${p.uid}/edit`, "Editar", "ghost", "edit")}${linkButton(`#/admin/initial/${p.uid}`, "Avaliação inicial", "ghost", "edit")}${linkButton(`#/admin/cards/${p.uid}`, "Preview Card", "ghost", "lab")}${linkButton(`#/admin/ovr/${p.uid}`, "Cálculo OVR", "ghost", "lab")}<button data-role="${p.uid}" class="btn btn-secondary" ${p.uid === ctx.user.uid ? 'disabled title="O teu próprio acesso está protegido"' : ""}>${icon("shield")}${p.role === "admin" ? "Remover admin" : "Promover admin"}</button>${p.role !== "admin" ? `<button data-role="${p.uid}" data-target-role="${p.role === "dbs" ? "member" : "dbs"}" class="btn btn-secondary">${icon("games")}${p.role === "dbs" ? "Remover DBS" : "Dar DBS"}</button>` : ""}<button data-rebuild="${p.uid}" class="btn btn-ghost">${icon("arrow")}Recalcular</button>${linkButton(`#/admin/ratings/${p.uid}`, "Ratings raw", "ghost", "shield")}</div></td></tr>`).join("")}</tbody></table></div>${!players.length ? empty("Sem jogadores", "As contas criadas aparecem aqui.") : ""}</section>`,
+    games: `<section><h2>Jogos</h2>${games.length ? `<div class="game-list">${games.map((g) => `<div class="game-row"><div><b>${esc(g.title)}</b><small>${g.status}</small></div>${linkButton(`#/game/${g.id}`, "Editar", "ghost", "edit")}<button data-delete="${g.id}" class="btn btn-danger">${icon("trash")}Eliminar</button></div>`).join("")}</div>` : empty("Sem jogos", "Cria a primeira Peladinha.", linkButton("#/game/new", "Criar jogo"), "games")}</section>`,
+    messages: `<section class="panel"><h2>Mensagem à liga</h2><p class="muted">Uma notificação interna para todos os jogadores activos.</p><form id="admin-message"><label>Título<input name="title" maxlength="80" required></label><label>Mensagem<textarea name="body" maxlength="500" required></textarea></label><button class="btn btn-primary">Enviar mensagem</button></form></section>`,
+    maintenance: `<section class="panel"><h2>Recalcular liga</h2><p>Atualiza as cartas em evolução com os pesos e avaliações atuais. Semanas fechadas permanecem bloqueadas.</p><button id="rebuild-league" class="btn btn-secondary">Recalcular liga</button></section>`,
+  };
+  if (!Object.hasOwn(pages, section)) section = "overview";
+  const area = ADMIN_AREAS.find((a) => a.id === section);
+  ctx.render(
+    `${pageHead("Administração", section === "overview" ? "A tua liga, organizada." : area.label, section === "overview" ? "Escolhe uma área para gerir a liga." : area.description, section === "games" ? linkButton("#/game/new", "Criar jogo", "primary", "plus") : "")}${pages[section]}`,
   );
+  if (section === "overview") {
+    const cycle = cardWeek();
+    document.querySelector("#admin-week-status").innerHTML =
+      `<div class="overview-line"><b>Cartas · ${cycle.weekId}</b><span class="pill ${cycle.phase === "open" ? "success" : "warning"}">${cycle.phase === "open" ? "Em evolução" : "Fechadas"}</span></div><p class="muted small">Fecho: quarta às 12h · Abertura: quinta às 20h · Lisboa</p>`;
+    DB.tickets(ctx.user)
+      .then((rows) => {
+        const counter = document.querySelector("#admin-open-tickets");
+        if (counter)
+          counter.textContent = rows.filter((t) => t.status === "open").length;
+      })
+      .catch(() => {
+        const counter = document.querySelector("#admin-open-tickets");
+        if (counter) counter.textContent = "—";
+      });
+  }
+  const ovrForm = document.querySelector("#ovr-settings");
+  if (ovrForm) {
+    const positions = structuredClone(ctx.league.ovrWeights.positions);
+    const selector = ovrForm.querySelector("#ovr-position");
+    let activePosition = selector.value;
+    const readWeights = () => {
+      positions[activePosition] = Object.fromEntries(
+        ATTRIBUTES.map(([key]) => [key, ovrForm.elements[key].valueAsNumber]),
+      );
+      return { positions };
+    };
+    selector.onchange = () => {
+      readWeights();
+      activePosition = selector.value;
+      ATTRIBUTES.forEach(([key]) => {
+        ovrForm.elements[key].value = positions[activePosition][key];
+      });
+      updateWeights();
+    };
+    const updateWeights = () => {
+      const settings = readWeights();
+      const total =
+        ATTRIBUTES.reduce(
+          (sum, [key]) =>
+            sum + Math.round(settings.positions[activePosition][key] * 100),
+          0,
+        ) / 100;
+      const valid = validOvrWeights(settings);
+      const invalidPositions = OVR_POSITIONS.filter(
+        (p) => !validOvrWeights({ weights: settings.positions[p] }),
+      );
+      document.querySelector("#ovr-total").textContent =
+        `Total: ${Number.isFinite(total) ? total.toLocaleString("pt-PT", { maximumFractionDigits: 2 }) : "—"}%${valid ? "" : ` · Ajusta para 100%: ${invalidPositions.join(", ")}.`}`;
+      ovrForm.querySelector("button").disabled = !valid;
+    };
+    ovrForm.oninput = updateWeights;
+    updateWeights();
+    ovrForm.onsubmit = async (event) => {
+      event.preventDefault();
+      if (!validOvrWeights(readWeights())) return;
+      try {
+        await busy(event.submitter, () =>
+          DB.callAdmin("saveOvrWeights", readWeights()),
+        );
+        toast("Pesos guardados. Cartas em evolução recalculadas.");
+        ctx.go(section === "overview" ? "#/admin" : `#/admin/${section}`);
+      } catch {}
+    };
+  }
   document.querySelectorAll("[data-role]").forEach(
     (b) =>
       (b.onclick = async () => {
         const p = players.find((p) => p.uid === b.dataset.role);
+        const targetRole =
+          b.dataset.targetRole || (p.role === "admin" ? "member" : "admin");
         if (
           !(await confirmDialog(
-            `${p.role === "admin" ? "Remover" : "Conceder"} acesso de administração a ${p.displayName || p.username}?`,
+            `Alterar a role de ${p.displayName || p.username} para ${targetRole === "dbs" ? "DBS" : targetRole}?`,
           ))
         )
           return;
         try {
           await busy(b, () =>
             DB.saveProfile(p.uid, {
-              role: p.role === "admin" ? "member" : "admin",
+              role: targetRole,
             }),
           );
           toast("Role actualizada.");
           await ctx.refresh();
-          ctx.go("#/admin");
+          ctx.go(section === "overview" ? "#/admin" : `#/admin/${section}`);
         } catch {}
       }),
   );
@@ -66,7 +186,7 @@ export async function adminPage(ctx) {
           );
           toast("Jogo eliminado.");
           await ctx.refresh();
-          ctx.go("#/admin");
+          ctx.go(section === "overview" ? "#/admin" : `#/admin/${section}`);
         } catch {}
       }),
   );
@@ -82,28 +202,32 @@ export async function adminPage(ctx) {
         } catch {}
       }),
   );
-  document.querySelector("#rebuild-league").onclick = async (e) => {
-    try {
-      await busy(e.currentTarget, () => DB.callAdmin("rebuildLeague", {}));
-      toast("Liga recalculada.");
-      await ctx.refresh();
-      ctx.go("#/admin");
-    } catch {}
-  };
-  document.querySelector("#admin-message").onsubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const f = new FormData(e.target);
-      await busy(e.submitter, () =>
-        DB.callAdmin("adminMessage", {
-          title: f.get("title"),
-          body: f.get("body"),
-        }),
-      );
-      toast("Mensagem enviada.");
-      e.target.reset();
-    } catch {}
-  };
+  const rebuildButton = document.querySelector("#rebuild-league");
+  if (rebuildButton)
+    rebuildButton.onclick = async (e) => {
+      try {
+        await busy(e.currentTarget, () => DB.callAdmin("rebuildLeague", {}));
+        toast("Liga recalculada.");
+        await ctx.refresh();
+        ctx.go(section === "overview" ? "#/admin" : `#/admin/${section}`);
+      } catch {}
+    };
+  const messageForm = document.querySelector("#admin-message");
+  if (messageForm)
+    messageForm.onsubmit = async (e) => {
+      e.preventDefault();
+      try {
+        const f = new FormData(e.target);
+        await busy(e.submitter, () =>
+          DB.callAdmin("adminMessage", {
+            title: f.get("title"),
+            body: f.get("body"),
+          }),
+        );
+        toast("Mensagem enviada.");
+        e.target.reset();
+      } catch {}
+    };
 }
 export async function adminEdit(ctx, uid) {
   const p = ctx.league.users.find((p) => p.uid === uid);
@@ -120,25 +244,54 @@ export async function rawRatings(ctx, uid) {
     ...feedback.flat().map((r) => ({ ...r, kind: "Pós-jogo" })),
   ].filter((r) => !uid || r.targetId === uid);
   ctx.render(
-    `${pageHead("Administração", "Ratings raw", "Identidades visíveis exclusivamente a administradores.", linkButton("#/admin", "Administração", "ghost"))}<label>Pesquisar jogo, avaliador ou jogador<input id="raw-search" placeholder="Username ou ID"></label><div id="raw-list"></div>`,
+    `${pageHead("Administração", "Avaliações", "Pesquisa e compara votos. Identidades visíveis apenas a administradores.", linkButton("#/admin", "Administração", "ghost"))}<section class="panel ratings-browser"><div class="ratings-toolbar"><label>Pesquisar<input id="raw-search" placeholder="Jogador, avaliador ou jogo"></label><label>Origem<select id="raw-kind"><option value="">Todas</option><option>Comunidade</option><option>Pós-jogo</option></select></label><label>Estado<select id="raw-status"><option value="">Todos</option><option value="sent">Enviadas</option><option value="draft">Rascunhos</option></select></label></div><div id="raw-list"></div><div class="ratings-pagination"><button id="raw-prev" type="button" class="btn btn-secondary">${icon("arrow")}Anterior</button><span id="raw-count" aria-live="polite"></span><button id="raw-next" type="button" class="btn btn-secondary">Seguinte${icon("arrow")}</button></div></section>`,
   );
   const name = (id) =>
     ctx.league.users.find((p) => p.uid === id)?.username || id;
+  let page = 0;
   const draw = () => {
-    const q = document.querySelector("#raw-search").value.toLowerCase();
-    document.querySelector("#raw-list").innerHTML =
-      rows
-        .filter((r) =>
-          JSON.stringify([r.gameId, name(r.raterId), name(r.targetId)])
-            .toLowerCase()
-            .includes(q),
-        )
-        .map(
-          (r) =>
-            `<details class="panel raw-rating"><summary>${esc(r.kind)} · ${esc(name(r.raterId))} → ${esc(name(r.targetId))} · ${r.submitted ? "Enviada" : "Rascunho"}</summary><pre>${esc(JSON.stringify(r, null, 2))}</pre><button type="button" class="btn btn-secondary" data-correct="${rows.indexOf(r)}">Editar valores</button></details>`,
-        )
-        .join("") ||
-      empty("Sem avaliações", "Os votos guardados aparecerão aqui.");
+    const q = document.querySelector("#raw-search").value.toLowerCase(),
+      kind = document.querySelector("#raw-kind").value,
+      status = document.querySelector("#raw-status").value;
+    const filtered = rows.filter(
+      (r) =>
+        (!kind || r.kind === kind) &&
+        (!status || r.submitted === (status === "sent")) &&
+        JSON.stringify([r.gameId, name(r.raterId), name(r.targetId)])
+          .toLowerCase()
+          .includes(q),
+    );
+    page = Math.max(0, Math.min(page, Math.ceil(filtered.length / 20) - 1));
+    const shown = filtered.slice(page * 20, page * 20 + 20);
+    document.querySelector("#raw-list").innerHTML = shown.length
+      ? `<div class="table-wrap"><table class="ratings-table"><thead><tr><th>Origem / Jogo</th><th>Avaliador</th><th>Jogador</th><th>Média</th><th>Estado</th><th>Ações</th></tr></thead><tbody>${shown
+          .map((r) => {
+            const values = Object.values(r.ratings || r.ratings20 || {}).filter(
+                Number.isFinite,
+              ),
+              mean = values.length
+                ? (values.reduce((s, v) => s + v, 0) / values.length).toFixed(1)
+                : "—";
+            return `<tr><td>${esc(r.kind)}<small>${esc(ctx.league.games.find((g) => g.id === r.gameId)?.title || "0–20")}</small></td><td>@${esc(name(r.raterId))}</td><td>@${esc(name(r.targetId))}</td><td><span class="rating-average">${mean}<small> / ${r.kind === "Pós-jogo" ? 5 : 20}</small></span></td><td><span class="pill ${r.submitted ? "success" : "warning"}">${r.submitted ? "Enviada" : "Rascunho"}</span></td><td><div class="actions compact"><button type="button" class="btn btn-ghost" data-view="${rows.indexOf(r)}">${icon("plus")}Ver</button><button type="button" class="btn btn-secondary" data-correct="${rows.indexOf(r)}">${icon("edit")}Corrigir</button></div></td></tr>`;
+          })
+          .join("")}</tbody></table></div>`
+      : empty("Sem avaliações", "Experimenta outros filtros.");
+    document.querySelector("#raw-count").textContent =
+      `${filtered.length ? page * 20 + 1 : 0}–${Math.min(filtered.length, page * 20 + 20)} de ${filtered.length}`;
+    document.querySelector("#raw-prev").disabled = page === 0;
+    document.querySelector("#raw-next").disabled =
+      (page + 1) * 20 >= filtered.length;
+    document.querySelectorAll("[data-view]").forEach((button) => {
+      button.onclick = () => {
+        const r = rows[Number(button.dataset.view)],
+          fields = r.kind === "Pós-jogo" ? FEEDBACK : ATTRIBUTES,
+          values = r.ratings || r.ratings20;
+        modal(
+          "Detalhes da avaliação",
+          `<p>@${esc(name(r.raterId))} → @${esc(name(r.targetId))}</p><div class="rating-detail-grid">${fields.map(([key, label]) => `<div><small>${esc(label)}</small><strong>${values[key] ?? "—"}<small> / ${r.kind === "Pós-jogo" ? 5 : 20}</small></strong></div>`).join("")}</div>`,
+        );
+      };
+    });
     document.querySelectorAll("[data-correct]").forEach((button) => {
       button.onclick = () => {
         const rating = rows[Number(button.dataset.correct)],
@@ -173,123 +326,23 @@ export async function rawRatings(ctx, uid) {
       };
     });
   };
-  document.querySelector("#raw-search").oninput = draw;
-  draw();
-}
-export async function cardLab(ctx, uid) {
-  const players = ctx.league.players;
-  const experimental = await DB.list("cardThemes");
-  const selected = players.find((p) => p.uid === uid) || players[0];
-  const sample = {
-    uid: "preview",
-    displayName: "O teu craque",
-    country: "Portugal",
-    countryCode: "PT",
-    primaryPosition: "ALA",
-    hasCard: true,
-    ovr: 82,
-    stats: Object.fromEntries(ATTRIBUTES.map(([k]) => [k, 82])),
-  };
-  ctx.render(
-    `${pageHead("Administração / Preview", "Card Lab", "Experimenta designs. O preview nunca altera as cartas reais.", linkButton("#/admin", "Administração", "ghost"))}<div class="lab-layout"><form id="lab-controls" class="panel"><label>Jogador<select name="player"><option value="">Jogador fictício</option>${players.map((p) => `<option value="${p.uid}" ${selected?.uid === p.uid ? "selected" : ""}>${esc(p.displayName || p.username)}</option>`).join("")}</select></label><div class="form-grid"><label>Nome<input name="displayName" value="${esc(selected?.displayName || sample.displayName)}" maxlength="30"></label><label>OVR<input name="ovr" type="number" min="0" max="99" value="${selected?.ovr || 82}"></label><label>País<input name="countryCode" maxlength="2" pattern="[A-Z]{2}" value="${selected?.countryCode || "PT"}"></label><label>Imagem (URL)<input name="photoURL" type="url" value="${esc(selected?.photoURL || "")}"></label></div><label>Card Theme<select name="theme">${THEMES.map((t) => `<option value="${t}" ${t === "gold-rare" ? "selected" : ""}>${themeName(t)}</option>`).join("")}<option value="custom-test">Custom Test</option></select></label><details><summary>Atributos</summary><div class="form-grid">${ATTRIBUTES.map(([k, n]) => `<label>${n}<input type="number" name="${k}" min="0" max="99" value="${selected?.stats[k] ?? 82}"></label>`).join("")}</div></details><fieldset id="custom-theme"><legend>Tema experimental</legend><label>Nome do tema<input name="themeName" value="Noite de Peladinha" maxlength="40"></label><div class="form-grid">${[
-      ["color1", "Cor principal", "#26304e"],
-      ["color2", "Cor secundária", "#866bcd"],
-      ["textColor", "Texto", "#f5f7fa"],
-      ["borderColor", "Borda", "#d7bc76"],
-      ["glowColor", "Glow", "#7660a0"],
-    ]
-      .map(
-        ([k, n, c]) =>
-          `<label>${n}<input type="color" name="${k}" value="${c}"></label>`,
-      )
-      .join(
-        "",
-      )}<label>Background / textura<select name="texture"><option value="diagonal">Diagonal</option><option value="radial">Radial</option><option value="plain">Sem textura</option></select></label></div><button type="button" id="save-theme" class="btn btn-secondary">Guardar tema experimental</button></fieldset></form><div class="lab-preview"><span class="pill">Preview · não altera produção</span><div id="card-preview"></div></div></div>`,
-  );
-  const form = document.querySelector("#lab-controls");
-  experimental.forEach((theme) =>
-    form.theme.add(
-      new Option(`${theme.name} · experimental`, `saved:${theme.id}`),
-    ),
-  );
-  form.onsubmit = (event) => event.preventDefault();
-  const draw = () => {
-    const f = new FormData(form),
-      p = {
-        ...(players.find((p) => p.uid === f.get("player")) || sample),
-        displayName: f.get("displayName"),
-        ovr: Number(f.get("ovr")),
-        countryCode: f.get("countryCode").toUpperCase(),
-        photoURL: f.get("photoURL"),
-        hasCard: true,
-        stats: Object.fromEntries(
-          ATTRIBUTES.map(([k]) => [k, Number(f.get(k))]),
-        ),
-      };
-    const preview = document.querySelector("#card-preview");
-    const savedTheme = experimental.find(
-      (theme) => `saved:${theme.id}` === f.get("theme"),
+  document
+    .querySelectorAll(".ratings-toolbar input,.ratings-toolbar select")
+    .forEach(
+      (input) =>
+        (input.oninput = () => {
+          page = 0;
+          draw();
+        }),
     );
-    preview.innerHTML = card(p, {
-      theme: savedTheme ? "custom-test" : f.get("theme"),
-      size: "lg",
-      preview: true,
-    });
-    if (savedTheme || f.get("theme") === "custom-test") {
-      const el = preview.firstElementChild;
-      for (const [key, variable] of [
-        ["color1", "--card-a"],
-        ["color2", "--card-b"],
-        ["textColor", "--card-text"],
-        ["borderColor", "--card-edge"],
-        ["glowColor", "--card-glow"],
-      ])
-        el.style.setProperty(
-          variable,
-          savedTheme
-            ? savedTheme.colors[
-                {
-                  color1: "primary",
-                  color2: "secondary",
-                  textColor: "text",
-                  borderColor: "border",
-                  glowColor: "glow",
-                }[key]
-              ]
-            : f.get(key),
-        );
-      el.dataset.texture = savedTheme?.texture || f.get("texture");
-    }
-    bindImages(preview);
-  };
-  form.oninput = draw;
-  form.player.onchange = () => {
-    const p = players.find((p) => p.uid === form.player.value) || sample;
-    form.displayName.value = p.displayName || p.username;
-    form.ovr.value = p.ovr;
-    form.countryCode.value = p.countryCode || "PT";
-    form.photoURL.value = p.photoURL || "";
-    ATTRIBUTES.forEach(([k]) => (form.elements[k].value = p.stats[k]));
+  document.querySelector("#raw-prev").onclick = () => {
+    page--;
     draw();
   };
-  document.querySelector("#save-theme").onclick = async (e) => {
-    const f = new FormData(form);
-    try {
-      await busy(e.currentTarget, () =>
-        DB.callAdmin("saveTheme", {
-          name: f.get("themeName"),
-          colors: {
-            primary: f.get("color1"),
-            secondary: f.get("color2"),
-            text: f.get("textColor"),
-            border: f.get("borderColor"),
-            glow: f.get("glowColor"),
-          },
-          texture: f.get("texture"),
-        }),
-      );
-      toast("Tema experimental guardado.");
-    } catch {}
+  document.querySelector("#raw-next").onclick = () => {
+    page++;
+    draw();
   };
   draw();
 }
+export { cardLab } from "./card-lab.js";

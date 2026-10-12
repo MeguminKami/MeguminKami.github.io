@@ -1,4 +1,13 @@
+import { adminCardsPage, editWeeklyCardPhotoPage } from "./admin-cards.js";
+import {
+  perspectiveUser,
+  perspectiveControl,
+  bindPerspective,
+} from "./role-perspective.js";
+import { mountAdminMenu } from "./admin-menu.js";
 import { configured } from "./firebase.js";
+import { ovrAuditPage } from "./ovr-audit.js";
+import { statisticsPage } from "./statistics.js";
 import { ticketsPage } from "./tickets.js";
 import { bindThemePicker } from "./themes.js";
 import { startAuth, currentUser, loadProfile, logout } from "./auth.js";
@@ -16,6 +25,7 @@ import { initialMission, feedbackPage } from "./ratings.js";
 import { adminPage, cardLab, adminEdit, rawRatings } from "./admin.js";
 import { card, bindImages } from "./cards.js";
 import {
+  ATTRIBUTES,
   calculateWeeklyTopPlayers,
   isoWeek,
   average,
@@ -38,13 +48,32 @@ import { ASSET_PATHS, safeImage } from "./assets.js";
 import * as DB from "./db.js";
 const ctx = {
   user: null,
+  realUser: null,
   league: null,
   missions: [],
   notifications: [],
   disposers: [],
   render(html) {
     setMain(html);
+    document
+      .querySelector("#main")
+      .classList.toggle(
+        "wide-layout",
+        /^#\/(admin|statistics|game)(\/|$)/.test(location.hash),
+      );
     bindImages();
+    if (
+      this.user &&
+      this.realUser?.role === "admin" &&
+      ["#/profile", `#/player/${this.user.uid}`].includes(location.hash)
+    ) {
+      const heading = document.querySelector("#main .page-head h1");
+      heading?.insertAdjacentHTML(
+        "afterend",
+        perspectiveControl(this.realUser, this.user.role),
+      );
+      bindPerspective(document.querySelector("#main"), this);
+    }
   },
   cleanup(fn) {
     this.disposers.push(fn);
@@ -54,7 +83,8 @@ const ctx = {
     else location.hash = hash;
   },
   async refresh() {
-    this.user = await loadProfile();
+    this.realUser = await loadProfile();
+    this.user = perspectiveUser(this.realUser);
     if (!this.user || this.user.disabled) return;
     this.league = await loadLeague();
     this.missions = await refreshMissionsForCurrentUser(this.user, this.league);
@@ -70,6 +100,9 @@ const ctx = {
 };
 let routeNumber = 0;
 function header() {
+  const dropdownOpen =
+    !!document.querySelector("#notification-dropdown") &&
+    document.querySelector("#header").dataset.route === location.hash;
   const p = ctx.user,
     hash = location.hash || "#/",
     unread = ctx.notifications.filter((n) => !n.read).length;
@@ -77,18 +110,23 @@ function header() {
     ["#/", "home", "Início"],
     ["#/players", "players", "Jogadores"],
     ["#/games", "games", "Jogos"],
+    ["#/statistics", "trophy", "Estatísticas"],
     ["#/missions", "missions", "Missões"],
     ["#/tickets", "tickets", "Tickets"],
   ];
   document.querySelector("#header").innerHTML =
-    `<nav class="navbar"><a class="brand" href="#/" aria-label="Peladinhas Cards — início"><img src="${ASSET_PATHS.logo}" alt=""><span>PELADINHAS<small>CARDS</small></span></a>${p ? `<div class="desktop-nav">${links.map(([h, i, n]) => `<a href="${h}" class="nav-link ${hash === h || (h !== "#/" && hash.startsWith(h)) ? "active" : ""}">${icon(i)}${n}${i === "missions" && ctx.missions.length ? `<span class="badge">${ctx.missions.length}</span>` : ""}</a>`).join("")}${p.role === "admin" ? `<a class="nav-link ${hash.startsWith("#/admin") ? "active" : ""}" href="#/admin">${icon("shield")}Admin</a>` : ""}</div><div class="header-actions">${p.role === "admin" ? `<a class="btn btn-icon btn-ghost mobile-admin" href="#/admin" aria-label="Administração">${icon("shield")}</a>` : ""}<button id="bell" class="btn btn-icon btn-ghost" aria-label="Notificações${unread ? `, ${unread} por ler` : ""}">${icon("bell")}${unread ? `<span class="badge notification-count">${unread}</span>` : ""}</button><a class="user-link" href="#/profile"><img src="${esc(safeImage(p.photoURL))}" alt="" data-fallback="${ASSET_PATHS.avatar}"><span>${esc(p.displayName || p.username)}</span></a><button id="logout" class="btn btn-icon btn-ghost" aria-label="Terminar sessão">${icon("logout")}</button></div>` : '<span class="club-label">A TUA LIGA. A TUA CARTA.</span>'}</nav>${p ? `<nav class="bottom-nav" aria-label="Navegação mobile">${[...links, ["#/profile", "profile", "Perfil"]].map(([h, i, n]) => `<a href="${h}" class="${hash === h || (h !== "#/" && hash.startsWith(h)) ? "active" : ""}">${icon(i)}<span>${n}</span>${i === "missions" && ctx.missions.length ? '<i class="nav-dot"></i>' : ""}</a>`).join("")}</nav>` : ""}`;
+    `<nav class="navbar"><a class="brand" href="#/" aria-label="Peladinhas Cards — início"><img src="${ASSET_PATHS.logo}" alt=""><span>PELADINHAS<small>CARDS</small></span></a>${p ? `<div class="desktop-nav">${links.map(([h, i, n]) => `<a href="${h}" class="nav-link ${hash === h || (h !== "#/" && hash.startsWith(h)) ? "active" : ""}">${icon(i)}${n}${i === "missions" && ctx.missions.length ? `<span class="badge">${ctx.missions.length}</span>` : ""}</a>`).join("")}${p.role === "admin" ? `<a class="nav-link ${hash.startsWith("#/admin") ? "active" : ""}" href="#/admin">${icon("shield")}Admin</a>` : ""}</div><div class="header-actions">${p.role === "admin" ? `<a class="btn btn-icon btn-ghost mobile-admin" href="#/admin" aria-label="Administração">${icon("shield")}</a>` : ""}<button id="bell" class="btn btn-icon btn-ghost" aria-label="Notificações${unread ? `, ${unread} por ler` : ""}">${icon("bell")}${unread ? `<span class="badge notification-count">${unread}</span>` : ""}</button><div class="profile-perspective-menu"><a class="user-link" href="#/profile"><img src="${esc(safeImage(p.photoURL))}" alt="" data-fallback="${ASSET_PATHS.avatar}"><span>${esc(p.displayName || p.username)}</span></a>${perspectiveControl(ctx.realUser, p.role, true)}</div><button id="logout" class="btn btn-icon btn-ghost" aria-label="Terminar sessão">${icon("logout")}</button></div>` : '<span class="club-label">A TUA LIGA. A TUA CARTA.</span>'}</nav>${p ? `<nav class="bottom-nav" aria-label="Navegação mobile">${[...links, ["#/profile", "profile", "Perfil"]].map(([h, i, n]) => `<a href="${h}" class="${hash === h || (h !== "#/" && hash.startsWith(h)) ? "active" : ""}">${icon(i)}<span>${n}</span>${i === "missions" && ctx.missions.length ? '<i class="nav-dot"></i>' : ""}</a>`).join("")}</nav>` : ""}`;
   document
     .querySelector("#bell")
     ?.addEventListener("click", () => toggleNotifications(ctx));
   document.querySelector("#logout")?.addEventListener("click", async (e) => {
+    const signedOutUid = ctx.realUser?.uid;
     try {
       await busy(e.currentTarget, logout);
+      if (signedOutUid)
+        sessionStorage.removeItem(`peladinhas-perspective:${signedOutUid}`);
       ctx.user = null;
+      ctx.realUser = null;
       ctx.league = null;
       ctx.notifications = [];
       ctx.missions = [];
@@ -96,8 +134,11 @@ function header() {
       ctx.go("#/");
     } catch {}
   });
+  bindPerspective(document.querySelector("#header"), ctx);
   bindThemePicker(document.querySelector("#header"));
   bindImages(document.querySelector("#header"));
+  document.querySelector("#header").dataset.route = location.hash;
+  if (dropdownOpen && p) toggleNotifications(ctx);
 }
 function weeklyPodium(players) {
   const top = calculateWeeklyTopPlayers(players).slice(0, 3);
@@ -121,7 +162,7 @@ function home() {
     }).format(new Date()),
   );
   ctx.render(
-    `<div class="dashboard-greeting"><div><p class="eyebrow">${isoWeek()} / A TUA COMUNIDADE</p><h1>${hour < 12 ? "Bom dia" : hour < 19 ? "Boa tarde" : "Boa noite"}, ${esc(ctx.user.displayName || ctx.user.username)}.</h1><p>Pronto para mais uma Peladinha?</p></div>${linkButton("#/game/new", "Criar jogo", "secondary", "plus")}</div><section class="weekly-section"><div class="section-head"><div><p class="eyebrow">A forma fala por si</p><h2>Melhores da semana</h2></div>${linkButton("#/ranking", "Ver ranking completo", "ghost", "trophy")}</div><p class="ranking-explanation">Média semanal dos jogos com pelo menos 2 votos. Sem ratings suficientes, usamos o OVR.</p>${weeklyPodium(players)}</section><div class="dashboard-columns"><section class="panel my-card-panel"><div class="section-head"><h2>A minha carta</h2>${linkButton("#/profile", "Ver perfil", "ghost")}</div>${me ? card(me, { size: "md" }) : empty("Perfil em preparação")}<div class="metrics compact-metrics">${[
+    `<div class="dashboard-greeting"><div><p class="eyebrow">${ctx.league.cycle.weekId} / ${ctx.league.cycle.phase === "closed" ? "CARTAS FECHADAS" : "A TUA COMUNIDADE"}</p><h1>${hour < 12 ? "Bom dia" : hour < 19 ? "Boa tarde" : "Boa noite"}, ${esc(ctx.user.displayName || ctx.user.username)}.</h1><p>Pronto para mais uma Peladinha?</p></div>${linkButton("#/game/new", "Criar jogo", "secondary", "plus")}</div><section class="weekly-section"><div class="section-head"><div><p class="eyebrow">A forma fala por si</p><h2>Melhores da semana</h2></div>${linkButton("#/ranking", "Ver ranking completo", "ghost", "trophy")}</div><p class="ranking-explanation">Média semanal dos jogos com pelo menos 2 votos. Sem ratings suficientes, usamos o OVR.</p>${weeklyPodium(players)}</section><div class="dashboard-columns"><section class="panel my-card-panel"><div class="section-head"><h2>A minha carta</h2>${linkButton("#/profile", "Ver perfil", "ghost")}</div>${me ? card(me, { size: "md" }) : empty("Perfil em preparação")}<div class="metrics compact-metrics">${[
       ["OVR", me?.hasCard ? me.ovr : "—"],
       [
         "Forma",
@@ -140,7 +181,7 @@ function home() {
 }
 function playersPage() {
   ctx.render(
-    `${pageHead("A comunidade", "Jogadores", "Cada carta tem uma história. Descobre o plantel das Peladinhas.")}<div class="filters panel"><label class="search-field">Procurar<input id="search" placeholder="Nome ou username"></label><label>Ordenar<select id="sort"><option value="ovr">OVR mais alto</option><option value="name">Nome A–Z</option></select></label><label>Família<select id="family"><option value="">Todas</option><option>Bronze</option><option>Silver</option><option>Gold</option></select></label><label>Especial<select id="special"><option value="">Todas</option>${THEMES.slice(
+    `${pageHead("A comunidade", "Jogadores", "Cada carta tem uma história. Descobre o plantel das Peladinhas.")}<div class="filters panel"><label class="search-field">Procurar<input id="search" placeholder="Nome ou username"></label><label>Ordenar<select id="sort"><option value="ovr">OVR mais alto</option><option value="ovr:asc">OVR mais baixo</option><option value="name">Nome A–Z</option><option value="name:desc">Nome Z–A</option>${ATTRIBUTES.map(([key, name]) => `<option value="${key}:desc">${esc(name)} · decrescente</option><option value="${key}:asc">${esc(name)} · crescente</option>`).join("")}</select></label><label>Família<select id="family"><option value="">Todas</option><option>Bronze</option><option>Silver</option><option>Gold</option></select></label><label>Especial<select id="special"><option value="">Todas</option>${THEMES.slice(
       6,
     )
       .map((t) => `<option value="${t}">${themeName(t)}</option>`)
@@ -151,7 +192,10 @@ function playersPage() {
   const draw = () => {
     const q = document.querySelector("#search").value.toLowerCase(),
       f = document.querySelector("#family").value.toLowerCase(),
-      sp = document.querySelector("#special").value;
+      sp = document.querySelector("#special").value,
+      [sortKey, sortDirection = sortKey === "name" ? "asc" : "desc"] = document
+        .querySelector("#sort")
+        .value.split(":");
     const players = ctx.league.players
       .filter(
         (p) =>
@@ -159,11 +203,20 @@ function playersPage() {
           (!f || p.cardType.startsWith(f)) &&
           (!sp || p.specials.some((x) => x.id === sp)),
       )
-      .sort(
-        document.querySelector("#sort").value === "name"
-          ? (a, b) => a.displayName.localeCompare(b.displayName)
-          : (a, b) => b.ovr - a.ovr,
-      );
+      .sort((a, b) => {
+        const byName = (a.displayName || a.username).localeCompare(
+          b.displayName || b.username,
+          "pt-PT",
+        );
+        if (sortKey === "name")
+          return sortDirection === "desc" ? -byName : byName;
+        if (a.hasCard !== b.hasCard) return a.hasCard ? -1 : 1;
+        const value = (p) => (sortKey === "ovr" ? p.ovr : p.stats?.[sortKey]);
+        return (
+          ((Number(value(a)) || 0) - (Number(value(b)) || 0)) *
+            (sortDirection === "asc" ? 1 : -1) || byName
+        );
+      });
     document.querySelector("#player-grid").innerHTML = players.length
       ? players
           .map(
@@ -221,6 +274,7 @@ async function route() {
   }
   if (!currentUser) {
     ctx.user = null;
+    ctx.realUser = null;
     header();
     authPage(ctx);
     return;
@@ -290,13 +344,19 @@ async function route() {
     } else if (parts[0] === "notifications") notificationsPage(ctx);
     else if (parts[0] === "tickets") await ticketsPage(ctx, parts[1]);
     else if (parts[0] === "ranking") rankingPage();
+    else if (parts[0] === "statistics") statisticsPage(ctx);
     else if (parts[0] === "admin") {
-      if (parts[1] === "cards") await cardLab(ctx, parts[2]);
+      if (parts[1] === "ovr") await ovrAuditPage(ctx, parts[2], parts[3]);
+      else if (parts[1] === "card-types") await adminCardsPage(ctx, parts[2]);
+      else if (parts[1] === "card-photo")
+        await editWeeklyCardPhotoPage(ctx, parts[2]);
+      else if (parts[1] === "cards") await cardLab(ctx, parts[2]);
       else if (parts[1] === "initial")
         await initialMission(ctx, parts[2], true);
       else if (parts[1] === "player") await adminEdit(ctx, parts[2]);
       else if (parts[1] === "ratings") await rawRatings(ctx, parts[2]);
-      else await adminPage(ctx);
+      else if (parts[1] === "support") await ticketsPage(ctx);
+      else await adminPage(ctx, parts[1]);
     } else if (parts[0] === "assets")
       ctx.render(
         `${pageHead("Identidade da liga", "Assets", "Recursos locais para as cartas e identidade visual.")}<div class="panel assets-preview"><img src="${ASSET_PATHS.logo}" alt="Logo Peladinhas Cards"><div><h2>Identidade Peladinhas</h2><p>Logo original, avatar padrão e frames de cartas em CSS.</p>${ctx.user.role === "admin" ? linkButton("#/admin/cards", "Experimentar no Card Lab", "secondary", "lab") : ""}</div></div>`,
@@ -309,6 +369,7 @@ async function route() {
           linkButton("#/", "Início"),
         ),
       );
+    if (parts[0] === "admin") mountAdminMenu();
     bindImages();
     document.querySelector("#main").focus({ preventScroll: true });
   } catch (error) {
@@ -320,39 +381,10 @@ document.querySelector(".skip-link").addEventListener("click", (event) => {
   event.preventDefault();
   document.querySelector("#main").focus();
 });
-document.addEventListener("visibilitychange", () => {
-  if (document.visibilityState === "visible" && currentUser) route();
-});
-let unsubscribe = () => {},
-  liveTimer;
+// Refresh league data and missions only on navigation, manual reload or auth changes.
 if (configured)
   startAuth(
-    async (user) => {
-      unsubscribe();
-      clearTimeout(liveTimer);
-      await route();
-      if (user) {
-        unsubscribe = DB.watchLeague(
-          user.uid,
-          (path) => {
-            clearTimeout(liveTimer);
-            liveTimer = setTimeout(async () => {
-              try {
-                if (path.endsWith("/notifications")) {
-                  ctx.notifications = await DB.notifications(user.uid);
-                  header();
-                  if (location.hash === "#/notifications")
-                    notificationsPage(ctx);
-                } else if (!document.querySelector("main form")) await route();
-              } catch (e) {
-                console.error(e);
-              }
-            }, 600);
-          },
-          (error) => console.error("Actualização da liga indisponível", error),
-        );
-      }
-    },
+    () => route(),
     (error) => errorPage(error, route),
   );
 else route();

@@ -163,6 +163,7 @@ const vote = (raterId = "pedro", targetId = "joao", submitted = true) => ({
     passing: 4,
     defense: 4,
     physical: 4,
+    attitude: 4,
     goalkeeping: null,
   },
   submitted,
@@ -327,5 +328,265 @@ test("novo jogador: leitura de rascunho ausente e submissão única", async () =
       submittedAt: serverTimestamp(),
       updatedAt: serverTimestamp(),
     }),
+  );
+});
+
+test("comunidade: editar voto próprio completo sem voltar a rascunho", async () => {
+  const ref = doc(signed("pedro"), "communityRatings/pedro_joao");
+  const ratings20 = Object.fromEntries(
+    [
+      "pace",
+      "shooting",
+      "passing",
+      "dribbling",
+      "defending",
+      "physical",
+      "goalkeeping",
+      "stamina",
+      "vision",
+      "positioning",
+      "teamwork",
+      "composure",
+    ].map((key) => [key, 15]),
+  );
+  await assertSucceeds(
+    setDoc(ref, {
+      raterId: "pedro",
+      targetId: "joao",
+      ratings20,
+      submitted: true,
+      createdAt: serverTimestamp(),
+      updatedAt: serverTimestamp(),
+      submittedAt: serverTimestamp(),
+    }),
+  );
+  await assertSucceeds(
+    updateDoc(ref, {
+      ratings20: { ...ratings20, pace: 18 },
+      updatedAt: serverTimestamp(),
+    }),
+  );
+  await assertFails(
+    updateDoc(ref, { submitted: false, updatedAt: serverTimestamp() }),
+  );
+  await assertFails(
+    updateDoc(ref, { ratings20: { pace: 18 }, updatedAt: serverTimestamp() }),
+  );
+  await assertFails(
+    updateDoc(doc(signed("joao"), "communityRatings/pedro_joao"), {
+      ratings20,
+      updatedAt: serverTimestamp(),
+    }),
+  );
+});
+
+test("pesos OVR: leitura de membros ativos e escrita exclusiva do backend", async () => {
+  await env.withSecurityRulesDisabled(async (c) => {
+    await setDoc(doc(c.firestore(), "settings/ovr"), {
+      weights: { pace: 100 },
+    });
+    await updateDoc(doc(c.firestore(), "users/outsider"), { disabled: true });
+  });
+  await assertSucceeds(getDoc(doc(signed("pedro"), "settings/ovr")));
+  await assertSucceeds(getDoc(doc(signed("boss"), "settings/ovr")));
+  await assertFails(getDoc(doc(signed("outsider"), "settings/ovr")));
+  await assertFails(
+    getDoc(doc(env.unauthenticatedContext().firestore(), "settings/ovr")),
+  );
+  for (const uid of ["pedro", "boss"])
+    await assertFails(
+      setDoc(doc(signed(uid), "settings/ovr"), {
+        weights: { passing: 100 },
+      }),
+    );
+});
+
+test("equilíbrio de jogos: membros leem, ninguém altera a referência pelo browser", async () => {
+  await env.withSecurityRulesDisabled(async (c) =>
+    setDoc(doc(c.firestore(), "gameBalances/test"), { boostA: 3, boostB: -3 }),
+  );
+  await assertSucceeds(getDoc(doc(signed("pedro"), "gameBalances/test")));
+  for (const uid of ["pedro", "boss"])
+    await assertFails(
+      setDoc(doc(signed(uid), "gameBalances/test"), { boostA: 99 }),
+    );
+  await assertFails(
+    getDoc(doc(env.unauthenticatedContext().firestore(), "gameBalances/test")),
+  );
+});
+
+test("DBS: só admin atribui e pode editar jogos de outros em qualquer estado", async () => {
+  await assertFails(
+    updateDoc(doc(signed("joao"), "users/joao"), {
+      role: "dbs",
+      updatedAt: serverTimestamp(),
+    }),
+  );
+  await assertSucceeds(
+    updateDoc(doc(signed("boss"), "users/joao"), {
+      role: "dbs",
+      updatedAt: serverTimestamp(),
+    }),
+  );
+  await assertSucceeds(
+    updateDoc(doc(signed("joao"), "games/open"), {
+      title: "Editado pelo DBS",
+      notes: "Equipas revistas",
+      updatedAt: serverTimestamp(),
+    }),
+  );
+  await assertFails(
+    updateDoc(doc(signed("joao"), "games/open"), {
+      creatorId: "joao",
+      updatedAt: serverTimestamp(),
+    }),
+  );
+  await assertSucceeds(
+    updateDoc(doc(signed("joao"), "games/closed"), {
+      title: "Não permitido",
+      updatedAt: serverTimestamp(),
+    }),
+  );
+  await env.withSecurityRulesDisabled(async (c) => {
+    await setDoc(doc(c.firestore(), "games/draft"), game("draft"));
+  });
+  await assertSucceeds(
+    updateDoc(doc(signed("joao"), "games/draft"), {
+      title: "Não permitido",
+      updatedAt: serverTimestamp(),
+    }),
+  );
+  await assertFails(
+    updateDoc(doc(signed("joao"), "users/outsider"), {
+      role: "dbs",
+      updatedAt: serverTimestamp(),
+    }),
+  );
+  await assertFails(
+    updateDoc(doc(signed("joao"), "users/joao"), {
+      role: "admin",
+      updatedAt: serverTimestamp(),
+    }),
+  );
+  await assertSucceeds(
+    updateDoc(doc(signed("joao"), "games/open"), {
+      status: "closed",
+      closedAt: serverTimestamp(),
+      closedBy: "joao",
+      updatedAt: serverTimestamp(),
+    }),
+  );
+  await assertSucceeds(
+    updateDoc(doc(signed("joao"), "games/open"), {
+      notes: "Não pode editar após encerrar",
+      updatedAt: serverTimestamp(),
+    }),
+  );
+  await env.withSecurityRulesDisabled(async (c) => {
+    await setDoc(doc(c.firestore(), "games/open"), game("open"));
+  });
+  await assertSucceeds(
+    updateDoc(doc(signed("boss"), "users/joao"), {
+      role: "member",
+      updatedAt: serverTimestamp(),
+    }),
+  );
+  await assertFails(
+    updateDoc(doc(signed("joao"), "games/open"), {
+      title: "DBS removido",
+      updatedAt: serverTimestamp(),
+    }),
+  );
+});
+
+test("golos e assistências: só participantes da equipa e totais até ao resultado", async () => {
+  const ref = doc(signed("boss"), "games/closed");
+  const valid = {
+    teamA: { goals: ["pedro", "pedro"], assists: ["pedro"] },
+    teamB: { goals: [], assists: [] },
+  };
+  await assertSucceeds(
+    updateDoc(ref, { performance: valid, updatedAt: serverTimestamp() }),
+  );
+  for (const performance of [
+    { ...valid, teamA: { goals: ["outsider"], assists: [] } },
+    { ...valid, teamA: { goals: Array(1000).fill("pedro"), assists: [] } },
+    { ...valid, teamA: { goals: [], assists: Array(1000).fill("joao") } },
+    { ...valid, teamA: { goals: [42], assists: [] } },
+    { ...valid, teamA: { goals: [], assists: [], unknown: 1 } },
+  ])
+    await assertFails(
+      updateDoc(ref, { performance, updatedAt: serverTimestamp() }),
+    );
+  await assertFails(
+    updateDoc(doc(signed("outsider"), "games/closed"), {
+      performance: valid,
+      updatedAt: serverTimestamp(),
+    }),
+  );
+});
+test("atitude obrigatória em novas avaliações e dentro de 0 a 5", async () => {
+  const ref = doc(signed("pedro"), "games/closed/feedback/pedro_joao");
+  const missing = vote();
+  delete missing.ratings.attitude;
+  await assertFails(setDoc(ref, missing));
+  for (const attitude of [-1, 6, 2.5]) {
+    const value = vote();
+    value.ratings.attitude = attitude;
+    await assertFails(setDoc(ref, value));
+  }
+  const value = vote();
+  value.ratings.attitude = 0;
+  await assertSucceeds(setDoc(ref, value));
+});
+
+test("cartas semanais: leitura da liga, bloqueio e conteúdo só escritos pelo servidor", async () => {
+  await env.withSecurityRulesDisabled(async (c) =>
+    setDoc(doc(c.firestore(), "weeklyCards/joao"), {
+      uid: "joao",
+      locked: true,
+      ovr: 80,
+    }),
+  );
+  await assertSucceeds(getDoc(doc(signed("pedro"), "weeklyCards/joao")));
+  for (const uid of ["pedro", "boss"])
+    await assertFails(
+      updateDoc(doc(signed(uid), "weeklyCards/joao"), {
+        locked: false,
+        ovr: 99,
+      }),
+    );
+  await assertFails(
+    getDoc(doc(env.unauthenticatedContext().firestore(), "weeklyCards/joao")),
+  );
+});
+
+test("fotografias semanais: leitura da liga e escrita apenas por função", async () => {
+  const path = "weeklyCardPhotos/joao_2026-W41";
+  await env.withSecurityRulesDisabled(async (c) =>
+    setDoc(doc(c.firestore(), path), {
+      uid: "joao",
+      weekId: "2026-W41",
+      photoURL: "https://example.com/card.webp",
+      design: { photoScale: 140 },
+    }),
+  );
+  await assertSucceeds(getDoc(doc(signed("pedro"), path)));
+  for (const uid of ["pedro", "boss"]) {
+    await assertFails(
+      updateDoc(doc(signed(uid), path), {
+        photoURL: "https://example.com/changed.webp",
+      }),
+    );
+    await assertFails(
+      setDoc(doc(signed(uid), "weeklyCardPhotos/joao_2026-W42"), {
+        uid: "joao",
+        weekId: "2026-W42",
+        design: {},
+      }),
+    );
+  }
+  await assertFails(
+    getDoc(doc(env.unauthenticatedContext().firestore(), path)),
   );
 });

@@ -1,3 +1,4 @@
+import { cardWeek } from "./card-week.js";
 import {
   COUNTRIES,
   profileComplete,
@@ -109,13 +110,31 @@ export async function playerPage(ctx, uid) {
         "players",
       ),
     );
+  const myRating =
+    uid !== ctx.user.uid
+      ? await DB.read(`communityRatings/${ctx.user.uid}_${uid}`)
+      : null;
+  const ratingAction =
+    uid !== ctx.user.uid
+      ? linkButton(
+          `#/missions/new/${uid}`,
+          myRating?.submitted ? "Editar a minha avaliação" : "Avaliar jogador",
+          "primary",
+          "edit",
+        )
+      : linkButton(
+          "#/missions/self",
+          "Editar autoavaliação",
+          "primary",
+          "edit",
+        );
   const own = uid === ctx.user.uid,
     history = (await DB.history(uid)).sort((a, b) =>
       b.weekId.localeCompare(a.weekId),
     ),
     s = p.matchStats,
     best = ATTRIBUTES.reduce((a, b) => (p.stats[b[0]] > p.stats[a[0]] ? b : a));
-  const previous = history.find((h) => h.weekId < isoWeek());
+  const previous = history.find((h) => h.weekId < cardWeek().weekId);
   const growth = previous?.stats
     ? ATTRIBUTES.map(([key, name]) => ({
         name,
@@ -123,7 +142,7 @@ export async function playerPage(ctx, uid) {
       })).sort((a, b) => b.delta - a.delta)[0]
     : null;
   ctx.render(
-    `${pageHead(own ? "A minha carta" : "Perfil do jogador", p.displayName || p.username, `@${p.username} · ${p.country || ""}`, own || ctx.user.role === "admin" ? linkButton(own ? "#/profile/edit" : `#/admin/player/${p.uid}/edit`, "Editar perfil", "secondary", "edit") : "")}<div class="player-hero"><div class="card-stage">${card(p, { size: "lg" })}<span class="pill ${p.official ? "success" : "warning"}">${p.hasCard ? (p.official ? "Carta oficial" : "Carta provisória") : "À espera de autoavaliação"}</span></div><div><p class="eyebrow">Dentro de campo</p><h2>${flag(p.countryCode)} ${esc(p.country || "")}</h2><div class="player-facts">${[
+    `${pageHead(own ? "A minha carta" : "Perfil do jogador", p.displayName || p.username, `@${p.username} · ${p.country || ""}`, own || ctx.user.role === "admin" ? linkButton(own ? "#/profile/edit" : `#/admin/player/${p.uid}/edit`, "Editar perfil", "secondary", "edit") : "")}${ratingAction || ctx.user.role === "admin" ? `<div class="actions profile-actions">${ratingAction}${ctx.user.role === "admin" ? linkButton(`#/admin/ovr/${p.uid}`, "Cálculo OVR", "secondary", "lab") + linkButton(`#/admin/card-photo/${p.uid}`, "Editar foto de carta", "secondary", "camera") : ""}</div>` : ""}<div class="player-hero"><div class="card-stage">${card(p, { size: "lg" })}<span class="pill ${p.official ? "success" : "warning"}">${p.cardLocked ? "Semana fechada · Quinta às 20h" : p.hasCard ? (p.official ? "Carta oficial" : "Carta provisória") : "À espera de autoavaliação"}</span></div><div><p class="eyebrow">Dentro de campo</p><h2>${flag(p.countryCode)} ${esc(p.country || "")}</h2>${p.inactivity?.penalty ? `<p class="pill warning">${p.inactivity.missed} jogos sem participar · −${p.inactivity.penalty} OVR</p>` : ""}<div class="player-facts">${[
       ["Idade", `${age(p.birthDate)} anos`],
       ["Altura", p.heightCm ? `${p.heightCm} cm` : "—"],
       ["Peso", p.weightKg ? `${p.weightKg} kg` : "—"],
@@ -148,7 +167,7 @@ export async function playerPage(ctx, uid) {
           : "—",
       ],
       ["Melhor atributo", best[1]],
-      ["Comunidade", `${p.communityCount} / 3`],
+      ["Avaliações recebidas · 0–20", p.communityCount],
       [
         "Em crescimento",
         growth?.delta > 0 ? `${growth.name} +${growth.delta}` : "Estável",
@@ -169,7 +188,9 @@ export async function playerPage(ctx, uid) {
       ["Empates", s.draws],
       ["Derrotas", s.losses],
       ["Vitórias %", s.winRate + "%"],
-      ["Golos a favor", s.goalsFor],
+      ["Golos", s.goals],
+      ["Assistências", s.assists],
+      ["Golos da equipa", s.goalsFor],
       ["Golos sofridos", s.goalsAgainst],
       ["Diferença", s.goalDifference],
     ]
@@ -214,7 +235,7 @@ export async function playerPage(ctx, uid) {
       );
       modal(
         `Carta · ${snapshot.weekId}`,
-        `<div class="history-card-expanded">${card(historicalPlayer(p, snapshot), { size: "lg", preview: true })}</div>`,
+        `<div class="history-card-expanded">${card(historicalPlayer(p, snapshot), { size: "lg", preview: true })}</div>${ctx.user.role === "admin" ? linkButton(`#/admin/ovr/${p.uid}/${snapshot.weekId}`, "Cálculo desta carta", "secondary", "lab") : ""}`,
       );
       bindImages(document.querySelector("#modal-root"));
     };
@@ -227,15 +248,18 @@ function historyStrip(player, history) {
       const snapshot = history[index];
       if (!snapshot)
         return `<div class="history-card-button history-placeholder panel"><span class="history-week">Semana por registar</span><div class="history-empty-card" aria-hidden="true">${icon("games")}</div><span class="history-card-hint">Ainda sem carta</span></div>`;
-      return `<button type="button" class="history-card-button panel" data-history-week="${esc(snapshot.weekId)}" aria-label="Ampliar carta da semana ${esc(snapshot.weekId)}"><span class="history-week">${esc(snapshot.weekId)}</span>${card(historicalPlayer(player, snapshot), { size: "sm", preview: true })}<span class="history-card-hint">Ver carta ampliada</span></button>`;
+      return `<button type="button" class="history-card-button panel" data-history-week="${esc(snapshot.weekId)}" aria-label="Ampliar carta da semana ${esc(snapshot.weekId)}"><span class="history-week">${esc(snapshot.weekId)} · ${snapshot.locked ? "Fechada" : "Em evolução"}</span>${card(historicalPlayer(player, snapshot), { size: "sm", preview: true })}<span class="history-card-hint">Ver carta ampliada</span></button>`;
     },
   ).join("");
   return `<p class="muted small">${history.length} ${history.length === 1 ? "semana guardada" : "semanas guardadas"}. Desliza horizontalmente para percorrer o histórico.</p><div class="history-grid" tabindex="0" role="region" aria-label="Histórico de cartas semanal, deslocação horizontal">${slots}</div>`;
 }
-function historicalPlayer(player, snapshot) {
+export function historicalPlayer(player, snapshot) {
   return {
     ...player,
+    ...snapshot.appearance,
     stats: snapshot.stats || {},
+    cardPhoto: snapshot.cardPhoto || null,
+    primaryPosition: snapshot.primaryPosition ?? player.primaryPosition,
     ovr: snapshot.ovr,
     cardType: snapshot.baseCard,
     specials: snapshot.specials || [],

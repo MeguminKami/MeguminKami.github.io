@@ -1,7 +1,7 @@
 import { readdirSync, readFileSync } from "node:fs";
 import { spawnSync } from "node:child_process";
-for (const dir of ["js", "functions"])
-  for (const file of readdirSync(dir).filter((f) => f.endsWith(".js"))) {
+for (const dir of ["js", "functions", "scripts"])
+  for (const file of readdirSync(dir).filter((f) => /\.m?js$/.test(f))) {
     const r = spawnSync(process.execPath, ["--input-type=module", "--check"], {
       input: readFileSync(`${dir}/${file}`),
       encoding: "utf8",

@@ -96,7 +96,7 @@ export async function saveCommunity(
   const target = doc(db, "communityRatings", `${raterId}_${targetId}`);
   await runTransaction(db, async (tx) => {
     const s = await tx.get(target);
-    if (s.data()?.submitted) throw Error("Esta avaliação já foi concluída.");
+    submit = submit || s.data()?.submitted === true;
     if (submit && !completeInitial(ratings20))
       throw Error("Preenche os 12 atributos.");
     const value = {
@@ -105,7 +105,11 @@ export async function saveCommunity(
       ratings20,
       submitted: submit,
       updatedAt: serverTimestamp(),
-      submittedAt: submit ? serverTimestamp() : null,
+      submittedAt: s.data()?.submitted
+        ? s.data().submittedAt
+        : submit
+          ? serverTimestamp()
+          : null,
     };
     if (!s.exists()) value.createdAt = serverTimestamp();
     else value.createdAt = s.data().createdAt;
@@ -141,7 +145,11 @@ export async function saveGame(id, data, actor) {
   const target = id ? doc(db, "games", id) : doc(collection(db, "games"));
   await runTransaction(db, async (tx) => {
     const s = await tx.get(target);
-    if (s.exists() && s.data().status === "closed" && actor.role !== "admin")
+    if (
+      s.exists() &&
+      s.data().status === "closed" &&
+      !["admin", "dbs"].includes(actor.role)
+    )
       throw Error("O jogo já foi encerrado.");
     const value = { ...data, updatedAt: serverTimestamp() };
     if (!s.exists()) {
@@ -233,27 +241,7 @@ export async function syncNotifications(uid, missions) {
 }
 export const callAdmin = (name, data) =>
   httpsCallable(getFunctions(undefined, "europe-west1"), name)(data);
-export function watchLeague(uid, onChange, onError) {
-  const watchers = [
-    "users",
-    "games",
-    "initialRatings",
-    "communitySummaries",
-    "gameSummaries",
-    `users/${uid}/notifications`,
-  ].map((path) => {
-    let initial = true;
-    return onSnapshot(
-      collection(db, path),
-      () => {
-        if (initial) {
-          initial = false;
-          return;
-        }
-        onChange(path);
-      },
-      onError,
-    );
-  });
-  return () => watchers.forEach((unsubscribe) => unsubscribe());
-}
+
+export const weeklyCardPhotos = (weekId) =>
+  list("weeklyCardPhotos", where("weekId", "==", weekId));
+export { prepareWeeklyCardPhoto } from "./photo-upload.js";

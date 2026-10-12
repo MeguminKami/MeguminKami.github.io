@@ -7,11 +7,17 @@
     "node": "22"
   },
   "scripts": {
-    "test": "node --test tests/logic.test.js tests/youtube.test.js",
+    "test": "node --test tests/logic.test.js tests/youtube.test.js tests/team-balance.test.js tests/card-week.test.js",
     "test:rules": "firebase emulators:exec --project demo-peladinhas-rules --only firestore \"node --test tests/firestore.rules.test.js\"",
     "test:backend": "firebase emulators:exec --config firebase.backend.json --project demo-peladinhas-backend --only firestore \"node --test tests/backend.test.js\"",
     "test:ui": "node tests/browser.mjs",
-    "check": "node scripts/check.mjs"
+    "check": "node scripts/check.mjs",
+    "build:hosting": "node scripts/build-hosting.mjs",
+    "deploy": "node scripts/deploy.mjs",
+    "deploy:frontend": "node scripts/deploy.mjs --frontend",
+    "deploy:backend": "node scripts/deploy.mjs --backend",
+    "test:hosting": "firebase emulators:exec --project demo-peladinhas-hosting --only hosting \"node tests/hosting.mjs\"",
+    "pretest:hosting": "node scripts/build-hosting.mjs"
   },
   "dependencies": {
     "firebase-admin": "^13.0.0",

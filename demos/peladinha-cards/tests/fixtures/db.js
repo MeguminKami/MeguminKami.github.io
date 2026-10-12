@@ -51,6 +51,12 @@ export const users = async () => {
   return state.users;
 };
 export const games = async () => state.games;
+export const tickets = async () => state.tickets || [];
+export const watchTicket = (id, ticketCallback, messageCallback) => {
+  ticketCallback(state.tickets?.find((t) => t.id === id));
+  messageCallback(state.ticketMessages || []);
+  return () => {};
+};
 export const initials = async () => state.initialRatings;
 export const communitySummaries = async () => state.communitySummaries;
 export const gameSummaries = async () => state.gameSummaries;
@@ -62,13 +68,17 @@ export const history = async () => state.history;
 export const notifications = async () => state.notifications;
 export const read = async (path) => {
   const [type, id] = path.split("/");
-  return type === "initialRatings"
-    ? state.initialRatings.find((r) => r.uid === id) || null
-    : type === "communityRatings"
-      ? state.communityRatings.find(
-          (r) => `${r.raterId}_${r.targetId}` === id,
-        ) || null
-      : null;
+  return type === "settings"
+    ? state.ovrWeights || null
+    : type === "initialRatings"
+      ? state.initialRatings.find((r) => r.uid === id) || null
+      : type === "tickets"
+        ? state.tickets?.find((t) => t.id === id) || null
+        : type === "communityRatings"
+          ? state.communityRatings.find(
+              (r) => `${r.raterId}_${r.targetId}` === id,
+            ) || null
+          : null;
 };
 export async function saveProfile(uid, data) {
   Object.assign(
@@ -94,7 +104,7 @@ export async function saveCommunity(raterId, targetId, ratings20, submit) {
     state.communityRatings.push(r);
   }
   r.ratings20 = ratings20;
-  r.submitted = !!submit;
+  r.submitted = !!submit || r.submitted === true;
 }
 export async function saveFeedback(gameId, raterId, targetId, ratings, submit) {
   let r = state.feedback.find(
@@ -139,11 +149,42 @@ export const syncNotifications = async (uid, missions) => {
       });
   return state.notifications;
 };
-export const callAdmin = async () => ({ data: { ok: true } });
+export const callAdmin = async (name, data) => {
+  if (name === "saveOvrWeights") state.ovrWeights = { ...data };
+  if (name === "saveWeeklyCardPhoto") {
+    state.weeklyCardPhotos ||= [];
+    state.weeklyCardPhotos = state.weeklyCardPhotos.filter(
+      (p) => p.uid !== data.uid || p.weekId !== data.weekId,
+    );
+    if (!data.reset)
+      state.weeklyCardPhotos.push({
+        ...data,
+        photoURL: data.imageBase64
+          ? "https://example.com/weekly-photo.webp"
+          : data.photoURL,
+      });
+    return {
+      data: {
+        ok: true,
+        photoURL: data.imageBase64
+          ? "https://example.com/weekly-photo.webp"
+          : data.photoURL || "",
+      },
+    };
+  }
+  return { data: { ok: true } };
+};
 export const list = async (path) =>
-  path === "communityRatings"
-    ? state.communityRatings
-    : path.includes("/feedback")
-      ? state.feedback
-      : [];
-export const watchLeague = () => () => {};
+  path === "cardThemes"
+    ? state.cardThemes || []
+    : path === "gameBalances"
+      ? state.gameBalances || []
+      : path === "communityRatings"
+        ? state.communityRatings
+        : path.includes("/feedback")
+          ? state.feedback
+          : [];
+
+export const weeklyCardPhotos = (weekId) =>
+  (state.weeklyCardPhotos || []).filter((p) => p.weekId === weekId);
+export { prepareWeeklyCardPhoto } from "./photo-upload.js";

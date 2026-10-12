@@ -1,3 +1,4 @@
+import { cardWeek } from "./card-week.js";
 export const ATTRIBUTES = [
   ["pace", "Velocidade", "VEL"],
   ["shooting", "Finalização", "FIN"],
@@ -19,6 +20,7 @@ export const FEEDBACK = [
   ["defense", "Defesa"],
   ["physical", "Intensidade / Físico"],
   ["goalkeeping", "Guarda-redes"],
+  ["attitude", "Atitude"],
 ];
 export const CARD_SETTINGS = {
   communityMinimum: 3,
@@ -26,6 +28,15 @@ export const CARD_SETTINGS = {
   communityWeight: 0.8,
   baselineWeight: 3,
 };
+export function matchOutcome(uid, game) {
+  if (game.status !== "closed" || !participants(game).includes(uid)) return 0;
+  const team = [...game.teamA.starters, ...game.teamA.bench].includes(uid)
+    ? "teamA"
+    : "teamB";
+  return Math.sign(
+    game.score[team] - game.score[team === "teamA" ? "teamB" : "teamA"],
+  );
+}
 export const COUNTRIES = [
   ["PT", "Portugal"],
   ["BR", "Brasil"],
@@ -90,10 +101,35 @@ export const convert5To99 = (n) => Math.round((clamp(n, 0, 5) * 99) / 5);
 export const completeInitial = (r) =>
   ATTRIBUTES.every(([k]) => Number.isFinite(r?.[k]) && r[k] >= 0 && r[k] <= 20);
 export const completeFeedback = (r) =>
-  FEEDBACK.slice(0, 5).every(
+  FEEDBACK.filter(([k]) => k !== "goalkeeping").every(
     ([k]) => Number.isFinite(r?.[k]) && r[k] >= 0 && r[k] <= 5,
   ) &&
-  (r.goalkeeping === null || Number.isFinite(r.goalkeeping));
+  (r?.goalkeeping === null ||
+    (Number.isFinite(r?.goalkeeping) &&
+      r.goalkeeping >= 0 &&
+      r.goalkeeping <= 5));
+export function matchPerformance(uid, game) {
+  const side = ["teamA", "teamB"].find((side) =>
+    [...(game[side]?.starters || []), ...(game[side]?.bench || [])].includes(
+      uid,
+    ),
+  );
+  const row = side && game.performance?.[side];
+  return {
+    goals: (row?.goals || []).filter((id) => id === uid).length,
+    assists: (row?.assists || []).filter((id) => id === uid).length,
+  };
+}
+export function performanceBonuses(a) {
+  const goals = clamp(a.goals || 0, 0, 999),
+    assists = clamp(a.assists || 0, 0, 999);
+  return {
+    shooting: Math.min(6, goals * 2),
+    passing: Math.min(6, assists * 2),
+    dribbling: Math.min(4, goals + assists),
+    teamwork: a.outcome > 0 ? 3 : 0,
+  };
+}
 export function calculateInitialBaseline(
   self,
   community,
@@ -120,7 +156,7 @@ export function calculateGameAggregate(feedback) {
     }),
   );
 }
-export function mapAggregateToStats(a) {
+export function mapAggregateToStats(a, initial = {}) {
   const mapping = {
     pace: "physical",
     shooting: "attack",
@@ -135,41 +171,245 @@ export function mapAggregateToStats(a) {
     teamwork: "passing",
     composure: "attack",
   };
+  const bonuses = performanceBonuses(a);
+  const adjustment = (a.outcome || 0) * 5 + clamp(a.balanceBoost || 0, -3, 3);
   return Object.fromEntries(
     ATTRIBUTES.map(([k]) => {
-      const primary = a[mapping[k]];
+      const primary =
+        ["stamina", "composure"].includes(k) && Number.isFinite(a.attitude)
+          ? a.attitude
+          : a[mapping[k]];
+      const bonus = bonuses[k] || 0;
       return [
         k,
-        primary == null
+        primary == null && !adjustment && !bonus
           ? null
           : Math.round(
-              convert5To99(primary) * 0.9 +
-                convert5To99(a.overall ?? primary) * 0.1,
+              clamp(
+                (primary == null
+                  ? convert20To99(initial[k] ?? 0)
+                  : convert5To99(primary) * 0.9 +
+                    convert5To99(a.overall ?? primary) * 0.1) +
+                  adjustment +
+                  bonus,
+                0,
+                99,
+              ),
             ),
       ];
     }),
   );
 }
+export const ACCELERATED_ATTRIBUTES = Object.freeze([
+  "teamwork",
+  "positioning",
+  "composure",
+  "vision",
+]);
+export function accelerateAttributeGain(key, current, gain) {
+  const extra =
+    ACCELERATED_ATTRIBUTES.includes(key) && gain > 0
+      ? Math.min(gain, Math.max(0, 70 - current) / 2)
+      : 0;
+  return gain + extra;
+}
+export function calculatePlayerStatsDetails(initial, aggregates) {
+  const games = [...aggregates]
+    .sort((a, b) => (+asDate(a.date) || 0) - (+asDate(b.date) || 0))
+    .map((a) => mapAggregateToStats(a, initial));
+  const rows = ATTRIBUTES.map(([key, name]) => {
+    const contributions = games.map((g) => g[key]).filter(Number.isFinite);
+    const baseline = convert20To99(initial[key] ?? 0);
+    const total =
+      baseline * CARD_SETTINGS.baselineWeight +
+      contributions.reduce((sum, value) => sum + value, 0);
+    const divisor = CARD_SETTINGS.baselineWeight + contributions.length;
+    let normal = baseline,
+      accelerated = baseline,
+      runningTotal = baseline * CARD_SETTINGS.baselineWeight;
+    contributions.forEach((contribution, index) => {
+      runningTotal += contribution;
+      const next = runningTotal / (CARD_SETTINGS.baselineWeight + index + 1);
+      accelerated = clamp(
+        accelerated + accelerateAttributeGain(key, accelerated, next - normal),
+        0,
+        99,
+      );
+      normal = next;
+    });
+    const growthBonus = ACCELERATED_ATTRIBUTES.includes(key)
+      ? accelerated - normal
+      : 0;
+    return {
+      key,
+      name,
+      initial20: initial[key] ?? 0,
+      baseline,
+      baselineWeight: CARD_SETTINGS.baselineWeight,
+      contributions,
+      total,
+      divisor,
+      growthBonus,
+      normalValue: Math.round(total / divisor),
+      value: Math.round(clamp(total / divisor + growthBonus, 0, 99)),
+    };
+  });
+  return {
+    rows,
+    stats: Object.fromEntries(rows.map((row) => [row.key, row.value])),
+  };
+}
 export function calculatePlayerStats(initial, aggregates) {
-  return Object.fromEntries(
-    ATTRIBUTES.map(([k]) => {
-      const v = aggregates
-        .map(mapAggregateToStats)
-        .map((x) => x[k])
-        .filter(Number.isFinite);
-      return [
-        k,
-        Math.round(
-          (convert20To99(initial[k] ?? 0) * CARD_SETTINGS.baselineWeight +
-            v.reduce((s, n) => s + n, 0)) /
-            (CARD_SETTINGS.baselineWeight + v.length),
+  return calculatePlayerStatsDetails(initial, aggregates).stats;
+}
+export const OVR_POSITIONS = Object.freeze(["GR", "DEF", "ALA", "MED", "AV"]);
+const positionDefaults = {
+  GR: [3, 1, 8, 2, 5, 10, 35, 5, 5, 12, 6, 8],
+  DEF: [8, 2, 8, 3, 25, 15, 0, 10, 5, 12, 7, 5],
+  ALA: [18, 10, 12, 18, 5, 8, 0, 12, 5, 4, 4, 4],
+  MED: [6, 6, 22, 10, 8, 5, 0, 10, 15, 6, 8, 4],
+  AV: [12, 25, 5, 15, 2, 10, 0, 7, 4, 10, 3, 7],
+};
+export const DEFAULT_OVR_WEIGHTS = Object.freeze({
+  weights: Object.freeze(
+    Object.fromEntries(
+      ATTRIBUTES.map(([key], i) => [key, i < 4 ? 8.34 : 8.33]),
+    ),
+  ),
+  positions: Object.freeze(
+    Object.fromEntries(
+      OVR_POSITIONS.map((position) => [
+        position,
+        Object.freeze(
+          Object.fromEntries(
+            ATTRIBUTES.map(([key], i) => [key, positionDefaults[position][i]]),
+          ),
         ),
-      ];
-    }),
+      ]),
+    ),
+  ),
+});
+function validStatWeights(weights) {
+  return (
+    !!weights &&
+    typeof weights === "object" &&
+    !Array.isArray(weights) &&
+    Object.keys(weights).length === ATTRIBUTES.length &&
+    ATTRIBUTES.every(
+      ([key]) =>
+        Number.isFinite(weights[key]) &&
+        weights[key] >= 0 &&
+        weights[key] <= 100 &&
+        Math.abs(weights[key] * 100 - Math.round(weights[key] * 100)) < 1e-8,
+    ) &&
+    ATTRIBUTES.reduce(
+      (sum, [key]) => sum + Math.round(weights[key] * 100),
+      0,
+    ) === 10000
   );
 }
-export const calculateOverall = (stats) =>
-  Math.round(average(ATTRIBUTES.map(([k]) => clamp(stats[k], 0, 99))));
+export function validOvrWeights(settings) {
+  if (settings?.positions !== undefined) {
+    return (
+      !!settings.positions &&
+      !Array.isArray(settings.positions) &&
+      Object.keys(settings.positions).length === OVR_POSITIONS.length &&
+      OVR_POSITIONS.every((position) =>
+        validStatWeights(settings.positions[position]),
+      )
+    );
+  }
+  return validStatWeights(settings?.weights);
+}
+export function normalizeOvrWeights(settings) {
+  const valid = validOvrWeights(settings);
+  const weights = validStatWeights(settings?.weights)
+    ? settings.weights
+    : DEFAULT_OVR_WEIGHTS.weights;
+  return {
+    weights: { ...weights },
+    positions: Object.fromEntries(
+      OVR_POSITIONS.map((position) => [
+        position,
+        {
+          ...(valid
+            ? settings.positions?.[position] || weights
+            : DEFAULT_OVR_WEIGHTS.positions[position]),
+        },
+      ]),
+    ),
+  };
+}
+export function calculateInactivity(uid, games, joinedAt, cutoff = new Date()) {
+  const joined = +asDate(joinedAt) || 0;
+  const closed = games
+    .filter((g) => {
+      const date = +asDate(g.closedAt || g.scheduledAt);
+      return (
+        g.status === "closed" &&
+        Number.isFinite(date) &&
+        date > 0 &&
+        date >= joined &&
+        date <= +cutoff
+      );
+    })
+    .sort(
+      (a, b) =>
+        +asDate(b.closedAt || b.scheduledAt) -
+          +asDate(a.closedAt || a.scheduledAt) ||
+        String(b.id).localeCompare(String(a.id)),
+    );
+  let missed = 0;
+  for (const game of closed) {
+    if (participants(game).includes(uid)) break;
+    missed++;
+  }
+  return {
+    missed,
+    penalty:
+      missed < 4 ? 0 : Math.min(10, Math.round(2 + ((missed - 4) * 8) / 3)),
+  };
+}
+export function calculateOverallDetails(stats, settings, position, inactivity) {
+  if (typeof settings === "string") {
+    position = settings;
+    settings = undefined;
+  }
+  const normalized = normalizeOvrWeights(settings);
+  const knownPosition = OVR_POSITIONS.includes(position) ? position : null;
+  const weights = knownPosition
+    ? normalized.positions[knownPosition]
+    : normalized.weights;
+  const rows = ATTRIBUTES.map(([key, name]) => {
+    const value = clamp(stats[key], 0, 99),
+      weight = weights[key];
+    return {
+      key,
+      name,
+      value,
+      weight,
+      contribution: value * Math.round(weight * 100),
+    };
+  });
+  const total = rows.reduce((sum, row) => sum + row.contribution, 0),
+    divisor = 10000;
+  return {
+    version: knownPosition ? "position-weights-v4" : "stat-weights-v3",
+    position: knownPosition,
+    weights,
+    rows,
+    total,
+    divisor,
+    rawExact: total / divisor,
+    rawOvr: Math.round(total / divisor),
+    inactivity: inactivity || { missed: 0, penalty: 0 },
+    exact: clamp(total / divisor - (inactivity?.penalty || 0), 0, 99),
+    ovr: clamp(Math.round(total / divisor) - (inactivity?.penalty || 0), 0, 99),
+  };
+}
+export function calculateOverall(stats, settings, position, inactivity) {
+  return calculateOverallDetails(stats, settings, position, inactivity).ovr;
+}
 export function calculateBaseCard(o) {
   return o < 50
     ? "bronze-common"
@@ -236,6 +476,8 @@ export function calculateMatchStats(uid, games) {
     wins: 0,
     draws: 0,
     losses: 0,
+    goals: 0,
+    assists: 0,
     goalsFor: 0,
     goalsAgainst: 0,
   };
@@ -246,6 +488,9 @@ export function calculateMatchStats(uid, games) {
     const f = g.score[a ? "teamA" : "teamB"],
       against = g.score[a ? "teamB" : "teamA"];
     s.played++;
+    const performance = matchPerformance(uid, g);
+    s.goals += performance.goals;
+    s.assists += performance.assists;
     s.goalsFor += f;
     s.goalsAgainst += against;
     s[f > against ? "wins" : f === against ? "draws" : "losses"]++;
@@ -300,11 +545,14 @@ export function isoWeekEnd(weekId) {
   return new Date(monday - (local - monday) - 1);
 }
 export function calculateWeeklyTopPlayers(players, date = new Date()) {
-  const week = isoWeek(date);
+  const cycle = cardWeek(date);
   return players
     .map((p) => {
       const games = (p.aggregates || []).filter(
-        (g) => isoWeek(g.date) === week && g.count >= 2,
+        (g) =>
+          +asDate(g.date) >= +cycle.opensAt &&
+          +asDate(g.date) < +cycle.closesAt &&
+          g.count >= 2,
       );
       return {
         ...p,

@@ -1,4 +1,15 @@
-import { initializeApp } from "firebase-admin/app";
+import { validPhotoDesign } from "../js/card-photo.js";
+import { getStorage } from "firebase-admin/storage";
+import { randomUUID } from "node:crypto";
+import { cardWeek, cardWeekBounds } from "../js/card-week.js";
+import { onSchedule } from "firebase-functions/v2/scheduler";
+import {
+  teamBalance,
+  balanceBoost,
+  balanceSignature,
+} from "../js/team-balance.js";
+import { validCardDesign } from "../js/card-design.js";
+import { initializeApp, getApp } from "firebase-admin/app";
 import { getFirestore, FieldValue } from "firebase-admin/firestore";
 import { onDocumentWritten } from "firebase-functions/v2/firestore";
 import { onCall, HttpsError } from "firebase-functions/v2/https";
@@ -8,7 +19,11 @@ import {
   calculateGameAggregate,
   calculateInitialBaseline,
   calculatePlayerStats,
+  calculateInactivity,
   calculateOverall,
+  normalizeOvrWeights,
+  validOvrWeights,
+  calculateOverallDetails,
   calculateBaseCard,
   calculateSpecialCards,
   isoWeek,
@@ -17,6 +32,9 @@ import {
   completeInitial,
   completeFeedback,
   FEEDBACK,
+  THEMES,
+  matchOutcome,
+  matchPerformance,
 } from "../js/utils.js";
 initializeApp();
 setGlobalOptions({ region: "europe-west1", maxInstances: 3 });
@@ -179,6 +197,148 @@ async function aggregateCommunity(uid) {
     });
   });
 }
+async function captureGameBalance(gid, g) {
+  const ref = db.doc(`gameBalances/${gid}`);
+  const existing = await ref.get();
+  const signature = balanceSignature(g),
+    closedAt = g.closedAt?.toMillis?.();
+  if (
+    existing.exists &&
+    existing.data().signature === signature &&
+    existing.data().closedAt?.toMillis?.() === closedAt
+  )
+    return;
+  const [initials, votes, games, balances, settings, users] = await Promise.all(
+    [
+      db.collection("initialRatings").get(),
+      db.collection("communityRatings").get(),
+      db.collection("games").get(),
+      db.collection("gameBalances").get(),
+      db.doc("settings/ovr").get(),
+      db.collection("users").get(),
+    ],
+  );
+  const weights = normalizeOvrWeights(settings.data());
+  const initialRows = data(initials),
+    voteRows = data(votes),
+    priorGames = data(games).filter(
+      (game) =>
+        game.id !== gid &&
+        game.status === "closed" &&
+        game.closedAt?.toMillis?.() < closedAt,
+    ),
+    balanceRows = data(balances);
+  const priorFeedback = await Promise.all(
+    priorGames.map((game) => db.collection(`games/${game.id}/feedback`).get()),
+  );
+  const priorRatings = new Map(
+    priorGames.map((game, i) => [
+      game.id,
+      data(priorFeedback[i]).filter(
+        (v) =>
+          v.submitted &&
+          participants(game).includes(v.raterId) &&
+          (v.submittedAt || v.updatedAt || v.createdAt)?.toMillis?.() <=
+            closedAt,
+      ),
+    ]),
+  );
+  const closingCycle = cardWeek(g.closedAt.toDate());
+  const frozenCards =
+    closingCycle.phase === "closed"
+      ? data(await db.collection("weeklyCards").get())
+      : [];
+  const players = participants(g).map((uid) => {
+    if (closingCycle.phase === "closed") {
+      const snapshot = frozenCards.find(
+        (card) => card.uid === uid && card.weekId === closingCycle.weekId,
+      );
+      return snapshot
+        ? { uid, hasCard: true, ovr: snapshot.ovr }
+        : { uid, hasCard: false };
+    }
+    const initial = initialRows.find((r) => r.uid === uid)?.ratings20;
+    if (!completeInitial(initial)) return { uid, hasCard: false };
+    const external = voteRows.filter(
+      (v) =>
+        v.targetId === uid &&
+        v.submitted &&
+        (v.submittedAt || v.createdAt)?.toMillis?.() <= closedAt,
+    );
+    const community = {
+      count: external.length,
+      ratings20: Object.fromEntries(
+        ATTRIBUTES.map(([key]) => [
+          key,
+          external.length
+            ? external.reduce((sum, v) => sum + v.ratings20[key], 0) /
+              external.length
+            : 0,
+        ]),
+      ),
+    };
+    const aggregates = priorGames
+      .filter((game) => participants(game).includes(uid))
+      .map((game) => ({
+        ...calculateGameAggregate(
+          priorRatings.get(game.id).filter((v) => v.targetId === uid),
+        ),
+        ...matchPerformance(uid, game),
+        outcome: matchOutcome(uid, game),
+        date: game.closedAt.toDate(),
+        balanceBoost: balanceBoost(
+          uid,
+          game,
+          balanceRows.find((b) => b.id === game.id),
+        ),
+      }));
+    return {
+      uid,
+      hasCard: true,
+      ovr: calculateOverall(
+        calculatePlayerStats(
+          calculateInitialBaseline(initial, community),
+          aggregates,
+        ),
+        weights,
+        data(users).find((u) => u.uid === uid)?.primaryPosition,
+        calculateInactivity(
+          uid,
+          priorGames,
+          data(users).find((u) => u.uid === uid)?.createdAt ||
+            initialRows.find((r) => r.uid === uid)?.createdAt,
+          new Date(closedAt),
+        ),
+      ),
+    };
+  });
+  const snapshot = {
+    ...teamBalance(g, players),
+    signature,
+    closedAt: g.closedAt,
+    weights: weights.weights,
+    positionWeights: weights.positions,
+    playerOvr: Object.fromEntries(players.map((p) => [p.uid, p.ovr ?? null])),
+    capturedAt: FieldValue.serverTimestamp(),
+  };
+  await db.runTransaction(async (tx) => {
+    const current = await tx.get(ref);
+    const currentGame = await tx.get(db.doc(`games/${gid}`));
+    if (
+      !currentGame.exists ||
+      currentGame.data().status !== "closed" ||
+      balanceSignature(currentGame.data()) !== signature ||
+      currentGame.data().closedAt?.toMillis?.() !== closedAt
+    )
+      return;
+    if (
+      !current.exists ||
+      current.data().signature !== signature ||
+      current.data().closedAt?.toMillis?.() !== closedAt
+    )
+      tx.set(ref, snapshot);
+  });
+}
 async function aggregateGame(gid) {
   await db.runTransaction(async (tx) => {
     const gameSnap = await tx.get(db.doc(`games/${gid}`));
@@ -214,11 +374,23 @@ async function aggregateGame(gid) {
   });
 }
 async function buildHistory(uid) {
-  const [user, initial, community, gameSnaps] = await Promise.all([
+  const now = new Date();
+  const [
+    user,
+    initial,
+    community,
+    gameSnaps,
+    settings,
+    balanceSnaps,
+    photoSnap,
+  ] = await Promise.all([
     db.doc(`users/${uid}`).get(),
     db.doc(`initialRatings/${uid}`).get(),
     db.collection("communityRatings").where("targetId", "==", uid).get(),
     db.collection("games").get(),
+    db.doc("settings/ovr").get(),
+    db.collection("gameBalances").get(),
+    db.doc(`weeklyCardPhotos/${uid}_${cardWeek(now).weekId}`).get(),
   ]);
   if (
     !user.exists ||
@@ -226,6 +398,8 @@ async function buildHistory(uid) {
     !completeInitial(initial.data().ratings20)
   )
     return;
+  const balanceRows = data(balanceSnaps);
+  const ovrWeights = normalizeOvrWeights(settings.data());
   const self = initial.data().ratings20;
   const votes = data(community).filter((r) => r.submitted);
   const games = data(gameSnaps).filter(
@@ -234,23 +408,47 @@ async function buildHistory(uid) {
   const feedback = await Promise.all(
     games.map((g) => db.collection(`games/${g.id}/feedback`).get()),
   );
-  const start = initial.data().createdAt?.toDate?.() || new Date(),
-    now = new Date();
-  const weeks = [];
-  for (
-    let cursor = new Date(start);
-    cursor <= now;
-    cursor = new Date(cursor.getTime() + 7 * 86400000)
-  ) {
-    if (weeks.length >= 520) break;
-    weeks.push(isoWeek(cursor));
+  const cycle = cardWeek(now),
+    cutoff = cycle.phase === "closed" ? cycle.closesAt : now;
+  const activeRef = db.doc(`users/${uid}/cardHistory/${cycle.weekId}`);
+  // Lock existing past cards in place. Rebuilds never rewrite their stats or artwork.
+  const existingHistory = await db.collection(`users/${uid}/cardHistory`).get();
+  for (const doc of existingHistory.docs) {
+    if (doc.id >= cycle.weekId || doc.data().locked) continue;
+    await db.runTransaction(async (tx) => {
+      const fresh = await tx.get(doc.ref);
+      if (fresh.exists && !fresh.data().locked)
+        tx.update(doc.ref, {
+          locked: true,
+          lockedAt: FieldValue.serverTimestamp(),
+        });
+    });
   }
-  if (!weeks.includes(isoWeek(now))) weeks.push(isoWeek(now));
+  const existing = await db.runTransaction(async (tx) => {
+    const snapshot = await tx.get(activeRef);
+    if (!snapshot.exists) return null;
+    const value = snapshot.data();
+    if (value.locked || cycle.phase === "closed") {
+      if (!value.locked)
+        tx.update(activeRef, {
+          locked: true,
+          lockedAt: FieldValue.serverTimestamp(),
+        });
+      return { ...value, locked: true };
+    }
+    return null;
+  });
+  if (existing) {
+    await publishWeeklyCard(uid, existing, cycle);
+    return;
+  }
+  // No new cards during the Wednesday–Thursday pause.
+  if (cycle.phase === "closed") return;
+  const weeks = [cycle.weekId];
   const results = [];
   for (const weekId of weeks) {
     const external = votes.filter(
-      (v) =>
-        isoWeek(v.submittedAt?.toDate?.() || v.createdAt.toDate()) <= weekId,
+      (v) => (v.submittedAt || v.createdAt)?.toMillis?.() <= +cutoff,
     );
     const cs = {
       count: external.length,
@@ -266,16 +464,15 @@ async function buildHistory(uid) {
     const aggregates = [];
     for (let i = 0; i < games.length; i++) {
       const g = games[i];
-      if (isoWeek(g.closedAt.toDate()) > weekId) continue;
+      if (+g.closedAt.toDate() > +cutoff) continue;
       const feedbackRows = data(feedback[i]).filter(
         (f) =>
           f.submitted &&
           (f.submittedAt || f.updatedAt || f.createdAt) &&
-          isoWeek((f.submittedAt || f.updatedAt || f.createdAt).toDate()) <=
-            weekId,
+          +(f.submittedAt || f.updatedAt || f.createdAt).toDate() <= +cutoff,
       );
       const own = feedbackRows.filter((f) => f.targetId === uid);
-      if (!own.length) continue;
+
       const aggregate = calculateGameAggregate(own);
       const max = Math.max(
         ...participants(g).map(
@@ -287,6 +484,13 @@ async function buildHistory(uid) {
       );
       aggregates.push({
         ...aggregate,
+        ...matchPerformance(uid, g),
+        outcome: matchOutcome(uid, g),
+        balanceBoost: balanceBoost(
+          uid,
+          g,
+          balanceRows.find((b) => b.id === g.id),
+        ),
         count: own.length,
         mvp:
           own.length >= 3 &&
@@ -300,26 +504,70 @@ async function buildHistory(uid) {
         calculateInitialBaseline(self, cs),
         aggregates,
       ),
-      ovr = calculateOverall(stats),
+      inactivity = calculateInactivity(
+        uid,
+        data(gameSnaps),
+        user.data().createdAt || initial.data().createdAt,
+        cutoff,
+      ),
+      ovr = calculateOverall(
+        stats,
+        ovrWeights,
+        user.data().primaryPosition,
+        inactivity,
+      ),
       specials = calculateSpecialCards(aggregates);
     results.push({
       weekId,
       ovr,
+      inactivity,
       stats,
+      primaryPosition: user.data().primaryPosition || null,
+      ovrCalculation: calculateOverallDetails(
+        stats,
+        ovrWeights,
+        user.data().primaryPosition,
+        inactivity,
+      ),
       baseCard: calculateBaseCard(ovr),
       specials,
       official: cs.count >= 3,
-      sourceCutoffDate: isoWeekEnd(weekId) > now ? now : isoWeekEnd(weekId),
+      sourceCutoffDate: cutoff,
+      locked: false,
+      opensAt: cycle.opensAt,
+      closesAt: cycle.closesAt,
+      cardPhoto: photoSnap.exists
+        ? {
+            photoURL: photoSnap.data().photoURL,
+            design: photoSnap.data().design,
+          }
+        : null,
+      appearance: {
+        displayName:
+          user.data().displayName || user.data().username || "Jogador",
+        photoURL: user.data().photoURL || "",
+        countryCode: user.data().countryCode || "PT",
+      },
       updatedAt: FieldValue.serverTimestamp(),
     });
   }
-  for (let i = 0; i < results.length; i += 400) {
-    const batch = db.batch();
-    for (const r of results.slice(i, i + 400))
-      batch.set(db.doc(`users/${uid}/cardHistory/${r.weekId}`), r);
-    await batch.commit();
+  for (const r of results) {
+    await db.runTransaction(async (tx) => {
+      const ref = db.doc(`users/${uid}/cardHistory/${r.weekId}`),
+        snapshot = await tx.get(ref);
+      if (snapshot.data()?.locked) return;
+      const photo = await tx.get(db.doc(`weeklyCardPhotos/${uid}_${r.weekId}`));
+      tx.set(ref, {
+        ...r,
+        cardPhoto: photo.exists
+          ? { photoURL: photo.data().photoURL, design: photo.data().design }
+          : null,
+      });
+    });
   }
   const latest = results.at(-1);
+  if (latest)
+    await publishWeeklyCard(uid, (await activeRef.get()).data(), cycle);
   if (latest)
     await db.runTransaction(async (tx) => {
       const ref = db.doc(`users/${uid}/cardState/current`),
@@ -367,6 +615,14 @@ export const onCommunityRating = onDocumentWritten(
     await buildHistory(value.targetId);
   },
 );
+export const onPlayerPosition = onDocumentWritten("users/{uid}", (event) => {
+  if (
+    event.data.after.exists &&
+    event.data.after.data().primaryPosition !==
+      event.data.before.data()?.primaryPosition
+  )
+    return buildHistory(event.params.uid);
+});
 export const onInitialRating = onDocumentWritten(
   "initialRatings/{uid}",
   (event) => {
@@ -386,18 +642,24 @@ export const onFeedback = onDocumentWritten(
   },
 );
 export const onGame = onDocumentWritten("games/{gid}", async (event) => {
-  if (!event.data.after.exists) {
+  const latestGame = await db.doc(`games/${event.params.gid}`).get();
+  if (!latestGame.exists) {
     await db.doc(`gameSummaries/${event.params.gid}`).delete();
+    await db.doc(`gameBalances/${event.params.gid}`).delete();
+    await Promise.all(
+      data(await db.collection("users").get())
+        .filter((u) => !u.disabled)
+        .map((u) => buildHistory(u.uid)),
+    );
     return;
   }
-  const g = event.data.after.data();
+  const g = latestGame.data();
+  if (g.status === "closed") await captureGameBalance(event.params.gid, g);
+  else await db.doc(`gameBalances/${event.params.gid}`).delete();
   await aggregateGame(event.params.gid);
-  const uids = [
-    ...new Set([
-      ...participants(g),
-      ...participants(event.data.before.data() || {}),
-    ]),
-  ];
+  const uids = data(await db.collection("users").get())
+    .filter((u) => !u.disabled)
+    .map((u) => u.uid);
   await Promise.all(uids.map(buildHistory));
   if (g.status === "closed" && event.data.before.data()?.status !== "closed")
     await Promise.all(
@@ -417,6 +679,28 @@ async function requireAdmin(request) {
   if (u.data()?.role !== "admin" || u.data()?.disabled)
     throw new HttpsError("permission-denied", "Acesso reservado.");
 }
+export const saveOvrWeights = onCall(
+  { timeoutSeconds: 540 },
+  async (request) => {
+    await requireAdmin(request);
+    if (!validOvrWeights(request.data))
+      throw new HttpsError(
+        "invalid-argument",
+        "Define os 12 pesos entre 0 e 100, com até duas casas decimais, e um total de 100%.",
+      );
+    const { weights, positions } = normalizeOvrWeights(request.data);
+    await db.doc("settings/ovr").set({
+      version: "position-weights-v4",
+      weights,
+      positions,
+      updatedBy: request.auth.uid,
+      updatedAt: FieldValue.serverTimestamp(),
+    });
+    const users = data(await db.collection("users").get());
+    for (const user of users) await buildHistory(user.uid);
+    return { ok: true, weights, positions };
+  },
+);
 export const rebuildHistory = onCall(async (request) => {
   await requireAdmin(request);
   const uid = request.data.uid;
@@ -426,15 +710,52 @@ export const rebuildHistory = onCall(async (request) => {
   await buildHistory(uid);
   return { ok: true };
 });
+async function publishWeeklyCard(uid, snapshot, cycle) {
+  if (!snapshot) return;
+  // Read the history inside the transaction to prevent an older trigger overwriting a locked card.
+  await db.runTransaction(async (tx) => {
+    const history = await tx.get(
+      db.doc(`users/${uid}/cardHistory/${snapshot.weekId}`),
+    );
+    const current = await tx.get(db.doc(`weeklyCards/${uid}`));
+    if (
+      !history.exists ||
+      (current.data()?.weekId && current.data().weekId > snapshot.weekId)
+    )
+      return;
+    tx.set(db.doc(`weeklyCards/${uid}`), {
+      ...history.data(),
+      uid,
+      phase: history.data().locked ? "closed" : "open",
+      nextOpensAt: cycle.nextOpensAt,
+    });
+  });
+}
+export const closeCardWeek = onSchedule(
+  { schedule: "0 12 * * 3", timeZone: "Europe/Lisbon", timeoutSeconds: 540 },
+  async () => {
+    const users = data(await db.collection("users").get()).filter(
+      (u) => !u.disabled,
+    );
+    for (const user of users) await buildHistory(user.uid);
+  },
+);
+export const openCardWeek = onSchedule(
+  { schedule: "0 20 * * 4", timeZone: "Europe/Lisbon", timeoutSeconds: 540 },
+  async () => {
+    const users = data(await db.collection("users").get()).filter(
+      (u) => !u.disabled,
+    );
+    for (const user of users) await buildHistory(user.uid);
+  },
+);
 export const ensureHistory = onCall(async (request) => {
   if (!request.auth) throw new HttpsError("unauthenticated", "Inicia sessão.");
   const uid = request.auth.uid,
-    week = isoWeek();
-  const user = await db.doc(`users/${uid}`).get();
+    user = await db.doc(`users/${uid}`).get();
   if (user.data()?.disabled)
     throw new HttpsError("permission-denied", "Conta desactivada.");
-  if (!(await db.doc(`users/${uid}/cardHistory/${week}`).get()).exists)
-    await buildHistory(uid);
+  await buildHistory(uid);
   return { ok: true };
 });
 export const rebuildLeague = onCall(async (request) => {
@@ -455,9 +776,12 @@ export const deleteGame = onCall(async (request) => {
     throw new HttpsError("invalid-argument", "Jogo inválido.");
   const ref = db.doc(`games/${id}`),
     s = await ref.get();
-  const affected = participants(s.data() || {});
+  const affected = data(await db.collection("users").get())
+    .filter((u) => !u.disabled)
+    .map((u) => u.uid);
   await db.recursiveDelete(ref);
   await db.doc(`gameSummaries/${id}`).delete();
+  await db.doc(`gameBalances/${id}`).delete();
   await Promise.all(affected.map(buildHistory));
   return { ok: true };
 });
@@ -491,7 +815,7 @@ export const adminMessage = onCall(async (request) => {
 });
 export const saveTheme = onCall(async (request) => {
   await requireAdmin(request);
-  const { name, colors, texture } = request.data;
+  const { name, colors, texture, design, baseTheme } = request.data;
   if (
     typeof name !== "string" ||
     !name.trim() ||
@@ -500,6 +824,9 @@ export const saveTheme = onCall(async (request) => {
     !["primary", "secondary", "text", "border", "glow"].every((k) =>
       /^#[0-9a-f]{6}$/i.test(colors[k] || ""),
     ) ||
+    (design !== undefined && !validCardDesign(design)) ||
+    (baseTheme !== undefined &&
+      ![...THEMES, "custom-test"].includes(baseTheme)) ||
     !["diagonal", "radial", "plain"].includes(texture)
   )
     throw new HttpsError("invalid-argument", "Tema inválido.");
@@ -507,6 +834,8 @@ export const saveTheme = onCall(async (request) => {
     name,
     colors,
     texture,
+    ...(design ? { design } : {}),
+    ...(baseTheme ? { baseTheme } : {}),
     experimental: true,
     createdBy: request.auth.uid,
     createdAt: FieldValue.serverTimestamp(),
@@ -568,4 +897,104 @@ export const correctRating = onCall(async (request) => {
     });
   });
   return { ok: true };
+});
+
+export const saveWeeklyCardPhoto = onCall(async (request) => {
+  await requireAdmin(request);
+  const { uid, weekId, design, reset, imageBase64 } = request.data || {};
+  let photoURL = request.data?.photoURL;
+  const cycle = cardWeek();
+  if (
+    typeof uid !== "string" ||
+    !/^[a-zA-Z0-9_-]{1,128}$/.test(uid) ||
+    weekId !== cycle.weekId
+  )
+    throw new HttpsError("invalid-argument", "Jogador ou semana inválidos.");
+  if (cycle.phase !== "open")
+    throw new HttpsError(
+      "failed-precondition",
+      "A semana está fechada. A fotografia também está bloqueada.",
+    );
+  if (
+    reset !== true &&
+    (typeof photoURL !== "string" ||
+      photoURL.length > 2000 ||
+      (photoURL && !/^https:\/\//i.test(photoURL)) ||
+      !validPhotoDesign(design))
+  )
+    throw new HttpsError(
+      "invalid-argument",
+      "Fotografia ou enquadramento inválidos.",
+    );
+  const validate = async (tx) => {
+    const user = await tx.get(db.doc(`users/${uid}`));
+    const history = await tx.get(db.doc(`users/${uid}/cardHistory/${weekId}`));
+    if (!user.exists || user.data().disabled)
+      throw new HttpsError("not-found", "Jogador não encontrado.");
+    if (
+      history.data()?.locked ||
+      cardWeek().phase !== "open" ||
+      cardWeek().weekId !== weekId
+    )
+      throw new HttpsError("failed-precondition", "Esta carta está fechada.");
+  };
+  let uploaded;
+  if (reset !== true && imageBase64 !== undefined) {
+    if (
+      typeof imageBase64 !== "string" ||
+      imageBase64.length > 1400000 ||
+      !/^[A-Za-z0-9+/]+={0,2}$/.test(imageBase64)
+    )
+      throw new HttpsError("invalid-argument", "Imagem inválida.");
+    const buffer = Buffer.from(imageBase64, "base64");
+    if (
+      buffer.length < 12 ||
+      buffer.length >= 1024 * 1024 ||
+      buffer.toString("ascii", 0, 4) !== "RIFF" ||
+      buffer.toString("ascii", 8, 12) !== "WEBP"
+    )
+      throw new HttpsError(
+        "invalid-argument",
+        "É necessária uma imagem WebP até 1 MB.",
+      );
+    await db.runTransaction(validate);
+    const token = randomUUID();
+    const bucketName =
+      getApp().options.storageBucket ||
+      `${process.env.GCLOUD_PROJECT || getApp().options.projectId}.firebasestorage.app`;
+    uploaded = getStorage()
+      .bucket(bucketName)
+      .file(`weekly-cards/${uid}/${weekId}/${randomUUID()}.webp`);
+    await uploaded.save(buffer, {
+      resumable: false,
+      preconditionOpts: { ifGenerationMatch: 0 },
+      metadata: {
+        contentType: "image/webp",
+        cacheControl: "public,max-age=31536000,immutable",
+        metadata: { firebaseStorageDownloadTokens: token },
+      },
+    });
+    photoURL = `https://firebasestorage.googleapis.com/v0/b/${uploaded.bucket.name}/o/${encodeURIComponent(uploaded.name)}?alt=media&token=${token}`;
+  }
+  try {
+    await db.runTransaction(async (tx) => {
+      await validate(tx);
+      const ref = db.doc(`weeklyCardPhotos/${uid}_${weekId}`);
+      if (reset === true) tx.delete(ref);
+      else
+        tx.set(ref, {
+          uid,
+          weekId,
+          photoURL,
+          design,
+          updatedBy: request.auth.uid,
+          updatedAt: FieldValue.serverTimestamp(),
+        });
+    });
+  } catch (error) {
+    if (uploaded) await uploaded.delete().catch(() => {});
+    throw error;
+  }
+  await buildHistory(uid);
+  return { ok: true, photoURL: reset === true ? "" : photoURL };
 });
